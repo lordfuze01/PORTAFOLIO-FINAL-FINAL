@@ -1,0 +1,7 @@
+# Archivos que NO se publican en el sitio (solo son del repo).
+.git
+.gitignore
+.gitattributes
+.assetsignore
+README.md
+wrangler.jsonc

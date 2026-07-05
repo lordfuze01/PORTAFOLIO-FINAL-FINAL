@@ -1,0 +1,11 @@
+{
+  // Configuracion de Cloudflare (Worker con assets estaticos).
+  // Sirve el sitio desde la RAIZ del repo.
+  "name": "byknox",
+  "compatibility_date": "2026-07-05",
+  "compatibility_flags": ["nodejs_compat"],
+  "observability": { "enabled": true },
+  "assets": {
+    "directory": "."
+  }
+}
