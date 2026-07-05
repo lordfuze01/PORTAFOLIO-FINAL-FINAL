@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trabajos · KNOX</title>
+    <link rel="stylesheet" href="./pagina.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="site-header__brand" href="index.html#main">KNOX</a>
+      <nav class="site-header__nav">
+        <a href="knox.html">¿Quién es Knox?</a>
+        <a href="trabajos.html" class="is-active">Trabajos</a>
+        <a href="contacto.html">Contacto</a>
+      </nav>
+    </header>
+
+    <main class="page">
+      <span class="eyebrow reveal">Selección</span>
+      <h1 class="page__title reveal">Trabajos</h1>
+      <p class="page__lead reveal">
+        Pasa el cursor sobre cada proyecto. Pronto sumaré las imágenes de cada
+        uno.
+      </p>
+
+      <hr class="divider" />
+
+      <section class="work reveal">
+        <ul class="work__list" id="workList">
+          <li class="work__item" data-title="Especiferal">
+            <a class="work__link" href="#" data-project="especiferal">
+              <span class="work__index">01</span>
+              <span class="work__name">Especiferal</span>
+              <span class="work__cat">Colección · Industrial · Editorial</span>
+            </a>
+          </li>
+          <li class="work__item" data-title="Mordiendo el polvo">
+            <a class="work__link" href="#" data-project="mordiendo">
+              <span class="work__index">02</span>
+              <span class="work__name">Mordiendo el polvo</span>
+              <span class="work__cat">Fotografía · Gráfico</span>
+            </a>
+          </li>
+          <li class="work__item" data-title="Lyla">
+            <a class="work__link" href="#" data-project="lyla">
+              <span class="work__index">03</span>
+              <span class="work__name">Lyla</span>
+              <span class="work__cat">Producto · Universo visual</span>
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <hr class="divider" />
+
+      <section class="reveal">
+        <p class="section-label">Sobre los proyectos</p>
+        <div class="grid grid--3">
+          <article class="card">
+            <span class="card__num">01 · Mar — May 2025</span>
+            <h3 class="card__title">Especiferal</h3>
+            <p class="card__text">
+              Colección propositiva de accesorios y productos inspirada en
+              especies ferales. Ilustración, editorial, industrial y
+              comunicación visual.
+            </p>
+            <div class="chips" style="margin-top: 1rem">
+              <span class="chip">InDesign</span>
+              <span class="chip">Fusion 360</span>
+              <span class="chip">Impresión 3D</span>
+            </div>
+          </article>
+          <article class="card">
+            <span class="card__num">02 · Feb 2025 — Actualidad</span>
+            <h3 class="card__title">Mordiendo el polvo</h3>
+            <p class="card__text">
+              Colección fotográfica y gráfica sobre el deporte automotor de la
+              región. Piezas visuales coherentes y dinámicas.
+            </p>
+            <div class="chips" style="margin-top: 1rem">
+              <span class="chip">Fotografía</span>
+              <span class="chip">Lightroom</span>
+              <span class="chip">Baja obturación</span>
+            </div>
+          </article>
+          <article class="card">
+            <span class="card__num">03 · Ago — Oct 2025</span>
+            <h3 class="card__title">Lyla</h3>
+            <p class="card__text">
+              Huerto lúdico e interactivo para niños: producto físico y universo
+              visual, a escala 1:1, listo para el aula.
+            </p>
+            <div class="chips" style="margin-top: 1rem">
+              <span class="chip">Blender</span>
+              <span class="chip">Fusion 360</span>
+              <span class="chip">Acabados</span>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <!-- Vista previa flotante (sigue al cursor) -->
+    <div class="work__preview" id="workPreview" aria-hidden="true">
+      <div class="work__preview-inner" id="workPreviewInner">Vista previa</div>
+    </div>
+
+    <footer class="site-footer">
+      <div class="site-footer__row">
+        <div>
+          <h3>KNOX</h3>
+          <p class="text-lg mt-sm" style="max-width: 34ch">
+            Dirección creativa. Human centered creation, desde Bogotá.
+          </p>
+        </div>
+        <div class="site-footer__contact">
+          <a href="mailto:sencisoballesta@gmail.com">sencisoballesta@gmail.com</a>
+          <a href="https://www.instagram.com/by_knox/" target="_blank" rel="noopener">@by_knox</a>
+          <span style="color: #666">Bogotá, Colombia</span>
+        </div>
+      </div>
+      <p class="site-footer__legal">© 2025 KNOX</p>
+    </footer>
+
+    <script>
+      // Índice interactivo: la vista previa sigue el cursor sobre la lista.
+      var list = document.getElementById('workList');
+      var preview = document.getElementById('workPreview');
+      var previewInner = document.getElementById('workPreviewInner');
+      var targetX = 0, targetY = 0, curX = 0, curY = 0;
+      var activo = false;
+
+      // Solo en dispositivos con puntero fino (mouse); en tactil no aplica.
+      var tienePuntero = window.matchMedia('(pointer: fine)').matches;
+
+      if (tienePuntero) {
+        list.addEventListener('mousemove', function (e) {
+          targetX = e.clientX;
+          targetY = e.clientY;
+        });
+
+        list.querySelectorAll('.work__link').forEach(function (link) {
+          link.addEventListener('mouseenter', function () {
+            activo = true;
+            previewInner.textContent = link.parentElement.dataset.title;
+            preview.classList.add('is-visible');
+          });
+          link.addEventListener('mouseleave', function () {
+            activo = false;
+            preview.classList.remove('is-visible');
+          });
+          // Por ahora los proyectos no abren pagina (aún sin contenido interno).
+          link.addEventListener('click', function (e) { e.preventDefault(); });
+        });
+
+        // Movimiento suave (lerp) para que la vista previa "flote".
+        (function animar() {
+          curX += (targetX - curX) * 0.12;
+          curY += (targetY - curY) * 0.12;
+          preview.style.left = curX + 'px';
+          preview.style.top = curY + 'px';
+          requestAnimationFrame(animar);
+        })();
+      }
+    </script>
+  </body>
+</html>

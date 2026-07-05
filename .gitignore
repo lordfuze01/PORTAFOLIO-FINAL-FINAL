@@ -1,0 +1,11 @@
+node_modules
+.DS_Store
+.claude
+*.log
+Thumbs.db
+
+# Imagenes fuente pesadas: no se suben al repo.
+# El sitio usa la version optimizada (foto-portada.jpg).
+FOTO PORTADA FINAL.jpg
+FOTO PORTADA.jpg
+DSC04623-2.jpg
