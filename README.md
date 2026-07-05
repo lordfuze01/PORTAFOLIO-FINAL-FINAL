@@ -11,28 +11,41 @@ para verlo en tu máquina basta con abrir `index.html` con doble clic.
 - `contacto.html` — Contacto.
 - `pagina.css` — estilos de las páginas internas.
 - `lib/` — librerías locales (GSAP y Lottie), funcionan sin internet.
-- `foto-portada.jpg` — imagen de portada.
-- `netlify.toml` — configuración de despliegue.
+- `foto-portada.jpg` — imagen de portada (optimizada).
+- `_headers` — cabeceras de caché para Cloudflare Pages.
 
-## Subirlo a internet con Netlify
+## Subirlo a internet con Cloudflare Pages
 
-### Opción A — Arrastrar y soltar (la más rápida)
+### Opción A — Con GitHub (recomendada, deploy automático)
 
-1. Entra a **https://app.netlify.com/drop**
-2. Inicia sesión (o crea una cuenta gratis).
-3. Arrastra **toda la carpeta `PORTAFOLIO`** a la zona de "Drag and drop".
-4. En segundos tendrás una URL pública (ej. `https://algo-random.netlify.app`).
-5. En *Site settings → Change site name* puedes ponerle un nombre bonito.
+1. Sube este repo a GitHub (ver más abajo).
+2. Entra al panel de Cloudflare → **Workers & Pages → Create → Pages**.
+3. **Connect to Git** y elige tu repositorio.
+4. En la configuración de build:
+   - **Framework preset:** `None`
+   - **Build command:** *(déjalo vacío)*
+   - **Build output directory:** `/`
+5. **Save and Deploy.** Tendrás una URL `https://tu-proyecto.pages.dev`.
+6. Cada `git push` vuelve a desplegar el sitio solo.
 
-### Opción B — Con Git (despliegue continuo)
+### Opción B — Subida directa (sin Git)
 
-1. Sube esta carpeta a un repositorio de GitHub.
-2. En Netlify: *Add new site → Import an existing project → GitHub*.
-3. Elige el repo. No pongas comando de build; *Publish directory* = `.`
-4. Cada vez que hagas *push*, Netlify actualiza el sitio solo.
+1. Cloudflare → **Workers & Pages → Create → Pages → Upload assets**.
+2. Arrastra el contenido de la carpeta (los `.html`, `pagina.css`, `lib/`,
+   `foto-portada.jpg`, `_headers`).
+3. Deploy.
+
+## Subir el repo a GitHub
+
+```powershell
+cd "C:\Users\mudki\Documents\PORTAFOLIO"
+git remote add origin https://github.com/TU-USUARIO/portafolio-knox.git
+git push -u origin main
+```
+
+De ahí en adelante: `git add -A`, `git commit -m "..."`, `git push`.
 
 ## Notas
 
-- La foto pesa varios MB. Si quieres que cargue más rápido en internet,
-  se puede comprimir sin pérdida visible (pídemelo).
-- `DSC04623-2.jpg` no se usa actualmente en el sitio.
+- Las imágenes fuente pesadas (`FOTO PORTADA FINAL.jpg`, etc.) no se suben al
+  repo (`.gitignore`); el sitio usa la versión optimizada `foto-portada.jpg`.

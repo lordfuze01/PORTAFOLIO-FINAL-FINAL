@@ -1,0 +1,7 @@
+# Cabeceras para Cloudflare Pages (cachear librerias e imagen -> mas velocidad)
+
+/lib/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/foto-portada.jpg
+  Cache-Control: public, max-age=31536000
