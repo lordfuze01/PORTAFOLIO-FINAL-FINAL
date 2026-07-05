@@ -161,6 +161,23 @@
         will-change: filter, transform;
       }
 
+      /* Pie de foto en la imagen principal */
+      .hero__caption {
+        position: absolute;
+        right: clamp(1rem, 3vw, 2.2rem);
+        bottom: clamp(0.9rem, 2.5vw, 1.6rem);
+        z-index: 3;
+        margin: 0;
+        color: #ffffff;
+        font-family: 'Helvetica Neue', 'Segoe UI', Arial, sans-serif;
+        font-weight: 300;                 /* delgada */
+        font-size: clamp(0.72rem, 1.3vw, 0.95rem);
+        letter-spacing: 0.12em;
+        text-shadow: 0 1px 10px rgba(0, 0, 0, 0.55);
+        opacity: 0.92;
+        pointer-events: none;
+      }
+
       /* Pista de "desliza" */
       .hero__hint {
         position: absolute;
@@ -251,6 +268,7 @@
 
           <figure class="hero__cover" id="cover">
             <img src="./foto-portada.jpg" alt="BY KNOX" fetchpriority="high" decoding="async" />
+            <figcaption class="hero__caption">Colección mordiendo el polvo</figcaption>
           </figure>
 
           <div class="hero__hint" id="scrollHint">↓ desliza</div>
