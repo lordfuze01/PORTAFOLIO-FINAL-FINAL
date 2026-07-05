@@ -19,9 +19,8 @@
     <main class="page">
       <span class="eyebrow reveal">Selección</span>
       <h1 class="page__title reveal">Trabajos</h1>
-      <p class="page__lead reveal">
-        Pasa el cursor sobre cada proyecto. Pronto sumaré las imágenes de cada
-        uno.
+      <p class="page__lead reveal" id="workLead">
+        Una selección de proyectos. Pronto sumaré las imágenes de cada uno.
       </p>
 
       <hr class="divider" />
@@ -135,6 +134,13 @@
       var tienePuntero = window.matchMedia('(pointer: fine)').matches;
 
       if (tienePuntero) {
+        // En desktop invitamos a usar el cursor para la vista previa.
+        var workLead = document.getElementById('workLead');
+        if (workLead) {
+          workLead.textContent =
+            'Pasa el cursor sobre cada proyecto para ver una vista previa. Pronto sumaré las imágenes de cada uno.';
+        }
+
         list.addEventListener('mousemove', function (e) {
           targetX = e.clientX;
           targetY = e.clientY;

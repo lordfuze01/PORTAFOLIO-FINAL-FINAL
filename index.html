@@ -91,11 +91,13 @@
         position: relative;
         /* ALTO del recorrido de scroll: mas alto = la foto crece mas lento */
         height: 230vh;
+        height: 230dvh;   /* dvh = viewport dinamico (barra de direcciones en movil) */
       }
       .hero__sticky {
         position: sticky;
         top: 0;
         height: 100vh;
+        height: 100dvh;
         overflow: hidden;
         padding: clamp(1.4rem, 3vw, 2.6rem);
       }
@@ -194,6 +196,7 @@
       /* Seccion Introduccion (debajo del hero) */
       .intro {
         min-height: 100vh;
+        min-height: 100dvh;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -350,16 +353,20 @@
 
       function lerp(a, b, t) { return a + (b - a) * t; }
 
+      var heroSticky = hero ? hero.querySelector('.hero__sticky') : null;
+
       function actualizarHero() {
-        if (!hero || !cover || !coverImg) return;
-        var vh = window.innerHeight;
-        var total = hero.offsetHeight - vh;          // recorrido mientras esta "pegada"
+        if (!hero || !cover || !coverImg || !heroSticky) return;
+        // Altura REAL de la zona pegada (en px) -> robusto en movil aunque
+        // la barra de direcciones cambie el alto del viewport.
+        var vpH = heroSticky.clientHeight;
+        var total = hero.offsetHeight - vpH;         // recorrido mientras esta "pegada"
         var top = hero.getBoundingClientRect().top;
         var scrolled = Math.min(Math.max(-top, 0), total);
         var p = total > 0 ? scrolled / total : 0;    // progreso 0 -> 1
 
-        // La foto crece de 56vh a 100vh (cubre el wordmark).
-        cover.style.height = lerp(56, 100, p) + 'vh';
+        // La foto crece de 56% a 100% de la pantalla (en px) y cubre el wordmark.
+        cover.style.height = (lerp(0.56, 1, p) * vpH) + 'px';
         // Se aclara (brillo 0.55 -> 1), se enfoca (blur 3px -> 0) y hace zoom-out (1.06 -> 1).
         coverImg.style.filter =
           'brightness(' + lerp(0.55, 1, p) + ') blur(' + lerp(3, 0, p) + 'px)';
@@ -370,6 +377,8 @@
 
       window.addEventListener('scroll', actualizarHero, { passive: true });
       window.addEventListener('resize', actualizarHero);
+      // En movil, la barra de direcciones dispara este evento al aparecer/ocultarse.
+      if (window.visualViewport) window.visualViewport.addEventListener('resize', actualizarHero);
       actualizarHero();
 
       // Secuencia completa del conejo (intro).

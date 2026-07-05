@@ -368,6 +368,20 @@ a { color: inherit; }
   .site-footer__contact { text-align: left; }
 }
 
+@media (max-width: 640px) {
+  /* Contacto: etiqueta arriba y valor abajo (mas limpio en movil) */
+  .contact-row a,
+  .contact-row span.value {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+  }
+  .contact-row__value { font-size: clamp(1.5rem, 8vw, 2.2rem); }
+  /* Header: la marca y el menu se separan bien en pantallas chicas */
+  .site-header { gap: 0.4rem 1.2rem; padding: 1.1rem clamp(1.1rem, 5vw, 2rem); }
+  .site-header__nav { gap: 1rem; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .reveal { animation: none; opacity: 1; transform: none; }
   html { scroll-behavior: auto; }
