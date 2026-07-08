@@ -199,95 +199,64 @@
       }
 
       /* ==================================================================
-         Seccion "MANIFIESTO" (la intro debajo del hero).
-         Concepto: el hero es duro (Helvetica, mayusculas) = lo moderno;
-         aqui la voz es humana (serif, revelada linea a linea al bajar).
-         >>> Los TEXTOS se editan en el HTML, en <section class="intro">.
+         Seccion "Introduccion" (debajo del hero) — TODO CENTRADO, sin serif.
+         El texto se revela linea a linea al bajar (efecto de scroll).
+         >>> Los TEXTOS se editan en el HTML, dentro de <section id="intro">.
          ================================================================== */
       .intro {
         position: relative;
         background: var(--bg-final);
         min-height: 100vh;
         min-height: 100dvh;
-        display: grid;
-        grid-template-columns: minmax(190px, 0.85fr) minmax(0, 2.15fr);
-        column-gap: clamp(2rem, 6vw, 6rem);
-        row-gap: clamp(3rem, 9vh, 7rem);
-        align-content: center;
-        max-width: 1280px;
-        margin: 0 auto;
-        padding: clamp(6rem, 16vh, 12rem) clamp(1.6rem, 6vw, 5rem);
-      }
-
-      /* --- Riel izquierdo: la voz "sistema" (utilitaria, en mayusculas) --- */
-      .intro__meta {
-        position: sticky;
-        top: clamp(3rem, 16vh, 8rem);
-        align-self: start;
         display: flex;
         flex-direction: column;
-        gap: 1.1rem;
-      }
-      .intro__eyebrow {
-        display: flex;
-        align-items: center;
-        gap: 0.8rem;
-        font-size: 0.72rem;
-        letter-spacing: 0.32em;
-        text-transform: uppercase;
-        color: var(--bone);
-      }
-      .intro__eyebrow::after {
-        content: "";
-        flex: 1;
-        height: 1px;
-        background: var(--line);
-      }
-      .intro__metaline {
-        font-size: 0.78rem;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        line-height: 1.55;
-        color: var(--ash);
+        justify-content: center;
+        align-items: center;       /* centra horizontalmente */
+        text-align: center;        /* centra el texto */
+        gap: clamp(2rem, 6vh, 3.5rem);
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: clamp(5rem, 14vh, 10rem) clamp(1.4rem, 6vw, 4rem);
       }
 
-      /* --- Manifiesto: la voz "humana" (serif, revelada linea a linea) --- */
-      .intro__body { align-self: center; }
+      /* Titulo grande (hereda la Helvetica del sitio, sin serif) */
       .intro__title {
-        font-family: Georgia, 'Times New Roman', serif;
-        font-weight: 400;
+        font-weight: 700;
         color: var(--bone);
-        font-size: clamp(2rem, 5.2vw, 4.1rem);
+        /* minimo bajo + max-width 100%: nunca se sale en moviles */
+        font-size: clamp(1.1rem, 5.3vw, 4.2rem);
         line-height: 1.06;
-        letter-spacing: -0.015em;
+        letter-spacing: -0.03em;
         margin: 0;
+        width: 100%;        /* fija el ancho: el texto se acomoda, nunca se sale */
       }
-      .intro__title em { font-style: italic; }
+      .intro__title em { font-style: italic; }   /* enfasis: cursiva (sigue siendo Helvetica) */
+
+      /* Parrafo de apoyo */
       .intro__lead {
-        font-family: Georgia, 'Times New Roman', serif;
         color: #cfcac2;
-        font-size: clamp(1.05rem, 1.7vw, 1.5rem);
+        font-size: clamp(0.95rem, 2vw, 1.5rem);
         line-height: 1.5;
-        margin: clamp(1.8rem, 4vh, 3rem) 0 0;
-        max-width: 46ch;
+        margin: 0;
+        width: 100%;
+        max-width: 52ch;    /* en escritorio no pasa de 52 caracteres de ancho */
       }
       .intro__lead em { font-style: italic; color: var(--bone); }
 
       /* Mecanica del revelado: cada .line recorta a su hijo, que sube desde abajo */
       .line { display: block; overflow: hidden; }
       .line > span { display: block; will-change: transform; }
-      /* Respiro para que no se recorten las colas (q, g, y) en la serif grande */
-      .intro__title .line { padding-bottom: 0.1em; }
+      .intro__title .line { padding-bottom: 0.08em; }  /* respiro para colas (g, y) */
 
-      /* --- Indice de enlaces (abajo, cruza las dos columnas) --- */
+      /* Indice de enlaces (centrado, debajo de una linea fina) */
       .intro__links {
-        grid-column: 1 / -1;
+        width: min(760px, 100%);
         border-top: 1px solid var(--line);
-        padding-top: clamp(1.4rem, 4vh, 2.4rem);
+        padding-top: clamp(1.4rem, 4vh, 2.2rem);
         display: flex;
         flex-wrap: wrap;
-        align-items: flex-start;   /* el subrayado se ajusta al ancho del texto */
-        gap: clamp(1.2rem, 5vw, 4rem);
+        justify-content: center;
+        gap: clamp(1.2rem, 5vw, 3.5rem);
       }
       .intro__link {
         position: relative;
@@ -320,28 +289,10 @@
         .home__nav { flex-direction: row; align-items: flex-start; gap: 1.4rem; }
         .hero__cover { height: 44vh; }
       }
-      /* Manifiesto en una sola columna en pantallas medianas/pequenas */
-      @media (max-width: 820px) {
-        .intro {
-          grid-template-columns: 1fr;
-          align-content: start;
-          row-gap: clamp(2rem, 6vh, 3rem);
-          padding-top: clamp(4.5rem, 12vh, 7rem);
-        }
-        .intro__meta {
-          position: static;
-          top: auto;
-          flex-direction: row;
-          flex-wrap: wrap;
-          align-items: baseline;
-          gap: 0.6rem 1.6rem;
-        }
-        .intro__eyebrow { width: 100%; }
-      }
-      /* En moviles: todo apilado (evita que el texto se salga por la derecha) */
+      /* En moviles: menos margen lateral y enlaces apilados/centrados */
       @media (max-width: 560px) {
-        .intro__meta { flex-direction: column; }
-        .intro__links { flex-direction: column; gap: 1rem; }
+        .intro { padding-left: 1.1rem; padding-right: 1.1rem; }
+        .intro__links { flex-direction: column; align-items: center; gap: 1rem; }
       }
       @keyframes fadeIn {
         from { opacity: 0; transform: translateY(12px); }
@@ -390,28 +341,21 @@
            - Puedes agregar o quitar lineas copiando/borrando un <span class="line">.
            ================================================================ -->
       <section class="intro" id="intro">
-        <!-- Riel: datos cortos (mayusculas) -->
-        <aside class="intro__meta">
-          <p class="intro__eyebrow">Manifiesto</p>
-          <p class="intro__metaline">Santiago Enciso<br />Dirección creativa</p>
-          <p class="intro__metaline">Entornos visuales,<br />físicos y audiovisuales</p>
-        </aside>
+        <!-- Titulo (se revela linea a linea) -->
+        <h2 class="intro__title">
+          <span class="line"><span>Knox es dirección creativa</span></span>
+          <span class="line"><span>que busca devolverle lo</span></span>
+          <span class="line"><span><em>humano</em> a lo que creamos.</span></span>
+        </h2>
 
-        <!-- Manifiesto (se revela linea a linea) -->
-        <div class="intro__body">
-          <h2 class="intro__title">
-            <span class="line"><span>Knox es dirección creativa</span></span>
-            <span class="line"><span>que busca devolverle lo</span></span>
-            <span class="line"><span><em>humano</em> a lo que creamos.</span></span>
-          </h2>
-          <p class="intro__lead">
-            <span class="line"><span>En una modernidad que nos aleja</span></span>
-            <span class="line"><span>de nosotros mismos, diseñamos entornos</span></span>
-            <span class="line"><span>para volver a <em>sentirnos humanos</em>.</span></span>
-            <span class="line"><span>La tecnología acelera;</span></span>
-            <span class="line"><span>las personas dan el <em>sentido</em>.</span></span>
-          </p>
-        </div>
+        <!-- Parrafo de apoyo -->
+        <p class="intro__lead">
+          <span class="line"><span>En una modernidad que nos aleja</span></span>
+          <span class="line"><span>de nosotros mismos, diseñamos entornos</span></span>
+          <span class="line"><span>para volver a <em>sentirnos humanos</em>.</span></span>
+          <span class="line"><span>La tecnología acelera;</span></span>
+          <span class="line"><span>las personas dan el <em>sentido</em>.</span></span>
+        </p>
 
         <!-- Indice de enlaces -->
         <nav class="intro__links">
