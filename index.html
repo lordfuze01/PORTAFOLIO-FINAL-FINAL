@@ -284,6 +284,150 @@
       .intro__link:hover .arrow { transform: translateX(6px); }
       .intro__link:focus-visible { outline: 2px solid var(--bone); outline-offset: 5px; }
 
+      /* ==================================================================
+         Seccion "CORTO" (debajo del manifiesto): texto grande a la
+         izquierda (1/3) + miniatura de video a la derecha (2/3).
+         Texto y miniatura se mueven a velocidades distintas al bajar
+         (parallax continuo, via JS). Sin serif.
+         >>> Los TEXTOS se editan en el HTML, dentro de <section id="corto">.
+         ================================================================== */
+      .corto {
+        position: relative;
+        background: var(--bg-final);
+        display: grid;
+        grid-template-columns: 1fr 2fr;   /* 1/3 texto + 2/3 miniatura */
+        align-items: center;
+        gap: clamp(1.8rem, 5vw, 4.5rem);
+        /* Ancho casi completo (solo margen lateral) = miniatura grande */
+        padding: clamp(1.5rem, 5vh, 3rem) clamp(1.4rem, 5vw, 5rem) clamp(4rem, 10vh, 7rem);
+      }
+
+      .corto__texto { will-change: transform, opacity; }
+      .corto__title {
+        font-weight: 700;
+        color: var(--bone);
+        font-size: clamp(1.8rem, 4.8vw, 5.2rem);
+        line-height: 1.06;
+        letter-spacing: -0.03em;
+        margin: 0;
+      }
+      .corto__title em { font-style: italic; }
+
+      /* Boton de texto "Ver corto" (mismo subrayado que los enlaces de la intro) */
+      .corto__cta {
+        position: relative;
+        display: inline-block;
+        margin-top: clamp(1.4rem, 4vh, 2.4rem);
+        border: 0;
+        background: none;
+        cursor: pointer;
+        color: var(--bone);
+        font-family: inherit;
+        font-size: clamp(1.05rem, 1.8vw, 1.4rem);
+        font-weight: 500;
+        letter-spacing: 0.01em;
+        padding: 0 0 5px;
+      }
+      .corto__cta .arrow { display: inline-block; transition: transform 0.35s ease; }
+      .corto__cta::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 1px;
+        background: var(--bone);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.45s cubic-bezier(0.19, 1, 0.22, 1);
+      }
+      .corto__cta:hover::after { transform: scaleX(1); }
+      .corto__cta:hover .arrow { transform: translateX(6px); }
+      .corto__cta:focus-visible { outline: 2px solid var(--bone); outline-offset: 5px; }
+
+      /* Miniatura: bloque 16:9 oscuro con boton de play (placeholder del video) */
+      .corto__thumb {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        border: 1px solid var(--line);
+        padding: 0;
+        cursor: pointer;
+        overflow: hidden;
+        background: radial-gradient(120% 140% at 28% 18%, #1c1c1e 0%, #0b0b0c 55%, #000 100%);
+        will-change: transform, opacity;
+      }
+      .corto__play {
+        position: absolute;
+        inset: 0;
+        margin: auto;
+        width: clamp(72px, 9vw, 116px);
+        height: clamp(72px, 9vw, 116px);
+        border-radius: 50%;
+        border: 1px solid rgba(236, 231, 223, 0.5);
+        display: grid;
+        place-items: center;
+        color: var(--bone);
+        background: rgba(0, 0, 0, 0.35);
+        transition: transform 0.35s ease, border-color 0.35s ease;
+      }
+      .corto__thumb:hover .corto__play,
+      .corto__thumb:focus-visible .corto__play { transform: scale(1.12); border-color: var(--bone); }
+      .corto__thumb:focus-visible { outline: 2px solid var(--bone); outline-offset: 5px; }
+
+      /* ---- Visor (lightbox): la miniatura se expande y reproduce aqui ---- */
+      .visor {
+        position: fixed;
+        inset: 0;
+        z-index: 50;
+        display: grid;
+        place-items: center;
+        background: rgba(0, 0, 0, 0.92);
+        padding: clamp(1rem, 4vw, 3rem);
+      }
+      .visor[hidden] { display: none; }
+      .visor__marco {
+        position: relative;
+        width: min(1100px, 100%);
+        aspect-ratio: 16 / 9;
+        background: radial-gradient(120% 140% at 28% 18%, #1c1c1e 0%, #0b0b0c 55%, #000 100%);
+        border: 1px solid var(--line);
+        overflow: hidden;
+        will-change: transform;
+      }
+      .visor__marco video { width: 100%; height: 100%; display: block; object-fit: cover; }
+      .visor__pronto {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        color: var(--bone);
+        font-size: clamp(1rem, 2.4vw, 1.6rem);
+        font-weight: 500;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+      }
+      .visor__cerrar {
+        position: absolute;
+        top: clamp(0.8rem, 3vw, 1.6rem);
+        right: clamp(1rem, 3vw, 2rem);
+        z-index: 1;
+        border: 0;
+        background: none;
+        cursor: pointer;
+        color: var(--bone);
+        font-size: clamp(1.8rem, 4vw, 2.6rem);
+        line-height: 1;
+        font-family: inherit;
+      }
+      .visor__cerrar:hover { color: #ffffff; }
+      .visor__cerrar:focus-visible { outline: 2px solid var(--bone); outline-offset: 4px; }
+
+      /* En pantallas angostas: texto arriba, miniatura abajo (ancho completo) */
+      @media (max-width: 700px) {
+        .corto { grid-template-columns: 1fr; }
+      }
+
       @media (max-width: 640px) {
         .hero__head { flex-direction: column; gap: 0.8rem; }
         .home__nav { flex-direction: row; align-items: flex-start; gap: 1.4rem; }
@@ -364,7 +508,53 @@
           <a class="intro__link" href="contacto.html">Hablemos <span class="arrow">→</span></a>
         </nav>
       </section>
+
+      <!-- ================================================================
+           Seccion "CORTO": texto grande (1/3) + miniatura de video (2/3).
+
+           >>> COMO EDITAR LOS TEXTOS <<<
+           - Cada frase del titulo va en su propia linea:
+                 <span class="line"><span>tu frase aqui</span></span>
+           - Para poner una palabra en CURSIVA usa <em>palabra</em>.
+
+           >>> AQUI VA EL VIDEO <<<
+           - Cuando exista el corto, agregale el src al <video> del visor
+             (mas abajo, id="visorVideo"). Ejemplo:
+                 <video id="visorVideo" src="./corto.mp4" ...>
+           - Con el src puesto, el "Proximamente" desaparece solo y el
+             video se reproduce al abrir el visor.
+           ================================================================ -->
+      <section class="corto" id="corto">
+        <div class="corto__texto">
+          <h2 class="corto__title">
+            <span class="line"><span>Conoce uno</span></span>
+            <span class="line"><span>de nuestros</span></span>
+            <span class="line"><span><em>cortos</em>.</span></span>
+          </h2>
+          <button class="corto__cta" type="button" data-abrir-visor>
+            Ver corto <span class="arrow">→</span>
+          </button>
+        </div>
+
+        <!-- Miniatura (placeholder mientras no hay video): clic = se expande -->
+        <button class="corto__thumb" id="cortoThumb" type="button" data-abrir-visor
+                aria-label="Reproducir el corto">
+          <span class="corto__play" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </span>
+        </button>
+      </section>
     </main>
+
+    <!-- Visor del corto (lightbox): se abre al hacer clic en la miniatura -->
+    <div class="visor" id="visor" hidden>
+      <button class="visor__cerrar" id="visorCerrar" type="button" aria-label="Cerrar">&times;</button>
+      <div class="visor__marco" id="visorMarco">
+        <!-- >>> AQUI VA EL VIDEO: agrega src="./tu-corto.mp4" <<< -->
+        <video id="visorVideo" controls playsinline preload="metadata" hidden></video>
+        <div class="visor__pronto" id="visorPronto">Próximamente</div>
+      </div>
+    </div>
 
     <!-- Librerias locales (funcionan sin internet) -->
     <script src="./lib/lottie.min.js"></script>
@@ -499,6 +689,135 @@
           { threshold: 0.25 }
         );
         io.observe(intro);
+      })();
+
+      // ====== SECCION "CORTO": parallax continuo + visor (lightbox) ======
+      // El texto baja lento y la miniatura mas rapido mientras la seccion
+      // cruza la pantalla (sensacion de profundidad, tipo orastudio).
+      // Mismo patron que actualizarHero(): progreso 0->1 ligado al scroll.
+      (function () {
+        var corto = document.getElementById('corto');
+        if (!corto || typeof gsap === 'undefined') return;
+
+        var texto = corto.querySelector('.corto__texto');
+        var thumb = document.getElementById('cortoThumb');
+        var visor = document.getElementById('visor');
+        var marco = document.getElementById('visorMarco');
+        var cerrarBtn = document.getElementById('visorCerrar');
+        var video = document.getElementById('visorVideo');
+        var pronto = document.getElementById('visorPronto');
+        var menosMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // ---- Parallax continuo (si piden menos movimiento, queda estatico) ----
+        var pendiente = false;
+        function actualizarCorto() {
+          var r = corto.getBoundingClientRect();
+          var vpH = window.innerHeight;
+          // Progreso 0 (la seccion asoma por abajo) -> 1 (sale por arriba).
+          var p = (vpH - r.top) / (vpH + r.height);
+          p = Math.min(Math.max(p, 0), 1);
+          var aparicion = Math.min(p / 0.22, 1);   // opacidad de entrada
+          // Texto lento; miniatura mas rapida y con escala sutil = profundidad.
+          gsap.set(texto, { y: lerp(70, -70, p), opacity: aparicion });
+          gsap.set(thumb, {
+            y: lerp(140, -140, p),
+            scale: lerp(0.94, 1, Math.min(p * 2, 1)),
+            opacity: aparicion,
+          });
+        }
+        function alScroll() {
+          if (pendiente) return;
+          pendiente = true;
+          requestAnimationFrame(function () {
+            pendiente = false;
+            actualizarCorto();
+          });
+        }
+        if (!menosMovimiento) {
+          window.addEventListener('scroll', alScroll, { passive: true });
+          window.addEventListener('resize', alScroll);
+          actualizarCorto();
+        }
+
+        // ---- Visor: la miniatura se expande hasta casi pantalla completa ----
+        // Si el <video> ya tiene src, se muestra y reproduce; si no, "Proximamente".
+        var hayVideo = video && video.getAttribute('src');
+        if (hayVideo) {
+          video.hidden = false;
+          pronto.hidden = true;
+        }
+
+        var abierto = false;
+        function abrirVisor() {
+          if (abierto) return;
+          abierto = true;
+          visor.hidden = false;
+          document.body.style.overflow = 'hidden';   // bloquea el scroll de fondo
+
+          if (menosMovimiento) {
+            gsap.set(visor, { opacity: 1 });
+            gsap.set(marco, { x: 0, y: 0, scaleX: 1, scaleY: 1 });
+          } else {
+            // Tipo FLIP: parte desde donde esta la miniatura y crece al centro.
+            var a = thumb.getBoundingClientRect();
+            var b = marco.getBoundingClientRect();
+            gsap.fromTo(visor, { opacity: 0 }, { opacity: 1, duration: 0.35, ease: 'power2.out' });
+            gsap.fromTo(
+              marco,
+              {
+                x: a.left + a.width / 2 - (b.left + b.width / 2),
+                y: a.top + a.height / 2 - (b.top + b.height / 2),
+                scaleX: a.width / b.width,
+                scaleY: a.height / b.height,
+              },
+              { x: 0, y: 0, scaleX: 1, scaleY: 1, duration: 0.6, ease: 'power3.inOut' }
+            );
+          }
+          if (hayVideo) video.play();
+          cerrarBtn.focus();
+        }
+
+        function cerrarVisor() {
+          if (!abierto) return;
+          abierto = false;
+          if (hayVideo) video.pause();
+
+          function alTerminar() {
+            visor.hidden = true;
+            document.body.style.overflow = '';
+            thumb.focus();
+          }
+          if (menosMovimiento) {
+            alTerminar();
+            return;
+          }
+          // La expansion se revierte hacia la miniatura.
+          var a = thumb.getBoundingClientRect();
+          var b = marco.getBoundingClientRect();
+          gsap.to(visor, { opacity: 0, duration: 0.4, ease: 'power2.in', delay: 0.15 });
+          gsap.to(marco, {
+            x: a.left + a.width / 2 - (b.left + b.width / 2),
+            y: a.top + a.height / 2 - (b.top + b.height / 2),
+            scaleX: a.width / b.width,
+            scaleY: a.height / b.height,
+            duration: 0.55,
+            ease: 'power3.inOut',
+            onComplete: alTerminar,
+          });
+        }
+
+        // Abren el visor: la miniatura y el boton "Ver corto".
+        corto.querySelectorAll('[data-abrir-visor]').forEach(function (el) {
+          el.addEventListener('click', abrirVisor);
+        });
+        // Cierran el visor: la X, clic fuera del video y la tecla Escape.
+        cerrarBtn.addEventListener('click', cerrarVisor);
+        visor.addEventListener('click', function (e) {
+          if (e.target === visor) cerrarVisor();
+        });
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape') cerrarVisor();
+        });
       })();
 
       // Secuencia completa del conejo (intro).
