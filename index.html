@@ -125,26 +125,6 @@
         letter-spacing: -0.04em;
         text-transform: uppercase;
       }
-      .home__nav {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-        gap: 1.2rem;              /* SEPARACION entre los enlaces (mas = mas separados) */
-        padding-top: 0.6rem;
-        flex-shrink: 0;
-        text-align: right;
-      }
-      .home__link {
-        color: #8a8a8a;
-        text-decoration: none;
-        font-size: clamp(1.05rem, 1.7vw, 1.5rem);  /* TAMANO de los enlaces */
-        font-weight: 600;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        transition: color 0.25s ease;
-      }
-      .home__link:hover { color: var(--titulo-color); }
-
       /* La foto: anclada abajo, CRECE hacia arriba con el scroll (via JS) */
       .hero__cover {
         position: absolute;
@@ -430,7 +410,6 @@
 
       @media (max-width: 640px) {
         .hero__head { flex-direction: column; gap: 0.8rem; }
-        .home__nav { flex-direction: row; align-items: flex-start; gap: 1.4rem; }
         .hero__cover { height: 44vh; }
       }
       /* En moviles: menos margen lateral y enlaces apilados/centrados */
@@ -441,6 +420,104 @@
       @keyframes fadeIn {
         from { opacity: 0; transform: translateY(12px); }
         to   { opacity: 1; transform: translateY(0); }
+      }
+
+      /* =========================================================
+         MENU LATERAL — boton toggle + panel deslizante (compartido
+         con pagina.css, ver docs/superpowers/specs/2026-07-09-menu-lateral-design.md)
+         ========================================================= */
+      .menu-toggle {
+        position: fixed;
+        top: clamp(1.2rem, 3vw, 2rem);
+        right: clamp(1.2rem, 3vw, 2rem);
+        z-index: 60;
+        background: none;
+        border: 0;
+        cursor: pointer;
+        color: var(--bone);
+        font-family: inherit;
+        font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        padding: 0.3em 0.1em;
+      }
+      .menu-toggle:hover { color: #ffffff; }
+      .menu-toggle:focus-visible { outline: 2px solid var(--bone); outline-offset: 4px; }
+
+      .menu-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 55;
+        background: rgba(0, 0, 0, 0.6);
+      }
+      .menu-overlay[hidden] { display: none; }
+
+      .menu-panel {
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+        height: 100dvh;
+        width: min(420px, 92vw);
+        background: var(--bg-final);
+        border-left: 1px solid var(--line);
+        padding: clamp(5rem, 12vh, 7rem) clamp(1.6rem, 4vw, 2.4rem) clamp(2rem, 6vh, 3rem);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        will-change: transform;
+      }
+
+      .menu-panel__list { list-style: none; }
+      .menu-panel__item { border-bottom: 1px solid var(--line); }
+      .menu-panel__item:first-child { border-top: 1px solid var(--line); }
+
+      .menu-panel__link {
+        display: block;
+        padding: clamp(0.9rem, 2.4vh, 1.3rem) 0;
+        text-decoration: none;
+        color: var(--bone);
+        font-size: clamp(1.5rem, 4vw, 2.1rem);
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        transition: color 0.25s ease;
+      }
+      .menu-panel__link .line { overflow: hidden; display: block; }
+      .menu-panel__link .line > span { display: block; will-change: transform; }
+      .menu-panel__num {
+        display: inline-block;
+        color: var(--ash);
+        font-size: 0.5em;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        margin-right: 0.5em;
+        vertical-align: middle;
+      }
+      .menu-panel__link:hover,
+      .menu-panel__link.is-active { color: #ffffff; }
+      .menu-panel__link.is-active .menu-panel__num { color: var(--bone); }
+      .menu-panel__link:focus-visible { outline: 2px solid var(--bone); outline-offset: 4px; }
+
+      .menu-panel__contact {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+        padding-top: clamp(1.2rem, 3vh, 1.8rem);
+        border-top: 1px solid var(--line);
+      }
+      .menu-panel__contact a {
+        color: var(--ash);
+        text-decoration: none;
+        font-size: 0.92rem;
+        letter-spacing: 0.02em;
+        transition: color 0.25s ease;
+      }
+      .menu-panel__contact a:hover { color: var(--bone); }
+      .menu-panel__contact a:focus-visible { outline: 2px solid var(--bone); outline-offset: 3px; }
+
+      @media (max-width: 640px) {
+        .menu-panel { width: 100vw; border-left: 0; }
       }
     </style>
   </head>
@@ -458,11 +535,7 @@
         <div class="hero__sticky">
           <div class="hero__head">
             <h1 class="home__word">BY KNOX</h1>
-            <nav class="home__nav">
-              <a class="home__link" href="knox.html">Knox</a>
-              <a class="home__link" href="trabajos.html">Trabajos</a>
-              <a class="home__link" href="contacto.html">Contacto</a>
-            </nav>
+            <button type="button" id="menuToggle" class="menu-toggle" aria-expanded="false" aria-controls="menuPanel">Menú</button>
           </div>
 
           <figure class="hero__cover" id="cover">
@@ -556,9 +629,43 @@
       </div>
     </div>
 
+    <div class="menu-overlay" id="menuOverlay" hidden>
+      <div class="menu-panel" id="menuPanel">
+        <nav aria-label="Navegación principal">
+          <ol class="menu-panel__list">
+            <li class="menu-panel__item">
+              <a class="menu-panel__link is-active" href="index.html#main">
+                <span class="line"><span><span class="menu-panel__num">01</span>Home</span></span>
+              </a>
+            </li>
+            <li class="menu-panel__item">
+              <a class="menu-panel__link" href="knox.html">
+                <span class="line"><span><span class="menu-panel__num">02</span>Knox</span></span>
+              </a>
+            </li>
+            <li class="menu-panel__item">
+              <a class="menu-panel__link" href="trabajos.html">
+                <span class="line"><span><span class="menu-panel__num">03</span>Trabajos</span></span>
+              </a>
+            </li>
+            <li class="menu-panel__item">
+              <a class="menu-panel__link" href="contacto.html">
+                <span class="line"><span><span class="menu-panel__num">04</span>Contacto</span></span>
+              </a>
+            </li>
+          </ol>
+        </nav>
+        <div class="menu-panel__contact">
+          <a href="https://www.instagram.com/by_kn0x/" target="_blank" rel="noopener">@by_kn0x</a>
+          <a href="mailto:sencisoballesta@gmail.com">sencisoballesta@gmail.com</a>
+        </div>
+      </div>
+    </div>
+
     <!-- Librerias locales (funcionan sin internet) -->
     <script src="./lib/lottie.min.js"></script>
     <script src="./lib/gsap.min.js"></script>
+    <script src="./menu.js"></script>
 
     <!-- Animacion del conejo incrustada -->
     <script>
@@ -584,7 +691,7 @@
         launch.style.display = 'none';
         home.style.display = 'block';
         gsap.set('.home__word', { opacity: 1, y: 0 });
-        gsap.set('.home__link', { opacity: 1, y: 0 });
+        gsap.set('.menu-toggle', { opacity: 1, y: 0 });
         gsap.set('.hero__cover', { opacity: 1 });
         actualizarHero();
       }
@@ -592,13 +699,13 @@
       // Animacion de entrada de la home (estilo NEXOLA).
       function animarHome() {
         gsap.set('.home__word', { y: 40, opacity: 0 });
-        gsap.set('.home__link', { y: 12, opacity: 0 });
+        gsap.set('.menu-toggle', { y: 12, opacity: 0 });
         gsap.set('.hero__cover', { opacity: 0 });
         gsap.timeline({ delay: 0.15 })
           // 1) El wordmark BY KNOX sube y aparece.
           .to('.home__word', { y: 0, opacity: 1, duration: 0.9, ease: 'power3.out' })
-          // 2) El nav aparece apilado, uno tras otro.
-          .to('.home__link', { y: 0, opacity: 1, duration: 0.6, stagger: 0.12, ease: 'power2.out' }, '-=0.5')
+          // 2) El boton de menu aparece.
+          .to('.menu-toggle', { y: 0, opacity: 1, duration: 0.6, ease: 'power2.out' }, '-=0.5')
           // 3) La foto de portada aparece.
           .to('.hero__cover', { opacity: 1, duration: 1.1, ease: 'power2.out' }, '-=0.7');
       }
