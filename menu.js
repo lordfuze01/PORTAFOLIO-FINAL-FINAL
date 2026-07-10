@@ -1,4 +1,4 @@
-// ====== MENU LATERAL: boton "Menu"/"Cerrar" + panel deslizante ======
+// ====== MENU LATERAL: boton hamburguesa + panel deslizante ======
 // Compartido por las 4 paginas del sitio. Mismo patron de cierre
 // (Escape / clic fuera del panel / bloqueo de scroll del body) que el
 // visor de video de index.html (ver seccion "CORTO").
@@ -14,13 +14,25 @@
 
   var abierto = false;
 
+  // Compensa el ancho de la scrollbar al quitarla (evita el salto del
+  // contenido cuando el body pasa a overflow:hidden con el menu abierto).
+  function bloquearScroll() {
+    var anchoScrollbar = window.innerWidth - document.documentElement.clientWidth;
+    if (anchoScrollbar > 0) document.body.style.paddingRight = anchoScrollbar + 'px';
+    document.body.style.overflow = 'hidden';
+  }
+  function desbloquearScroll() {
+    document.body.style.overflow = '';
+    document.body.style.paddingRight = '';
+  }
+
   function abrirMenu() {
     if (abierto) return;
     abierto = true;
     overlay.hidden = false;
-    document.body.style.overflow = 'hidden';
-    toggle.textContent = 'Cerrar';
+    bloquearScroll();
     toggle.setAttribute('aria-expanded', 'true');
+    toggle.setAttribute('aria-label', 'Cerrar menú');
 
     if (menosMovimiento) {
       gsap.set(overlay, { opacity: 1 });
@@ -48,12 +60,12 @@
   function cerrarMenu() {
     if (!abierto) return;
     abierto = false;
-    toggle.textContent = 'Menú';
     toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', 'Abrir menú');
 
     function alTerminar() {
       overlay.hidden = true;
-      document.body.style.overflow = '';
+      desbloquearScroll();
       toggle.focus();
     }
     if (menosMovimiento) {
