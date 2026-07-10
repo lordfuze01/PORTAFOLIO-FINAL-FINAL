@@ -9,11 +9,7 @@
   <body>
     <header class="site-header">
       <a class="site-header__brand" href="index.html#main">KNOX</a>
-      <nav class="site-header__nav">
-        <a href="knox.html">¿Quién es Knox?</a>
-        <a href="trabajos.html" class="is-active">Trabajos</a>
-        <a href="contacto.html">Contacto</a>
-      </nav>
+      <button type="button" id="menuToggle" class="menu-toggle" aria-expanded="false" aria-controls="menuPanel">Menú</button>
     </header>
 
     <main class="page">
@@ -170,5 +166,41 @@
         })();
       }
     </script>
+
+    <div class="menu-overlay" id="menuOverlay" hidden>
+      <div class="menu-panel" id="menuPanel">
+        <nav aria-label="Navegación principal">
+          <ol class="menu-panel__list">
+            <li class="menu-panel__item">
+              <a class="menu-panel__link" href="index.html#main">
+                <span class="line"><span><span class="menu-panel__num">01</span>Home</span></span>
+              </a>
+            </li>
+            <li class="menu-panel__item">
+              <a class="menu-panel__link" href="knox.html">
+                <span class="line"><span><span class="menu-panel__num">02</span>Knox</span></span>
+              </a>
+            </li>
+            <li class="menu-panel__item">
+              <a class="menu-panel__link is-active" href="trabajos.html">
+                <span class="line"><span><span class="menu-panel__num">03</span>Trabajos</span></span>
+              </a>
+            </li>
+            <li class="menu-panel__item">
+              <a class="menu-panel__link" href="contacto.html">
+                <span class="line"><span><span class="menu-panel__num">04</span>Contacto</span></span>
+              </a>
+            </li>
+          </ol>
+        </nav>
+        <div class="menu-panel__contact">
+          <a href="https://www.instagram.com/by_kn0x/" target="_blank" rel="noopener">@by_kn0x</a>
+          <a href="mailto:sencisoballesta@gmail.com">sencisoballesta@gmail.com</a>
+        </div>
+      </div>
+    </div>
+
+    <script src="./lib/gsap.min.js"></script>
+    <script src="./menu.js"></script>
   </body>
 </html>
