@@ -1,7 +1,7 @@
 # Contexto para el agente — Portafolio BY KNOX
 
 > Archivo de traspaso. Léelo antes de trabajar en este proyecto para no re-descubrir todo.
-> Última actualización: 2026-07-08.
+> Última actualización: 2026-07-09.
 
 ## Qué es
 
@@ -27,6 +27,10 @@ JavaScript, sin framework ni build. El logo/mascota es un **conejo** (animación
 - `trabajos.html` — índice de trabajos
 - `contacto.html` — contacto
 - `pagina.css` — estilos de las páginas internas (knox/trabajos/contacto)
+- `menu.js` — comportamiento del menú lateral (compartido por las 4 páginas)
+- `_headers` — cabeceras de Cloudflare: seguridad (CSP, nosniff, anti-iframe) + cache
+- `.assetsignore` — qué archivos del repo NO se publican en el sitio
+  (docs internos, graphify-out, CLAUDE.md, CONTEXTO-AGENTE.md, conejo.json)
 - `lib/gsap.min.js`, `lib/lottie.min.js` — librerías locales (funcionan sin internet).
   **Solo está el core de GSAP** (no ScrollTrigger) → para efectos de scroll usar
   IntersectionObserver + gsap.to (así se hizo la intro).
@@ -68,6 +72,28 @@ Inspirada en orastudio.ca. Spec completo en
   hasta casi fullscreen. Cierra con ✕, Escape o clic fuera; bloquea el scroll del body.
 - **Para enchufar el video real:** buscar `>>> AQUI VA EL VIDEO` en `index.html` y
   ponerle `src` al `<video id="visorVideo">`; el "Próximamente" desaparece solo.
+
+### Menú lateral (botón hamburguesa en las 4 páginas) — HECHO
+Spec en `docs/superpowers/specs/2026-07-09-menu-lateral-design.md`. Botón fijo
+arriba-derecha → panel deslizante desde la derecha (GSAP), overlay oscuro, cierra
+con ✕/Escape/clic fuera. Comportamiento en `menu.js`; CSS duplicado a propósito
+en `index.html` (inline) y `pagina.css` — si se toca uno, tocar el otro.
+En `index.html` reemplazó al nav viejo del hero; el índice de enlaces de la intro
+ahora es el "flow menu" (filas anchas con marquee CSS infinito al hacer hover).
+
+### Limpieza + seguridad (2026-07-09) — HECHO
+- `.assetsignore`: se dejaron de publicar `docs/`, `graphify-out/`, `CLAUDE.md`,
+  `CONTEXTO-AGENTE.md` y `conejo.json` (antes eran públicos en el sitio).
+- `_headers`: cabeceras de seguridad (CSP con 'unsafe-inline'/'unsafe-eval' —
+  necesarios por el JS inline y las expresiones de Lottie —, nosniff, anti-iframe,
+  Referrer-Policy, Permissions-Policy). **La CSP no se puede probar en local**
+  (el server local no manda cabeceras): tras publicar, abrir el sitio y verificar
+  que el conejo reproduce; si algo falla, borrar la línea Content-Security-Policy.
+- Cache de `foto-portada.jpg` bajado de 1 año a 1 día (para poder reemplazarla
+  con el mismo nombre sin que los visitantes vean la vieja).
+- Se borró CSS muerto (`.project*`, `.info-row*`, `.grid--2` en pagina.css;
+  `fadeIn`, `--accent` en index.html) y se agregaron meta description + favicon
+  SVG ("K" sobre negro, data URI) a las 4 páginas.
 
 ## Notas técnicas / gotchas
 

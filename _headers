@@ -1,7 +1,28 @@
-# Cabeceras para Cloudflare Pages (cachear librerias e imagen -> mas velocidad)
+# Cabeceras para Cloudflare (seguridad + cache).
 
+# ---- Seguridad: aplica a TODO el sitio ----
+# - nosniff: el navegador no "adivina" tipos de archivo (evita trucos MIME).
+# - X-Frame-Options / frame-ancestors: nadie puede meter el sitio en un iframe
+#   (anti-clickjacking).
+# - Referrer-Policy: no filtra URLs internas al navegar a otros sitios.
+# - Permissions-Policy: el sitio no usa camara/microfono/ubicacion; se apagan.
+# - CSP: solo se pueden cargar scripts/estilos/imagenes DEL PROPIO sitio.
+#   ('unsafe-inline' y 'unsafe-eval' son necesarios: el CSS/JS va inline en
+#   index.html y Lottie evalua expresiones de la animacion del conejo.)
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
+
+# ---- Cache: librerias locales (no cambian nunca -> 1 año) ----
 /lib/*
   Cache-Control: public, max-age=31536000, immutable
 
+# ---- Cache: foto del hero (1 dia) ----
+# OJO: antes era 1 año. Si reemplazabas la foto con el MISMO nombre, los
+# visitantes seguian viendo la vieja hasta un año. Con 1 dia se renueva sola;
+# el borde de Cloudflare la sigue sirviendo rapido igual.
 /foto-portada.jpg
-  Cache-Control: public, max-age=31536000
+  Cache-Control: public, max-age=86400

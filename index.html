@@ -4,6 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Santiago Enciso · Portafolio</title>
+    <!-- Descripcion para buscadores y previews al compartir el link.
+         >>> EDITA AQUI el texto si quieres cambiar como se ve al compartir. -->
+    <meta name="description" content="Portafolio de Santiago Enciso — BY KNOX. Dirección creativa que busca devolverle lo humano a lo que creamos: entornos visuales, físicos y audiovisuales desde Bogotá." />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="BY KNOX · Portafolio de Santiago Enciso" />
+    <meta property="og:description" content="Dirección creativa que busca devolverle lo humano a lo que creamos." />
+    <!-- Favicon: "K" blanca sobre negro (SVG incrustado, sin archivo extra) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23000000'/%3E%3Ctext x='32' y='47' font-family='Helvetica,Arial,sans-serif' font-size='42' font-weight='800' fill='%23ECE7DF' text-anchor='middle'%3EK%3C/text%3E%3C/svg%3E" />
     <!-- Si volvemos desde una subpagina (#main), marcamos ANTES de pintar nada
          para que la pantalla blanca del conejo no aparezca (evita el flash). -->
     <script>
@@ -16,7 +24,6 @@
         --bg: #FFFFFF;          /* fondo mientras se ve el conejo */
         --bg-final: #000000;    /* fondo negro final (detras del texto) */
         --fg: #111114;
-        --accent: #FFFFFF;
 
         /* COLOR del texto "Santiago Enciso" cuando aparece. */
         --titulo-color: #FFFFFF;
@@ -125,26 +132,6 @@
         letter-spacing: -0.04em;
         text-transform: uppercase;
       }
-      .home__nav {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-        gap: 1.2rem;              /* SEPARACION entre los enlaces (mas = mas separados) */
-        padding-top: 0.6rem;
-        flex-shrink: 0;
-        text-align: right;
-      }
-      .home__link {
-        color: #8a8a8a;
-        text-decoration: none;
-        font-size: clamp(1.05rem, 1.7vw, 1.5rem);  /* TAMANO de los enlaces */
-        font-weight: 600;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        transition: color 0.25s ease;
-      }
-      .home__link:hover { color: var(--titulo-color); }
-
       /* La foto: anclada abajo, CRECE hacia arriba con el scroll (via JS) */
       .hero__cover {
         position: absolute;
@@ -248,27 +235,118 @@
       .line > span { display: block; will-change: transform; }
       .intro__title .line { padding-bottom: 0.08em; }  /* respiro para colas (g, y) */
 
-      /* Indice de enlaces (centrado, debajo de una linea fina) */
-      .intro__links {
-        width: min(760px, 100%);
+      /* ==================================================================
+         Indice de enlaces: "flowing menu" a todo el ancho (rompe el
+         max-width: 1000px del .intro con margenes negativos). Cada fila
+         es un link grande centrado; al pasar el cursor entra una franja
+         clara con el texto en marquee (scroll horizontal infinito),
+         desde el borde (arriba/abajo) mas cercano al cursor.
+         ================================================================== */
+      .flow-menu {
+        /* align-self: el .intro tiene align-items:center, que re-centraria
+           esta fila (mas ancha que .intro) y anularia el margen que fija
+           el JS. flex-start la saca de ese centrado automatico. */
+        align-self: flex-start;
+        /* Ancho y margen reales los fija el JS (mide el offset real contra
+           el viewport): el padding de .intro hace que un calc(50% - 50vw)
+           puramente en CSS no quede exacto. */
         border-top: 1px solid var(--line);
-        padding-top: clamp(1.4rem, 4vh, 2.2rem);
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: clamp(1.2rem, 5vw, 3.5rem);
       }
-      .intro__link {
+      .flow-menu__item { position: relative; border-bottom: 1px solid var(--line); overflow: hidden; }
+      .flow-menu__link {
         position: relative;
+        z-index: 2;
+        display: block;
+        text-align: center;
         color: var(--bone);
         text-decoration: none;
-        font-size: clamp(1.1rem, 2vw, 1.55rem);
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        font-size: clamp(1.8rem, 6vw, 4.5rem);
+        padding: clamp(1rem, 3.5vh, 1.8rem) 1rem;
+        transition: color 0.3s ease;
+      }
+      .flow-menu__link:focus-visible { outline: 2px solid var(--bone); outline-offset: -6px; }
+
+      /* Franja que entra desde arriba/abajo, oculta hasta que JS la mueve.
+         z-index por encima del link: al entrar debe TAPAR el texto blanco
+         estatico, no quedar detras de el. */
+      .flow-menu__marquee {
+        position: absolute;
+        inset: 0;
+        z-index: 3;
+        overflow: hidden;
+        background: var(--bone);
+        pointer-events: none;
+      }
+      .flow-menu__marquee-inner-wrap { height: 100%; overflow: hidden; }
+      .flow-menu__marquee-inner { display: flex; align-items: center; height: 100%; width: max-content; will-change: transform; }
+      .flow-menu__marquee-part {
+        display: flex;
+        align-items: center;
+        white-space: nowrap;
+        color: var(--bg-final);
+        font-weight: 700;
+        letter-spacing: -0.01em;
+        font-size: clamp(1.8rem, 6vw, 4.5rem);
+        padding: 0 1.2rem;
+      }
+      /* Scroll horizontal infinito por CSS (no depende de un tween de JS que
+         se pueda matar/recrear en cada resize): el ancho de una "parte" se
+         pasa por --part-width y la animacion se repite para siempre. */
+      .flow-menu__marquee-inner[data-flow-inner] {
+        animation: flow-menu-marquee var(--marquee-duration, 15s) linear infinite;
+      }
+      @keyframes flow-menu-marquee {
+        to { transform: translateX(calc(-1 * var(--part-width, 0px))); }
+      }
+
+      /* ==================================================================
+         Seccion "CORTO" (debajo del manifiesto): texto grande a la
+         izquierda (1/3) + miniatura de video a la derecha (2/3).
+         Texto y miniatura se mueven a velocidades distintas al bajar
+         (parallax continuo, via JS). Sin serif.
+         >>> Los TEXTOS se editan en el HTML, dentro de <section id="corto">.
+         ================================================================== */
+      .corto {
+        position: relative;
+        background: var(--bg-final);
+        display: grid;
+        grid-template-columns: 1fr 2fr;   /* 1/3 texto + 2/3 miniatura */
+        align-items: center;
+        gap: clamp(1.8rem, 5vw, 4.5rem);
+        /* Ancho casi completo (solo margen lateral) = miniatura grande */
+        padding: clamp(1.5rem, 5vh, 3rem) clamp(1.4rem, 5vw, 5rem) clamp(4rem, 10vh, 7rem);
+      }
+
+      .corto__texto { will-change: transform, opacity; }
+      .corto__title {
+        font-weight: 700;
+        color: var(--bone);
+        font-size: clamp(1.8rem, 4.8vw, 5.2rem);
+        line-height: 1.06;
+        letter-spacing: -0.03em;
+        margin: 0;
+      }
+      .corto__title em { font-style: italic; }
+
+      /* Boton de texto "Ver corto" (mismo subrayado que los enlaces de la intro) */
+      .corto__cta {
+        position: relative;
+        display: inline-block;
+        margin-top: clamp(1.4rem, 4vh, 2.4rem);
+        border: 0;
+        background: none;
+        cursor: pointer;
+        color: var(--bone);
+        font-family: inherit;
+        font-size: clamp(1.05rem, 1.8vw, 1.4rem);
         font-weight: 500;
         letter-spacing: 0.01em;
-        padding-bottom: 5px;
+        padding: 0 0 5px;
       }
-      .intro__link .arrow { display: inline-block; transition: transform 0.35s ease; }
-      .intro__link::after {
+      .corto__cta .arrow { display: inline-block; transition: transform 0.35s ease; }
+      .corto__cta::after {
         content: "";
         position: absolute;
         left: 0;
@@ -280,23 +358,210 @@
         transform-origin: left;
         transition: transform 0.45s cubic-bezier(0.19, 1, 0.22, 1);
       }
-      .intro__link:hover::after { transform: scaleX(1); }
-      .intro__link:hover .arrow { transform: translateX(6px); }
-      .intro__link:focus-visible { outline: 2px solid var(--bone); outline-offset: 5px; }
+      .corto__cta:hover::after { transform: scaleX(1); }
+      .corto__cta:hover .arrow { transform: translateX(6px); }
+      .corto__cta:focus-visible { outline: 2px solid var(--bone); outline-offset: 5px; }
+
+      /* Miniatura: bloque 16:9 oscuro con boton de play (placeholder del video) */
+      .corto__thumb {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        border: 1px solid var(--line);
+        padding: 0;
+        cursor: pointer;
+        overflow: hidden;
+        background: radial-gradient(120% 140% at 28% 18%, #1c1c1e 0%, #0b0b0c 55%, #000 100%);
+        will-change: transform, opacity;
+      }
+      .corto__play {
+        position: absolute;
+        inset: 0;
+        margin: auto;
+        width: clamp(72px, 9vw, 116px);
+        height: clamp(72px, 9vw, 116px);
+        border-radius: 50%;
+        border: 1px solid rgba(236, 231, 223, 0.5);
+        display: grid;
+        place-items: center;
+        color: var(--bone);
+        background: rgba(0, 0, 0, 0.35);
+        transition: transform 0.35s ease, border-color 0.35s ease;
+      }
+      .corto__thumb:hover .corto__play,
+      .corto__thumb:focus-visible .corto__play { transform: scale(1.12); border-color: var(--bone); }
+      .corto__thumb:focus-visible { outline: 2px solid var(--bone); outline-offset: 5px; }
+
+      /* ---- Visor (lightbox): la miniatura se expande y reproduce aqui ---- */
+      .visor {
+        position: fixed;
+        inset: 0;
+        z-index: 50;
+        display: grid;
+        place-items: center;
+        background: rgba(0, 0, 0, 0.92);
+        padding: clamp(1rem, 4vw, 3rem);
+      }
+      .visor[hidden] { display: none; }
+      .visor__marco {
+        position: relative;
+        width: min(1100px, 100%);
+        aspect-ratio: 16 / 9;
+        background: radial-gradient(120% 140% at 28% 18%, #1c1c1e 0%, #0b0b0c 55%, #000 100%);
+        border: 1px solid var(--line);
+        overflow: hidden;
+        will-change: transform;
+      }
+      .visor__marco video { width: 100%; height: 100%; display: block; object-fit: cover; }
+      .visor__pronto {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        color: var(--bone);
+        font-size: clamp(1rem, 2.4vw, 1.6rem);
+        font-weight: 500;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+      }
+      .visor__cerrar {
+        position: absolute;
+        top: clamp(0.8rem, 3vw, 1.6rem);
+        right: clamp(1rem, 3vw, 2rem);
+        z-index: 1;
+        border: 0;
+        background: none;
+        cursor: pointer;
+        color: var(--bone);
+        font-size: clamp(1.8rem, 4vw, 2.6rem);
+        line-height: 1;
+        font-family: inherit;
+      }
+      .visor__cerrar:hover { color: #ffffff; }
+      .visor__cerrar:focus-visible { outline: 2px solid var(--bone); outline-offset: 4px; }
+
+      /* En pantallas angostas: texto arriba, miniatura abajo (ancho completo) */
+      @media (max-width: 700px) {
+        .corto { grid-template-columns: 1fr; }
+      }
 
       @media (max-width: 640px) {
         .hero__head { flex-direction: column; gap: 0.8rem; }
-        .home__nav { flex-direction: row; align-items: flex-start; gap: 1.4rem; }
         .hero__cover { height: 44vh; }
       }
-      /* En moviles: menos margen lateral y enlaces apilados/centrados */
+      /* En moviles: menos margen lateral en el resto de la intro */
       @media (max-width: 560px) {
         .intro { padding-left: 1.1rem; padding-right: 1.1rem; }
-        .intro__links { flex-direction: column; align-items: center; gap: 1rem; }
       }
-      @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(12px); }
-        to   { opacity: 1; transform: translateY(0); }
+      /* =========================================================
+         MENU LATERAL — boton toggle + panel deslizante (compartido
+         con pagina.css, ver docs/superpowers/specs/2026-07-09-menu-lateral-design.md)
+         ========================================================= */
+      .menu-toggle {
+        position: fixed;
+        top: calc(clamp(1.2rem, 3vw, 2rem) + 14px);
+        right: clamp(1.2rem, 3vw, 2rem);
+        z-index: 60;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: none;
+        border: 0;
+        cursor: pointer;
+        padding: 10px;
+      }
+      .menu-toggle__icon { position: relative; width: 26px; height: 18px; display: block; }
+      .menu-toggle__icon span {
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        border-radius: 1px;
+        background: var(--bone);
+        transition: transform 0.35s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.25s ease, background 0.25s ease;
+      }
+      .menu-toggle__icon span:nth-child(1) { top: 0; }
+      .menu-toggle__icon span:nth-child(2) { top: 8px; }
+      .menu-toggle__icon span:nth-child(3) { top: 16px; }
+      .menu-toggle:hover .menu-toggle__icon span { background: #ffffff; }
+      .menu-toggle[aria-expanded="true"] .menu-toggle__icon span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+      .menu-toggle[aria-expanded="true"] .menu-toggle__icon span:nth-child(2) { opacity: 0; }
+      .menu-toggle[aria-expanded="true"] .menu-toggle__icon span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+      .menu-toggle:focus-visible { outline: 2px solid var(--bone); outline-offset: 4px; }
+
+      .menu-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 55;
+        background: rgba(0, 0, 0, 0.6);
+      }
+      .menu-overlay[hidden] { display: none; }
+
+      .menu-panel {
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+        height: 100dvh;
+        width: min(420px, 92vw);
+        background: var(--bg-final);
+        border-left: 1px solid var(--line);
+        padding: clamp(5rem, 12vh, 7rem) clamp(1.6rem, 4vw, 2.4rem) clamp(2rem, 6vh, 3rem);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        will-change: transform;
+      }
+
+      .menu-panel__list { list-style: none; }
+      .menu-panel__item { border-bottom: 1px solid var(--line); }
+      .menu-panel__item:first-child { border-top: 1px solid var(--line); }
+
+      .menu-panel__link {
+        display: block;
+        padding: clamp(0.9rem, 2.4vh, 1.3rem) 0;
+        text-decoration: none;
+        color: var(--bone);
+        font-size: clamp(1.5rem, 4vw, 2.1rem);
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        transition: color 0.25s ease;
+      }
+      .menu-panel__link .line { overflow: hidden; display: block; }
+      .menu-panel__link .line > span { display: block; will-change: transform; }
+      .menu-panel__num {
+        display: inline-block;
+        color: var(--ash);
+        font-size: 0.5em;
+        font-weight: 500;
+        letter-spacing: 0.06em;
+        margin-right: 0.5em;
+        vertical-align: middle;
+      }
+      .menu-panel__link:hover,
+      .menu-panel__link.is-active { color: #ffffff; }
+      .menu-panel__link.is-active .menu-panel__num { color: var(--bone); }
+      .menu-panel__link:focus-visible { outline: 2px solid var(--bone); outline-offset: 4px; }
+
+      .menu-panel__contact {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+        padding-top: clamp(1.2rem, 3vh, 1.8rem);
+        border-top: 1px solid var(--line);
+      }
+      .menu-panel__contact a {
+        color: var(--ash);
+        text-decoration: none;
+        font-size: 0.92rem;
+        letter-spacing: 0.02em;
+        transition: color 0.25s ease;
+      }
+      .menu-panel__contact a:hover { color: var(--bone); }
+      .menu-panel__contact a:focus-visible { outline: 2px solid var(--bone); outline-offset: 3px; }
+
+      @media (max-width: 640px) {
+        .menu-panel { width: 100vw; border-left: 0; }
       }
     </style>
   </head>
@@ -314,11 +579,9 @@
         <div class="hero__sticky">
           <div class="hero__head">
             <h1 class="home__word">BY KNOX</h1>
-            <nav class="home__nav">
-              <a class="home__link" href="knox.html">Knox</a>
-              <a class="home__link" href="trabajos.html">Trabajos</a>
-              <a class="home__link" href="contacto.html">Contacto</a>
-            </nav>
+            <button type="button" id="menuToggle" class="menu-toggle" aria-expanded="false" aria-controls="menuPanel" aria-label="Abrir menú">
+              <span class="menu-toggle__icon" aria-hidden="true"><span></span><span></span><span></span></span>
+            </button>
           </div>
 
           <figure class="hero__cover" id="cover">
@@ -343,7 +606,7 @@
       <section class="intro" id="intro">
         <!-- Titulo (se revela linea a linea) -->
         <h2 class="intro__title">
-          <span class="line"><span>Knox es </span></span>
+          <span class="line"><span>Knox es dirección creativa</span></span>
           <span class="line"><span>que busca devolverle lo</span></span>
           <span class="line"><span><em>humano</em> a lo que creamos.</span></span>
         </h2>
@@ -357,18 +620,125 @@
           <span class="line"><span>las personas dan el <em>sentido</em>.</span></span>
         </p>
 
-        <!-- Indice de enlaces -->
-        <nav class="intro__links">
-          <a class="intro__link" href="knox.html">Conoce a Knox <span class="arrow">→</span></a>
-          <a class="intro__link" href="trabajos.html">Ver trabajos <span class="arrow">→</span></a>
-          <a class="intro__link" href="contacto.html">Hablemos <span class="arrow">→</span></a>
+        <!-- Indice de enlaces: flowing menu a todo el ancho -->
+        <nav class="flow-menu" id="flowMenu" aria-label="Enlaces del sitio">
+          <div class="flow-menu__item" data-flow-item>
+            <a class="flow-menu__link" href="knox.html">Conoce a Knox</a>
+            <div class="flow-menu__marquee" data-flow-marquee>
+              <div class="flow-menu__marquee-inner-wrap">
+                <div class="flow-menu__marquee-inner" data-flow-inner>
+                  <div class="flow-menu__marquee-part">Conoce a Knox</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flow-menu__item" data-flow-item>
+            <a class="flow-menu__link" href="trabajos.html">Ver trabajos</a>
+            <div class="flow-menu__marquee" data-flow-marquee>
+              <div class="flow-menu__marquee-inner-wrap">
+                <div class="flow-menu__marquee-inner" data-flow-inner>
+                  <div class="flow-menu__marquee-part">Ver trabajos</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flow-menu__item" data-flow-item>
+            <a class="flow-menu__link" href="contacto.html">Hablemos</a>
+            <div class="flow-menu__marquee" data-flow-marquee>
+              <div class="flow-menu__marquee-inner-wrap">
+                <div class="flow-menu__marquee-inner" data-flow-inner>
+                  <div class="flow-menu__marquee-part">Hablemos</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </nav>
       </section>
+
+      <!-- ================================================================
+           Seccion "CORTO": texto grande (1/3) + miniatura de video (2/3).
+
+           >>> COMO EDITAR LOS TEXTOS <<<
+           - Cada frase del titulo va en su propia linea:
+                 <span class="line"><span>tu frase aqui</span></span>
+           - Para poner una palabra en CURSIVA usa <em>palabra</em>.
+
+           >>> AQUI VA EL VIDEO <<<
+           - Cuando exista el corto, agregale el src al <video> del visor
+             (mas abajo, id="visorVideo"). Ejemplo:
+                 <video id="visorVideo" src="./corto.mp4" ...>
+           - Con el src puesto, el "Proximamente" desaparece solo y el
+             video se reproduce al abrir el visor.
+           ================================================================ -->
+      <section class="corto" id="corto">
+        <div class="corto__texto">
+          <h2 class="corto__title">
+            <span class="line"><span>Conoce uno</span></span>
+            <span class="line"><span>de nuestros</span></span>
+            <span class="line"><span><em>cortos</em>.</span></span>
+          </h2>
+          <button class="corto__cta" type="button" data-abrir-visor>
+            Ver corto <span class="arrow">→</span>
+          </button>
+        </div>
+
+        <!-- Miniatura (placeholder mientras no hay video): clic = se expande -->
+        <button class="corto__thumb" id="cortoThumb" type="button" data-abrir-visor
+                aria-label="Reproducir el corto">
+          <span class="corto__play" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </span>
+        </button>
+      </section>
     </main>
+
+    <!-- Visor del corto (lightbox): se abre al hacer clic en la miniatura -->
+    <div class="visor" id="visor" hidden>
+      <button class="visor__cerrar" id="visorCerrar" type="button" aria-label="Cerrar">&times;</button>
+      <div class="visor__marco" id="visorMarco">
+        <!-- >>> AQUI VA EL VIDEO: agrega src="./tu-corto.mp4" <<< -->
+        <video id="visorVideo" controls playsinline preload="metadata" hidden></video>
+        <div class="visor__pronto" id="visorPronto">Próximamente</div>
+      </div>
+    </div>
+
+    <div class="menu-overlay" id="menuOverlay" hidden>
+      <div class="menu-panel" id="menuPanel">
+        <nav aria-label="Navegación principal">
+          <ol class="menu-panel__list">
+            <li class="menu-panel__item">
+              <a class="menu-panel__link is-active" href="index.html#main">
+                <span class="line"><span><span class="menu-panel__num">01</span>Home</span></span>
+              </a>
+            </li>
+            <li class="menu-panel__item">
+              <a class="menu-panel__link" href="knox.html">
+                <span class="line"><span><span class="menu-panel__num">02</span>Knox</span></span>
+              </a>
+            </li>
+            <li class="menu-panel__item">
+              <a class="menu-panel__link" href="trabajos.html">
+                <span class="line"><span><span class="menu-panel__num">03</span>Trabajos</span></span>
+              </a>
+            </li>
+            <li class="menu-panel__item">
+              <a class="menu-panel__link" href="contacto.html">
+                <span class="line"><span><span class="menu-panel__num">04</span>Contacto</span></span>
+              </a>
+            </li>
+          </ol>
+        </nav>
+        <div class="menu-panel__contact">
+          <a href="https://www.instagram.com/by_kn0x/" target="_blank" rel="noopener">@by_kn0x</a>
+          <a href="mailto:sencisoballesta@gmail.com">sencisoballesta@gmail.com</a>
+        </div>
+      </div>
+    </div>
 
     <!-- Librerias locales (funcionan sin internet) -->
     <script src="./lib/lottie.min.js"></script>
     <script src="./lib/gsap.min.js"></script>
+    <script src="./menu.js"></script>
 
     <!-- Animacion del conejo incrustada -->
     <script>
@@ -389,12 +759,23 @@
         reproducirIntro();
       }
 
+      // Marca la URL con #main (sin recargar ni agregar entrada al
+      // historial) una vez que la home ya se ve. Asi, si el usuario navega
+      // a una subpagina y despues le da "atras" del navegador, vuelve aqui
+      // con #main ya puesto y no se repite el conejo.
+      function marcarHashMain() {
+        if (location.hash !== '#main') {
+          history.replaceState(null, '', location.pathname + '#main');
+        }
+      }
+
       // Muestra la home directamente, ya visible (sin conejo ni animacion).
       function irAlMenu() {
         launch.style.display = 'none';
         home.style.display = 'block';
+        marcarHashMain();
         gsap.set('.home__word', { opacity: 1, y: 0 });
-        gsap.set('.home__link', { opacity: 1, y: 0 });
+        gsap.set('.menu-toggle', { opacity: 1, y: 0 });
         gsap.set('.hero__cover', { opacity: 1 });
         actualizarHero();
       }
@@ -402,13 +783,13 @@
       // Animacion de entrada de la home (estilo NEXOLA).
       function animarHome() {
         gsap.set('.home__word', { y: 40, opacity: 0 });
-        gsap.set('.home__link', { y: 12, opacity: 0 });
+        gsap.set('.menu-toggle', { y: 12, opacity: 0 });
         gsap.set('.hero__cover', { opacity: 0 });
         gsap.timeline({ delay: 0.15 })
           // 1) El wordmark BY KNOX sube y aparece.
           .to('.home__word', { y: 0, opacity: 1, duration: 0.9, ease: 'power3.out' })
-          // 2) El nav aparece apilado, uno tras otro.
-          .to('.home__link', { y: 0, opacity: 1, duration: 0.6, stagger: 0.12, ease: 'power2.out' }, '-=0.5')
+          // 2) El boton de menu aparece.
+          .to('.menu-toggle', { y: 0, opacity: 1, duration: 0.6, ease: 'power2.out' }, '-=0.5')
           // 3) La foto de portada aparece.
           .to('.hero__cover', { opacity: 1, duration: 1.1, ease: 'power2.out' }, '-=0.7');
       }
@@ -458,7 +839,7 @@
         if (!intro || typeof gsap === 'undefined') return;
 
         var lineas = intro.querySelectorAll('.line > span');
-        var enlaces = intro.querySelector('.intro__links');
+        var enlaces = intro.querySelector('.flow-menu');
         // Respeta a quien pide menos movimiento: mostramos todo sin animar.
         var menosMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -499,6 +880,268 @@
           { threshold: 0.25 }
         );
         io.observe(intro);
+      })();
+
+      // ====== FLOWING MENU: fila a todo el ancho + marquee al pasar el cursor ======
+      // 1) Ancho completo: rompe el max-width:1000px + padding de .intro
+      //    midiendo el offset real contra el viewport (un calc(50% - 50vw)
+      //    en CSS no da exacto porque .intro tiene padding). Corre siempre,
+      //    en todos los dispositivos.
+      // 2) Efecto marquee al pasar el cursor: por fila, una franja clara
+      //    sube (o baja) desde el borde mas cercano y el texto se desplaza
+      //    en loop horizontal infinito (GSAP). Solo con puntero fino y sin
+      //    "menos movimiento"; en tactil o reduced-motion las filas quedan
+      //    estaticas (igual de anchas y clicables, solo sin el efecto).
+      (function () {
+        var flowMenu = document.getElementById('flowMenu');
+        var home = document.getElementById('home');
+        if (!flowMenu || !home) return;
+
+        // Refrescos que dependen del ancho de cada fila (repeticiones del
+        // marquee): se registran mas abajo y se llaman DESPUES de fijar el
+        // ancho completo, nunca antes (si no, calculan contra el ancho viejo
+        // y angosto, y el marquee queda con muy pocas copias / se ve fijo).
+        var refrescosDependientesDelAncho = [];
+
+        function ajustarAnchoCompleto() {
+          // Mientras #home sigue "display:none" (se ve el conejo) esto mide
+          // todo en cero; se ignora y se reintenta cuando #home se muestre.
+          if (!flowMenu.offsetParent) return;
+          flowMenu.style.width = '';
+          flowMenu.style.marginLeft = '';
+          var offset = flowMenu.getBoundingClientRect().left;
+          // clientWidth (no innerWidth): innerWidth incluye el ancho de la
+          // scrollbar vertical: usarlo como ancho de la fila la hacia mas
+          // ancha que el area visible real y generaba scroll horizontal.
+          flowMenu.style.width = document.documentElement.clientWidth + 'px';
+          flowMenu.style.marginLeft = (-offset) + 'px';
+        }
+
+        function refrescarTodo() {
+          ajustarAnchoCompleto();
+          refrescosDependientesDelAncho.forEach(function (fn) { fn(); });
+        }
+
+        refrescarTodo();
+        window.addEventListener('resize', refrescarTodo);
+        // #home pasa de display:none a block cuando termina el conejo (o de
+        // entrada, si venimos con #main): ese cambio no dispara "resize",
+        // asi que se observa directamente para recalcular en ese momento.
+        if (typeof ResizeObserver !== 'undefined') {
+          new ResizeObserver(refrescarTodo).observe(home);
+        }
+
+        if (typeof gsap === 'undefined') return;
+
+        // Oculta las franjas via GSAP desde el arranque (no por CSS): asi
+        // GSAP es dueño del transform desde el inicio y no "dobla" el
+        // desplazamiento al mezclarlo despues con un transform de CSS.
+        var marquees = flowMenu.querySelectorAll('[data-flow-marquee]');
+        gsap.set(marquees, { yPercent: 101 });
+
+        var tienePuntero = window.matchMedia('(pointer: fine)').matches;
+        var menosMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (!tienePuntero || menosMovimiento) return;
+
+        var VELOCIDAD = 15; // segundos que tarda en pasar un ancho de texto
+
+        flowMenu.querySelectorAll('[data-flow-item]').forEach(function (item) {
+          var marquee = item.querySelector('[data-flow-marquee]');
+          var inner = item.querySelector('[data-flow-inner]');
+          var parteOriginal = inner.querySelector('.flow-menu__marquee-part');
+
+          // Duplica la parte original hasta cubrir ~2x el ancho de la fila,
+          // para que el loop nunca deje un hueco (mismo criterio que el
+          // componente de referencia, adaptado sin React).
+          function calcularRepeticiones() {
+            var anchoParte = parteOriginal.offsetWidth;
+            if (!anchoParte) return;
+            var necesarias = Math.ceil((item.offsetWidth * 2) / anchoParte) + 2;
+            necesarias = Math.max(4, necesarias);
+
+            var actuales = inner.querySelectorAll('.flow-menu__marquee-part').length;
+            for (var i = actuales; i < necesarias; i++) {
+              inner.appendChild(parteOriginal.cloneNode(true));
+            }
+            while (inner.querySelectorAll('.flow-menu__marquee-part').length > necesarias) {
+              inner.removeChild(inner.lastElementChild);
+            }
+          }
+
+          // El scroll horizontal lo mueve una animacion CSS (@keyframes
+          // flow-menu-marquee, infinite): solo hay que decirle cuanto mide
+          // una "parte" (--part-width) y a que velocidad. Al no depender de
+          // un tween de JS que se mata y recrea en cada resize/observer, no
+          // se puede quedar "pegada" a medio loop: la animacion nativa del
+          // navegador sigue corriendo sola para siempre.
+          function iniciarScroll() {
+            var anchoParte = parteOriginal.offsetWidth;
+            inner.style.setProperty('--part-width', anchoParte + 'px');
+            inner.style.setProperty('--marquee-duration', VELOCIDAD + 's');
+          }
+
+          refrescosDependientesDelAncho.push(function () {
+            calcularRepeticiones();
+            iniciarScroll();
+          });
+
+          function bordeCercano(clientY) {
+            var r = item.getBoundingClientRect();
+            var y = clientY - r.top;
+            return y < r.height / 2 ? 'top' : 'bottom';
+          }
+
+          item.addEventListener('mouseenter', function (e) {
+            var borde = bordeCercano(e.clientY);
+            gsap.timeline({ defaults: { duration: 0.6, ease: 'expo.out' } })
+              .set(marquee, { yPercent: borde === 'top' ? -101 : 101 }, 0)
+              .to(marquee, { yPercent: 0 }, 0);
+          });
+          item.addEventListener('mouseleave', function (e) {
+            var borde = bordeCercano(e.clientY);
+            gsap.to(marquee, { yPercent: borde === 'top' ? -101 : 101, duration: 0.6, ease: 'expo.out' });
+          });
+        });
+
+        // Los items se registraron DESPUES del primer refrescarTodo() de
+        // arriba (que corrio antes de que existiera este forEach), asi que
+        // se llama una vez mas ahora para que el marquee nazca ya con el
+        // ancho final.
+        refrescarTodo();
+      })();
+
+      // ====== SECCION "CORTO": parallax continuo + visor (lightbox) ======
+      // El texto baja lento y la miniatura mas rapido mientras la seccion
+      // cruza la pantalla (sensacion de profundidad, tipo orastudio).
+      // Mismo patron que actualizarHero(): progreso 0->1 ligado al scroll.
+      (function () {
+        var corto = document.getElementById('corto');
+        if (!corto || typeof gsap === 'undefined') return;
+
+        var texto = corto.querySelector('.corto__texto');
+        var thumb = document.getElementById('cortoThumb');
+        var visor = document.getElementById('visor');
+        var marco = document.getElementById('visorMarco');
+        var cerrarBtn = document.getElementById('visorCerrar');
+        var video = document.getElementById('visorVideo');
+        var pronto = document.getElementById('visorPronto');
+        var menosMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // ---- Parallax continuo (si piden menos movimiento, queda estatico) ----
+        var pendiente = false;
+        function actualizarCorto() {
+          var r = corto.getBoundingClientRect();
+          var vpH = window.innerHeight;
+          // Progreso 0 (la seccion asoma por abajo) -> 1 (sale por arriba).
+          var p = (vpH - r.top) / (vpH + r.height);
+          p = Math.min(Math.max(p, 0), 1);
+          var aparicion = Math.min(p / 0.22, 1);   // opacidad de entrada
+          // Texto lento; miniatura mas rapida y con escala sutil = profundidad.
+          gsap.set(texto, { y: lerp(70, -70, p), opacity: aparicion });
+          gsap.set(thumb, {
+            y: lerp(140, -140, p),
+            scale: lerp(0.94, 1, Math.min(p * 2, 1)),
+            opacity: aparicion,
+          });
+        }
+        function alScroll() {
+          if (pendiente) return;
+          pendiente = true;
+          requestAnimationFrame(function () {
+            pendiente = false;
+            actualizarCorto();
+          });
+        }
+        if (!menosMovimiento) {
+          window.addEventListener('scroll', alScroll, { passive: true });
+          window.addEventListener('resize', alScroll);
+          actualizarCorto();
+        }
+
+        // ---- Visor: la miniatura se expande hasta casi pantalla completa ----
+        // Si el <video> ya tiene src, se muestra y reproduce; si no, "Proximamente".
+        var hayVideo = video && video.getAttribute('src');
+        if (hayVideo) {
+          video.hidden = false;
+          pronto.hidden = true;
+        }
+
+        var abierto = false;
+        function abrirVisor() {
+          if (abierto) return;
+          abierto = true;
+          visor.hidden = false;
+          document.body.style.overflow = 'hidden';   // bloquea el scroll de fondo
+
+          if (menosMovimiento) {
+            gsap.set(visor, { opacity: 1 });
+            gsap.set(marco, { x: 0, y: 0, scaleX: 1, scaleY: 1 });
+          } else {
+            // Tipo FLIP: parte desde donde esta la miniatura y crece al centro.
+            var a = thumb.getBoundingClientRect();
+            var b = marco.getBoundingClientRect();
+            gsap.fromTo(visor, { opacity: 0 }, { opacity: 1, duration: 0.35, ease: 'power2.out' });
+            gsap.fromTo(
+              marco,
+              {
+                x: a.left + a.width / 2 - (b.left + b.width / 2),
+                y: a.top + a.height / 2 - (b.top + b.height / 2),
+                scaleX: a.width / b.width,
+                scaleY: a.height / b.height,
+              },
+              { x: 0, y: 0, scaleX: 1, scaleY: 1, duration: 0.6, ease: 'power3.inOut' }
+            );
+          }
+          if (hayVideo) {
+            // play() puede fallar si el navegador bloquea la reproduccion;
+            // no pasa nada (quedan los controles), solo evitamos el error.
+            var reproduccion = video.play();
+            if (reproduccion && reproduccion.catch) reproduccion.catch(function () {});
+          }
+          cerrarBtn.focus();
+        }
+
+        function cerrarVisor() {
+          if (!abierto) return;
+          abierto = false;
+          if (hayVideo) video.pause();
+
+          function alTerminar() {
+            visor.hidden = true;
+            document.body.style.overflow = '';
+            thumb.focus();
+          }
+          if (menosMovimiento) {
+            alTerminar();
+            return;
+          }
+          // La expansion se revierte hacia la miniatura.
+          var a = thumb.getBoundingClientRect();
+          var b = marco.getBoundingClientRect();
+          gsap.to(visor, { opacity: 0, duration: 0.4, ease: 'power2.in', delay: 0.15 });
+          gsap.to(marco, {
+            x: a.left + a.width / 2 - (b.left + b.width / 2),
+            y: a.top + a.height / 2 - (b.top + b.height / 2),
+            scaleX: a.width / b.width,
+            scaleY: a.height / b.height,
+            duration: 0.55,
+            ease: 'power3.inOut',
+            onComplete: alTerminar,
+          });
+        }
+
+        // Abren el visor: la miniatura y el boton "Ver corto".
+        corto.querySelectorAll('[data-abrir-visor]').forEach(function (el) {
+          el.addEventListener('click', abrirVisor);
+        });
+        // Cierran el visor: la X, clic fuera del video y la tecla Escape.
+        cerrarBtn.addEventListener('click', cerrarVisor);
+        visor.addEventListener('click', function (e) {
+          if (e.target === visor) cerrarVisor();
+        });
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape') cerrarVisor();
+        });
       })();
 
       // Secuencia completa del conejo (intro).
@@ -542,6 +1185,7 @@
                 // Ya en negro: mostramos la home y animamos su entrada.
                 launch.style.display = 'none';
                 home.style.display = 'block';
+                marcarHashMain();
                 animarHome();
                 actualizarHero();
               },

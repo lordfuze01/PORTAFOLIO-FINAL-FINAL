@@ -5,3 +5,13 @@
 .assetsignore
 README.md
 wrangler.jsonc
+
+# Documentacion interna y contexto del agente: NO publicar (contienen
+# notas de trabajo, rutas locales y datos personales).
+CLAUDE.md
+CONTEXTO-AGENTE.md
+docs
+graphify-out
+
+# Fuente de la animacion Lottie (ya va incrustada en index.html).
+conejo.json

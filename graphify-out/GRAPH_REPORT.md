@@ -1,13 +1,18 @@
-# Graph Report - PORTAFOLIO  (2026-07-09)
+# Graph Report - portafolio  (2026-07-09)
 
 ## Corpus Check
-- 10 files · ~30,658 words
+- 10 files · ~31,263 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 442 nodes · 762 edges · 43 communities (25 shown, 18 thin omitted)
+- 444 nodes · 764 edges · 42 communities (24 shown, 18 thin omitted)
 - Extraction: 89% EXTRACTED · 11% INFERRED · 0% AMBIGUOUS · INFERRED: 84 edges (avg confidence: 0.56)
 - Token cost: 0 input · 0 output
+
+## Graph Freshness
+- Built from commit: `4fd82e51`
+- Run `git rev-parse HEAD` and compare to check if the graph is stale.
+- Run `graphify update .` after code changes (no API cost).
 
 ## Community Hubs (Navigation)
 - Lottie/GSAP minified core helpers
@@ -23,7 +28,6 @@
 - Lottie shape/mask elements
 - GSAP minified internals C
 - GSAP animation core classes
-- GSAP minified internals D
 - Lottie RGB/HSV color convert
 - Lottie quaternion interpolation
 - Cover photo (foto-portada.jpg)
@@ -83,7 +87,7 @@
 ## Hyperedges (group relationships)
 - **Shared site navigation across the four pages** — index_page, knox_page, trabajos_page, contacto_page, contacto_pagina_css_stylesheet [EXTRACTED 1.00]
 
-## Communities (43 total, 18 thin omitted)
+## Communities (42 total, 18 thin omitted)
 
 ### Community 1 - "Lottie/GSAP minified core helpers"
 Cohesion: 0.15
@@ -111,7 +115,7 @@ Nodes (20): Ae(), Animation(), ce(), $d(), Da(), ee(), he(), ka() (+12 more)
 
 ### Community 7 - "GSAP minified internals B"
 Cohesion: 0.21
-Nodes (12): Ao(), cb(), cc(), ga(), ha(), ia(), r(), s() (+4 more)
+Nodes (12): Ao(), cc(), ia(), kb(), ob(), r(), ra(), rb() (+4 more)
 
 ### Community 8 - "Lottie SVG filter effects"
 Cohesion: 0.17
@@ -122,8 +126,8 @@ Cohesion: 0.27
 Nodes (10): _a(), Context(), Db(), Eb(), fb(), Gc(), Hc(), ib() (+2 more)
 
 ### Community 10 - "GSAP timeline/tween core"
-Cohesion: 0.27
-Nodes (10): _assertThisInitialized(), ic(), ta(), Timeline(), Tween(), w(), x(), xa() (+2 more)
+Cohesion: 0.17
+Nodes (15): _assertThisInitialized(), cb(), ga(), ha(), ic(), ta(), Timeline(), Tween() (+7 more)
 
 ### Community 11 - "Lottie shape/mask elements"
 Cohesion: 0.20
@@ -136,10 +140,6 @@ Nodes (6): Aa(), Ca(), na(), Vb(), wb(), Xb()
 ### Community 13 - "GSAP animation core classes"
 Cohesion: 0.14
 Nodes (13): Alcance, Animación (GSAP, ya cargado localmente en `lib/gsap.min.js`), Botón de cierre, Botón toggle, Contenido del panel, Estructura del componente, Interacción y cierre, Menú lateral "BY KNOX" — Design Spec (+5 more)
-
-### Community 14 - "GSAP minified internals D"
-Cohesion: 0.40
-Nodes (5): kb(), ob(), ra(), rb(), Za()
 
 ### Community 15 - "Lottie RGB/HSV color convert"
 Cohesion: 0.60
@@ -166,8 +166,8 @@ Cohesion: 0.18
 Nodes (10): Corrección respecto a la spec, Global Constraints, Menú lateral "BY KNOX" Implementation Plan, Task 1: CSS compartido del menú en `pagina.css`, Task 2: Comportamiento compartido en `menu.js`, Task 3: Integrar el menú en `contacto.html`, Task 4: Integrar el menú en `knox.html`, Task 5: Integrar el menú en `trabajos.html` (+2 more)
 
 ### Community 28 - "Contexto para el agente — Portafolio BY KNOX"
-Cohesion: 0.20
-Nodes (9): Contexto para el agente — Portafolio BY KNOX, Estado actual del trabajo, Estructura de archivos, Notas técnicas / gotchas, Preferencias del usuario, Qué es, Rediseño de la sección "Introducción" (inferior de index.html) — HECHO, Sección "Corto" (debajo de la Introducción) — HECHO (+1 more)
+Cohesion: 0.17
+Nodes (11): Contexto para el agente — Portafolio BY KNOX, Estado actual del trabajo, Estructura de archivos, Limpieza + seguridad (2026-07-09) — HECHO, Menú lateral (botón hamburguesa en las 4 páginas) — HECHO, Notas técnicas / gotchas, Preferencias del usuario, Qué es (+3 more)
 
 ### Community 29 - "Spec — Sección "Corto" en index.html"
 Cohesion: 0.22
@@ -182,7 +182,7 @@ Cohesion: 0.67
 Nodes (3): Sección "Corto" design (orastudio.ca-inspired layout), Intro manifiesto reveal IIFE (IntersectionObserver), Line-by-line scroll reveal pattern (.line + IntersectionObserver + GSAP)
 
 ## Knowledge Gaps
-- **51 isolated node(s):** `graphify`, `Qué es`, `Ubicación y despliegue`, `Estructura de archivos`, `Rediseño de la sección "Introducción" (inferior de index.html) — HECHO` (+46 more)
+- **53 isolated node(s):** `graphify`, `Qué es`, `Ubicación y despliegue`, `Estructura de archivos`, `Rediseño de la sección "Introducción" (inferior de index.html) — HECHO` (+48 more)
   These have ≤1 connection - possible missing edges or undocumented components.
 - **18 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -191,10 +191,10 @@ _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `hb()` connect `Lottie/GSAP minified core helpers` to `GSAP.min.js core internals`, `GSAP minified internals A`, `GSAP minified internals B`, `GSAP context/callback internals`, `GSAP timeline/tween core`?**
   _High betweenness centrality (0.068) - this node is a cross-community bridge._
-- **Why does `i()` connect `Lottie/GSAP minified core helpers` to `Lottie.min.js element classes`, `GSAP timeline/tween core`, `GSAP minified internals D`, `GSAP minified internals B`?**
-  _High betweenness centrality (0.057) - this node is a cross-community bridge._
+- **Why does `i()` connect `Lottie/GSAP minified core helpers` to `Lottie.min.js element classes`, `GSAP timeline/tween core`, `GSAP minified internals B`?**
+  _High betweenness centrality (0.056) - this node is a cross-community bridge._
 - **Why does `e()` connect `Lottie/GSAP minified core helpers` to `Lottie.min.js element classes`, `GSAP context/callback internals`, `GSAP.min.js core internals`?**
-  _High betweenness centrality (0.055) - this node is a cross-community bridge._
+  _High betweenness centrality (0.054) - this node is a cross-community bridge._
 - **Are the 13 inferred relationships involving `r()` (e.g. with `addDecorator()` and `addPropertyDecorator()`) actually correct?**
   _`r()` has 13 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 10 inferred relationships involving `e()` (e.g. with `Eb()` and `Hc()`) actually correct?**

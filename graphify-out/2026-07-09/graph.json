@@ -17,35 +17,6 @@
         "confidence": "EXTRACTED",
         "confidence_score": 1.0,
         "source_file": "index.html"
-      },
-      {
-        "id": "corto_section_flow",
-        "label": "Secci\u00f3n Corto: parallax + lightbox interaction flow",
-        "nodes": [
-          "docs_superpowers_specs_2026_07_08_seccion_corto_design_seccion_corto",
-          "index_actualizarcorto",
-          "docs_superpowers_specs_2026_07_08_seccion_corto_design_visor_lightbox",
-          "index_abrirvisor",
-          "index_cerrarvisor"
-        ],
-        "relation": "form",
-        "confidence": "INFERRED",
-        "confidence_score": 0.85,
-        "source_file": "docs/superpowers/specs/2026-07-08-seccion-corto-design.md"
-      },
-      {
-        "id": "manifiesto_redesign_group",
-        "label": "Manifiesto redesign: rationale + reveal implementation",
-        "nodes": [
-          "contexto_agente_manifiesto_section",
-          "index_intro_reveal_effect",
-          "index_reveal_scroll_animation",
-          "contexto_agente_overview"
-        ],
-        "relation": "form",
-        "confidence": "INFERRED",
-        "confidence_score": 0.85,
-        "source_file": "CONTEXTO-AGENTE.md"
       }
     ]
   },
@@ -217,7 +188,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "lib_gsap_min_la",
-      "community": 13,
+      "community": 6,
       "norm_label": "la()"
     },
     {
@@ -227,7 +198,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "lib_gsap_min_ma",
-      "community": 13,
+      "community": 6,
       "norm_label": "ma()"
     },
     {
@@ -367,7 +338,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "lib_gsap_min_da",
-      "community": 13,
+      "community": 6,
       "norm_label": "da()"
     },
     {
@@ -387,7 +358,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "lib_gsap_min_ua",
-      "community": 13,
+      "community": 6,
       "norm_label": "ua()"
     },
     {
@@ -397,7 +368,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "lib_gsap_min_va",
-      "community": 13,
+      "community": 6,
       "norm_label": "va()"
     },
     {
@@ -447,7 +418,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "lib_gsap_min_gb",
-      "community": 1,
+      "community": 3,
       "norm_label": "gb()"
     },
     {
@@ -617,7 +588,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "lib_gsap_min_animation",
-      "community": 13,
+      "community": 6,
       "norm_label": "animation()"
     },
     {
@@ -1017,7 +988,7 @@
       "source_location": "L10",
       "_origin": "ast",
       "id": "lib_gsap_min_he",
-      "community": 3,
+      "community": 6,
       "norm_label": "he()"
     },
     {
@@ -3501,6 +3472,576 @@
       "norm_label": "cvtransformeffect()"
     },
     {
+      "label": "menu.js",
+      "file_type": "code",
+      "source_file": "menu.js",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "menu",
+      "community": 31,
+      "norm_label": "menu.js"
+    },
+    {
+      "label": "bloquearScroll()",
+      "file_type": "code",
+      "source_file": "menu.js",
+      "source_location": "L19",
+      "_origin": "ast",
+      "id": "menu_bloquearscroll",
+      "community": 31,
+      "norm_label": "bloquearscroll()"
+    },
+    {
+      "label": "desbloquearScroll()",
+      "file_type": "code",
+      "source_file": "menu.js",
+      "source_location": "L24",
+      "_origin": "ast",
+      "id": "menu_desbloquearscroll",
+      "community": 31,
+      "norm_label": "desbloquearscroll()"
+    },
+    {
+      "label": "abrirMenu()",
+      "file_type": "code",
+      "source_file": "menu.js",
+      "source_location": "L29",
+      "_origin": "ast",
+      "id": "menu_abrirmenu",
+      "community": 31,
+      "norm_label": "abrirmenu()"
+    },
+    {
+      "label": "cerrarMenu()",
+      "file_type": "code",
+      "source_file": "menu.js",
+      "source_location": "L60",
+      "_origin": "ast",
+      "id": "menu_cerrarmenu",
+      "community": 31,
+      "norm_label": "cerrarmenu()"
+    },
+    {
+      "label": "CLAUDE.md",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "claude",
+      "community": 34,
+      "norm_label": "claude.md"
+    },
+    {
+      "label": "graphify",
+      "file_type": "document",
+      "source_file": "CLAUDE.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "claude_graphify",
+      "community": 34,
+      "norm_label": "graphify"
+    },
+    {
+      "label": "CONTEXTO-AGENTE.md",
+      "file_type": "document",
+      "source_file": "CONTEXTO-AGENTE.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "contexto_agente",
+      "community": 28,
+      "norm_label": "contexto-agente.md"
+    },
+    {
+      "label": "Contexto para el agente \u2014 Portafolio BY KNOX",
+      "file_type": "document",
+      "source_file": "CONTEXTO-AGENTE.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "contexto_agente_contexto_para_el_agente_portafolio_by_knox",
+      "community": 28,
+      "norm_label": "contexto para el agente \u2014 portafolio by knox"
+    },
+    {
+      "label": "Qu\u00e9 es",
+      "file_type": "document",
+      "source_file": "CONTEXTO-AGENTE.md",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "contexto_agente_qu\u00e9_es",
+      "community": 28,
+      "norm_label": "que es"
+    },
+    {
+      "label": "Ubicaci\u00f3n y despliegue",
+      "file_type": "document",
+      "source_file": "CONTEXTO-AGENTE.md",
+      "source_location": "L12",
+      "_origin": "ast",
+      "id": "contexto_agente_ubicaci\u00f3n_y_despliegue",
+      "community": 28,
+      "norm_label": "ubicacion y despliegue"
+    },
+    {
+      "label": "Estructura de archivos",
+      "file_type": "document",
+      "source_file": "CONTEXTO-AGENTE.md",
+      "source_location": "L22",
+      "_origin": "ast",
+      "id": "contexto_agente_estructura_de_archivos",
+      "community": 28,
+      "norm_label": "estructura de archivos"
+    },
+    {
+      "label": "Estado actual del trabajo",
+      "file_type": "document",
+      "source_file": "CONTEXTO-AGENTE.md",
+      "source_location": "L35",
+      "_origin": "ast",
+      "id": "contexto_agente_estado_actual_del_trabajo",
+      "community": 28,
+      "norm_label": "estado actual del trabajo"
+    },
+    {
+      "label": "Redise\u00f1o de la secci\u00f3n \"Introducci\u00f3n\" (inferior de index.html) \u2014 HECHO",
+      "file_type": "document",
+      "source_file": "CONTEXTO-AGENTE.md",
+      "source_location": "L37",
+      "_origin": "ast",
+      "id": "contexto_agente_redise\u00f1o_de_la_secci\u00f3n_introducci\u00f3n_inferior_de_index_html_hecho",
+      "community": 28,
+      "norm_label": "rediseno de la seccion \"introduccion\" (inferior de index.html) \u2014 hecho"
+    },
+    {
+      "label": "Secci\u00f3n \"Corto\" (debajo de la Introducci\u00f3n) \u2014 HECHO",
+      "file_type": "document",
+      "source_file": "CONTEXTO-AGENTE.md",
+      "source_location": "L58",
+      "_origin": "ast",
+      "id": "contexto_agente_secci\u00f3n_corto_debajo_de_la_introducci\u00f3n_hecho",
+      "community": 28,
+      "norm_label": "seccion \"corto\" (debajo de la introduccion) \u2014 hecho"
+    },
+    {
+      "label": "Notas t\u00e9cnicas / gotchas",
+      "file_type": "document",
+      "source_file": "CONTEXTO-AGENTE.md",
+      "source_location": "L72",
+      "_origin": "ast",
+      "id": "contexto_agente_notas_t\u00e9cnicas_gotchas",
+      "community": 28,
+      "norm_label": "notas tecnicas / gotchas"
+    },
+    {
+      "label": "Preferencias del usuario",
+      "file_type": "document",
+      "source_file": "CONTEXTO-AGENTE.md",
+      "source_location": "L84",
+      "_origin": "ast",
+      "id": "contexto_agente_preferencias_del_usuario",
+      "community": 28,
+      "norm_label": "preferencias del usuario"
+    },
+    {
+      "label": "README.md",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "readme",
+      "community": 30,
+      "norm_label": "readme.md"
+    },
+    {
+      "label": "BY KNOX \u2014 Portafolio",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "readme_by_knox_portafolio",
+      "community": 30,
+      "norm_label": "by knox \u2014 portafolio"
+    },
+    {
+      "label": "Estructura",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "readme_estructura",
+      "community": 30,
+      "norm_label": "estructura"
+    },
+    {
+      "label": "Despliegue (Cloudflare)",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L18",
+      "_origin": "ast",
+      "id": "readme_despliegue_cloudflare",
+      "community": 30,
+      "norm_label": "despliegue (cloudflare)"
+    },
+    {
+      "label": "Flujo de trabajo",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L25",
+      "_origin": "ast",
+      "id": "readme_flujo_de_trabajo",
+      "community": 30,
+      "norm_label": "flujo de trabajo"
+    },
+    {
+      "label": "Notas",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "L35",
+      "_origin": "ast",
+      "id": "readme_notas",
+      "community": 30,
+      "norm_label": "notas"
+    },
+    {
+      "label": "2026-07-09-menu-lateral.md",
+      "file_type": "document",
+      "source_file": "docs/superpowers/plans/2026-07-09-menu-lateral.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_superpowers_plans_2026_07_09_menu_lateral",
+      "community": 27,
+      "norm_label": "2026-07-09-menu-lateral.md"
+    },
+    {
+      "label": "Men\u00fa lateral \"BY KNOX\" Implementation Plan",
+      "file_type": "document",
+      "source_file": "docs/superpowers/plans/2026-07-09-menu-lateral.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_superpowers_plans_2026_07_09_menu_lateral_men\u00fa_lateral_by_knox_implementation_plan",
+      "community": 27,
+      "norm_label": "menu lateral \"by knox\" implementation plan"
+    },
+    {
+      "label": "Global Constraints",
+      "file_type": "document",
+      "source_file": "docs/superpowers/plans/2026-07-09-menu-lateral.md",
+      "source_location": "L21",
+      "_origin": "ast",
+      "id": "docs_superpowers_plans_2026_07_09_menu_lateral_global_constraints",
+      "community": 27,
+      "norm_label": "global constraints"
+    },
+    {
+      "label": "Correcci\u00f3n respecto a la spec",
+      "file_type": "document",
+      "source_file": "docs/superpowers/plans/2026-07-09-menu-lateral.md",
+      "source_location": "L39",
+      "_origin": "ast",
+      "id": "docs_superpowers_plans_2026_07_09_menu_lateral_correcci\u00f3n_respecto_a_la_spec",
+      "community": 27,
+      "norm_label": "correccion respecto a la spec"
+    },
+    {
+      "label": "Task 1: CSS compartido del men\u00fa en `pagina.css`",
+      "file_type": "document",
+      "source_file": "docs/superpowers/plans/2026-07-09-menu-lateral.md",
+      "source_location": "L50",
+      "_origin": "ast",
+      "id": "docs_superpowers_plans_2026_07_09_menu_lateral_task_1_css_compartido_del_men\u00fa_en_pagina_css",
+      "community": 27,
+      "norm_label": "task 1: css compartido del menu en `pagina.css`"
+    },
+    {
+      "label": "Task 2: Comportamiento compartido en `menu.js`",
+      "file_type": "document",
+      "source_file": "docs/superpowers/plans/2026-07-09-menu-lateral.md",
+      "source_location": "L276",
+      "_origin": "ast",
+      "id": "docs_superpowers_plans_2026_07_09_menu_lateral_task_2_comportamiento_compartido_en_menu_js",
+      "community": 27,
+      "norm_label": "task 2: comportamiento compartido en `menu.js`"
+    },
+    {
+      "label": "Task 3: Integrar el men\u00fa en `contacto.html`",
+      "file_type": "document",
+      "source_file": "docs/superpowers/plans/2026-07-09-menu-lateral.md",
+      "source_location": "L388",
+      "_origin": "ast",
+      "id": "docs_superpowers_plans_2026_07_09_menu_lateral_task_3_integrar_el_men\u00fa_en_contacto_html",
+      "community": 27,
+      "norm_label": "task 3: integrar el menu en `contacto.html`"
+    },
+    {
+      "label": "Task 4: Integrar el men\u00fa en `knox.html`",
+      "file_type": "document",
+      "source_file": "docs/superpowers/plans/2026-07-09-menu-lateral.md",
+      "source_location": "L497",
+      "_origin": "ast",
+      "id": "docs_superpowers_plans_2026_07_09_menu_lateral_task_4_integrar_el_men\u00fa_en_knox_html",
+      "community": 27,
+      "norm_label": "task 4: integrar el menu en `knox.html`"
+    },
+    {
+      "label": "Task 5: Integrar el men\u00fa en `trabajos.html`",
+      "file_type": "document",
+      "source_file": "docs/superpowers/plans/2026-07-09-menu-lateral.md",
+      "source_location": "L584",
+      "_origin": "ast",
+      "id": "docs_superpowers_plans_2026_07_09_menu_lateral_task_5_integrar_el_men\u00fa_en_trabajos_html",
+      "community": 27,
+      "norm_label": "task 5: integrar el menu en `trabajos.html`"
+    },
+    {
+      "label": "Task 6: Integrar el men\u00fa en `index.html` (CSS inline + markup + script)",
+      "file_type": "document",
+      "source_file": "docs/superpowers/plans/2026-07-09-menu-lateral.md",
+      "source_location": "L686",
+      "_origin": "ast",
+      "id": "docs_superpowers_plans_2026_07_09_menu_lateral_task_6_integrar_el_men\u00fa_en_index_html_css_inline_markup_script",
+      "community": 27,
+      "norm_label": "task 6: integrar el menu en `index.html` (css inline + markup + script)"
+    },
+    {
+      "label": "Task 7: Verificaci\u00f3n cruzada final (las 4 p\u00e1ginas)",
+      "file_type": "document",
+      "source_file": "docs/superpowers/plans/2026-07-09-menu-lateral.md",
+      "source_location": "L951",
+      "_origin": "ast",
+      "id": "docs_superpowers_plans_2026_07_09_menu_lateral_task_7_verificaci\u00f3n_cruzada_final_las_4_p\u00e1ginas",
+      "community": 27,
+      "norm_label": "task 7: verificacion cruzada final (las 4 paginas)"
+    },
+    {
+      "label": "2026-07-08-seccion-corto-design.md",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-07-08-seccion-corto-design.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_07_08_seccion_corto_design",
+      "community": 29,
+      "norm_label": "2026-07-08-seccion-corto-design.md"
+    },
+    {
+      "label": "Spec \u2014 Secci\u00f3n \"Corto\" en index.html",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-07-08-seccion-corto-design.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_07_08_seccion_corto_design_spec_secci\u00f3n_corto_en_index_html",
+      "community": 29,
+      "norm_label": "spec \u2014 seccion \"corto\" en index.html"
+    },
+    {
+      "label": "Objetivo",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-07-08-seccion-corto-design.md",
+      "source_location": "L5",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_07_08_seccion_corto_design_objetivo",
+      "community": 29,
+      "norm_label": "objetivo"
+    },
+    {
+      "label": "Decisiones tomadas",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-07-08-seccion-corto-design.md",
+      "source_location": "L12",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_07_08_seccion_corto_design_decisiones_tomadas",
+      "community": 29,
+      "norm_label": "decisiones tomadas"
+    },
+    {
+      "label": "1. Estructura (HTML)",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-07-08-seccion-corto-design.md",
+      "source_location": "L21",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_07_08_seccion_corto_design_1_estructura_html",
+      "community": 29,
+      "norm_label": "1. estructura (html)"
+    },
+    {
+      "label": "2. Parallax continuo (JS)",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-07-08-seccion-corto-design.md",
+      "source_location": "L35",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_07_08_seccion_corto_design_2_parallax_continuo_js",
+      "community": 29,
+      "norm_label": "2. parallax continuo (js)"
+    },
+    {
+      "label": "3. Lightbox (clic en la miniatura)",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-07-08-seccion-corto-design.md",
+      "source_location": "L46",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_07_08_seccion_corto_design_3_lightbox_clic_en_la_miniatura",
+      "community": 29,
+      "norm_label": "3. lightbox (clic en la miniatura)"
+    },
+    {
+      "label": "4. Restricciones y no-objetivos",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-07-08-seccion-corto-design.md",
+      "source_location": "L57",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_07_08_seccion_corto_design_4_restricciones_y_no_objetivos",
+      "community": 29,
+      "norm_label": "4. restricciones y no-objetivos"
+    },
+    {
+      "label": "Criterio de \u00e9xito",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-07-08-seccion-corto-design.md",
+      "source_location": "L66",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_07_08_seccion_corto_design_criterio_de_\u00e9xito",
+      "community": 29,
+      "norm_label": "criterio de exito"
+    },
+    {
+      "label": "2026-07-09-menu-lateral-design.md",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-07-09-menu-lateral-design.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_07_09_menu_lateral_design",
+      "community": 13,
+      "norm_label": "2026-07-09-menu-lateral-design.md"
+    },
+    {
+      "label": "Men\u00fa lateral \"BY KNOX\" \u2014 Design Spec",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-07-09-menu-lateral-design.md",
+      "source_location": "L1",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_07_09_menu_lateral_design_men\u00fa_lateral_by_knox_design_spec",
+      "community": 13,
+      "norm_label": "menu lateral \"by knox\" \u2014 design spec"
+    },
+    {
+      "label": "Qu\u00e9 es",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-07-09-menu-lateral-design.md",
+      "source_location": "L6",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_07_09_menu_lateral_design_qu\u00e9_es",
+      "community": 13,
+      "norm_label": "que es"
+    },
+    {
+      "label": "Alcance",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-07-09-menu-lateral-design.md",
+      "source_location": "L14",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_07_09_menu_lateral_design_alcance",
+      "community": 13,
+      "norm_label": "alcance"
+    },
+    {
+      "label": "Paleta y tipograf\u00eda (reutilizada, no se crea nada nuevo)",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-07-09-menu-lateral-design.md",
+      "source_location": "L26",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_07_09_menu_lateral_design_paleta_y_tipograf\u00eda_reutilizada_no_se_crea_nada_nuevo",
+      "community": 13,
+      "norm_label": "paleta y tipografia (reutilizada, no se crea nada nuevo)"
+    },
+    {
+      "label": "Estructura del componente",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-07-09-menu-lateral-design.md",
+      "source_location": "L38",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_07_09_menu_lateral_design_estructura_del_componente",
+      "community": 13,
+      "norm_label": "estructura del componente"
+    },
+    {
+      "label": "Bot\u00f3n toggle",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-07-09-menu-lateral-design.md",
+      "source_location": "L40",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_07_09_menu_lateral_design_bot\u00f3n_toggle",
+      "community": 13,
+      "norm_label": "boton toggle"
+    },
+    {
+      "label": "Panel",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-07-09-menu-lateral-design.md",
+      "source_location": "L46",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_07_09_menu_lateral_design_panel",
+      "community": 13,
+      "norm_label": "panel"
+    },
+    {
+      "label": "Contenido del panel",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-07-09-menu-lateral-design.md",
+      "source_location": "L55",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_07_09_menu_lateral_design_contenido_del_panel",
+      "community": 13,
+      "norm_label": "contenido del panel"
+    },
+    {
+      "label": "Bot\u00f3n de cierre",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-07-09-menu-lateral-design.md",
+      "source_location": "L74",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_07_09_menu_lateral_design_bot\u00f3n_de_cierre",
+      "community": 13,
+      "norm_label": "boton de cierre"
+    },
+    {
+      "label": "Interacci\u00f3n y cierre",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-07-09-menu-lateral-design.md",
+      "source_location": "L78",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_07_09_menu_lateral_design_interacci\u00f3n_y_cierre",
+      "community": 13,
+      "norm_label": "interaccion y cierre"
+    },
+    {
+      "label": "Animaci\u00f3n (GSAP, ya cargado localmente en `lib/gsap.min.js`)",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-07-09-menu-lateral-design.md",
+      "source_location": "L85",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_07_09_menu_lateral_design_animaci\u00f3n_gsap_ya_cargado_localmente_en_lib_gsap_min_js",
+      "community": 13,
+      "norm_label": "animacion (gsap, ya cargado localmente en `lib/gsap.min.js`)"
+    },
+    {
+      "label": "No-alcance (fuera de esta spec)",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-07-09-menu-lateral-design.md",
+      "source_location": "L98",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_07_09_menu_lateral_design_no_alcance_fuera_de_esta_spec",
+      "community": 13,
+      "norm_label": "no-alcance (fuera de esta spec)"
+    },
+    {
+      "label": "Verificaci\u00f3n (sitio est\u00e1tico, sin test runner)",
+      "file_type": "document",
+      "source_file": "docs/superpowers/specs/2026-07-09-menu-lateral-design.md",
+      "source_location": "L106",
+      "_origin": "ast",
+      "id": "docs_superpowers_specs_2026_07_09_menu_lateral_design_verificaci\u00f3n_sitio_est\u00e1tico_sin_test_runner",
+      "community": 13,
+      "norm_label": "verificacion (sitio estatico, sin test runner)"
+    },
+    {
       "label": "CLAUDE.md \u2014 graphify usage rules",
       "file_type": "document",
       "source_file": "CLAUDE.md",
@@ -3509,9 +4050,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "claude_graphify_config",
       "community": 20,
-      "norm_label": "claude.md \u2014 graphify usage rules"
+      "norm_label": "claude.md \u2014 graphify usage rules",
+      "id": "claude_graphify_config"
     },
     {
       "label": "graphify knowledge graph tool",
@@ -3522,9 +4063,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "claude_graphify_tool",
-      "community": 20,
-      "norm_label": "graphify knowledge graph tool"
+      "community": 35,
+      "norm_label": "graphify knowledge graph tool",
+      "id": "claude_graphify_tool"
     },
     {
       "label": "CONTEXTO-AGENTE.md \u2014 handoff doc for BY KNOX portfolio",
@@ -3535,9 +4076,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "contexto_agente_overview",
-      "community": 2,
-      "norm_label": "contexto-agente.md \u2014 handoff doc for by knox portfolio"
+      "community": 38,
+      "norm_label": "contexto-agente.md \u2014 handoff doc for by knox portfolio",
+      "id": "contexto_agente_overview"
     },
     {
       "label": "BY KNOX portfolio project",
@@ -3548,9 +4089,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "contexto_agente_byknox_portfolio",
       "community": 2,
-      "norm_label": "by knox portfolio project"
+      "norm_label": "by knox portfolio project",
+      "id": "contexto_agente_byknox_portfolio"
     },
     {
       "label": "Manifiesto / Introducci\u00f3n section redesign (design decisions)",
@@ -3561,9 +4102,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "contexto_agente_manifiesto_section",
-      "community": 2,
-      "norm_label": "manifiesto / introduccion section redesign (design decisions)"
+      "community": 37,
+      "norm_label": "manifiesto / introduccion section redesign (design decisions)",
+      "id": "contexto_agente_manifiesto_section"
     },
     {
       "label": "skip-intro flow (index.html#main to bypass bunny intro)",
@@ -3574,9 +4115,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "contexto_agente_skip_intro_flow",
-      "community": 2,
-      "norm_label": "skip-intro flow (index.html#main to bypass bunny intro)"
+      "community": 39,
+      "norm_label": "skip-intro flow (index.html#main to bypass bunny intro)",
+      "id": "contexto_agente_skip_intro_flow"
     },
     {
       "label": "GitHub repo PORTAFOLIO-FINAL-FINAL (main branch, Cloudflare-linked)",
@@ -3587,9 +4128,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "contexto_agente_github_repo",
-      "community": 2,
-      "norm_label": "github repo portafolio-final-final (main branch, cloudflare-linked)"
+      "community": 36,
+      "norm_label": "github repo portafolio-final-final (main branch, cloudflare-linked)",
+      "id": "contexto_agente_github_repo"
     },
     {
       "label": "README.md \u2014 project overview",
@@ -3600,9 +4141,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "readme_overview",
-      "community": 2,
-      "norm_label": "readme.md \u2014 project overview"
+      "community": 41,
+      "norm_label": "readme.md \u2014 project overview",
+      "id": "readme_overview"
     },
     {
       "label": "Cloudflare deploy flow (git push to main auto-redeploys)",
@@ -3613,9 +4154,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "readme_cloudflare_deploy",
-      "community": 2,
-      "norm_label": "cloudflare deploy flow (git push to main auto-redeploys)"
+      "community": 40,
+      "norm_label": "cloudflare deploy flow (git push to main auto-redeploys)",
+      "id": "readme_cloudflare_deploy"
     },
     {
       "label": "wrangler.jsonc Cloudflare Pages config",
@@ -3626,9 +4167,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "readme_wrangler_config",
-      "community": 2,
-      "norm_label": "wrangler.jsonc cloudflare pages config"
+      "community": 42,
+      "norm_label": "wrangler.jsonc cloudflare pages config",
+      "id": "readme_wrangler_config"
     },
     {
       "label": "contacto.html \u2014 Contact page",
@@ -3639,9 +4180,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "contacto_page",
       "community": 2,
-      "norm_label": "contacto.html \u2014 contact page"
+      "norm_label": "contacto.html \u2014 contact page",
+      "id": "contacto_page"
     },
     {
       "label": "pagina.css shared internal-page stylesheet",
@@ -3652,22 +4193,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "contacto_pagina_css_stylesheet",
       "community": 2,
-      "norm_label": "pagina.css shared internal-page stylesheet"
-    },
-    {
-      "label": "Spec \u2014 Secci\u00f3n \"Corto\" en index.html",
-      "file_type": "document",
-      "source_file": "docs/superpowers/specs/2026-07-08-seccion-corto-design.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "docs_superpowers_specs_2026_07_08_seccion_corto_design_spec",
-      "community": 2,
-      "norm_label": "spec \u2014 seccion \"corto\" en index.html"
+      "norm_label": "pagina.css shared internal-page stylesheet",
+      "id": "contacto_pagina_css_stylesheet"
     },
     {
       "label": "Secci\u00f3n \"Corto\" design (orastudio.ca-inspired layout)",
@@ -3678,9 +4206,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "docs_superpowers_specs_2026_07_08_seccion_corto_design_seccion_corto",
-      "community": 2,
-      "norm_label": "seccion \"corto\" design (orastudio.ca-inspired layout)"
+      "community": 32,
+      "norm_label": "seccion \"corto\" design (orastudio.ca-inspired layout)",
+      "id": "docs_superpowers_specs_2026_07_08_seccion_corto_design_seccion_corto"
     },
     {
       "label": "Parallax continuo mechanism (scroll-linked scrub via rAF)",
@@ -3691,9 +4219,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "docs_superpowers_specs_2026_07_08_seccion_corto_design_parallax_continuo",
       "community": 2,
-      "norm_label": "parallax continuo mechanism (scroll-linked scrub via raf)"
+      "norm_label": "parallax continuo mechanism (scroll-linked scrub via raf)",
+      "id": "docs_superpowers_specs_2026_07_08_seccion_corto_design_parallax_continuo"
     },
     {
       "label": "Visor lightbox (FLIP-style video expand overlay)",
@@ -3704,9 +4232,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "docs_superpowers_specs_2026_07_08_seccion_corto_design_visor_lightbox",
-      "community": 2,
-      "norm_label": "visor lightbox (flip-style video expand overlay)"
+      "community": 33,
+      "norm_label": "visor lightbox (flip-style video expand overlay)",
+      "id": "docs_superpowers_specs_2026_07_08_seccion_corto_design_visor_lightbox"
     },
     {
       "label": "index.html \u2014 landing page (bunny intro + scroll home)",
@@ -3717,9 +4245,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "index_page",
       "community": 2,
-      "norm_label": "index.html \u2014 landing page (bunny intro + scroll home)"
+      "norm_label": "index.html \u2014 landing page (bunny intro + scroll home)",
+      "id": "index_page"
     },
     {
       "label": "GSAP core library (local, no ScrollTrigger)",
@@ -3730,9 +4258,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "index_gsap_library",
       "community": 2,
-      "norm_label": "gsap core library (local, no scrolltrigger)"
+      "norm_label": "gsap core library (local, no scrolltrigger)",
+      "id": "index_gsap_library"
     },
     {
       "label": "Lottie bunny mascot animation (CONEJO data)",
@@ -3743,9 +4271,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "index_lottie_animation",
       "community": 2,
-      "norm_label": "lottie bunny mascot animation (conejo data)"
+      "norm_label": "lottie bunny mascot animation (conejo data)",
+      "id": "index_lottie_animation"
     },
     {
       "label": "foto-portada.jpg hero image",
@@ -3756,9 +4284,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "index_foto_portada",
       "community": 2,
-      "norm_label": "foto-portada.jpg hero image"
+      "norm_label": "foto-portada.jpg hero image",
+      "id": "index_foto_portada"
     },
     {
       "label": "Line-by-line scroll reveal pattern (.line + IntersectionObserver + GSAP)",
@@ -3769,9 +4297,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "index_reveal_scroll_animation",
-      "community": 2,
-      "norm_label": "line-by-line scroll reveal pattern (.line + intersectionobserver + gsap)"
+      "community": 32,
+      "norm_label": "line-by-line scroll reveal pattern (.line + intersectionobserver + gsap)",
+      "id": "index_reveal_scroll_animation"
     },
     {
       "label": "Top-level init script (hash-based intro dispatch)",
@@ -3782,9 +4310,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "index_main_script",
       "community": 2,
-      "norm_label": "top-level init script (hash-based intro dispatch)"
+      "norm_label": "top-level init script (hash-based intro dispatch)",
+      "id": "index_main_script"
     },
     {
       "label": "irAlMenu()",
@@ -3795,9 +4323,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "index_iralmenu",
       "community": 2,
-      "norm_label": "iralmenu()"
+      "norm_label": "iralmenu()",
+      "id": "index_iralmenu"
     },
     {
       "label": "animarHome()",
@@ -3808,9 +4336,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "index_animarhome",
       "community": 2,
-      "norm_label": "animarhome()"
+      "norm_label": "animarhome()",
+      "id": "index_animarhome"
     },
     {
       "label": "lerp(a, b, t)",
@@ -3821,9 +4349,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "index_lerp",
       "community": 2,
-      "norm_label": "lerp(a, b, t)"
+      "norm_label": "lerp(a, b, t)",
+      "id": "index_lerp"
     },
     {
       "label": "actualizarHero()",
@@ -3834,9 +4362,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "index_actualizarhero",
       "community": 2,
-      "norm_label": "actualizarhero()"
+      "norm_label": "actualizarhero()",
+      "id": "index_actualizarhero"
     },
     {
       "label": "Intro manifiesto reveal IIFE (IntersectionObserver)",
@@ -3847,9 +4375,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "index_intro_reveal_effect",
-      "community": 2,
-      "norm_label": "intro manifiesto reveal iife (intersectionobserver)"
+      "community": 32,
+      "norm_label": "intro manifiesto reveal iife (intersectionobserver)",
+      "id": "index_intro_reveal_effect"
     },
     {
       "label": "actualizarCorto()",
@@ -3860,9 +4388,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "index_actualizarcorto",
       "community": 2,
-      "norm_label": "actualizarcorto()"
+      "norm_label": "actualizarcorto()",
+      "id": "index_actualizarcorto"
     },
     {
       "label": "alScroll() (rAF-throttled scroll handler for corto section)",
@@ -3873,9 +4401,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "index_alscroll",
       "community": 2,
-      "norm_label": "alscroll() (raf-throttled scroll handler for corto section)"
+      "norm_label": "alscroll() (raf-throttled scroll handler for corto section)",
+      "id": "index_alscroll"
     },
     {
       "label": "abrirVisor()",
@@ -3886,9 +4414,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "index_abrirvisor",
-      "community": 2,
-      "norm_label": "abrirvisor()"
+      "community": 33,
+      "norm_label": "abrirvisor()",
+      "id": "index_abrirvisor"
     },
     {
       "label": "cerrarVisor()",
@@ -3899,9 +4427,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "index_cerrarvisor",
-      "community": 2,
-      "norm_label": "cerrarvisor()"
+      "community": 33,
+      "norm_label": "cerrarvisor()",
+      "id": "index_cerrarvisor"
     },
     {
       "label": "reproducirIntro()",
@@ -3912,9 +4440,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "index_reproducirintro",
       "community": 2,
-      "norm_label": "reproducirintro()"
+      "norm_label": "reproducirintro()",
+      "id": "index_reproducirintro"
     },
     {
       "label": "knox.html \u2014 \u00bfQui\u00e9n es Knox? page",
@@ -3925,9 +4453,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "knox_page",
       "community": 2,
-      "norm_label": "knox.html \u2014 \u00bfquien es knox? page"
+      "norm_label": "knox.html \u2014 \u00bfquien es knox? page",
+      "id": "knox_page"
     },
     {
       "label": "Santiago Enciso Ballesta (designer behind Knox)",
@@ -3938,9 +4466,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "knox_santiago_enciso",
       "community": 2,
-      "norm_label": "santiago enciso ballesta (designer behind knox)"
+      "norm_label": "santiago enciso ballesta (designer behind knox)",
+      "id": "knox_santiago_enciso"
     },
     {
       "label": "trabajos.html \u2014 Trabajos index page",
@@ -3951,9 +4479,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "trabajos_page",
       "community": 2,
-      "norm_label": "trabajos.html \u2014 trabajos index page"
+      "norm_label": "trabajos.html \u2014 trabajos index page",
+      "id": "trabajos_page"
     },
     {
       "label": "Interactive project index (cursor-following preview)",
@@ -3964,9 +4492,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "trabajos_index_interactivo",
       "community": 2,
-      "norm_label": "interactive project index (cursor-following preview)"
+      "norm_label": "interactive project index (cursor-following preview)",
+      "id": "trabajos_index_interactivo"
     },
     {
       "label": "animar() (rAF lerp loop following cursor)",
@@ -3977,9 +4505,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "trabajos_animar",
       "community": 2,
-      "norm_label": "animar() (raf lerp loop following cursor)"
+      "norm_label": "animar() (raf lerp loop following cursor)",
+      "id": "trabajos_animar"
     },
     {
       "label": "Foto Portada - Downhill Rider Portrait",
@@ -3990,9 +4518,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "foto_portada_cover_photo",
       "community": 17,
-      "norm_label": "foto portada - downhill rider portrait"
+      "norm_label": "foto portada - downhill rider portrait",
+      "id": "foto_portada_cover_photo"
     },
     {
       "label": "High-Contrast Black and White Portrait Style",
@@ -4003,9 +4531,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "foto_portada_high_contrast_bw_style",
       "community": 17,
-      "norm_label": "high-contrast black and white portrait style"
+      "norm_label": "high-contrast black and white portrait style",
+      "id": "foto_portada_high_contrast_bw_style"
     },
     {
       "label": "Downhill Mountain Biker Subject (Helmet, Goggles, 100% Gear)",
@@ -4016,9 +4544,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "foto_portada_downhill_mtb_subject",
       "community": 17,
-      "norm_label": "downhill mountain biker subject (helmet, goggles, 100% gear)"
+      "norm_label": "downhill mountain biker subject (helmet, goggles, 100% gear)",
+      "id": "foto_portada_downhill_mtb_subject"
     },
     {
       "label": "Backlit Silhouette Photography Technique",
@@ -4029,9 +4557,9 @@
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "foto_portada_backlit_silhouette_technique",
       "community": 17,
-      "norm_label": "backlit silhouette photography technique"
+      "norm_label": "backlit silhouette photography technique",
+      "id": "foto_portada_backlit_silhouette_technique"
     }
   ],
   "links": [
@@ -11096,184 +11624,515 @@
       "confidence_score": 1.0
     },
     {
-      "relation": "references",
+      "relation": "contains",
       "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
+      "source_file": "menu.js",
+      "source_location": "L29",
+      "weight": 1.0,
+      "source": "menu",
+      "target": "menu_abrirmenu",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "menu.js",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "menu",
+      "target": "menu_bloquearscroll",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "menu.js",
+      "source_location": "L60",
+      "weight": 1.0,
+      "source": "menu",
+      "target": "menu_cerrarmenu",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "menu.js",
+      "source_location": "L24",
+      "weight": 1.0,
+      "source": "menu",
+      "target": "menu_desbloquearscroll",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "menu.js",
+      "source_location": "L33",
+      "weight": 1.0,
+      "source": "menu_abrirmenu",
+      "target": "menu_bloquearscroll",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
       "source_file": "CLAUDE.md",
-      "source_location": null,
+      "source_location": "L1",
       "weight": 1.0,
-      "source": "claude_graphify_config",
-      "target": "claude_graphify_tool"
+      "source": "claude",
+      "target": "claude_graphify",
+      "confidence_score": 1.0
     },
     {
-      "relation": "references",
+      "relation": "contains",
       "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
       "source_file": "CONTEXTO-AGENTE.md",
-      "source_location": null,
+      "source_location": "L1",
       "weight": 1.0,
-      "source": "contexto_agente_overview",
-      "target": "contacto_page"
+      "source": "contexto_agente",
+      "target": "contexto_agente_contexto_para_el_agente_portafolio_by_knox",
+      "confidence_score": 1.0
     },
     {
-      "relation": "references",
+      "relation": "contains",
       "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
       "source_file": "CONTEXTO-AGENTE.md",
-      "source_location": null,
+      "source_location": "L35",
       "weight": 1.0,
-      "source": "contexto_agente_overview",
-      "target": "contacto_pagina_css_stylesheet"
+      "source": "contexto_agente_contexto_para_el_agente_portafolio_by_knox",
+      "target": "contexto_agente_estado_actual_del_trabajo",
+      "confidence_score": 1.0
     },
     {
-      "relation": "references",
+      "relation": "contains",
       "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
       "source_file": "CONTEXTO-AGENTE.md",
-      "source_location": null,
+      "source_location": "L22",
       "weight": 1.0,
-      "source": "contexto_agente_overview",
-      "target": "contexto_agente_github_repo"
+      "source": "contexto_agente_contexto_para_el_agente_portafolio_by_knox",
+      "target": "contexto_agente_estructura_de_archivos",
+      "confidence_score": 1.0
     },
     {
-      "relation": "rationale_for",
+      "relation": "contains",
       "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
       "source_file": "CONTEXTO-AGENTE.md",
-      "source_location": null,
+      "source_location": "L72",
       "weight": 1.0,
-      "source": "contexto_agente_overview",
-      "target": "contexto_agente_manifiesto_section"
+      "source": "contexto_agente_contexto_para_el_agente_portafolio_by_knox",
+      "target": "contexto_agente_notas_t\u00e9cnicas_gotchas",
+      "confidence_score": 1.0
     },
     {
-      "relation": "rationale_for",
+      "relation": "contains",
       "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
       "source_file": "CONTEXTO-AGENTE.md",
-      "source_location": null,
+      "source_location": "L84",
       "weight": 1.0,
-      "source": "contexto_agente_overview",
-      "target": "contexto_agente_skip_intro_flow"
+      "source": "contexto_agente_contexto_para_el_agente_portafolio_by_knox",
+      "target": "contexto_agente_preferencias_del_usuario",
+      "confidence_score": 1.0
     },
     {
-      "relation": "references",
+      "relation": "contains",
       "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
       "source_file": "CONTEXTO-AGENTE.md",
-      "source_location": null,
+      "source_location": "L6",
       "weight": 1.0,
-      "source": "contexto_agente_overview",
-      "target": "docs_superpowers_specs_2026_07_08_seccion_corto_design_spec"
+      "source": "contexto_agente_contexto_para_el_agente_portafolio_by_knox",
+      "target": "contexto_agente_qu\u00e9_es",
+      "confidence_score": 1.0
     },
     {
-      "relation": "references",
+      "relation": "contains",
       "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
       "source_file": "CONTEXTO-AGENTE.md",
-      "source_location": null,
+      "source_location": "L12",
       "weight": 1.0,
-      "source": "contexto_agente_overview",
-      "target": "index_foto_portada"
+      "source": "contexto_agente_contexto_para_el_agente_portafolio_by_knox",
+      "target": "contexto_agente_ubicaci\u00f3n_y_despliegue",
+      "confidence_score": 1.0
     },
     {
-      "relation": "references",
+      "relation": "contains",
       "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
       "source_file": "CONTEXTO-AGENTE.md",
-      "source_location": null,
+      "source_location": "L37",
       "weight": 1.0,
-      "source": "contexto_agente_overview",
-      "target": "index_gsap_library"
+      "source": "contexto_agente_estado_actual_del_trabajo",
+      "target": "contexto_agente_redise\u00f1o_de_la_secci\u00f3n_introducci\u00f3n_inferior_de_index_html_hecho",
+      "confidence_score": 1.0
     },
     {
-      "relation": "references",
+      "relation": "contains",
       "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
       "source_file": "CONTEXTO-AGENTE.md",
-      "source_location": null,
+      "source_location": "L58",
       "weight": 1.0,
-      "source": "contexto_agente_overview",
-      "target": "index_lottie_animation"
+      "source": "contexto_agente_estado_actual_del_trabajo",
+      "target": "contexto_agente_secci\u00f3n_corto_debajo_de_la_introducci\u00f3n_hecho",
+      "confidence_score": 1.0
     },
     {
-      "relation": "references",
+      "relation": "contains",
       "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "CONTEXTO-AGENTE.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "contexto_agente_overview",
-      "target": "index_page"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "CONTEXTO-AGENTE.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "contexto_agente_overview",
-      "target": "knox_page"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "CONTEXTO-AGENTE.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "contexto_agente_overview",
-      "target": "knox_santiago_enciso"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "CONTEXTO-AGENTE.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "contexto_agente_overview",
-      "target": "readme_cloudflare_deploy"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "CONTEXTO-AGENTE.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "contexto_agente_overview",
-      "target": "trabajos_page"
-    },
-    {
-      "relation": "conceptually_related_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
       "source_file": "README.md",
-      "source_location": null,
+      "source_location": "L1",
       "weight": 1.0,
-      "source": "readme_overview",
-      "target": "contexto_agente_overview"
+      "source": "readme",
+      "target": "readme_by_knox_portafolio",
+      "confidence_score": 1.0
     },
     {
-      "relation": "references",
+      "relation": "contains",
       "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "CONTEXTO-AGENTE.md",
-      "source_location": null,
+      "source_file": "README.md",
+      "source_location": "L18",
       "weight": 1.0,
-      "source": "contexto_agente_byknox_portfolio",
-      "target": "index_page"
+      "source": "readme_by_knox_portafolio",
+      "target": "readme_despliegue_cloudflare",
+      "confidence_score": 1.0
     },
     {
-      "relation": "conceptually_related_to",
+      "relation": "contains",
       "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "CONTEXTO-AGENTE.md",
-      "source_location": null,
+      "source_file": "README.md",
+      "source_location": "L6",
       "weight": 1.0,
-      "source": "contexto_agente_byknox_portfolio",
-      "target": "readme_cloudflare_deploy"
+      "source": "readme_by_knox_portafolio",
+      "target": "readme_estructura",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L25",
+      "weight": 1.0,
+      "source": "readme_by_knox_portafolio",
+      "target": "readme_flujo_de_trabajo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "README.md",
+      "source_location": "L35",
+      "weight": 1.0,
+      "source": "readme_by_knox_portafolio",
+      "target": "readme_notas",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/plans/2026-07-09-menu-lateral.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "docs_superpowers_plans_2026_07_09_menu_lateral",
+      "target": "docs_superpowers_plans_2026_07_09_menu_lateral_men\u00fa_lateral_by_knox_implementation_plan",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/plans/2026-07-09-menu-lateral.md",
+      "source_location": "L39",
+      "weight": 1.0,
+      "source": "docs_superpowers_plans_2026_07_09_menu_lateral_men\u00fa_lateral_by_knox_implementation_plan",
+      "target": "docs_superpowers_plans_2026_07_09_menu_lateral_correcci\u00f3n_respecto_a_la_spec",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/plans/2026-07-09-menu-lateral.md",
+      "source_location": "L21",
+      "weight": 1.0,
+      "source": "docs_superpowers_plans_2026_07_09_menu_lateral_men\u00fa_lateral_by_knox_implementation_plan",
+      "target": "docs_superpowers_plans_2026_07_09_menu_lateral_global_constraints",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/plans/2026-07-09-menu-lateral.md",
+      "source_location": "L50",
+      "weight": 1.0,
+      "source": "docs_superpowers_plans_2026_07_09_menu_lateral_correcci\u00f3n_respecto_a_la_spec",
+      "target": "docs_superpowers_plans_2026_07_09_menu_lateral_task_1_css_compartido_del_men\u00fa_en_pagina_css",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/plans/2026-07-09-menu-lateral.md",
+      "source_location": "L276",
+      "weight": 1.0,
+      "source": "docs_superpowers_plans_2026_07_09_menu_lateral_correcci\u00f3n_respecto_a_la_spec",
+      "target": "docs_superpowers_plans_2026_07_09_menu_lateral_task_2_comportamiento_compartido_en_menu_js",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/plans/2026-07-09-menu-lateral.md",
+      "source_location": "L388",
+      "weight": 1.0,
+      "source": "docs_superpowers_plans_2026_07_09_menu_lateral_correcci\u00f3n_respecto_a_la_spec",
+      "target": "docs_superpowers_plans_2026_07_09_menu_lateral_task_3_integrar_el_men\u00fa_en_contacto_html",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/plans/2026-07-09-menu-lateral.md",
+      "source_location": "L497",
+      "weight": 1.0,
+      "source": "docs_superpowers_plans_2026_07_09_menu_lateral_correcci\u00f3n_respecto_a_la_spec",
+      "target": "docs_superpowers_plans_2026_07_09_menu_lateral_task_4_integrar_el_men\u00fa_en_knox_html",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/plans/2026-07-09-menu-lateral.md",
+      "source_location": "L584",
+      "weight": 1.0,
+      "source": "docs_superpowers_plans_2026_07_09_menu_lateral_correcci\u00f3n_respecto_a_la_spec",
+      "target": "docs_superpowers_plans_2026_07_09_menu_lateral_task_5_integrar_el_men\u00fa_en_trabajos_html",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/plans/2026-07-09-menu-lateral.md",
+      "source_location": "L686",
+      "weight": 1.0,
+      "source": "docs_superpowers_plans_2026_07_09_menu_lateral_correcci\u00f3n_respecto_a_la_spec",
+      "target": "docs_superpowers_plans_2026_07_09_menu_lateral_task_6_integrar_el_men\u00fa_en_index_html_css_inline_markup_script",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/plans/2026-07-09-menu-lateral.md",
+      "source_location": "L951",
+      "weight": 1.0,
+      "source": "docs_superpowers_plans_2026_07_09_menu_lateral_correcci\u00f3n_respecto_a_la_spec",
+      "target": "docs_superpowers_plans_2026_07_09_menu_lateral_task_7_verificaci\u00f3n_cruzada_final_las_4_p\u00e1ginas",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-07-08-seccion-corto-design.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "docs_superpowers_specs_2026_07_08_seccion_corto_design",
+      "target": "docs_superpowers_specs_2026_07_08_seccion_corto_design_spec_secci\u00f3n_corto_en_index_html",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-07-08-seccion-corto-design.md",
+      "source_location": "L21",
+      "weight": 1.0,
+      "source": "docs_superpowers_specs_2026_07_08_seccion_corto_design_spec_secci\u00f3n_corto_en_index_html",
+      "target": "docs_superpowers_specs_2026_07_08_seccion_corto_design_1_estructura_html",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-07-08-seccion-corto-design.md",
+      "source_location": "L35",
+      "weight": 1.0,
+      "source": "docs_superpowers_specs_2026_07_08_seccion_corto_design_spec_secci\u00f3n_corto_en_index_html",
+      "target": "docs_superpowers_specs_2026_07_08_seccion_corto_design_2_parallax_continuo_js",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-07-08-seccion-corto-design.md",
+      "source_location": "L46",
+      "weight": 1.0,
+      "source": "docs_superpowers_specs_2026_07_08_seccion_corto_design_spec_secci\u00f3n_corto_en_index_html",
+      "target": "docs_superpowers_specs_2026_07_08_seccion_corto_design_3_lightbox_clic_en_la_miniatura",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-07-08-seccion-corto-design.md",
+      "source_location": "L57",
+      "weight": 1.0,
+      "source": "docs_superpowers_specs_2026_07_08_seccion_corto_design_spec_secci\u00f3n_corto_en_index_html",
+      "target": "docs_superpowers_specs_2026_07_08_seccion_corto_design_4_restricciones_y_no_objetivos",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-07-08-seccion-corto-design.md",
+      "source_location": "L66",
+      "weight": 1.0,
+      "source": "docs_superpowers_specs_2026_07_08_seccion_corto_design_spec_secci\u00f3n_corto_en_index_html",
+      "target": "docs_superpowers_specs_2026_07_08_seccion_corto_design_criterio_de_\u00e9xito",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-07-08-seccion-corto-design.md",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "docs_superpowers_specs_2026_07_08_seccion_corto_design_spec_secci\u00f3n_corto_en_index_html",
+      "target": "docs_superpowers_specs_2026_07_08_seccion_corto_design_decisiones_tomadas",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-07-08-seccion-corto-design.md",
+      "source_location": "L5",
+      "weight": 1.0,
+      "source": "docs_superpowers_specs_2026_07_08_seccion_corto_design_spec_secci\u00f3n_corto_en_index_html",
+      "target": "docs_superpowers_specs_2026_07_08_seccion_corto_design_objetivo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-07-09-menu-lateral-design.md",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "docs_superpowers_specs_2026_07_09_menu_lateral_design",
+      "target": "docs_superpowers_specs_2026_07_09_menu_lateral_design_men\u00fa_lateral_by_knox_design_spec",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-07-09-menu-lateral-design.md",
+      "source_location": "L14",
+      "weight": 1.0,
+      "source": "docs_superpowers_specs_2026_07_09_menu_lateral_design_men\u00fa_lateral_by_knox_design_spec",
+      "target": "docs_superpowers_specs_2026_07_09_menu_lateral_design_alcance",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-07-09-menu-lateral-design.md",
+      "source_location": "L85",
+      "weight": 1.0,
+      "source": "docs_superpowers_specs_2026_07_09_menu_lateral_design_men\u00fa_lateral_by_knox_design_spec",
+      "target": "docs_superpowers_specs_2026_07_09_menu_lateral_design_animaci\u00f3n_gsap_ya_cargado_localmente_en_lib_gsap_min_js",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-07-09-menu-lateral-design.md",
+      "source_location": "L38",
+      "weight": 1.0,
+      "source": "docs_superpowers_specs_2026_07_09_menu_lateral_design_men\u00fa_lateral_by_knox_design_spec",
+      "target": "docs_superpowers_specs_2026_07_09_menu_lateral_design_estructura_del_componente",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-07-09-menu-lateral-design.md",
+      "source_location": "L78",
+      "weight": 1.0,
+      "source": "docs_superpowers_specs_2026_07_09_menu_lateral_design_men\u00fa_lateral_by_knox_design_spec",
+      "target": "docs_superpowers_specs_2026_07_09_menu_lateral_design_interacci\u00f3n_y_cierre",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-07-09-menu-lateral-design.md",
+      "source_location": "L98",
+      "weight": 1.0,
+      "source": "docs_superpowers_specs_2026_07_09_menu_lateral_design_men\u00fa_lateral_by_knox_design_spec",
+      "target": "docs_superpowers_specs_2026_07_09_menu_lateral_design_no_alcance_fuera_de_esta_spec",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-07-09-menu-lateral-design.md",
+      "source_location": "L26",
+      "weight": 1.0,
+      "source": "docs_superpowers_specs_2026_07_09_menu_lateral_design_men\u00fa_lateral_by_knox_design_spec",
+      "target": "docs_superpowers_specs_2026_07_09_menu_lateral_design_paleta_y_tipograf\u00eda_reutilizada_no_se_crea_nada_nuevo",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-07-09-menu-lateral-design.md",
+      "source_location": "L6",
+      "weight": 1.0,
+      "source": "docs_superpowers_specs_2026_07_09_menu_lateral_design_men\u00fa_lateral_by_knox_design_spec",
+      "target": "docs_superpowers_specs_2026_07_09_menu_lateral_design_qu\u00e9_es",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-07-09-menu-lateral-design.md",
+      "source_location": "L106",
+      "weight": 1.0,
+      "source": "docs_superpowers_specs_2026_07_09_menu_lateral_design_men\u00fa_lateral_by_knox_design_spec",
+      "target": "docs_superpowers_specs_2026_07_09_menu_lateral_design_verificaci\u00f3n_sitio_est\u00e1tico_sin_test_runner",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-07-09-menu-lateral-design.md",
+      "source_location": "L74",
+      "weight": 1.0,
+      "source": "docs_superpowers_specs_2026_07_09_menu_lateral_design_estructura_del_componente",
+      "target": "docs_superpowers_specs_2026_07_09_menu_lateral_design_bot\u00f3n_de_cierre",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-07-09-menu-lateral-design.md",
+      "source_location": "L40",
+      "weight": 1.0,
+      "source": "docs_superpowers_specs_2026_07_09_menu_lateral_design_estructura_del_componente",
+      "target": "docs_superpowers_specs_2026_07_09_menu_lateral_design_bot\u00f3n_toggle",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-07-09-menu-lateral-design.md",
+      "source_location": "L55",
+      "weight": 1.0,
+      "source": "docs_superpowers_specs_2026_07_09_menu_lateral_design_estructura_del_componente",
+      "target": "docs_superpowers_specs_2026_07_09_menu_lateral_design_contenido_del_panel",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "docs/superpowers/specs/2026-07-09-menu-lateral-design.md",
+      "source_location": "L46",
+      "weight": 1.0,
+      "source": "docs_superpowers_specs_2026_07_09_menu_lateral_design_estructura_del_componente",
+      "target": "docs_superpowers_specs_2026_07_09_menu_lateral_design_panel",
+      "confidence_score": 1.0
     },
     {
       "relation": "conceptually_related_to",
@@ -11284,136 +12143,6 @@
       "weight": 1.0,
       "source": "knox_santiago_enciso",
       "target": "contexto_agente_byknox_portfolio"
-    },
-    {
-      "relation": "conceptually_related_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.95,
-      "source_file": "CONTEXTO-AGENTE.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "contexto_agente_manifiesto_section",
-      "target": "index_intro_reveal_effect"
-    },
-    {
-      "relation": "conceptually_related_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.95,
-      "source_file": "CONTEXTO-AGENTE.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "contexto_agente_skip_intro_flow",
-      "target": "index_iralmenu"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "README.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "readme_overview",
-      "target": "contacto_page"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "README.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "readme_overview",
-      "target": "contacto_pagina_css_stylesheet"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "README.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "readme_overview",
-      "target": "index_foto_portada"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "README.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "readme_overview",
-      "target": "index_gsap_library"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "README.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "readme_overview",
-      "target": "index_lottie_animation"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "README.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "readme_overview",
-      "target": "index_page"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "README.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "readme_overview",
-      "target": "knox_page"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "README.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "readme_overview",
-      "target": "readme_cloudflare_deploy"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "README.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "readme_overview",
-      "target": "readme_wrangler_config"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "README.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "readme_overview",
-      "target": "trabajos_page"
-    },
-    {
-      "relation": "conceptually_related_to",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "README.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "readme_wrangler_config",
-      "target": "readme_cloudflare_deploy"
     },
     {
       "relation": "references",
@@ -11476,46 +12205,6 @@
       "target": "contacto_pagina_css_stylesheet"
     },
     {
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-08-seccion-corto-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_08_seccion_corto_design_spec",
-      "target": "docs_superpowers_specs_2026_07_08_seccion_corto_design_parallax_continuo"
-    },
-    {
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-08-seccion-corto-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_08_seccion_corto_design_spec",
-      "target": "docs_superpowers_specs_2026_07_08_seccion_corto_design_seccion_corto"
-    },
-    {
-      "relation": "rationale_for",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-08-seccion-corto-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_08_seccion_corto_design_spec",
-      "target": "docs_superpowers_specs_2026_07_08_seccion_corto_design_visor_lightbox"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-08-seccion-corto-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_08_seccion_corto_design_spec",
-      "target": "index_page"
-    },
-    {
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
@@ -11524,16 +12213,6 @@
       "weight": 1.0,
       "source": "docs_superpowers_specs_2026_07_08_seccion_corto_design_seccion_corto",
       "target": "index_reveal_scroll_animation"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "docs/superpowers/specs/2026-07-08-seccion-corto-design.md",
-      "source_location": null,
-      "weight": 1.0,
-      "source": "docs_superpowers_specs_2026_07_08_seccion_corto_design_parallax_continuo",
-      "target": "index_actualizarhero"
     },
     {
       "relation": "implements",
@@ -11851,36 +12530,6 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "index.html"
-    },
-    {
-      "id": "corto_section_flow",
-      "label": "Secci\u00f3n Corto: parallax + lightbox interaction flow",
-      "nodes": [
-        "docs_superpowers_specs_2026_07_08_seccion_corto_design_seccion_corto",
-        "index_actualizarcorto",
-        "docs_superpowers_specs_2026_07_08_seccion_corto_design_visor_lightbox",
-        "index_abrirvisor",
-        "index_cerrarvisor"
-      ],
-      "relation": "form",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "source_file": "docs/superpowers/specs/2026-07-08-seccion-corto-design.md"
-    },
-    {
-      "id": "manifiesto_redesign_group",
-      "label": "Manifiesto redesign: rationale + reveal implementation",
-      "nodes": [
-        "contexto_agente_manifiesto_section",
-        "index_intro_reveal_effect",
-        "index_reveal_scroll_animation",
-        "contexto_agente_overview"
-      ],
-      "relation": "form",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "source_file": "CONTEXTO-AGENTE.md"
     }
-  ],
-  "built_at_commit": "000170b86f9959b9578e01421ef19be05f25f9ff"
+  ]
 }

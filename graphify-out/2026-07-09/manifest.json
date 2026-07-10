@@ -30,9 +30,9 @@
     "semantic_hash": "d4a9d1a1e3c26689939059292339da6b"
   },
   "contacto.html": {
-    "mtime": 1783232965.4057307,
-    "ast_hash": "2c7580bf04f544badd5c15e28ccbce68",
-    "semantic_hash": "2c7580bf04f544badd5c15e28ccbce68"
+    "mtime": 1783645623.9951408,
+    "ast_hash": "3764d830133b99ff563636854ef180d8",
+    "semantic_hash": ""
   },
   "docs/superpowers/specs/2026-07-08-seccion-corto-design.md": {
     "mtime": 1783529805.5248716,
@@ -40,23 +40,38 @@
     "semantic_hash": "1e114d1a97fe2b3478f5676a119823d8"
   },
   "index.html": {
-    "mtime": 1783530435.5143824,
-    "ast_hash": "6f1bb062bbd5051825ec17d7ddc3f01b",
-    "semantic_hash": "6f1bb062bbd5051825ec17d7ddc3f01b"
+    "mtime": 1783648728.6037247,
+    "ast_hash": "bf0d3e64d7253bdc93d9e5425c12d694",
+    "semantic_hash": ""
   },
   "knox.html": {
-    "mtime": 1783232970.2249868,
-    "ast_hash": "4c917e9151d0c4b2a0daaaa2804b3019",
-    "semantic_hash": "4c917e9151d0c4b2a0daaaa2804b3019"
+    "mtime": 1783645625.3639789,
+    "ast_hash": "71cd9e35c28a4ba14777efc90d72a540",
+    "semantic_hash": ""
   },
   "trabajos.html": {
-    "mtime": 1783234034.199387,
-    "ast_hash": "4826064705cb9c7bf56d9183bf4e0fdf",
-    "semantic_hash": "4826064705cb9c7bf56d9183bf4e0fdf"
+    "mtime": 1783645622.176622,
+    "ast_hash": "8ed29b5a3904d02eee1bc5240101c9d5",
+    "semantic_hash": ""
   },
   "foto-portada.jpg": {
     "mtime": 1783231313.4774365,
     "ast_hash": "421624dae7427b5d8e35ec67fd627c49",
     "semantic_hash": "421624dae7427b5d8e35ec67fd627c49"
+  },
+  "menu.js": {
+    "mtime": 1783645649.2289608,
+    "ast_hash": "484c533a739fa2b1a7582c81983f31dc",
+    "semantic_hash": ""
+  },
+  "docs/superpowers/plans/2026-07-09-menu-lateral.md": {
+    "mtime": 1783643383.124759,
+    "ast_hash": "8dd98bbaadae5f6d8a60dac1a0809eba",
+    "semantic_hash": ""
+  },
+  "docs/superpowers/specs/2026-07-09-menu-lateral-design.md": {
+    "mtime": 1783642963.552816,
+    "ast_hash": "c831ec57ee88e0bac91d41e4b8b53e72",
+    "semantic_hash": ""
   }
 }
