@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Trabajos · KNOX</title>
-    <meta name="description" content="Selección de proyectos de BY KNOX: Especiferal, Mordiendo el polvo y Lyla. Dirección creativa, fotografía, editorial e industrial." />
+    <meta name="description" content="Selección de proyectos de BY KNOX: Especiferal y Mordiendo el polvo. Dirección creativa, fotografía, editorial e industrial." />
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23000000'/%3E%3Ctext x='32' y='47' font-family='Helvetica,Arial,sans-serif' font-size='42' font-weight='800' fill='%23ECE7DF' text-anchor='middle'%3EK%3C/text%3E%3C/svg%3E" />
     <link rel="stylesheet" href="./pagina.css" />
   </head>
@@ -20,32 +20,27 @@
       <span class="eyebrow reveal">Selección</span>
       <h1 class="page__title reveal">Trabajos</h1>
       <p class="page__lead reveal" id="workLead">
-        Una selección de proyectos. Pronto sumaré las imágenes de cada uno.
+        Una selección de proyectos. Entra a cada uno para ver más.
       </p>
 
       <hr class="divider" />
 
       <section class="work reveal">
+        <!-- >>> PARA AGREGAR UN PROYECTO: copia un <li> y cambia numero,
+             nombre, categorias y el href a su pagina de detalle. -->
         <ul class="work__list" id="workList">
           <li class="work__item" data-title="Especiferal">
-            <a class="work__link" href="#" data-project="especiferal">
+            <a class="work__link" href="especiferal.html" data-project="especiferal">
               <span class="work__index">01</span>
               <span class="work__name">Especiferal</span>
               <span class="work__cat">Colección · Industrial · Editorial</span>
             </a>
           </li>
           <li class="work__item" data-title="Mordiendo el polvo">
-            <a class="work__link" href="#" data-project="mordiendo">
+            <a class="work__link" href="mordiendo.html" data-project="mordiendo">
               <span class="work__index">02</span>
               <span class="work__name">Mordiendo el polvo</span>
               <span class="work__cat">Fotografía · Gráfico</span>
-            </a>
-          </li>
-          <li class="work__item" data-title="Lyla">
-            <a class="work__link" href="#" data-project="lyla">
-              <span class="work__index">03</span>
-              <span class="work__name">Lyla</span>
-              <span class="work__cat">Producto · Universo visual</span>
             </a>
           </li>
         </ul>
@@ -55,7 +50,8 @@
 
       <section class="reveal">
         <p class="section-label">Sobre los proyectos</p>
-        <div class="grid grid--3">
+        <!-- Con 2 proyectos se usa grid--2; cuando haya 3, cambiar a grid--3. -->
+        <div class="grid grid--2">
           <article class="card">
             <span class="card__num">01 · Mar — May 2025</span>
             <h3 class="card__title">Especiferal</h3>
@@ -83,19 +79,6 @@
               <span class="chip">Baja obturación</span>
             </div>
           </article>
-          <article class="card">
-            <span class="card__num">03 · Ago — Oct 2025</span>
-            <h3 class="card__title">Lyla</h3>
-            <p class="card__text">
-              Huerto lúdico e interactivo para niños: producto físico y universo
-              visual, a escala 1:1, listo para el aula.
-            </p>
-            <div class="chips" style="margin-top: 1rem">
-              <span class="chip">Blender</span>
-              <span class="chip">Fusion 360</span>
-              <span class="chip">Acabados</span>
-            </div>
-          </article>
         </div>
       </section>
     </main>
@@ -119,7 +102,7 @@
           <span style="color: #666">Bogotá, Colombia</span>
         </div>
       </div>
-      <p class="site-footer__legal">© 2025 KNOX</p>
+      <p class="site-footer__legal">© 2026 KNOX</p>
     </footer>
 
     <script>
@@ -128,7 +111,6 @@
       var preview = document.getElementById('workPreview');
       var previewInner = document.getElementById('workPreviewInner');
       var targetX = 0, targetY = 0, curX = 0, curY = 0;
-      var activo = false;
 
       // Solo en dispositivos con puntero fino (mouse); en tactil no aplica.
       var tienePuntero = window.matchMedia('(pointer: fine)').matches;
@@ -138,7 +120,7 @@
         var workLead = document.getElementById('workLead');
         if (workLead) {
           workLead.textContent =
-            'Pasa el cursor sobre cada proyecto para ver una vista previa. Pronto sumaré las imágenes de cada uno.';
+            'Pasa el cursor sobre cada proyecto y haz clic para entrar.';
         }
 
         list.addEventListener('mousemove', function (e) {
@@ -148,16 +130,12 @@
 
         list.querySelectorAll('.work__link').forEach(function (link) {
           link.addEventListener('mouseenter', function () {
-            activo = true;
             previewInner.textContent = link.parentElement.dataset.title;
             preview.classList.add('is-visible');
           });
           link.addEventListener('mouseleave', function () {
-            activo = false;
             preview.classList.remove('is-visible');
           });
-          // Por ahora los proyectos no abren pagina (aún sin contenido interno).
-          link.addEventListener('click', function (e) { e.preventDefault(); });
         });
 
         // Movimiento suave (lerp) para que la vista previa "flote".

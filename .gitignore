@@ -9,3 +9,13 @@ Thumbs.db
 FOTO PORTADA FINAL.jpg
 FOTO PORTADA.jpg
 DSC04623-2.jpg
+
+# Secretos / variables de entorno: NUNCA al repo.
+# (Hoy no existe ningun .env; la regla queda lista para cuando haga falta.)
+.env
+.env.*
+
+# Salida generada por graphify (grafo local del codigo): es derivada,
+# contiene rutas absolutas de esta maquina y cambia en cada corrida.
+# Se regenera con: graphify update .
+graphify-out/

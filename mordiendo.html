@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contacto · KNOX</title>
-    <meta name="description" content="Hablemos: contacto de BY KNOX (Santiago Enciso). Correo, celular e Instagram para proyectos de dirección creativa." />
+    <title>Mordiendo el polvo · KNOX</title>
+    <meta name="description" content="Mordiendo el polvo — colección fotográfica y gráfica sobre el deporte automotor de la región. Fotografía de baja obturación. Un proyecto de BY KNOX." />
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23000000'/%3E%3Ctext x='32' y='47' font-family='Helvetica,Arial,sans-serif' font-size='42' font-weight='800' fill='%23ECE7DF' text-anchor='middle'%3EK%3C/text%3E%3C/svg%3E" />
     <link rel="stylesheet" href="./pagina.css" />
   </head>
@@ -17,37 +17,43 @@
     </header>
 
     <main class="page">
-      <span class="eyebrow reveal">Hablemos</span>
-      <h1 class="page__title reveal">Contacto</h1>
+      <span class="eyebrow reveal">Proyecto 02 · Fotografía · Gráfico</span>
+      <h1 class="page__title reveal">Mordiendo el polvo</h1>
       <p class="page__lead reveal">
-        ¿Tienes una idea cruda? La convertimos en realidad, contigo en cada
-        paso. Escríbeme por donde prefieras.
+        Colección fotográfica y gráfica sobre el deporte automotor de la
+        región. Piezas visuales coherentes y dinámicas.
       </p>
-      <p class="status reveal">
-        <span class="status__dot" aria-hidden="true"></span>
-        Disponible para proyectos — Bogotá / remoto
-      </p>
+      <div class="chips mt-lg reveal">
+        <span class="chip">Feb 2025 — Actualidad</span>
+        <span class="chip">Fotografía</span>
+        <span class="chip">Lightroom</span>
+        <span class="chip">Baja obturación</span>
+      </div>
 
-      <ul class="contact-list reveal">
-        <li class="contact-row">
-          <a href="mailto:sencisoballesta@gmail.com">
-            <span class="contact-row__label">Correo</span>
-            <span class="contact-row__value">sencisoballesta@gmail.com</span>
-          </a>
-        </li>
-        <li class="contact-row">
-          <a href="tel:+573162801718">
-            <span class="contact-row__label">Celular</span>
-            <span class="contact-row__value">+57 316 280 1718</span>
-          </a>
-        </li>
-        <li class="contact-row">
-          <a href="https://www.instagram.com/by_kn0x/" target="_blank" rel="noopener">
-            <span class="contact-row__label">Instagram</span>
-            <span class="contact-row__value">@by_kn0x</span>
-          </a>
-        </li>
-      </ul>
+      <!-- ============================================================
+           GALERIA DEL PROYECTO
+           >>> AQUI VAN LAS FOTOS <<<
+           La principal ya usa la foto de portada del sitio (es de esta
+           coleccion). Para las demas, dentro de cada
+           <div class="galeria__item"> pega:
+               <img src="./fotos/mordiendo-1.jpg" alt="descripcion corta" loading="lazy" />
+           y borra el texto "Próximamente". Puedes agregar o quitar
+           bloques copiando/borrando un galeria__item.
+           ============================================================ -->
+      <section class="galeria galeria--2 reveal" aria-label="Galería del proyecto">
+        <div class="galeria__item galeria__item--ancha">
+          <img src="./foto-portada.jpg" alt="Colección Mordiendo el polvo" loading="lazy" />
+        </div>
+        <div class="galeria__item">Próximamente</div>
+        <div class="galeria__item">Próximamente</div>
+      </section>
+
+      <hr class="divider" />
+
+      <a class="next" href="especiferal.html">
+        <span class="next__label">Siguiente proyecto</span>
+        <span class="next__name">Especiferal →</span>
+      </a>
     </main>
 
     <footer class="site-footer">
@@ -82,12 +88,12 @@
               </a>
             </li>
             <li class="menu-panel__item">
-              <a class="menu-panel__link" href="trabajos.html">
+              <a class="menu-panel__link is-active" href="trabajos.html">
                 <span class="line"><span><span class="menu-panel__num">03</span>Trabajos</span></span>
               </a>
             </li>
             <li class="menu-panel__item">
-              <a class="menu-panel__link is-active" href="contacto.html">
+              <a class="menu-panel__link" href="contacto.html">
                 <span class="line"><span><span class="menu-panel__num">04</span>Contacto</span></span>
               </a>
             </li>

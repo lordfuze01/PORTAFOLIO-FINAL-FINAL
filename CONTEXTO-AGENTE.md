@@ -11,7 +11,7 @@ JavaScript, sin framework ni build. El logo/mascota es un **conejo** (animación
 
 ## Ubicación y despliegue
 
-- **Carpeta local:** `C:\Users\mudki\Documents\portafolio`
+- **Carpeta local:** `Documents\portafolio` (en el equipo del usuario)
 - **Repo GitHub:** `https://github.com/lordfuze01/PORTAFOLIO-FINAL-FINAL.git` (rama `main`)
 - **Hosting en vivo:** Cloudflare, proyecto **byknox** (config en `wrangler.jsonc`,
   sirve desde la raíz `"directory": "."`).
@@ -24,8 +24,12 @@ JavaScript, sin framework ni build. El logo/mascota es un **conejo** (animación
 - `index.html` — intro del conejo (Lottie) + landing con scroll + sección "Introducción".
   **Todo el CSS y JS va inline en este archivo** (dentro de `<style>` y `<script>`).
 - `knox.html` — "¿Quién es Knox?"
-- `trabajos.html` — índice de trabajos
-- `contacto.html` — contacto
+- `trabajos.html` — índice de trabajos (2 proyectos; Lyla se retiró, se re-agrega
+  cuando haya contenido)
+- `especiferal.html`, `mordiendo.html` — páginas de detalle de proyecto, con
+  galería placeholder lista para fotos (buscar `>>> AQUI VAN LAS FOTOS`).
+  Mordiendo ya usa `foto-portada.jpg` como imagen principal.
+- `contacto.html` — contacto (con línea de disponibilidad)
 - `pagina.css` — estilos de las páginas internas (knox/trabajos/contacto)
 - `menu.js` — comportamiento del menú lateral (compartido por las 4 páginas)
 - `_headers` — cabeceras de Cloudflare: seguridad (CSP, nosniff, anti-iframe) + cache
@@ -91,9 +95,31 @@ ahora es el "flow menu" (filas anchas con marquee CSS infinito al hacer hover).
   que el conejo reproduce; si algo falla, borrar la línea Content-Security-Policy.
 - Cache de `foto-portada.jpg` bajado de 1 año a 1 día (para poder reemplazarla
   con el mismo nombre sin que los visitantes vean la vieja).
+- Auditoría de secretos (2026-07-10): cero claves/tokens en archivos e historial.
+  El repo es PÚBLICO → se quitaron rutas locales con usuario (README, este
+  archivo) y se des-rastreó `graphify-out/` (derivado, con rutas absolutas;
+  sigue en disco y en `.gitignore`). Reglas `.env` listas en `.gitignore` y
+  `.assetsignore`; no existe ningún .env porque el sitio no usa APIs.
 - Se borró CSS muerto (`.project*`, `.info-row*`, `.grid--2` en pagina.css;
   `fadeIn`, `--accent` en index.html) y se agregaron meta description + favicon
   SVG ("K" sobre negro, data URI) a las 4 páginas.
+
+### Mejoras UI/UX (2026-07-10, referencia podium.global / fromanother.love / Studio Namma) — HECHO
+- **Footer "cierre" en index** (`<footer id="cierre">`): disponibilidad con punto
+  que pulsa + eyebrow "¿Tienes una idea?" + CTA gigante "Hablemos →" (a contacto)
+  + línea de servicios + correo/IG/ciudad + © . Filas con `data-cierre-fila` se
+  revelan en cascada (GSAP + IntersectionObserver, patrón del manifiesto).
+- **Disponibilidad** (`.status` / `.status__dot`): duplicada a propósito en
+  index inline y pagina.css (como el CSS del menú). El punto es inline para que
+  no flote al partirse el texto. También está en contacto.html.
+- **Transición entre páginas**: `@view-transition { navigation: auto }` en ambos
+  CSS (crossfade nativo; navegadores viejos lo ignoran; reduced-motion lo apaga).
+- **Trabajos**: enlaces del índice activos hacia las páginas de detalle (se quitó
+  el preventDefault); vista previa de cursor intacta. Cards en `grid--2`
+  (cambiar a `grid--3` con el tercer proyecto).
+- **Páginas de proyecto**: estructura lista sin fotos — galería con placeholders
+  "Próximamente" (`.galeria__item`, la `--ancha` es 16:9), chips de fechas y
+  herramientas, enlace "Siguiente proyecto" circular entre ambas.
 
 ## Notas técnicas / gotchas
 

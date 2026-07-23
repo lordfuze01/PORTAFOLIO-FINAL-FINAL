@@ -43,6 +43,13 @@
 
       * { box-sizing: border-box; margin: 0; padding: 0; }
       html, body { min-height: 100%; }
+
+      /* Transicion suave (crossfade) al navegar entre paginas. Solo actua
+         en navegadores que la soportan; los demas navegan normal. */
+      @view-transition { navigation: auto; }
+      @media (prefers-reduced-motion: reduce) {
+        @view-transition { navigation: none; }
+      }
       /* El html tambien en negro: evita cualquier destello blanco al cargar. */
       html { background: var(--bg-final); }
 
@@ -453,6 +460,117 @@
       @media (max-width: 560px) {
         .intro { padding-left: 1.1rem; padding-right: 1.1rem; }
       }
+
+      /* ==================================================================
+         CIERRE (footer): disponibilidad + CTA "Hablemos" + servicios +
+         datos de contacto. TODO CENTRADO, sin serif (mismo aire que la
+         Introduccion). >>> Los TEXTOS se editan en el HTML, en <footer id="cierre">.
+         ================================================================== */
+      .cierre {
+        position: relative;
+        background: var(--bg-final);
+        border-top: 1px solid var(--line);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: clamp(1.1rem, 3vh, 1.8rem);
+        padding: clamp(4rem, 12vh, 7rem) clamp(1.4rem, 6vw, 4rem) clamp(2.2rem, 6vh, 3.5rem);
+      }
+
+      /* Disponibilidad: punto que "respira" + texto (mismo patron que
+         pagina.css para que se vea igual en contacto.html). El punto es
+         inline: si el texto se parte en varias lineas, queda pegado a la
+         primera palabra en vez de flotar a la izquierda. */
+      .status {
+        display: inline-block;
+        color: var(--ash);
+        font-size: 0.8rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+      }
+      .status__dot {
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--bone);
+        margin-right: 0.55rem;
+        vertical-align: middle;
+        animation: pulso 2.4s ease-in-out infinite;
+      }
+      @keyframes pulso {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        50%      { opacity: 0.3; transform: scale(0.75); }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .status__dot { animation: none; }
+      }
+
+      .cierre__eyebrow {
+        color: #cfcac2;
+        font-size: clamp(1rem, 2vw, 1.4rem);
+        margin: 0;
+      }
+
+      /* CTA gigante (mismo subrayado que barre + flecha que se desliza) */
+      .cierre__cta {
+        position: relative;
+        display: inline-block;
+        color: var(--bone);
+        text-decoration: none;
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        line-height: 1.05;
+        font-size: clamp(2.4rem, 9vw, 6.5rem);
+        padding-bottom: 10px;
+      }
+      .cierre__cta .arrow { display: inline-block; transition: transform 0.35s ease; }
+      .cierre__cta::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 2px;
+        background: var(--bone);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+      }
+      .cierre__cta:hover::after { transform: scaleX(1); }
+      .cierre__cta:hover .arrow { transform: translateX(10px); }
+      .cierre__cta:focus-visible { outline: 2px solid var(--bone); outline-offset: 6px; }
+
+      .cierre__servicios {
+        color: var(--ash);
+        font-size: clamp(0.85rem, 1.6vw, 1rem);
+        letter-spacing: 0.06em;
+        max-width: 60ch;
+        margin: 0;
+      }
+      .cierre__datos {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem 1rem;
+        color: var(--ash);
+        font-size: 0.92rem;
+        margin: 0;
+      }
+      .cierre__datos a {
+        color: var(--bone);
+        text-decoration: none;
+        transition: color 0.25s ease;
+      }
+      .cierre__datos a:hover { color: #ffffff; }
+      .cierre__datos a:focus-visible { outline: 2px solid var(--bone); outline-offset: 3px; }
+      .cierre__legal {
+        color: #666666;
+        font-size: 0.78rem;
+        letter-spacing: 0.08em;
+        margin: clamp(1rem, 3vh, 2rem) 0 0;
+      }
       /* =========================================================
          MENU LATERAL — boton toggle + panel deslizante (compartido
          con pagina.css, ver docs/superpowers/specs/2026-07-09-menu-lateral-design.md)
@@ -690,6 +808,31 @@
           </span>
         </button>
       </section>
+
+      <!-- ================================================================
+           CIERRE (footer): el "siguiente paso" del visitante interesado.
+           >>> Los TEXTOS se editan aqui mismo. Cada fila con
+           data-cierre-fila se revela en cascada al llegar con el scroll.
+           ================================================================ -->
+      <footer class="cierre" id="cierre">
+        <p class="status" data-cierre-fila>
+          <span class="status__dot" aria-hidden="true"></span>
+          Disponible para proyectos — Bogotá / remoto
+        </p>
+        <p class="cierre__eyebrow" data-cierre-fila>¿Tienes una idea?</p>
+        <a class="cierre__cta" href="contacto.html" data-cierre-fila>Hablemos <span class="arrow">→</span></a>
+        <p class="cierre__servicios" data-cierre-fila>
+          Dirección creativa · Diseño gráfico · Audiovisual · Fotografía · Editorial · Diseño industrial
+        </p>
+        <p class="cierre__datos" data-cierre-fila>
+          <a href="mailto:sencisoballesta@gmail.com">sencisoballesta@gmail.com</a>
+          <span aria-hidden="true">·</span>
+          <a href="https://www.instagram.com/by_kn0x/" target="_blank" rel="noopener">@by_kn0x</a>
+          <span aria-hidden="true">·</span>
+          <span>Bogotá, Colombia</span>
+        </p>
+        <p class="cierre__legal" data-cierre-fila>© 2026 KNOX</p>
+      </footer>
     </main>
 
     <!-- Visor del corto (lightbox): se abre al hacer clic en la miniatura -->
@@ -880,6 +1023,38 @@
           { threshold: 0.25 }
         );
         io.observe(intro);
+      })();
+
+      // ====== REVELADO DEL CIERRE (footer) ======
+      // Cada fila del footer sube y aparece en cascada al entrar en pantalla
+      // (mismo patron GSAP + IntersectionObserver del manifiesto).
+      (function () {
+        var cierre = document.getElementById('cierre');
+        if (!cierre || typeof gsap === 'undefined') return;
+
+        var filas = cierre.querySelectorAll('[data-cierre-fila]');
+        var menosMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        if (menosMovimiento) {
+          gsap.set(filas, { opacity: 1, y: 0 });
+          return;
+        }
+
+        gsap.set(filas, { opacity: 0, y: 26 });
+
+        var reproducido = false;
+        var io = new IntersectionObserver(
+          function (entradas) {
+            entradas.forEach(function (e) {
+              if (!e.isIntersecting || reproducido) return;
+              reproducido = true;
+              gsap.to(filas, { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out', stagger: 0.09 });
+              io.disconnect();
+            });
+          },
+          { threshold: 0.3 }
+        );
+        io.observe(cierre);
       })();
 
       // ====== FLOWING MENU: fila a todo el ancho + marquee al pasar el cursor ======

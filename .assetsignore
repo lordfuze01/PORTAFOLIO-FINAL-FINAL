@@ -15,3 +15,8 @@ graphify-out
 
 # Fuente de la animacion Lottie (ya va incrustada en index.html).
 conejo.json
+
+# Variables de entorno: jamas publicarlas (protege tambien los deploys
+# manuales con wrangler desde esta carpeta).
+.env
+.env.*

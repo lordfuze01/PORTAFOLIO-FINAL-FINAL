@@ -25,7 +25,7 @@ GitHub. Cada `git push` a la rama `main` **redespliega el sitio solo**.
 ## Flujo de trabajo
 
 ```powershell
-cd "C:\Users\mudki\Documents\PORTAFOLIO"
+cd <carpeta-del-portafolio>
 # ...hacer cambios...
 git add -A
 git commit -m "describe el cambio"
