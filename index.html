@@ -325,22 +325,6 @@
         gap: clamp(1.2rem, 3.5vh, 2rem);
         padding: clamp(4rem, 12vh, 7rem) clamp(1.4rem, 6vw, 4rem);
       }
-      .behance__eyebrow {
-        color: var(--ash);
-        font-size: 0.8rem;
-        letter-spacing: 0.22em;
-        text-transform: uppercase;
-        margin: 0;
-      }
-      .behance__title {
-        color: var(--bone);
-        font-weight: 700;
-        font-size: clamp(1.8rem, 4.4vw, 3.4rem);
-        line-height: 1.1;
-        letter-spacing: -0.02em;
-        margin: 0;
-      }
-      .behance__title em { font-style: italic; }
       .behance__btn { margin-top: clamp(0.4rem, 1.5vh, 0.8rem); }
       .behance__btn .arrow { display: inline-block; transition: transform 0.35s ease; }
       .behance__btn:hover .arrow { transform: translateX(6px); }
@@ -727,8 +711,6 @@
            - Para poner una palabra en CURSIVA usa <em>palabra</em>.
            ================================================================ -->
       <section class="behance" id="behance">
-        <p class="behance__eyebrow" data-behance-fila>Portafolio completo</p>
-        <h2 class="behance__title" data-behance-fila>Más trabajo en <em>Behance</em>.</h2>
         <a class="specular-button specular-button--lg behance__btn" data-behance-fila
            href="https://www.behance.net/santiagenciso1" target="_blank" rel="noopener"
            data-specular-button>
@@ -1391,7 +1373,7 @@ void main() {
             speed: 0.35,
             followMouse: true,
             proximity: 260,
-            autoAnimate: false,
+            autoAnimate: true,
           });
         });
       }
