@@ -1,7 +1,5 @@
 // ====== MENU LATERAL: boton hamburguesa + panel deslizante ======
-// Compartido por las 4 paginas del sitio. Mismo patron de cierre
-// (Escape / clic fuera del panel / bloqueo de scroll del body) que el
-// visor de video de index.html (ver seccion "CORTO").
+// Compartido por las 4 paginas del sitio.
 (function () {
   var toggle = document.getElementById('menuToggle');
   var overlay = document.getElementById('menuOverlay');
