@@ -400,7 +400,10 @@ a { color: inherit; }
    ========================================================= */
 .menu-toggle {
   position: fixed;
-  top: calc(clamp(1.2rem, 3vw, 2rem) + 14px);
+  /* Centrado con el texto "KNOX" del .site-header: el padding-top del
+     header es fijo (1.4rem, no cambia con el viewport), asi que este
+     ajuste tampoco necesita clamp(). */
+  top: calc(1.4rem - 7px);
   right: clamp(1.2rem, 3vw, 2rem);
   z-index: 60;
   display: flex;
