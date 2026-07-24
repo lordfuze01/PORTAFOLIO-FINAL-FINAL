@@ -210,7 +210,9 @@
         gap: clamp(2rem, 6vh, 3.5rem);
         max-width: 1000px;
         margin: 0 auto;
-        padding: clamp(5rem, 14vh, 10rem) clamp(1.4rem, 6vw, 4rem);
+        /* Abajo, menos aire que arriba: la seccion Behance que sigue ya
+           trae su propio padding-top, y no queremos duplicar el espacio. */
+        padding: clamp(5rem, 14vh, 10rem) clamp(1.4rem, 6vw, 4rem) clamp(2rem, 6vh, 3.5rem);
       }
 
       /* Titulo grande (hereda la Helvetica del sitio, sin serif) */
@@ -326,6 +328,10 @@
         padding: clamp(2rem, 6vh, 3.5rem) clamp(1.4rem, 6vw, 4rem);
       }
       .behance__btn { margin-top: clamp(0.4rem, 1.5vh, 0.8rem); }
+      .specular-button--lg.behance__btn {
+        font-size: clamp(1.3rem, 2.2vw, 1.6rem);
+        padding: clamp(20px, 2.4vw, 28px) clamp(44px, 5vw, 60px);
+      }
       .behance__btn .arrow { display: inline-block; transition: transform 0.35s ease; }
       .behance__btn:hover .arrow { transform: translateX(6px); }
 
