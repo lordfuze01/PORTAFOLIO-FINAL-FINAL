@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Trabajos · KNOX</title>
-    <meta name="description" content="Selección de proyectos de BY KNOX: Especiferal y Mordiendo el polvo. Dirección creativa, fotografía, editorial e industrial." />
+    <meta name="description" content="Selección de proyectos de BY KNOX: Especiferal, Mordiendo el polvo y El sabio se parcha el bobo se estresa. Dirección creativa, fotografía, editorial e industrial." />
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23000000'/%3E%3Ctext x='32' y='47' font-family='Helvetica,Arial,sans-serif' font-size='42' font-weight='800' fill='%23ECE7DF' text-anchor='middle'%3EK%3C/text%3E%3C/svg%3E" />
     <link rel="stylesheet" href="./pagina.css" />
   </head>
@@ -27,20 +27,29 @@
 
       <section class="work reveal">
         <!-- >>> PARA AGREGAR UN PROYECTO: copia un <li> y cambia numero,
-             nombre, categorias y el href a su pagina de detalle. -->
+             nombre, categorias, el href a su pagina de detalle y el
+             data-preview (imagen que aparece en la vista previa al pasar
+             el cursor; van en imagenes/*-hover.jpg). -->
         <ul class="work__list" id="workList">
-          <li class="work__item" data-title="Especiferal">
+          <li class="work__item" data-title="Especiferal" data-preview="imagenes/especiferal-hover.jpg">
             <a class="work__link" href="especiferal.html" data-project="especiferal">
               <span class="work__index">01</span>
               <span class="work__name">Especiferal</span>
               <span class="work__cat">Colección · Industrial · Editorial</span>
             </a>
           </li>
-          <li class="work__item" data-title="Mordiendo el polvo">
+          <li class="work__item" data-title="Mordiendo el polvo" data-preview="imagenes/mordiendo-hover.jpg">
             <a class="work__link" href="mordiendo.html" data-project="mordiendo">
               <span class="work__index">02</span>
               <span class="work__name">Mordiendo el polvo</span>
               <span class="work__cat">Fotografía · Gráfico</span>
+            </a>
+          </li>
+          <li class="work__item" data-title="El sabio se parcha el bobo se estresa" data-preview="imagenes/sabio-se-parcha-hover.jpg">
+            <a class="work__link" href="elsabio.html" data-project="elsabio">
+              <span class="work__index">03</span>
+              <span class="work__name">El sabio se parcha el bobo se estresa</span>
+              <span class="work__cat">Próximamente</span>
             </a>
           </li>
         </ul>
@@ -50,8 +59,7 @@
 
       <section class="reveal">
         <p class="section-label">Sobre los proyectos</p>
-        <!-- Con 2 proyectos se usa grid--2; cuando haya 3, cambiar a grid--3. -->
-        <div class="grid grid--2">
+        <div class="grid grid--3">
           <article class="card">
             <span class="card__num">01 · Mar — May 2025</span>
             <h3 class="card__title">Especiferal</h3>
@@ -77,6 +85,18 @@
               <span class="chip">Fotografía</span>
               <span class="chip">Lightroom</span>
               <span class="chip">Baja obturación</span>
+            </div>
+          </article>
+          <article class="card">
+            <!-- >>> PENDIENTE: reemplazar fecha, descripcion y chips con la
+                 info real de este proyecto. -->
+            <span class="card__num">03 · Próximamente</span>
+            <h3 class="card__title">El sabio se parcha el bobo se estresa</h3>
+            <p class="card__text">
+              Próximamente más detalles de este proyecto.
+            </p>
+            <div class="chips" style="margin-top: 1rem">
+              <span class="chip">Próximamente</span>
             </div>
           </article>
         </div>
@@ -130,7 +150,17 @@
 
         list.querySelectorAll('.work__link').forEach(function (link) {
           link.addEventListener('mouseenter', function () {
-            previewInner.textContent = link.parentElement.dataset.title;
+            var item = link.parentElement;
+            var preview_src = item.dataset.preview;
+            if (preview_src) {
+              previewInner.innerHTML = '';
+              var img = document.createElement('img');
+              img.src = preview_src;
+              img.alt = '';
+              previewInner.appendChild(img);
+            } else {
+              previewInner.textContent = item.dataset.title;
+            }
             preview.classList.add('is-visible');
           });
           link.addEventListener('mouseleave', function () {

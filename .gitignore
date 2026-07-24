@@ -10,6 +10,12 @@ FOTO PORTADA FINAL.jpg
 FOTO PORTADA.jpg
 DSC04623-2.jpg
 
+# Fotos originales sin comprimir de los hover de trabajos.html (una pesa
+# 9MB). El sitio usa las versiones livianas en imagenes/*-hover.jpg.
+imagenes/ESPECIFERAL HOVER.png
+imagenes/MORDIENDO EL POLVO HOVER.jpg
+imagenes/EL SABIO SE PARCHA EL BOBO SE ESTRESA HOVER.png
+
 # Secretos / variables de entorno: NUNCA al repo.
 # (Hoy no existe ningun .env; la regla queda lista para cuando haga falta.)
 .env
