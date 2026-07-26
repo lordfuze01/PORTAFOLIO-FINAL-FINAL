@@ -19,34 +19,98 @@
     <main class="page">
       <span class="eyebrow reveal">Proyecto 02 · Fotografía · Gráfico</span>
       <h1 class="page__title reveal">Mordiendo el polvo</h1>
-      <p class="page__lead reveal">
-        Colección fotográfica y gráfica sobre el deporte automotor de la
-        región. Piezas visuales coherentes y dinámicas.
-      </p>
-      <div class="chips mt-lg reveal">
-        <span class="chip">Feb 2025 — Actualidad</span>
-        <span class="chip">Fotografía</span>
-        <span class="chip">Lightroom</span>
-        <span class="chip">Baja obturación</span>
-      </div>
 
-      <!-- ============================================================
-           GALERIA DEL PROYECTO
-           >>> AQUI VAN LAS FOTOS <<<
-           La principal ya usa la foto de portada del sitio (es de esta
-           coleccion). Para las demas, dentro de cada
-           <div class="galeria__item"> pega:
-               <img src="./fotos/mordiendo-1.jpg" alt="descripcion corta" loading="lazy" />
-           y borra el texto "Próximamente". Puedes agregar o quitar
-           bloques copiando/borrando un galeria__item.
-           ============================================================ -->
-      <section class="galeria galeria--2 reveal" aria-label="Galería del proyecto">
-        <div class="galeria__item galeria__item--ancha">
-          <img src="./foto-portada.jpg" alt="Colección Mordiendo el polvo" loading="lazy" />
+      <div class="page-body">
+        <nav class="line-sidebar" aria-label="Secciones del proyecto">
+          <ul class="line-sidebar__list">
+            <li class="line-sidebar__item">
+              <span class="line-sidebar__marker" aria-hidden="true"></span>
+              <a class="line-sidebar__link" href="#concepto">
+                <span class="line-sidebar__index">01</span>
+                <span class="line-sidebar__text">Concepto</span>
+              </a>
+            </li>
+            <li class="line-sidebar__item">
+              <span class="line-sidebar__marker" aria-hidden="true"></span>
+              <a class="line-sidebar__link" href="#proceso">
+                <span class="line-sidebar__index">02</span>
+                <span class="line-sidebar__text">Proceso</span>
+              </a>
+            </li>
+            <li class="line-sidebar__item">
+              <span class="line-sidebar__marker" aria-hidden="true"></span>
+              <a class="line-sidebar__link" href="#herramientas">
+                <span class="line-sidebar__index">03</span>
+                <span class="line-sidebar__text">Herramientas</span>
+              </a>
+            </li>
+            <li class="line-sidebar__item">
+              <span class="line-sidebar__marker" aria-hidden="true"></span>
+              <a class="line-sidebar__link" href="#producto-final">
+                <span class="line-sidebar__index">04</span>
+                <span class="line-sidebar__text">Producto final</span>
+              </a>
+            </li>
+            <li class="line-sidebar__item">
+              <span class="line-sidebar__marker" aria-hidden="true"></span>
+              <a class="line-sidebar__link" href="#galeria">
+                <span class="line-sidebar__index">05</span>
+                <span class="line-sidebar__text">Galería</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="page-content">
+          <section id="concepto">
+            <h2>Concepto</h2>
+            <p>
+              Colección fotográfica y gráfica sobre el deporte automotor de la
+              región. Piezas visuales coherentes y dinámicas.
+            </p>
+            <!-- >>> EDITA AQUI: contá el brief/idea detrás de esta colección. -->
+            <p>Próximamente más sobre el concepto.</p>
+          </section>
+
+          <section id="proceso">
+            <h2>Proceso</h2>
+            <!-- >>> EDITA AQUI: cómo se cubren las carreras, logística, etc. -->
+            <p>Próximamente.</p>
+          </section>
+
+          <section id="herramientas">
+            <h2>Herramientas</h2>
+            <div class="chips">
+              <span class="chip">Feb 2025 — Actualidad</span>
+              <span class="chip">Fotografía</span>
+              <span class="chip">Lightroom</span>
+              <span class="chip">Baja obturación</span>
+            </div>
+            <!-- >>> EDITA AQUI: equipo/técnica usada (cámara, lentes, etc). -->
+            <p class="mt">Próximamente más sobre el equipo y la técnica.</p>
+          </section>
+
+          <section id="producto-final">
+            <h2>Producto final</h2>
+            <!-- >>> EDITA AQUI: cómo se entrega/usa esta colección. -->
+            <p>Próximamente.</p>
+          </section>
+
+          <section id="galeria">
+            <h2>Galería</h2>
+            <!-- >>> AQUI VAN LAS FOTOS: dentro de cada .galeria__item pega
+                 <img src="./fotos/mordiendo-1.jpg" alt="descripcion corta" loading="lazy" />
+                 y borra el texto "Próximamente". -->
+            <div class="galeria galeria--2">
+              <div class="galeria__item galeria__item--ancha">
+                <img src="./foto-portada.jpg" alt="Colección Mordiendo el polvo" loading="lazy" />
+              </div>
+              <div class="galeria__item">Próximamente</div>
+              <div class="galeria__item">Próximamente</div>
+            </div>
+          </section>
         </div>
-        <div class="galeria__item">Próximamente</div>
-        <div class="galeria__item">Próximamente</div>
-      </section>
+      </div>
 
       <hr class="divider" />
 
@@ -108,5 +172,6 @@
 
     <script src="./lib/gsap.min.js"></script>
     <script src="./menu.js"></script>
+    <script src="./sidebar.js"></script>
   </body>
 </html>

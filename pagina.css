@@ -509,3 +509,133 @@ a { color: inherit; }
 @media (max-width: 640px) {
   .menu-panel { width: 100vw; border-left: 0; }
 }
+
+/* =========================================================
+   SIDEBAR DE PROYECTO — layout de 2 columnas + lista con efecto
+   de proximidad al cursor (puerto vanilla del componente React
+   "LineSidebar"). Compartido por especiferal.html / mordiendo.html
+   / elsabio.html. Comportamiento en sidebar.js. Ver
+   docs/superpowers/specs/2026-07-26-sidebar-proyecto-design.md.
+   ========================================================= */
+.page-body {
+  margin-top: clamp(2.5rem, 6vw, 4rem);
+}
+.page-content { min-width: 0; }
+.page-content > section {
+  padding: clamp(1.6rem, 4vw, 2.6rem) 0;
+  border-top: 1px solid var(--line);
+  scroll-margin-top: var(--header-height, 90px);
+}
+.page-content > section:first-child { border-top: 0; padding-top: 0; }
+.page-content h2 {
+  font-size: clamp(1.3rem, 3vw, 1.9rem);
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.9rem;
+}
+.page-content section p { color: var(--muted); max-width: 60ch; }
+.page-content section p + p { margin-top: 0.9rem; }
+
+/* Desktop: la sidebar se saca del flujo (position:absolute, sin ancestro
+   posicionado entre ella y <body>) para poder pegarla al borde real de la
+   ventana con left:0 -- no al borde de la columna centrada de .page. El
+   `top` lo recalcula sidebar.js en cada scroll para imitar
+   position:sticky centrado verticalmente: baja con la pagina hasta llegar
+   a la mitad del viewport y ahi se queda quieta (en pantalla) mientras el
+   resto del contenido sigue pasando, hasta acercarse al final de
+   .page-body, donde se suelta y vuelve a scrollear con el documento. No
+   se usa position:sticky real porque el `left:0` de la sidebar necesita
+   quedar fuera del ancestro posicionado que sticky exigiria. Por eso
+   .page-content necesita su propio padding-left para no quedar debajo. */
+.line-sidebar { position: absolute; left: 0; width: 226px; padding-left: 46px; will-change: transform; }
+
+@media (min-width: 821px) {
+  .page-content { padding-left: 266px; }
+}
+
+.line-sidebar__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+.line-sidebar__item { position: relative; --effect: 0; }
+.line-sidebar__link {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  padding: 0.2rem 0;
+  text-decoration: none;
+  color: color-mix(in srgb, var(--muted) calc((1 - var(--effect)) * 100%), var(--bone) calc(var(--effect) * 100%));
+  transform: translateX(calc(var(--effect) * 14px));
+}
+.line-sidebar__link:focus-visible {
+  outline: 2px solid var(--bone);
+  outline-offset: 4px;
+}
+/* Marcador: linea a la izquierda del texto (puerto fiel de la referencia
+   en REFERENCIAS/ -- component CSS de LineSidebar). Un segundo "tick" mas
+   corto y tenue marca la mitad del hueco ENTRE dos items consecutivos
+   (pseudo-elemento ::after, sin HTML extra): son esas "lineas entre las
+   lineas" que le dan textura a la lista en reposo. */
+.line-sidebar__marker {
+  position: absolute;
+  top: 50%;
+  left: -46px;
+  height: 2px;
+  width: 32px;
+  background: color-mix(in srgb, var(--line) calc((1 - var(--effect)) * 100%), var(--bone) calc(var(--effect) * 100%));
+  transform-origin: left center;
+  transform: translateY(-50%) scaleX(calc(0.7 + var(--effect) * 0.5));
+}
+.line-sidebar__item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: calc(100% + 11px);
+  left: -46px;
+  height: 1px;
+  width: 16px;
+  background: var(--line);
+  opacity: 0.5;
+  transform-origin: left center;
+  transform: translateY(-50%) scaleX(calc(0.7 + var(--effect) * 0.6));
+}
+.line-sidebar__index {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--ash);
+  opacity: calc(0.55 + var(--effect) * 0.45);
+  flex: 0 0 auto;
+}
+.line-sidebar__text {
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+
+@media (max-width: 820px) {
+  /* Mobile: sin espacio para un riel lateral -- vuelve al flujo normal
+     (position:static), franja horizontal con scroll arriba del contenido,
+     tampoco centrada/pegada al scrollear. */
+  .line-sidebar {
+    position: static;
+    width: 100%;
+    padding-left: 0;
+    z-index: 5;
+    background: rgba(0, 0, 0, 0.88);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 1.6rem;
+  }
+  .line-sidebar__list {
+    flex-direction: row;
+    gap: 1.5rem;
+    padding: 0.9rem clamp(1.25rem, 5vw, 3.5rem);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .line-sidebar__list::-webkit-scrollbar { display: none; }
+  .line-sidebar__marker,
+  .line-sidebar__item::after { display: none; }
+}

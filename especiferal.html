@@ -19,32 +19,96 @@
     <main class="page">
       <span class="eyebrow reveal">Proyecto 01 · Colección · Industrial · Editorial</span>
       <h1 class="page__title reveal">Especiferal</h1>
-      <p class="page__lead reveal">
-        Colección propositiva de accesorios y productos inspirada en especies
-        ferales. Ilustración, editorial, industrial y comunicación visual.
-      </p>
-      <div class="chips mt-lg reveal">
-        <span class="chip">Mar — May 2025</span>
-        <span class="chip">InDesign</span>
-        <span class="chip">Fusion 360</span>
-        <span class="chip">Impresión 3D</span>
-      </div>
 
-      <!-- ============================================================
-           GALERIA DEL PROYECTO
-           >>> AQUI VAN LAS FOTOS <<<
-           Cuando tengas las imagenes, dentro de cada
-           <div class="galeria__item"> pega:
-               <img src="./fotos/especiferal-1.jpg" alt="descripcion corta" loading="lazy" />
-           y borra el texto "Próximamente". La primera (--ancha) es la
-           principal (16:9); las demas son 4:3. Puedes agregar o quitar
-           bloques copiando/borrando un galeria__item.
-           ============================================================ -->
-      <section class="galeria galeria--2 reveal" aria-label="Galería del proyecto">
-        <div class="galeria__item galeria__item--ancha">Próximamente</div>
-        <div class="galeria__item">Próximamente</div>
-        <div class="galeria__item">Próximamente</div>
-      </section>
+      <div class="page-body">
+        <nav class="line-sidebar" aria-label="Secciones del proyecto">
+          <ul class="line-sidebar__list">
+            <li class="line-sidebar__item">
+              <span class="line-sidebar__marker" aria-hidden="true"></span>
+              <a class="line-sidebar__link" href="#concepto">
+                <span class="line-sidebar__index">01</span>
+                <span class="line-sidebar__text">Concepto</span>
+              </a>
+            </li>
+            <li class="line-sidebar__item">
+              <span class="line-sidebar__marker" aria-hidden="true"></span>
+              <a class="line-sidebar__link" href="#proceso">
+                <span class="line-sidebar__index">02</span>
+                <span class="line-sidebar__text">Proceso</span>
+              </a>
+            </li>
+            <li class="line-sidebar__item">
+              <span class="line-sidebar__marker" aria-hidden="true"></span>
+              <a class="line-sidebar__link" href="#herramientas">
+                <span class="line-sidebar__index">03</span>
+                <span class="line-sidebar__text">Herramientas</span>
+              </a>
+            </li>
+            <li class="line-sidebar__item">
+              <span class="line-sidebar__marker" aria-hidden="true"></span>
+              <a class="line-sidebar__link" href="#producto-final">
+                <span class="line-sidebar__index">04</span>
+                <span class="line-sidebar__text">Producto final</span>
+              </a>
+            </li>
+            <li class="line-sidebar__item">
+              <span class="line-sidebar__marker" aria-hidden="true"></span>
+              <a class="line-sidebar__link" href="#galeria">
+                <span class="line-sidebar__index">05</span>
+                <span class="line-sidebar__text">Galería</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="page-content">
+          <section id="concepto">
+            <h2>Concepto</h2>
+            <p>
+              Colección propositiva de accesorios y productos inspirada en especies
+              ferales. Ilustración, editorial, industrial y comunicación visual.
+            </p>
+            <!-- >>> EDITA AQUI: contá el brief/idea detrás de Especiferal. -->
+            <p>Próximamente más sobre el concepto.</p>
+          </section>
+
+          <section id="proceso">
+            <h2>Proceso</h2>
+            <!-- >>> EDITA AQUI: investigación, bocetos, iteraciones. -->
+            <p>Próximamente.</p>
+          </section>
+
+          <section id="herramientas">
+            <h2>Herramientas</h2>
+            <div class="chips">
+              <span class="chip">Mar — May 2025</span>
+              <span class="chip">InDesign</span>
+              <span class="chip">Fusion 360</span>
+              <span class="chip">Impresión 3D</span>
+            </div>
+            <!-- >>> EDITA AQUI: cómo se usó cada herramienta/material. -->
+            <p class="mt">Próximamente más sobre el proceso técnico.</p>
+          </section>
+
+          <section id="producto-final">
+            <h2>Producto final</h2>
+            <!-- >>> EDITA AQUI: descripción del resultado terminado. -->
+            <p>Próximamente.</p>
+          </section>
+
+          <section id="galeria">
+            <h2>Galería</h2>
+            <!-- >>> AQUI VAN LAS FOTOS: dentro de cada .galeria__item pega
+                 <img src="./fotos/especiferal-1.jpg" alt="descripcion corta" loading="lazy" />
+                 y borra el texto "Próximamente". -->
+            <div class="galeria galeria--2">
+              <div class="galeria__item galeria__item--ancha">Próximamente</div>
+              <div class="galeria__item">Próximamente</div>
+              <div class="galeria__item">Próximamente</div>
+            </div>
+          </section>
+        </div>
+      </div>
 
       <hr class="divider" />
 
@@ -106,5 +170,6 @@
 
     <script src="./lib/gsap.min.js"></script>
     <script src="./menu.js"></script>
+    <script src="./sidebar.js"></script>
   </body>
 </html>
