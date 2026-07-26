@@ -16,6 +16,10 @@ graphify-out
 # Fuente de la animacion Lottie (ya va incrustada en index.html).
 conejo.json
 
+# Fotos originales sin comprimir de la galeria Masonry (pesan varios MB
+# cada una). El sitio usa las versiones optimizadas en imagenes/masonry/.
+FOTOS MASSONERY
+
 # Variables de entorno: jamas publicarlas (protege tambien los deploys
 # manuales con wrangler desde esta carpeta).
 .env

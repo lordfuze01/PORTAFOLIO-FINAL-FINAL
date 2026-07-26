@@ -372,6 +372,72 @@
         background: repeating-linear-gradient(45deg, #0d0d0d 0 12px, #131313 12px 24px);
       }
 
+      /* ---- Lightbox de la galeria Masonry: al hacer clic en una foto se
+         ve en grande sobre la pagina (overlay), sin salir del sitio. ---- */
+      body.lightbox-open { overflow: hidden; }
+      .lightbox {
+        position: fixed;
+        inset: 0;
+        z-index: 200;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.92);
+        padding: clamp(1rem, 4vw, 3rem);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0s linear 0.3s;
+      }
+      .lightbox.is-open {
+        opacity: 1;
+        visibility: visible;
+        transition: opacity 0.3s ease, visibility 0s linear 0s;
+      }
+      .lightbox__img {
+        max-width: 90vw;
+        max-height: 90vh;
+        border-radius: 10px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+        transform: scale(0.85);
+        transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .lightbox.is-open .lightbox__img { transform: scale(1); }
+      @media (prefers-reduced-motion: reduce) {
+        .lightbox, .lightbox__img { transition: none; }
+      }
+      .lightbox__close,
+      .lightbox__nav {
+        position: absolute;
+        background: transparent;
+        border: 1px solid var(--line);
+        color: var(--bone);
+        cursor: pointer;
+        display: grid;
+        place-items: center;
+        border-radius: 999px;
+        transition: background 0.2s ease;
+      }
+      .lightbox__close:hover,
+      .lightbox__nav:hover { background: rgba(236, 231, 223, 0.1); }
+      .lightbox__close {
+        top: clamp(0.8rem, 2vw, 1.6rem);
+        right: clamp(0.8rem, 2vw, 1.6rem);
+        width: 40px;
+        height: 40px;
+        font-size: 1.4rem;
+        line-height: 1;
+      }
+      .lightbox__nav {
+        top: 50%;
+        transform: translateY(-50%);
+        width: 48px;
+        height: 48px;
+        font-size: 1.8rem;
+        line-height: 1;
+      }
+      .lightbox__nav--prev { left: clamp(0.6rem, 2vw, 1.6rem); }
+      .lightbox__nav--next { right: clamp(0.6rem, 2vw, 1.6rem); }
+
       /* ---- Boton "specular": brillo WebGL que recorre el borde y sigue el
          cursor (lib/ogl.min.js). Puerto a JS vanilla del componente
          SpecularButton (React Bits); logica en el <script type="module">
@@ -470,7 +536,7 @@
       }
 
       /* ==================================================================
-         CIERRE (footer): disponibilidad + CTA "Hablemos" + servicios +
+         CIERRE (footer): disponibilidad + servicios +
          datos de contacto. TODO CENTRADO, sin serif (mismo aire que la
          Introduccion). >>> Los TEXTOS se editan en el HTML, en <footer id="cierre">.
          ================================================================== */
@@ -514,41 +580,6 @@
       @media (prefers-reduced-motion: reduce) {
         .status__dot { animation: none; }
       }
-
-      .cierre__eyebrow {
-        color: #cfcac2;
-        font-size: clamp(1rem, 2vw, 1.4rem);
-        margin: 0;
-      }
-
-      /* CTA gigante (mismo subrayado que barre + flecha que se desliza) */
-      .cierre__cta {
-        position: relative;
-        display: inline-block;
-        color: var(--bone);
-        text-decoration: none;
-        font-weight: 700;
-        letter-spacing: -0.03em;
-        line-height: 1.05;
-        font-size: clamp(2.4rem, 9vw, 6.5rem);
-        padding-bottom: 10px;
-      }
-      .cierre__cta .arrow { display: inline-block; transition: transform 0.35s ease; }
-      .cierre__cta::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        bottom: 0;
-        width: 100%;
-        height: 2px;
-        background: var(--bone);
-        transform: scaleX(0);
-        transform-origin: left;
-        transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-      }
-      .cierre__cta:hover::after { transform: scaleX(1); }
-      .cierre__cta:hover .arrow { transform: translateX(10px); }
-      .cierre__cta:focus-visible { outline: 2px solid var(--bone); outline-offset: 6px; }
 
       .cierre__servicios {
         color: var(--ash);
@@ -732,9 +763,8 @@
       <section class="intro" id="intro">
         <!-- Titulo (se revela linea a linea) -->
         <h2 class="intro__title">
-          <span class="line"><span>Knox es dirección creativa</span></span>
-          <span class="line"><span>que busca devolverle lo</span></span>
-          <span class="line"><span><em>humano</em> a lo que creamos.</span></span>
+          <span class="line"><span>Dirección creativa</span></span>
+          <span class="line"><span>para <em>seres humanos</em>.</span></span>
         </h2>
 
         <!-- Parrafo de apoyo -->
@@ -768,6 +798,16 @@
               </div>
             </div>
           </div>
+          <div class="flow-menu__item" data-flow-item>
+            <a class="flow-menu__link" href="contacto.html">Contacto</a>
+            <div class="flow-menu__marquee" data-flow-marquee>
+              <div class="flow-menu__marquee-inner-wrap">
+                <div class="flow-menu__marquee-inner" data-flow-inner>
+                  <div class="flow-menu__marquee-part">Contacto</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </nav>
       </section>
 
@@ -780,11 +820,17 @@
            ================================================================ -->
       <section class="behance" id="behance">
         <!-- >>> GALERIA: los items estan en `behanceGalleryItems`, mas abajo
-             (en el <script type="module"> junto al del boton). Por ahora
-             son placeholders ("Proximamente"): cuando tengas las fotos,
-             reemplaza cada `img: null` por la ruta real y ajusta `height`
-             a la proporcion real de esa foto. -->
+             (en el <script type="module"> junto al del boton). Cada foto
+             abre un lightbox (#masonryLightbox, mas abajo) al hacer clic;
+             para agregar mas fotos, sumalas a imagenes/masonry/ y a ese
+             array (ver comentario junto a `behanceGalleryItems`). -->
         <div class="masonry-list" id="behanceGallery" aria-label="Galería de trabajos"></div>
+        <div class="lightbox" id="masonryLightbox" aria-hidden="true">
+          <button class="lightbox__nav lightbox__nav--prev" type="button" aria-label="Foto anterior">‹</button>
+          <img class="lightbox__img" alt="" />
+          <button class="lightbox__nav lightbox__nav--next" type="button" aria-label="Foto siguiente">›</button>
+          <button class="lightbox__close" type="button" aria-label="Cerrar">×</button>
+        </div>
         <a class="specular-button specular-button--lg behance__btn" data-behance-fila
            href="https://www.behance.net/santiagenciso1" target="_blank" rel="noopener"
            data-specular-button>
@@ -803,8 +849,6 @@
           <span class="status__dot" aria-hidden="true"></span>
           Disponible para proyectos — Bogotá / remoto
         </p>
-        <p class="cierre__eyebrow" data-cierre-fila>¿Tienes una idea?</p>
-        <a class="cierre__cta" href="contacto.html" data-cierre-fila>Hablemos <span class="arrow">→</span></a>
         <p class="cierre__servicios" data-cierre-fila>
           Dirección creativa · Diseño gráfico · Audiovisual · Fotografía · Editorial · Diseño industrial
         </p>
@@ -1466,20 +1510,22 @@ void main() {
       // Masonry (React Bits) -- sin React, usa GSAP (ya cargado arriba,
       // lib/gsap.min.js) para acomodar y animar los items.
       //
-      // >>> CUANDO TENGAS LAS FOTOS: en cada item de abajo reemplaza
-      // `img: null` por la ruta real (ej. './fotos/proyecto-1.jpg') y
-      // ajusta `height` a la proporcion real de esa foto (una imagen de
-      // 1200x800px -> height: 800). Mientras `img` sea null se muestra
-      // un placeholder "Proximamente".
+      // Fotos optimizadas en imagenes/masonry/ (originales pesados en
+      // "FOTOS MASSONERY/", fuera del repo -- ver .gitignore). `ratio` es
+      // alto/ancho real de cada foto: layout() lo multiplica por el ancho
+      // de columna vigente, asi que la proporcion se respeta en cualquier
+      // cantidad de columnas (5/4/3/2/1 segun el ancho de pantalla).
       // ============================================================
       var menosMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       var behanceGalleryItems = [
-        { id: 1, img: null, url: 'https://www.behance.net/santiagenciso1', height: 500 },
-        { id: 2, img: null, url: 'https://www.behance.net/santiagenciso1', height: 340 },
-        { id: 3, img: null, url: 'https://www.behance.net/santiagenciso1', height: 600 },
-        { id: 4, img: null, url: 'https://www.behance.net/santiagenciso1', height: 300 },
-        { id: 5, img: null, url: 'https://www.behance.net/santiagenciso1', height: 460 },
-        { id: 6, img: null, url: 'https://www.behance.net/santiagenciso1', height: 380 },
+        { id: 1, img: './imagenes/masonry/masonry-01.jpg', url: 'https://www.behance.net/santiagenciso1', ratio: 1.25 },
+        { id: 2, img: './imagenes/masonry/masonry-02.jpg', url: 'https://www.behance.net/santiagenciso1', ratio: 1.166 },
+        { id: 3, img: './imagenes/masonry/masonry-03.jpg', url: 'https://www.behance.net/santiagenciso1', ratio: 0.667 },
+        { id: 4, img: './imagenes/masonry/masonry-04.jpg', url: 'https://www.behance.net/santiagenciso1', ratio: 1.429 },
+        { id: 5, img: './imagenes/masonry/masonry-05.jpg', url: 'https://www.behance.net/santiagenciso1', ratio: 1.237 },
+        { id: 6, img: './imagenes/masonry/masonry-06.jpg', url: 'https://www.behance.net/santiagenciso1', ratio: 0.667 },
+        { id: 7, img: './imagenes/masonry/masonry-07.jpg', url: 'https://www.behance.net/santiagenciso1', ratio: 0.667 },
+        { id: 8, img: './imagenes/masonry/masonry-08.jpg', url: 'https://www.behance.net/santiagenciso1', ratio: 0.667 },
       ];
 
       function initMasonry(container, items, opts) {
@@ -1497,8 +1543,50 @@ void main() {
           return 1;
         }
 
+        var lightboxEl = document.getElementById('masonryLightbox');
+        var lightboxImg = lightboxEl ? lightboxEl.querySelector('.lightbox__img') : null;
+        var lightboxIndex = -1;
+
+        function openLightbox(index) {
+          var target = items[index];
+          if (!lightboxEl || !lightboxImg || !target || !target.img) return;
+          lightboxIndex = index;
+          lightboxImg.src = target.img;
+          lightboxEl.classList.add('is-open');
+          lightboxEl.setAttribute('aria-hidden', 'false');
+          document.body.classList.add('lightbox-open');
+        }
+        function closeLightbox() {
+          if (!lightboxEl) return;
+          lightboxEl.classList.remove('is-open');
+          lightboxEl.setAttribute('aria-hidden', 'true');
+          document.body.classList.remove('lightbox-open');
+          lightboxIndex = -1;
+        }
+        function showRelative(delta) {
+          if (lightboxIndex === -1) return;
+          openLightbox((lightboxIndex + delta + items.length) % items.length);
+        }
+        if (lightboxEl) {
+          lightboxEl.addEventListener('click', function (e) {
+            if (e.target === lightboxEl) closeLightbox();
+          });
+          var closeBtn = lightboxEl.querySelector('.lightbox__close');
+          if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
+          var prevBtn = lightboxEl.querySelector('.lightbox__nav--prev');
+          var nextBtn = lightboxEl.querySelector('.lightbox__nav--next');
+          if (prevBtn) prevBtn.addEventListener('click', function () { showRelative(-1); });
+          if (nextBtn) nextBtn.addEventListener('click', function () { showRelative(1); });
+          document.addEventListener('keydown', function (e) {
+            if (lightboxIndex === -1) return;
+            if (e.key === 'Escape') closeLightbox();
+            else if (e.key === 'ArrowLeft') showRelative(-1);
+            else if (e.key === 'ArrowRight') showRelative(1);
+          });
+        }
+
         var elements = {};
-        items.forEach(function (item) {
+        items.forEach(function (item, index) {
           var wrapper = document.createElement('div');
           wrapper.className = 'item-wrapper';
 
@@ -1512,7 +1600,8 @@ void main() {
           wrapper.appendChild(img);
 
           wrapper.addEventListener('click', function () {
-            window.open(item.url, '_blank', 'noopener');
+            if (item.img) openLightbox(index);
+            else window.open(item.url, '_blank', 'noopener');
           });
           if (!menosMovimiento) {
             wrapper.addEventListener('mouseenter', function () {
@@ -1539,7 +1628,7 @@ void main() {
           items.forEach(function (item, index) {
             var col = colHeights.indexOf(Math.min.apply(null, colHeights));
             var x = columnWidth * col;
-            var height = item.height / 2;
+            var height = columnWidth * item.ratio;
             var y = colHeights[col];
             colHeights[col] += height;
             maxHeight = Math.max(maxHeight, colHeights[col]);

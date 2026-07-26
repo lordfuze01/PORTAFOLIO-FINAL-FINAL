@@ -16,6 +16,10 @@ imagenes/ESPECIFERAL HOVER.png
 imagenes/MORDIENDO EL POLVO HOVER.jpg
 imagenes/EL SABIO SE PARCHA EL BOBO SE ESTRESA HOVER.png
 
+# Fotos originales sin comprimir de la galeria Masonry (varias de mas de
+# 5MB). El sitio usa las versiones optimizadas en imagenes/masonry/.
+FOTOS MASSONERY/
+
 # Secretos / variables de entorno: NUNCA al repo.
 # (Hoy no existe ningun .env; la regla queda lista para cuando haga falta.)
 .env
