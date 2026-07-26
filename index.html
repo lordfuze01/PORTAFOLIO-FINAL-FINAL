@@ -1436,22 +1436,31 @@ void main() {
       var menosMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (!menosMovimiento && window.WebGL2RenderingContext) {
         document.querySelectorAll('[data-specular-button]').forEach(function (btn) {
-          initSpecularButton(btn, {
-            radius: 18,
-            lineColor: '#ffffff',
-            baseColor: '#525252',
-            intensity: 1,
-            shineSize: 10,
-            shineFade: 40,
-            thickness: 1,
-            speed: 0.35,
-            followMouse: true,
-            proximity: 260,
-            autoAnimate: true,
-          });
+          try {
+            initSpecularButton(btn, {
+              radius: 18,
+              lineColor: '#ffffff',
+              baseColor: '#525252',
+              intensity: 1,
+              shineSize: 10,
+              shineFade: 40,
+              thickness: 1,
+              speed: 0.35,
+              followMouse: true,
+              proximity: 260,
+              autoAnimate: true,
+            });
+          } catch (e) {
+            console.error('specular button init failed', e);
+          }
         });
       }
+    </script>
 
+    <!-- Script independiente (no depende de ogl ni del boton de arriba):
+         si el brillo WebGL falla por lo que sea, la galeria de abajo
+         igual se inicializa. -->
+    <script type="module">
       // ============================================================
       // GALERIA "MASONRY" (Behance): puerto vanilla del componente
       // Masonry (React Bits) -- sin React, usa GSAP (ya cargado arriba,
@@ -1463,6 +1472,7 @@ void main() {
       // 1200x800px -> height: 800). Mientras `img` sea null se muestra
       // un placeholder "Proximamente".
       // ============================================================
+      var menosMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       var behanceGalleryItems = [
         { id: 1, img: null, url: 'https://www.behance.net/santiagenciso1', height: 500 },
         { id: 2, img: null, url: 'https://www.behance.net/santiagenciso1', height: 340 },
