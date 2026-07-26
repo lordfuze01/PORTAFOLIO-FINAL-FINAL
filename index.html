@@ -210,9 +210,10 @@
         gap: clamp(2rem, 6vh, 3.5rem);
         max-width: 1000px;
         margin: 0 auto;
-        /* Abajo, menos aire que arriba: la seccion Behance que sigue ya
-           trae su propio padding-top, y no queremos duplicar el espacio. */
-        padding: clamp(5rem, 14vh, 10rem) clamp(1.4rem, 6vw, 4rem) clamp(2rem, 6vh, 3.5rem);
+        /* Abajo, casi sin aire: el ultimo item del flow-menu ya cierra con
+           su propia linea, y la seccion Behance que sigue trae su propio
+           padding-top -- no queremos duplicar el espacio ni las lineas. */
+        padding: clamp(5rem, 14vh, 10rem) clamp(1.4rem, 6vw, 4rem) clamp(0.75rem, 2vh, 1.25rem);
       }
 
       /* Titulo grande (hereda la Helvetica del sitio, sin serif) */
@@ -319,13 +320,12 @@
       .behance {
         position: relative;
         background: var(--bg-final);
-        border-top: 1px solid var(--line);
         display: flex;
         flex-direction: column;
         align-items: center;
         text-align: center;
-        gap: clamp(1.2rem, 3.5vh, 2rem);
-        padding: clamp(2rem, 6vh, 3.5rem) clamp(1.4rem, 6vw, 4rem);
+        gap: clamp(1.5rem, 4vh, 2.5rem);
+        padding: clamp(1.5rem, 4vh, 2.5rem) clamp(1.4rem, 6vw, 4rem) clamp(3rem, 8vh, 5rem);
       }
       .behance__btn { margin-top: clamp(0.4rem, 1.5vh, 0.8rem); }
       .specular-button--lg.behance__btn {
@@ -334,6 +334,43 @@
       }
       .behance__btn .arrow { display: inline-block; transition: transform 0.35s ease; }
       .behance__btn:hover .arrow { transform: translateX(6px); }
+
+      /* ---- Galeria "Masonry": puerto vanilla (sin React) del componente
+         Masonry de React Bits. Los <div class="item-wrapper"> se ubican
+         con GSAP (position:absolute; JS calcula x/y/ancho/alto). ---- */
+      .masonry-list {
+        position: relative;
+        width: 100%;
+        max-width: 1100px;
+      }
+      .masonry-list .item-wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        box-sizing: border-box;
+        padding: 8px;
+        cursor: pointer;
+      }
+      .masonry-list .item-img {
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        border-radius: 10px;
+        border: 1px solid var(--line);
+        overflow: hidden;
+      }
+      /* Placeholder mientras no hay foto (item.img === null): mismo patron
+         visual que las paginas de proyecto (galeria__item). */
+      .masonry-list .item-img--placeholder {
+        display: grid;
+        place-items: center;
+        color: var(--ash);
+        font-size: 0.75rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        background: repeating-linear-gradient(45deg, #0d0d0d 0 12px, #131313 12px 24px);
+      }
 
       /* ---- Boton "specular": brillo WebGL que recorre el borde y sigue el
          cursor (lib/ogl.min.js). Puerto a JS vanilla del componente
@@ -369,6 +406,41 @@
         cursor: pointer;
         outline: none;
         transition: transform 0.15s ease;
+      }
+      /* Brillo de respaldo 100% CSS: un anillo que gira alrededor del boton.
+         No depende de WebGL ni de JS -- se ve siempre, en cualquier
+         navegador. El brillo WebGL (lib/ogl.min.js, mas abajo) se dibuja
+         encima y reacciona al cursor cuando esta disponible. */
+      @property --sb-angle {
+        syntax: '<angle>';
+        initial-value: 0deg;
+        inherits: false;
+      }
+      .specular-button::before {
+        content: "";
+        position: absolute;
+        inset: -1px;
+        z-index: 0;
+        border-radius: inherit;
+        padding: 1px;
+        background: conic-gradient(
+          from var(--sb-angle),
+          transparent 0deg,
+          transparent 250deg,
+          rgba(255, 255, 255, 0.85) 300deg,
+          transparent 345deg
+        );
+        -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        animation: sb-spin 3.5s linear infinite;
+        pointer-events: none;
+      }
+      @keyframes sb-spin {
+        to { --sb-angle: 360deg; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .specular-button::before { animation: none; --sb-angle: 35deg; }
       }
       .specular-button:active { transform: scale(0.97); }
       .specular-button:focus-visible {
@@ -696,16 +768,6 @@
               </div>
             </div>
           </div>
-          <div class="flow-menu__item" data-flow-item>
-            <a class="flow-menu__link" href="contacto.html">Hablemos</a>
-            <div class="flow-menu__marquee" data-flow-marquee>
-              <div class="flow-menu__marquee-inner-wrap">
-                <div class="flow-menu__marquee-inner" data-flow-inner>
-                  <div class="flow-menu__marquee-part">Hablemos</div>
-                </div>
-              </div>
-            </div>
-          </div>
         </nav>
       </section>
 
@@ -717,6 +779,12 @@
            - Para poner una palabra en CURSIVA usa <em>palabra</em>.
            ================================================================ -->
       <section class="behance" id="behance">
+        <!-- >>> GALERIA: los items estan en `behanceGalleryItems`, mas abajo
+             (en el <script type="module"> junto al del boton). Por ahora
+             son placeholders ("Proximamente"): cuando tengas las fotos,
+             reemplaza cada `img: null` por la ruta real y ajusta `height`
+             a la proporcion real de esa foto. -->
+        <div class="masonry-list" id="behanceGallery" aria-label="Galería de trabajos"></div>
         <a class="specular-button specular-button--lg behance__btn" data-behance-fila
            href="https://www.behance.net/santiagenciso1" target="_blank" rel="noopener"
            data-specular-button>
@@ -1383,6 +1451,117 @@ void main() {
           });
         });
       }
+
+      // ============================================================
+      // GALERIA "MASONRY" (Behance): puerto vanilla del componente
+      // Masonry (React Bits) -- sin React, usa GSAP (ya cargado arriba,
+      // lib/gsap.min.js) para acomodar y animar los items.
+      //
+      // >>> CUANDO TENGAS LAS FOTOS: en cada item de abajo reemplaza
+      // `img: null` por la ruta real (ej. './fotos/proyecto-1.jpg') y
+      // ajusta `height` a la proporcion real de esa foto (una imagen de
+      // 1200x800px -> height: 800). Mientras `img` sea null se muestra
+      // un placeholder "Proximamente".
+      // ============================================================
+      var behanceGalleryItems = [
+        { id: 1, img: null, url: 'https://www.behance.net/santiagenciso1', height: 500 },
+        { id: 2, img: null, url: 'https://www.behance.net/santiagenciso1', height: 340 },
+        { id: 3, img: null, url: 'https://www.behance.net/santiagenciso1', height: 600 },
+        { id: 4, img: null, url: 'https://www.behance.net/santiagenciso1', height: 300 },
+        { id: 5, img: null, url: 'https://www.behance.net/santiagenciso1', height: 460 },
+        { id: 6, img: null, url: 'https://www.behance.net/santiagenciso1', height: 380 },
+      ];
+
+      function initMasonry(container, items, opts) {
+        opts = Object.assign({
+          duration: 0.6, ease: 'power3.out', stagger: 0.05, hoverScale: 0.97,
+        }, opts || {});
+        if (typeof gsap === 'undefined') return;
+
+        var mediaQueries = ['(min-width:1500px)', '(min-width:1000px)', '(min-width:600px)', '(min-width:400px)'];
+        var mediaColumns = [5, 4, 3, 2];
+        function getColumns() {
+          for (var i = 0; i < mediaQueries.length; i++) {
+            if (window.matchMedia(mediaQueries[i]).matches) return mediaColumns[i];
+          }
+          return 1;
+        }
+
+        var elements = {};
+        items.forEach(function (item) {
+          var wrapper = document.createElement('div');
+          wrapper.className = 'item-wrapper';
+
+          var img = document.createElement('div');
+          img.className = 'item-img' + (item.img ? '' : ' item-img--placeholder');
+          if (item.img) {
+            img.style.backgroundImage = 'url(' + item.img + ')';
+          } else {
+            img.textContent = 'Próximamente';
+          }
+          wrapper.appendChild(img);
+
+          wrapper.addEventListener('click', function () {
+            window.open(item.url, '_blank', 'noopener');
+          });
+          if (!menosMovimiento) {
+            wrapper.addEventListener('mouseenter', function () {
+              gsap.to(wrapper, { scale: opts.hoverScale, duration: 0.3, ease: 'power2.out' });
+            });
+            wrapper.addEventListener('mouseleave', function () {
+              gsap.to(wrapper, { scale: 1, duration: 0.3, ease: 'power2.out' });
+            });
+          }
+
+          container.appendChild(wrapper);
+          elements[item.id] = wrapper;
+        });
+
+        var hasMounted = false;
+        function layout() {
+          var width = container.getBoundingClientRect().width;
+          if (!width) return;
+          var columns = getColumns();
+          var colHeights = new Array(columns).fill(0);
+          var columnWidth = width / columns;
+          var maxHeight = 0;
+
+          items.forEach(function (item, index) {
+            var col = colHeights.indexOf(Math.min.apply(null, colHeights));
+            var x = columnWidth * col;
+            var height = item.height / 2;
+            var y = colHeights[col];
+            colHeights[col] += height;
+            maxHeight = Math.max(maxHeight, colHeights[col]);
+
+            var el = elements[item.id];
+            var target = { x: x, y: y, width: columnWidth, height: height };
+
+            if (menosMovimiento) {
+              gsap.set(el, Object.assign({ opacity: 1 }, target));
+            } else if (!hasMounted) {
+              gsap.set(el, { opacity: 0, x: x, y: y + 100, width: columnWidth, height: height });
+              gsap.to(el, Object.assign({ opacity: 1 }, target, {
+                duration: 0.8, ease: 'power3.out', delay: index * opts.stagger,
+              }));
+            } else {
+              gsap.to(el, Object.assign({}, target, { duration: opts.duration, ease: opts.ease, overwrite: 'auto' }));
+            }
+          });
+
+          container.style.height = maxHeight + 'px';
+          hasMounted = true;
+        }
+
+        new ResizeObserver(layout).observe(container);
+        mediaQueries.forEach(function (q) {
+          window.matchMedia(q).addEventListener('change', layout);
+        });
+        layout();
+      }
+
+      var behanceGalleryEl = document.getElementById('behanceGallery');
+      if (behanceGalleryEl) initMasonry(behanceGalleryEl, behanceGalleryItems);
     </script>
   </body>
 </html>
