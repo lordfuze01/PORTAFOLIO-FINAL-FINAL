@@ -22,51 +22,31 @@
   // al saltar con un click).
   var header = document.querySelector('.site-header');
   var headerHeight = 0;
-  var esDesktop = true;
-  function ajustarOffsets() {
+  function ajustarAltoHeader() {
     headerHeight = header ? header.getBoundingClientRect().height : 0;
     document.documentElement.style.setProperty('--header-height', headerHeight + 'px');
-    // Se cachea aca (solo corre en load/resize) en vez de llamar
-    // getComputedStyle en cada frame de scroll -- getComputedStyle fuerza
-    // un recalculo de estilos, y no hace falta pagar ese costo 60 veces
-    // por segundo.
-    esDesktop = getComputedStyle(sidebar).position === 'absolute';
   }
-  ajustarOffsets();
+  ajustarAltoHeader();
 
-  // --- Posicion vertical de la sidebar: imita position:sticky centrado en
-  // el viewport (top:50%) sin depender de un ancestro posicionado (algo
-  // que position:sticky real exigiria y que rompería el left:0 pegado al
-  // borde real de la ventana -- ver comentario en pagina.css). Mientras el
-  // usuario baja la pagina, la sidebar la sigue normalmente hasta que su
-  // centro coincide con el centro del viewport; ahi se "clava" en ese
-  // punto (en pantalla se ve fija, centrada) hasta que el final de
-  // .page-body se acerca, momento en el que se suelta y vuelve a
-  // scrollear con el documento -- igual que un sticky nativo.
-  //
-  // Se mueve con `transform: translateY()`, NO con `top`: `top` en un
-  // elemento position:absolute dispara layout (reflow) en cada frame de
-  // scroll, y eso es justo lo que causaba el temblor/jitter reportado --
-  // la sidebar quedaba siempre un frame atras del scroll real, que si es
-  // 100% compositor (no dispara layout, lo mueve la GPU). `top` se deja
-  // en su valor por defecto (auto -> posicion estatica, el tope de
-  // .page-body) y translateY() se calcula relativo a ese punto.
-  function actualizarPosicionSidebar() {
-    if (!esDesktop) {
-      sidebar.style.transform = '';
-      return;
-    }
-    var containerTop = body.getBoundingClientRect().top + window.scrollY;
-    var containerBottom = containerTop + body.offsetHeight;
-    var sidebarHeight = sidebar.offsetHeight;
-    var deseado = window.scrollY + window.innerHeight / 2 - sidebarHeight / 2;
-    var minimo = containerTop;
-    var maximo = Math.max(containerTop, containerBottom - sidebarHeight);
-    var topDeseado = Math.min(Math.max(deseado, minimo), maximo);
-    var desplazamiento = topDeseado - containerTop; // relativo a la posicion estatica
-    sidebar.style.transform = 'translateY(' + desplazamiento + 'px)';
+  // --- Ancho completo de .page-body (desktop): se estira a lo ancho real
+  // del documento y se le resta ese mismo ancho como margin-left negativo
+  // -- mismo truco que ya usa .flow-menu en index.html para salirse del
+  // max-width centrado de .page. Adentro, la sidebar es position:sticky
+  // NATIVO (ver pagina.css): antes se imitaba "sticky centrado" a mano
+  // con JS en cada scroll, pero eso siempre queda un frame detras del
+  // scroll real -- el temblor/jitter reportado. Con sticky nativo lo
+  // mueve el compositor del navegador, sin JS de por medio, asi que esto
+  // SOLO corre en load/resize (nunca en scroll).
+  var esFullBleed = window.matchMedia('(min-width: 821px)');
+  function ajustarAnchoCompleto() {
+    body.style.width = '';
+    body.style.marginLeft = '';
+    if (!esFullBleed.matches) return; // mobile: .page-body vuelve al layout normal (columna)
+    var offset = body.getBoundingClientRect().left;
+    body.style.width = document.documentElement.clientWidth + 'px';
+    body.style.marginLeft = (-offset) + 'px';
   }
-  actualizarPosicionSidebar();
+  ajustarAnchoCompleto();
 
   var tienePuntero = window.matchMedia('(pointer: fine)').matches;
   var menosMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -144,21 +124,19 @@
     setActive(currentIndex);
   }
   var scrollTicking = false;
-  function onFrameDeScroll() {
-    scrollTicking = false;
-    actualizarActivoPorScroll();
-    actualizarPosicionSidebar();
-  }
   function onScroll() {
     if (scrollTicking) return;
     scrollTicking = true;
-    requestAnimationFrame(onFrameDeScroll);
+    requestAnimationFrame(function () {
+      scrollTicking = false;
+      actualizarActivoPorScroll();
+    });
   }
   window.addEventListener('scroll', onScroll, { passive: true });
   function onResize() {
-    ajustarOffsets();
+    ajustarAltoHeader();
+    ajustarAnchoCompleto();
     actualizarActivoPorScroll();
-    actualizarPosicionSidebar();
   }
   window.addEventListener('resize', onResize);
   actualizarActivoPorScroll();

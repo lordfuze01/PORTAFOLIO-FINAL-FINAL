@@ -517,9 +517,6 @@ a { color: inherit; }
    / elsabio.html. Comportamiento en sidebar.js. Ver
    docs/superpowers/specs/2026-07-26-sidebar-proyecto-design.md.
    ========================================================= */
-.page-body {
-  margin-top: clamp(2.5rem, 6vw, 4rem);
-}
 .page-content { min-width: 0; }
 .page-content > section {
   padding: clamp(1.6rem, 4vw, 2.6rem) 0;
@@ -536,21 +533,28 @@ a { color: inherit; }
 .page-content section p { color: var(--muted); max-width: 60ch; }
 .page-content section p + p { margin-top: 0.9rem; }
 
-/* Desktop: la sidebar se saca del flujo (position:absolute, sin ancestro
-   posicionado entre ella y <body>) para poder pegarla al borde real de la
-   ventana con left:0 -- no al borde de la columna centrada de .page. El
-   `top` lo recalcula sidebar.js en cada scroll para imitar
-   position:sticky centrado verticalmente: baja con la pagina hasta llegar
-   a la mitad del viewport y ahi se queda quieta (en pantalla) mientras el
-   resto del contenido sigue pasando, hasta acercarse al final de
-   .page-body, donde se suelta y vuelve a scrollear con el documento. No
-   se usa position:sticky real porque el `left:0` de la sidebar necesita
-   quedar fuera del ancestro posicionado que sticky exigiria. Por eso
-   .page-content necesita su propio padding-left para no quedar debajo. */
-.line-sidebar { position: absolute; left: 0; width: 226px; padding-left: 46px; will-change: transform; }
+/* Desktop: .page-body se estira a lo ancho completo del documento y se le
+   resta ese mismo ancho como margin-left negativo (calculado en JS,
+   sidebar.js -- mismo truco que ya usa .flow-menu en index.html para
+   salirse del max-width centrado de .page). Adentro, un flex row simple:
+   la sidebar (position:sticky nativo, sin JS de por medio) queda pegada
+   al borde real de la ventana porque ahora ES el borde de su contenedor.
+   position:sticky puro (no una imitacion con scroll+JS) es a proposito:
+   cualquier reimplementacion en JS mueve el elemento un frame detras del
+   scroll real, que es justo el temblor/jitter que se reporto -- sticky
+   nativo lo resuelve el compositor del navegador, sin ese delay. */
+.page-body { display: flex; align-items: flex-start; margin-top: clamp(2.5rem, 6vw, 4rem); }
 
 @media (min-width: 821px) {
-  .page-content { padding-left: 266px; }
+  .page-body { gap: 40px; }
+  .line-sidebar {
+    position: sticky;
+    top: 50%;
+    transform: translateY(-50%);
+    flex: 0 0 226px;
+    padding-left: 46px;
+  }
+  .page-content { max-width: 854px; }
 }
 
 .line-sidebar__list {
@@ -595,8 +599,8 @@ a { color: inherit; }
   left: -46px;
   height: 1px;
   width: 16px;
-  background: var(--line);
-  opacity: 0.5;
+  background: var(--bone);
+  opacity: 0.85;
   transform-origin: left center;
   transform: translateY(-50%) scaleX(calc(0.7 + var(--effect) * 0.6));
 }
@@ -618,6 +622,7 @@ a { color: inherit; }
   /* Mobile: sin espacio para un riel lateral -- vuelve al flujo normal
      (position:static), franja horizontal con scroll arriba del contenido,
      tampoco centrada/pegada al scrollear. */
+  .page-body { flex-direction: column; }
   .line-sidebar {
     position: static;
     width: 100%;
