@@ -12,13 +12,35 @@ CLAUDE.md
 CONTEXTO-AGENTE.md
 docs
 graphify-out
+# .claude vive solo en disco (esta en .gitignore, nunca llega al repo),
+# pero un `wrangler deploy` manual desde esta carpeta SI lo subiria:
+# publica configuracion e historial del agente. Se excluye explicitamente.
+.claude
+
+# Capturas de referencia de otros estudios: material interno de trabajo,
+# no obra propia. No deben servirse desde el dominio del portafolio.
+REFERENCIAS
+
+# Basura del sistema y de herramientas (solo aplican al deploy manual).
+node_modules
+*.log
+.DS_Store
+Thumbs.db
 
 # Fuente de la animacion Lottie (ya va incrustada en index.html).
 conejo.json
 
-# Fotos originales sin comprimir de la galeria Masonry (pesan varios MB
-# cada una). El sitio usa las versiones optimizadas en imagenes/masonry/.
+# Fotos originales sin comprimir (pesan varios MB cada una). El sitio usa
+# las versiones optimizadas: imagenes/masonry/, imagenes/*-hover.jpg y
+# foto-portada.jpg. Solo importan en un deploy manual con wrangler: por
+# git nunca llegan, estan en .gitignore.
 FOTOS MASSONERY
+FOTO PORTADA FINAL.jpg
+FOTO PORTADA.jpg
+DSC04623-2.jpg
+imagenes/ESPECIFERAL HOVER.png
+imagenes/MORDIENDO EL POLVO HOVER.jpg
+imagenes/EL SABIO SE PARCHA EL BOBO SE ESTRESA HOVER.png
 
 # Variables de entorno: jamas publicarlas (protege tambien los deploys
 # manuales con wrangler desde esta carpeta).
