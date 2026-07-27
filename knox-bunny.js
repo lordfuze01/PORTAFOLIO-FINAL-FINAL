@@ -73,3 +73,41 @@
     { passive: true }
   );
 })();
+
+// ====== KNOX: el texto de "Detras de Knox" se revela linea a linea al
+// entrar en pantalla (mismo patron GSAP + IntersectionObserver del
+// manifiesto de index.html). ======
+(function () {
+  'use strict';
+  var texto = document.getElementById('knoxBioText');
+  if (!texto || typeof gsap === 'undefined') return;
+
+  var lineas = texto.querySelectorAll('.line > span');
+  var menosMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  if (menosMovimiento) {
+    gsap.set(lineas, { yPercent: 0, opacity: 1 });
+    return;
+  }
+
+  gsap.set(lineas, { yPercent: 110 });
+
+  var reproducido = false;
+  var io = new IntersectionObserver(
+    function (entradas) {
+      entradas.forEach(function (e) {
+        if (!e.isIntersecting || reproducido) return;
+        reproducido = true;
+        gsap.to(lineas, {
+          yPercent: 0,
+          duration: 1.6,
+          ease: 'power4.out',
+          stagger: 0.14,
+        });
+        io.disconnect();
+      });
+    },
+    { threshold: 0.25 }
+  );
+  io.observe(texto);
+})();
