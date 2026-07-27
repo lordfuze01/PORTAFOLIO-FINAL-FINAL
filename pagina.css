@@ -723,16 +723,17 @@ em { font-style: italic; color: var(--accent); }
   padding: clamp(1.5rem, 4vh, 2.5rem) clamp(1.8rem, 5vw, 3.5rem) clamp(1.8rem, 5vw, 3.5rem);
   border-right: 15px solid var(--bone);
 }
-/* Label grande tipo titulo (~20-26pt): "Detras de" en peso normal +
-   "Knox" abajo en Helvetica Neue bien pesada, para que contraste como
-   nombre propio (misma familia base del sitio, sin fuente nueva). */
+/* Label grande tipo titulo (~20-26pt), todo en negrilla: "Detras de" en
+   Helvetica Neue bold + "Knox" abajo mas pesada aun (800), para que
+   contraste como nombre propio (misma familia base del sitio, sin
+   fuente nueva). */
 .knox-bio__text .section-label {
   font-size: clamp(1.6rem, 3.4vw, 2.1rem);
   line-height: 1.15;
   letter-spacing: 0;
   text-transform: none;
   color: var(--bone);
-  font-weight: 400;
+  font-weight: 700;
   margin-bottom: clamp(1.5rem, 4vh, 2.2rem);
 }
 .knox-bio__label-name {
