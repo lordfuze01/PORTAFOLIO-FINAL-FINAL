@@ -111,3 +111,62 @@
   );
   io.observe(texto);
 })();
+
+// ====== KNOX: los textos de "Detras de Knox" se estiran un poquito al
+// scrollear -- segun la VELOCIDAD del scroll, no la posicion -- y vuelven
+// solos a su tamano normal apenas se frena. Mismo patron rAF que el
+// conejo de arriba, pero con friccion: el impulso decae cada frame aunque
+// no entren mas eventos de scroll, asi el texto nunca se queda "estirado"
+// si el usuario para de golpe. ======
+(function () {
+  'use strict';
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var objetivos = document.querySelectorAll('#knoxBioText, .knox-bio__closing');
+  if (!objetivos.length) return;
+
+  var ESTIRO_MAX = 0.018; // tope +-1.8%: sutil, no se lee como "efecto"
+  var SENSIBILIDAD = 0.0007;
+  var FRICCION = 0.85; // que tan rapido se apaga el impulso sin scroll nuevo
+
+  var impulso = 0;
+  var actual = 0;
+  var lastScrollY = window.scrollY;
+  var rafId = null;
+
+  function pintar(valor) {
+    var transform = valor ? 'scaleY(' + (1 + valor).toFixed(4) + ')' : '';
+    for (var i = 0; i < objetivos.length; i++) objetivos[i].style.transform = transform;
+  }
+
+  function loop() {
+    impulso *= FRICCION;
+    actual += (impulso - actual) * 0.2;
+
+    if (Math.abs(impulso) < 0.0004 && Math.abs(actual) < 0.0004) {
+      impulso = 0;
+      actual = 0;
+      pintar(0);
+      rafId = null;
+      return;
+    }
+    pintar(actual);
+    rafId = requestAnimationFrame(loop);
+  }
+  function startLoop() {
+    if (rafId != null) return;
+    rafId = requestAnimationFrame(loop);
+  }
+
+  window.addEventListener(
+    'scroll',
+    function () {
+      var sy = window.scrollY;
+      var delta = sy - lastScrollY;
+      lastScrollY = sy;
+      impulso = Math.min(ESTIRO_MAX, Math.max(-ESTIRO_MAX, impulso + delta * SENSIBILIDAD));
+      startLoop();
+    },
+    { passive: true }
+  );
+})();
