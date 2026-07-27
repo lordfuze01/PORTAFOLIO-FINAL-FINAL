@@ -6,6 +6,7 @@
     <title>Trabajos · KNOX</title>
     <meta name="description" content="Selección de proyectos de BY KNOX: Especiferal, Mordiendo el polvo y El sabio se parcha el bobo se estresa. Dirección creativa, fotografía, editorial e industrial." />
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%231E1E20'/%3E%3Ctext x='32' y='47' font-family='Helvetica,Arial,sans-serif' font-size='42' font-weight='800' fill='%23ECE7DF' text-anchor='middle'%3EK%3C/text%3E%3C/svg%3E" />
+    <meta name="theme-color" content="#1E1E20" />
     <link rel="stylesheet" href="./pagina.css" />
   </head>
   <body>
@@ -59,47 +60,45 @@
 
       <section class="reveal">
         <p class="section-label">Sobre los proyectos</p>
-        <div class="grid grid--3">
-          <article class="card">
-            <span class="card__num">01 · Mar — May 2025</span>
-            <h3 class="card__title">Especiferal</h3>
-            <p class="card__text">
-              Colección propositiva de accesorios y productos inspirada en
-              especies ferales. Ilustración, editorial, industrial y
-              comunicación visual.
-            </p>
-            <div class="chips" style="margin-top: 1rem">
-              <span class="chip">InDesign</span>
-              <span class="chip">Fusion 360</span>
-              <span class="chip">Impresión 3D</span>
+        <!-- Ficha tecnica: filas con hairlines (fecha | proyecto | medios),
+             mismo lenguaje del indice grande de arriba. -->
+        <ul class="ficha">
+          <li class="ficha__row">
+            <span class="ficha__fecha">01 · Mar — May 2025</span>
+            <div>
+              <h3 class="ficha__title">Especiferal</h3>
+              <p class="ficha__text">
+                Colección propositiva de accesorios y productos inspirada en
+                especies ferales. Ilustración, editorial, industrial y
+                comunicación visual.
+              </p>
             </div>
-          </article>
-          <article class="card">
-            <span class="card__num">02 · Feb 2025 — Actualidad</span>
-            <h3 class="card__title">Mordiendo el polvo</h3>
-            <p class="card__text">
-              Colección fotográfica y gráfica sobre el deporte automotor de la
-              región. Piezas visuales coherentes y dinámicas.
-            </p>
-            <div class="chips" style="margin-top: 1rem">
-              <span class="chip">Fotografía</span>
-              <span class="chip">Lightroom</span>
-              <span class="chip">Baja obturación</span>
+            <span class="ficha__tools">InDesign · Fusion 360 · Impresión 3D</span>
+          </li>
+          <li class="ficha__row">
+            <span class="ficha__fecha">02 · Feb 2025 — Actualidad</span>
+            <div>
+              <h3 class="ficha__title">Mordiendo el polvo</h3>
+              <p class="ficha__text">
+                Colección fotográfica y gráfica sobre el deporte automotor de la
+                región. Piezas visuales coherentes y dinámicas.
+              </p>
             </div>
-          </article>
-          <article class="card">
-            <!-- >>> PENDIENTE: reemplazar fecha, descripcion y chips con la
+            <span class="ficha__tools">Fotografía · Lightroom · Baja obturación</span>
+          </li>
+          <li class="ficha__row">
+            <!-- >>> PENDIENTE: reemplazar fecha, descripcion y medios con la
                  info real de este proyecto. -->
-            <span class="card__num">03 · Próximamente</span>
-            <h3 class="card__title">El sabio se parcha el bobo se estresa</h3>
-            <p class="card__text">
-              Próximamente más detalles de este proyecto.
-            </p>
-            <div class="chips" style="margin-top: 1rem">
-              <span class="chip">Próximamente</span>
+            <span class="ficha__fecha">03 · Próximamente</span>
+            <div>
+              <h3 class="ficha__title">El sabio se parcha el bobo se estresa</h3>
+              <p class="ficha__text">
+                Próximamente más detalles de este proyecto.
+              </p>
             </div>
-          </article>
-        </div>
+            <span class="ficha__tools">Próximamente</span>
+          </li>
+        </ul>
       </section>
     </main>
 
@@ -114,6 +113,10 @@
           <h3>KNOX</h3>
           <p class="text-lg mt-sm" style="max-width: 34ch">
             Dirección creativa. Human centered creation, desde Bogotá.
+          </p>
+          <p class="status">
+            <span class="status__dot" aria-hidden="true"></span>
+            Disponible para proyectos — Bogotá / remoto
           </p>
         </div>
         <div class="site-footer__contact">

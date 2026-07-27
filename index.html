@@ -10,6 +10,8 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="BY KNOX · Portafolio de Santiago Enciso" />
     <meta property="og:description" content="Dirección creativa que busca devolverle lo humano a lo que creamos." />
+    <!-- Barra del navegador (movil) en el mismo carbon del sitio -->
+    <meta name="theme-color" content="#1E1E20" />
     <!-- Favicon: "K" blanca sobre negro (SVG incrustado, sin archivo extra) -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%231E1E20'/%3E%3Ctext x='32' y='47' font-family='Helvetica,Arial,sans-serif' font-size='42' font-weight='800' fill='%23ECE7DF' text-anchor='middle'%3EK%3C/text%3E%3C/svg%3E" />
     <!-- Si volvemos desde una subpagina (#main), marcamos ANTES de pintar nada
@@ -44,6 +46,9 @@
 
       * { box-sizing: border-box; margin: 0; padding: 0; }
       html, body { min-height: 100%; }
+
+      /* Seleccion de texto en terracota (igual que pagina.css). */
+      ::selection { background: var(--accent); color: var(--bg-final); }
 
       /* Transicion suave (crossfade) al navegar entre paginas. Solo actua
          en navegadores que la soportan; los demas navegan normal. */
@@ -326,7 +331,25 @@
         align-items: center;
         text-align: center;
         gap: clamp(1.5rem, 4vh, 2.5rem);
-        padding: clamp(1.5rem, 4vh, 2.5rem) clamp(1.4rem, 6vw, 4rem) clamp(3rem, 8vh, 5rem);
+        padding: clamp(2.5rem, 7vh, 4.5rem) clamp(1.4rem, 6vw, 4rem) clamp(3rem, 8vh, 5rem);
+      }
+      /* Cabecera silenciosa de la galeria: eyebrow + titulo, mismo aire
+         centrado del resto de la home. Una sola "fila" para el reveal. */
+      .behance__head { display: grid; gap: 0.8rem; }
+      .behance__eyebrow {
+        color: var(--ash);
+        font-size: 0.8rem;
+        letter-spacing: 0.28em;
+        text-transform: uppercase;
+        margin: 0;
+      }
+      .behance__title {
+        color: var(--bone);
+        font-size: clamp(1.5rem, 4.2vw, 2.8rem);
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        line-height: 1.1;
+        margin: 0;
       }
       .behance__btn { margin-top: clamp(0.4rem, 1.5vh, 0.8rem); }
       .specular-button--lg.behance__btn {
@@ -357,7 +380,7 @@
         height: 100%;
         background-size: cover;
         background-position: center;
-        border-radius: 10px;
+        border-radius: 4px;
         border: 1px solid var(--line);
         overflow: hidden;
       }
@@ -397,7 +420,7 @@
       .lightbox__img {
         max-width: 90vw;
         max-height: 90vh;
-        border-radius: 10px;
+        border-radius: 4px;
         box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
         transform: scale(0.85);
         transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
@@ -820,6 +843,10 @@
            - Para poner una palabra en CURSIVA usa <em>palabra</em>.
            ================================================================ -->
       <section class="behance" id="behance">
+        <div class="behance__head" data-behance-fila>
+          <p class="behance__eyebrow">Archivo</p>
+          <h2 class="behance__title">Fragmentos del trabajo</h2>
+        </div>
         <!-- >>> GALERIA: los items estan en `behanceGalleryItems`, mas abajo
              (en el <script type="module"> junto al del boton). Cada foto
              abre un lightbox (#masonryLightbox, mas abajo) al hacer clic;
@@ -1232,7 +1259,10 @@
               io.disconnect();
             });
           },
-          { threshold: 0.3 }
+          // 0.1 (no 0.3): con la galeria en 1 columna la seccion mide ~3000px
+          // y en un celular nunca llega a tener el 30% visible a la vez --
+          // con 0.3 el revelado no se disparaba y el boton quedaba invisible.
+          { threshold: 0.1 }
         );
         io.observe(behance);
       })();

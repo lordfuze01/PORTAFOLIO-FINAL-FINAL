@@ -37,6 +37,9 @@ body {
 a { color: inherit; }
 em { font-style: italic; color: var(--accent); }
 
+/* Seleccion de texto en terracota: la marca aparece hasta al copiar. */
+::selection { background: var(--accent); color: var(--bg); }
+
 /* Transicion suave (crossfade) al navegar entre paginas. Solo actua en
    navegadores que la soportan; los demas navegan normal. */
 @view-transition { navigation: auto; }
@@ -119,34 +122,49 @@ em { font-style: italic; color: var(--accent); }
 .grid--2 { grid-template-columns: repeat(2, 1fr); }
 .grid--3 { grid-template-columns: repeat(3, 1fr); }
 
-/* ---------- Tarjetas de servicio ---------- */
-.card {
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  padding: 1.8rem 1.6rem;
-  transition: border-color 0.3s ease, transform 0.3s ease;
+/* ---------- Ficha tecnica (trabajos.html) ----------
+   Filas con hairlines, mismo lenguaje del indice grande de proyectos:
+   fecha | nombre + descripcion | herramientas. Sin cajas ni chips. */
+.ficha { list-style: none; }
+.ficha__row {
+  display: grid;
+  grid-template-columns: minmax(9rem, 13rem) 1fr minmax(10rem, 15rem);
+  gap: 0.8rem 2.5rem;
+  align-items: baseline;
+  border-top: 1px solid var(--line);
+  padding: clamp(1.3rem, 3.5vw, 2rem) 0.4rem;
 }
-.card:hover { border-color: #4d4d4d; transform: translateY(-4px); }
-.card__num {
-  font-size: 0.8rem;
+.ficha__row:last-child { border-bottom: 1px solid var(--line); }
+.ficha__fecha {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
   color: var(--muted);
-  letter-spacing: 0.1em;
 }
-.card__title {
-  margin: 0.8rem 0 0.6rem;
-  font-size: 1.25rem;
-  font-weight: 700;
+.ficha__title { font-size: 1.15rem; font-weight: 700; letter-spacing: -0.01em; }
+.ficha__text {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-top: 0.5rem;
+  max-width: 52ch;
 }
-.card__text { color: var(--muted); font-size: 0.98rem; }
+.ficha__tools {
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: right;
+}
 
 /* ---------- Chips / etiquetas ---------- */
 .chips { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.4rem; }
 .chip {
   border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: 0.4rem 0.9rem;
-  font-size: 0.85rem;
+  border-radius: 2px;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.74rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
   color: var(--muted);
 }
 
@@ -221,13 +239,20 @@ em { font-style: italic; color: var(--accent); }
 .work__item:hover .work__name { opacity: 1; }
 .work__item:hover .work__link { padding-left: 1.4rem; }
 
+/* Movil: la categoria en su columna angosta se partia palabra por
+   palabra -- pasa debajo del nombre, alineada con el. */
+@media (max-width: 640px) {
+  .work__link { grid-template-columns: auto 1fr; row-gap: 0.5rem; }
+  .work__cat { grid-column: 2; text-align: left; }
+}
+
 /* Vista previa flotante que sigue al cursor */
 .work__preview {
   position: fixed;
   top: 0; left: 0;
   width: min(30vw, 340px);
   aspect-ratio: 4 / 3;
-  border-radius: 12px;
+  border-radius: 4px;
   overflow: hidden;
   pointer-events: none;
   opacity: 0;
@@ -259,7 +284,7 @@ em { font-style: italic; color: var(--accent); }
   position: relative;
   aspect-ratio: 4 / 3;
   border: 1px solid var(--line);
-  border-radius: 14px;
+  border-radius: 4px;
   overflow: hidden;
   background: repeating-linear-gradient(45deg, #242426 0 12px, #28282a 12px 24px);
   display: grid;
@@ -344,7 +369,12 @@ em { font-style: italic; color: var(--accent); }
   gap: 0.5rem 1.5rem;
   text-decoration: none;
   color: var(--fg);
+  transition: padding-left 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
+/* Mismo gesto del indice de trabajos: la fila se desliza y la etiqueta
+   toma el acento (antes solo se atenuaba el valor, que leia al reves). */
+.contact-row a:hover { padding-left: 1.4rem; }
+.contact-row a:hover .contact-row__label { color: var(--accent); }
 .contact-row__label {
   font-size: 0.8rem;
   letter-spacing: 0.2em;
@@ -355,9 +385,7 @@ em { font-style: italic; color: var(--accent); }
   font-size: clamp(1.4rem, 4.5vw, 2.6rem);
   font-weight: 700;
   letter-spacing: -0.01em;
-  transition: opacity 0.25s ease;
 }
-.contact-row a:hover .contact-row__value { opacity: 0.55; }
 
 /* ---------- Utilidades ---------- */
 .statement {
@@ -379,6 +407,8 @@ em { font-style: italic; color: var(--accent); }
   .galeria--2 { grid-template-columns: 1fr; }
   .galeria__item--ancha { grid-column: auto; }
   .site-footer__contact { text-align: left; }
+  .ficha__row { grid-template-columns: 1fr; gap: 0.35rem; }
+  .ficha__tools { text-align: left; margin-top: 0.3rem; }
 }
 
 @media (max-width: 640px) {
