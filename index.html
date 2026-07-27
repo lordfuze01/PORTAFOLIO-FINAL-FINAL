@@ -11,7 +11,7 @@
     <meta property="og:title" content="BY KNOX · Portafolio de Santiago Enciso" />
     <meta property="og:description" content="Dirección creativa que busca devolverle lo humano a lo que creamos." />
     <!-- Favicon: "K" blanca sobre negro (SVG incrustado, sin archivo extra) -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23000000'/%3E%3Ctext x='32' y='47' font-family='Helvetica,Arial,sans-serif' font-size='42' font-weight='800' fill='%23ECE7DF' text-anchor='middle'%3EK%3C/text%3E%3C/svg%3E" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%231E1E20'/%3E%3Ctext x='32' y='47' font-family='Helvetica,Arial,sans-serif' font-size='42' font-weight='800' fill='%23ECE7DF' text-anchor='middle'%3EK%3C/text%3E%3C/svg%3E" />
     <!-- Si volvemos desde una subpagina (#main), marcamos ANTES de pintar nada
          para que la pantalla blanca del conejo no aparezca (evita el flash). -->
     <script>
@@ -22,16 +22,17 @@
     <style>
       :root {
         --bg: #FFFFFF;          /* fondo mientras se ve el conejo */
-        --bg-final: #000000;    /* fondo negro final (detras del texto) */
+        --bg-final: #1E1E20;    /* fondo final (detras del texto, ya no negro puro) */
         --fg: #111114;
 
         /* COLOR del texto "Santiago Enciso" cuando aparece. */
-        --titulo-color: #FFFFFF;
+        --titulo-color: #F9F8F6;
 
         /* ---- Colores de la seccion "Manifiesto" (intro inferior) ---- */
         --bone: #ECE7DF;                       /* blanco calido del manifiesto */
         --ash:  #7c7c7c;                       /* gris del riel/meta */
         --line: rgba(236, 231, 223, 0.16);     /* hairlines / lineas finas */
+        --accent: #C4622E;                     /* acento terracota (regla 60-30-10) */
 
         /* ====== EDITA AQUI ====== */
         /* TAMANO del conejo (un solo numero, en px). Mas grande = numero mayor. */
@@ -169,7 +170,7 @@
         bottom: clamp(0.9rem, 2.5vw, 1.6rem);
         z-index: 3;
         margin: 0;
-        color: #ffffff;
+        color: #F9F8F6;
         font-family: 'Helvetica Neue', 'Segoe UI', Arial, sans-serif;
         font-weight: 300;                 /* delgada */
         font-size: clamp(0.72rem, 1.3vw, 0.95rem);
@@ -227,7 +228,7 @@
         margin: 0;
         width: 100%;        /* fija el ancho: el texto se acomoda, nunca se sale */
       }
-      .intro__title em { font-style: italic; }   /* enfasis: cursiva (sigue siendo Helvetica) */
+      .intro__title em { font-style: italic; color: var(--accent); }   /* enfasis: cursiva + acento */
 
       /* Parrafo de apoyo */
       .intro__lead {
@@ -238,7 +239,7 @@
         width: 100%;
         max-width: 52ch;    /* en escritorio no pasa de 52 caracteres de ancho */
       }
-      .intro__lead em { font-style: italic; color: var(--bone); }
+      .intro__lead em { font-style: italic; color: var(--accent); }
 
       /* Mecanica del revelado: cada .line recorta a su hijo, que sube desde abajo */
       .line { display: block; overflow: hidden; }
@@ -276,7 +277,7 @@
         padding: clamp(1rem, 3.5vh, 1.8rem) 1rem;
         transition: color 0.3s ease;
       }
-      .flow-menu__link:focus-visible { outline: 2px solid var(--bone); outline-offset: -6px; }
+      .flow-menu__link:focus-visible { outline: 2px solid var(--accent); outline-offset: -6px; }
 
       /* Franja que entra desde arriba/abajo, oculta hasta que JS la mueve.
          z-index por encima del link: al entrar debe TAPAR el texto blanco
@@ -369,7 +370,7 @@
         font-size: 0.75rem;
         letter-spacing: 0.16em;
         text-transform: uppercase;
-        background: repeating-linear-gradient(45deg, #0d0d0d 0 12px, #131313 12px 24px);
+        background: repeating-linear-gradient(45deg, #242426 0 12px, #2c2c2e 12px 24px);
       }
 
       /* ---- Lightbox de la galeria Masonry: al hacer clic en una foto se
@@ -382,7 +383,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background: rgba(0, 0, 0, 0.92);
+        background: rgba(30, 30, 32, 0.92);
         padding: clamp(1rem, 4vw, 3rem);
         opacity: 0;
         visibility: hidden;
@@ -445,10 +446,10 @@
          se queda con este mismo estilo, solo sin el brillo animado. ---- */
       .specular-button {
         --sb-radius: 18px;
-        --sb-tint: #ffffff;
+        --sb-tint: #F9F8F6;
         --sb-tint-opacity: 0;
         --sb-blur: 0px;
-        --sb-text-color: #f5f5f5;
+        --sb-text-color: #F9F8F6;
 
         position: relative;
         display: inline-flex;
@@ -568,7 +569,7 @@
         width: 8px;
         height: 8px;
         border-radius: 50%;
-        background: var(--bone);
+        background: var(--accent);
         margin-right: 0.55rem;
         vertical-align: middle;
         animation: pulso 2.4s ease-in-out infinite;
@@ -602,8 +603,8 @@
         text-decoration: none;
         transition: color 0.25s ease;
       }
-      .cierre__datos a:hover { color: #ffffff; }
-      .cierre__datos a:focus-visible { outline: 2px solid var(--bone); outline-offset: 3px; }
+      .cierre__datos a:hover { color: #F9F8F6; }
+      .cierre__datos a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
       .cierre__legal {
         color: #666666;
         font-size: 0.78rem;
@@ -640,17 +641,17 @@
       .menu-toggle__icon span:nth-child(1) { top: 0; }
       .menu-toggle__icon span:nth-child(2) { top: 8px; }
       .menu-toggle__icon span:nth-child(3) { top: 16px; }
-      .menu-toggle:hover .menu-toggle__icon span { background: #ffffff; }
+      .menu-toggle:hover .menu-toggle__icon span { background: #F9F8F6; }
       .menu-toggle[aria-expanded="true"] .menu-toggle__icon span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
       .menu-toggle[aria-expanded="true"] .menu-toggle__icon span:nth-child(2) { opacity: 0; }
       .menu-toggle[aria-expanded="true"] .menu-toggle__icon span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
-      .menu-toggle:focus-visible { outline: 2px solid var(--bone); outline-offset: 4px; }
+      .menu-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 
       .menu-overlay {
         position: fixed;
         inset: 0;
         z-index: 55;
-        background: rgba(0, 0, 0, 0.6);
+        background: rgba(30, 30, 32, 0.6);
       }
       .menu-overlay[hidden] { display: none; }
 
@@ -696,9 +697,9 @@
         vertical-align: middle;
       }
       .menu-panel__link:hover,
-      .menu-panel__link.is-active { color: #ffffff; }
+      .menu-panel__link.is-active { color: #F9F8F6; }
       .menu-panel__link.is-active .menu-panel__num { color: var(--bone); }
-      .menu-panel__link:focus-visible { outline: 2px solid var(--bone); outline-offset: 4px; }
+      .menu-panel__link:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 
       .menu-panel__contact {
         display: flex;
@@ -715,7 +716,7 @@
         transition: color 0.25s ease;
       }
       .menu-panel__contact a:hover { color: var(--bone); }
-      .menu-panel__contact a:focus-visible { outline: 2px solid var(--bone); outline-offset: 3px; }
+      .menu-panel__contact a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
       @media (max-width: 640px) {
         .menu-panel { width: 100vw; border-left: 0; }
@@ -1269,7 +1270,7 @@
             });
             // ...y a la vez el fondo hace una transicion suave de BLANCO a NEGRO.
             gsap.to(launch, {
-              backgroundColor: '#000000',
+              backgroundColor: '#1E1E20',
               duration: 1.1,
               ease: 'power2.inOut',
               delay: 0.35,
