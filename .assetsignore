@@ -10,12 +10,16 @@ wrangler.jsonc
 # notas de trabajo, rutas locales y datos personales).
 CLAUDE.md
 CONTEXTO-AGENTE.md
+PRODUCT.md
+DESIGN.md
 docs
 graphify-out
 # .claude vive solo en disco (esta en .gitignore, nunca llega al repo),
 # pero un `wrangler deploy` manual desde esta carpeta SI lo subiria:
 # publica configuracion e historial del agente. Se excluye explicitamente.
 .claude
+# Config local de la skill de diseno (misma razon que .claude).
+.impeccable
 
 # Capturas de referencia de otros estudios: material interno de trabajo,
 # no obra propia. No deben servirse desde el dominio del portafolio.

@@ -20,6 +20,11 @@ imagenes/EL SABIO SE PARCHA EL BOBO SE ESTRESA HOVER.png
 # 5MB). El sitio usa las versiones optimizadas en imagenes/masonry/.
 FOTOS MASSONERY/
 
+# Estado local de la skill de diseno (consentimiento del hook de esta
+# maquina). El sistema de diseno en si -- .impeccable/design.json -- SI
+# va al repo: es artefacto del proyecto, no configuracion personal.
+.impeccable/config.local.json
+
 # Secretos / variables de entorno: NUNCA al repo.
 # (Hoy no existe ningun .env; la regla queda lista para cuando haga falta.)
 .env

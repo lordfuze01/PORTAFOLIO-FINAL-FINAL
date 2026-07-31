@@ -605,6 +605,55 @@
         .status__dot { animation: none; }
       }
 
+      /* ---- Fila de cierre: el ultimo paso del visitante ----
+         Misma familia que el flow-menu (fila a todo el ancho con
+         hairlines), pero resuelta al reves: alli la franja de marfil
+         corre en marquee y tantea; aqui llega entera y se queda. Es el
+         unico lugar del sitio donde se prende la luz -- el fondo pasa a
+         marfil y el texto a grafito. Sale del padding lateral del
+         .cierre hasta el borde real de la ventana: como ese padding es
+         un valor unico, se puede negar exacto y no hace falta el JS que
+         si necesita el flow-menu. */
+      .cierre__cta {
+        align-self: stretch;
+        margin: clamp(1rem, 3vh, 2rem) calc(-1 * clamp(1.4rem, 6vw, 4rem));
+        display: block;
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+        background: transparent;
+        color: var(--bone);
+        text-align: center;
+        text-decoration: none;
+        font-weight: 800;
+        /* 13vw (no 10vw): con 10vw el CTA crecia tan lento que en un celular
+           quedaba apenas 1.4x el flow-menu y no leia como el paso final. El
+           piso de 2.6rem se queda igual para que en pantallas de 320px el
+           texto siga cabiendo en una linea. */
+        font-size: clamp(2.6rem, 13vw, 7.5rem);
+        line-height: 1;
+        letter-spacing: -0.03em;
+        padding: clamp(1.6rem, 5vh, 3rem) 1rem;
+        transition:
+          background 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+          color 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .cierre__cta:hover,
+      .cierre__cta:focus-visible {
+        background: var(--bone);
+        color: var(--bg-final);
+      }
+      .cierre__cta:focus-visible { outline: 2px solid var(--accent); outline-offset: -6px; }
+      .cierre__cta .arrow {
+        display: inline-block;
+        transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .cierre__cta:hover .arrow,
+      .cierre__cta:focus-visible .arrow { transform: translateX(0.18em); }
+      @media (prefers-reduced-motion: reduce) {
+        .cierre__cta,
+        .cierre__cta .arrow { transition: none; }
+      }
+
       .cierre__servicios {
         color: var(--ash);
         font-size: clamp(0.85rem, 1.6vw, 1rem);
@@ -877,6 +926,12 @@
           <span class="status__dot" aria-hidden="true"></span>
           Disponible para proyectos — Bogotá / remoto
         </p>
+        <!-- >>> EL PASO FINAL: la fila que lleva a contacto. Es el objetivo
+             de toda la home; si se toca, no quitarle tamaño ni sacarla del
+             ancho completo. -->
+        <a class="cierre__cta" href="contacto.html" data-cierre-fila>
+          Hablemos <span class="arrow" aria-hidden="true">→</span>
+        </a>
         <p class="cierre__servicios" data-cierre-fila>
           Dirección creativa · Diseño gráfico · Audiovisual · Fotografía · Editorial · Diseño industrial
         </p>
