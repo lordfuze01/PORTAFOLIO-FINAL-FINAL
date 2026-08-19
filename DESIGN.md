@@ -2,16 +2,16 @@
 name: BY KNOX
 description: Portafolio de dirección creativa de Santiago Enciso — la sala oscura donde solo la imagen emite luz.
 colors:
-  grafito-profundo: "#1E1E20"
-  grafito-elevado: "#2A2A2C"
-  marfil-archivo: "#ECE7DF"
-  blanco-titular: "#F9F8F6"
-  terracota-encendida: "#C4622E"
-  gris-lectura: "#a6a6a6"
-  gris-nota: "#7c7c7c"
-  gris-pie: "#666666"
-  hairline-marfil: "rgba(236, 231, 223, 0.16)"
-  hairline-grafito: "#3D3D3F"
+  taupe-profundo: "#211B18"
+  indigo-elevado: "#2F2B4E"
+  arena-lectura: "#EDE7E4"
+  hueso-titular: "#F6F4F3"
+  pizarra-senal: "#788F98"
+  gris-lectura: "#B1A6A0"
+  gris-nota: "#8C7C73"
+  gris-pie: "#766860"
+  hairline-clara: "rgba(237, 231, 228, 0.16)"
+  hairline-oscura: "#3A312C"
   blanco-apertura: "#FFFFFF"
   tinta-apertura: "#111114"
 typography:
@@ -65,20 +65,20 @@ spacing:
   hero-y: "clamp(5rem, 14vh, 10rem)"
 components:
   row-index:
-    textColor: "{colors.blanco-titular}"
+    textColor: "{colors.hueso-titular}"
     typography: "{typography.headline}"
     padding: "clamp(1.4rem, 4vw, 2.4rem) 0.4rem"
   row-index-hover:
-    textColor: "{colors.blanco-titular}"
+    textColor: "{colors.hueso-titular}"
     padding: "clamp(1.4rem, 4vw, 2.4rem) 0.4rem clamp(1.4rem, 4vw, 2.4rem) 1.4rem"
   button-specular:
     backgroundColor: "transparent"
-    textColor: "{colors.blanco-titular}"
+    textColor: "{colors.hueso-titular}"
     rounded: "{rounded.lg}"
     padding: "18px 40px"
   button-specular-lg:
     backgroundColor: "transparent"
-    textColor: "{colors.blanco-titular}"
+    textColor: "{colors.hueso-titular}"
     rounded: "{rounded.lg}"
     padding: "clamp(20px, 2.4vw, 28px) clamp(44px, 5vw, 60px)"
   chip:
@@ -87,44 +87,44 @@ components:
     rounded: "{rounded.sm}"
     padding: "0.35rem 0.75rem"
   site-header:
-    backgroundColor: "rgba(30, 30, 32, 0.72)"
-    textColor: "{colors.blanco-titular}"
+    backgroundColor: "rgba(33, 27, 24, 0.72)"
+    textColor: "{colors.hueso-titular}"
     padding: "1.4rem clamp(1.25rem, 5vw, 3.5rem)"
   menu-panel:
-    backgroundColor: "{colors.grafito-profundo}"
+    backgroundColor: "{colors.taupe-profundo}"
     width: "min(420px, 92vw)"
     padding: "clamp(5rem, 12vh, 7rem) clamp(1.6rem, 4vw, 2.4rem) clamp(2rem, 6vh, 3rem)"
   menu-link:
-    textColor: "{colors.marfil-archivo}"
+    textColor: "{colors.arena-lectura}"
     padding: "clamp(0.9rem, 2.4vh, 1.3rem) 0"
   menu-link-hover:
-    textColor: "{colors.blanco-titular}"
+    textColor: "{colors.hueso-titular}"
   flow-menu-link:
-    textColor: "{colors.marfil-archivo}"
+    textColor: "{colors.arena-lectura}"
     typography: "{typography.headline}"
     padding: "clamp(1rem, 3.5vh, 1.8rem) 1rem"
   flow-menu-marquee:
-    backgroundColor: "{colors.marfil-archivo}"
-    textColor: "{colors.grafito-profundo}"
+    backgroundColor: "{colors.arena-lectura}"
+    textColor: "{colors.taupe-profundo}"
   cta-cierre:
     backgroundColor: "transparent"
-    textColor: "{colors.marfil-archivo}"
+    textColor: "{colors.arena-lectura}"
     typography: "{typography.cta}"
     padding: "clamp(1.6rem, 5vh, 3rem) 1rem"
   cta-cierre-hover:
-    backgroundColor: "{colors.marfil-archivo}"
-    textColor: "{colors.grafito-profundo}"
+    backgroundColor: "{colors.arena-lectura}"
+    textColor: "{colors.taupe-profundo}"
   gallery-item:
-    backgroundColor: "{colors.grafito-elevado}"
+    backgroundColor: "{colors.indigo-elevado}"
     textColor: "{colors.gris-nota}"
     rounded: "{rounded.md}"
   status-dot:
-    backgroundColor: "{colors.terracota-encendida}"
+    backgroundColor: "{colors.pizarra-senal}"
     rounded: "{rounded.full}"
     size: "8px"
   lightbox-nav:
     backgroundColor: "transparent"
-    textColor: "{colors.marfil-archivo}"
+    textColor: "{colors.arena-lectura}"
     rounded: "{rounded.full}"
     size: "48px"
 ---
@@ -135,11 +135,12 @@ components:
 
 **Creative North Star: "La sala oscura"**
 
-El sitio es un cuarto de revelado. Todo lo que no es imagen se apaga hasta quedar en
-grafito (#1E1E20), para que lo único que emita luz sea el trabajo: la portada que crece
-con el scroll, las fotos del archivo, el conejo. La terracota funciona como la luz de
-seguridad de un laboratorio fotográfico: está siempre encendida, pero es tan escasa que
-cuando aparece —una cursiva, el punto de disponibilidad, el anillo de foco— se nota.
+El sitio es un cuarto de revelado. Todo lo que no es imagen se apaga hasta quedar en un
+taupe casi negro (#211B18, sombra de PANTONE 2474 C), para que lo único que emita luz sea
+el trabajo: la portada que crece con el scroll, las fotos del archivo, el conejo. El acento
+(#788F98, PANTONE 3526 C puro) funciona como el monitor encendido en un cuarto de revelado
+híbrido: una luz fría siempre prendida, pero tan escasa que cuando aparece —una cursiva, el
+punto de disponibilidad, el anillo de foco— se nota.
 
 La densidad es baja a propósito. El contenido respira en un contenedor de 1120px, pero
 las líneas que lo separan se salen hasta el borde real de la ventana: el texto lee
@@ -150,18 +151,19 @@ hairline**, que se desliza a la derecha cuando el cursor la toca y atenúa a sus
 una sola familia (Helvetica Neue) empujada a sus extremos: 800 con tracking negativo para
 los titulares, versalita de 0.8rem con tracking ancho para todo lo que sea metadato.
 
-El único momento en que el sistema abandona el grafito es la apertura: la pantalla del
+El único momento en que el sistema abandona el taupe oscuro es la apertura: la pantalla del
 conejo es blanco puro, y existe para apagarse. Después de eso, el blanco máximo del sitio
-es marfil, nunca #FFF. Ese contraste —el paso de la sala iluminada a la sala oscura— es
-la entrada a la marca, no un preloader.
+es la tinta clara de PANTONE 2474 C, nunca #FFF. Ese contraste —el paso de la sala
+iluminada a la sala oscura— es la entrada a la marca, no un preloader.
 
 **Key Characteristics:**
 
-- Grafito dominante, marfil para leer, terracota por debajo del 10%.
+- Taupe dominante (PANTONE 2474 C), su propia tinta clara para leer, gris azulado
+  (PANTONE 3526 C) por debajo del 10%.
 - Una sola familia tipográfica, llevada de 400 a 800 sin pedir refuerzos.
 - Hairlines en vez de bordes; filas en vez de tarjetas.
 - Las líneas sangran al borde de la ventana; el texto se queda centrado.
-- Las cursivas son semánticas y siempre terracota: marcan la palabra que carga el sentido.
+- Las cursivas son semánticas y siempre en el acento: marcan la palabra que carga el sentido.
 - Metadato en versalita ancha; titulares en negrilla apretada. Nunca al revés.
 - La imagen es la única fuente de luz de la página.
 
@@ -171,53 +173,71 @@ son rechazos duros del sistema, no preferencias.
 
 ## Colors
 
-Una paleta de tres voces —grafito, marfil, terracota— con una escala de grises de trabajo
-entre ellas; la disciplina 60-30-10 está escrita en el CSS y es normativa.
+**Rebranding Pantone (2026-08).** El sitio corrió su primera paleta (grafito neutro /
+marfil / terracota) por una de tres tintas Pantone —2474 C, 3524 C, 3526 C— en la misma
+disciplina 60-30-10, ya normativa en el CSS. La lógica de construcción cambió: en vez de
+tres colores distintos para fondo / lectura / acento, el fondo y el texto de lectura son
+la sombra y la tinta clara del **mismo matiz** (PANTONE 2474 C, hue ~22°) para que la
+"sala oscura" siga funcionando sin perder contraste; el indigo (PANTONE 3524 C) entra tal
+cual, ya casi negro, como superficie elevada; y el gris azulado (PANTONE 3526 C) entra tal
+cual como el único acento, reemplazando la terracota.
 
 ### Primary
 
-- **Terracota Encendida** (#C4622E): el único acento del sistema. Vive en las cursivas de
-  énfasis (`em` es terracota globalmente), el punto de disponibilidad que pulsa, el
-  `outline` de foco visible, el `::selection` (la marca aparece hasta al copiar texto), el
-  marcador activo de la sidebar de proyecto y la etiqueta de una fila de contacto en
-  hover. Nunca como fondo de un área grande.
+- **Pizarra Señal** (#788F98 — PANTONE 3526 C puro): el único acento del sistema. Vive en
+  las cursivas de énfasis (`em` es el acento globalmente), el punto de disponibilidad que
+  pulsa, el `outline` de foco visible, el `::selection` (la marca aparece hasta al copiar
+  texto), el marcador activo de la sidebar de proyecto y la etiqueta de una fila de
+  contacto en hover. Nunca como fondo de un área grande.
 
 ### Neutral
 
-- **Grafito Profundo** (#1E1E20): el fondo de todo el sitio y el color del `theme-color`
-  del navegador. Es el 60% dominante y la sala en la que ocurre todo.
-- **Grafito Elevado** (#2A2A2C): superficie apenas por encima del fondo. Fondo de tarjeta
-  declarado y base de los placeholders de galería (junto a #242426 / #2c2c2e en la trama
-  diagonal de "Próximamente").
-- **Marfil de Archivo** (#ECE7DF): el blanco cálido de lectura. Manifiesto, enlaces del
-  menú, marco del bloque "Detrás de Knox", franja del marquee. Es el color con el que la
-  marca habla.
-- **Blanco Titular** (#F9F8F6): el blanco máximo del sitio, reservado a titulares,
-  wordmark y estados hover/activo. Un grado por encima del marfil, nunca puro.
-- **Gris Lectura** (#a6a6a6): texto secundario y párrafos de las páginas internas.
-- **Gris Nota** (#7c7c7c): metadato de bajo peso — numeración del menú, índices de la
+- **Taupe Profundo** (#211B18 — sombra de PANTONE 2474 C): el fondo de todo el sitio y el
+  color del `theme-color` del navegador. Es el 60% dominante y la sala en la que ocurre
+  todo.
+- **Indigo Elevado** (#2F2B4E — PANTONE 3524 C puro): superficie elevada, con un salto de
+  matiz deliberado sobre el fondo (taupe cálido → indigo frío), no solo de tono. Fondo de
+  tarjeta declarado y base de los placeholders de galería (junto a #241E1B / #2A231F en la
+  trama diagonal de "Próximamente").
+- **Arena de Lectura** (#EDE7E4 — tinta clara de PANTONE 2474 C): el blanco cálido de
+  lectura. Manifiesto, enlaces del menú, marco del bloque "Detrás de Knox", franja del
+  marquee. Es el color con el que la marca habla.
+- **Hueso Titular** (#F6F4F3 — tinta más clara de PANTONE 2474 C): el blanco máximo del
+  sitio, reservado a titulares, wordmark y estados hover/activo. Un grado por encima de
+  la arena, nunca puro.
+- **Gris Lectura** (#B1A6A0): texto secundario y párrafos de las páginas internas, misma
+  familia tonal que el fondo y la arena.
+- **Gris Nota** (#8C7C73): metadato de bajo peso — numeración del menú, índices de la
   sidebar, eyebrow del archivo, servicios y datos del cierre.
-- **Gris Pie** (#666666): línea legal y ciudad en los footers. El escalón más bajo.
-- **Hairline Marfil** (rgba(236, 231, 223, 0.16)): la línea fina sobre grafito en
-  `index.html`. Marfil translúcido, no gris: la línea es del mismo material que el texto.
-- **Hairline Grafito** (#3D3D3F): la misma línea en las páginas internas, resuelta en
-  opaco.
+- **Gris Pie** (#766860): línea legal y ciudad en los footers. El escalón más bajo.
+- **Hairline Clara** (rgba(237, 231, 228, 0.16)): la línea fina sobre el fondo oscuro en
+  `index.html`. Traslúcida sobre la arena, no gris: la línea es del mismo material que el
+  texto.
+- **Hairline Oscura** (#3A312C): la misma línea en las páginas internas, resuelta en
+  opaco, un paso de tono sobre Taupe Profundo.
 - **Blanco Apertura** (#FFFFFF) y **Tinta de Apertura** (#111114): existen únicamente en
-  la pantalla de bienvenida del conejo. Fuera de esa pantalla no aparecen jamás.
+  la pantalla de bienvenida del conejo. Fuera de esa pantalla no aparecen jamás — el
+  rebranding no las tocó a propósito.
 
 ### Named Rules
 
-**La regla del 10%.** Terracota Encendida nunca ocupa más del 10% de una pantalla. Su
-escasez es la razón por la que funciona. Test: si en una captura de pantalla la terracota
-se lee como "un color del sitio" y no como "un detalle que resalta", se rompió la regla.
+**La regla del 10%.** Pizarra Señal nunca ocupa más del 10% de una pantalla. Su escasez es
+la razón por la que funciona. Test: si en una captura de pantalla el acento se lee como
+"un color del sitio" y no como "un detalle que resalta", se rompió la regla.
 
 **La regla del blanco único.** #FFFFFF solo existe en la pantalla del conejo. En cualquier
-otro lugar el blanco es Blanco Titular (#F9F8F6) o Marfil de Archivo (#ECE7DF). Un
+otro lugar el blanco es Hueso Titular (#F6F4F3) o Arena de Lectura (#EDE7E4). Un
 `#fff` suelto en el CSS del sitio es un error, no un atajo.
 
-**La regla de la línea de marfil.** Las hairlines no son grises neutros: son el color del
-texto bajado en opacidad. Al agregar una línea nueva, derivarla del marfil, no de un gris
-inventado.
+**La regla de la línea clara.** Las hairlines no son grises neutros: son el color del
+texto bajado en opacidad. Al agregar una línea nueva, derivarla de Arena de Lectura, no de
+un gris inventado.
+
+**La regla del matiz único.** Fondo, texto de lectura y los tres grises de metadato salen
+todos del mismo matiz de PANTONE 2474 C (~22°), solo variando luminancia. El indigo
+(3524 C) y el acento (3526 C) son las únicas dos veces que el sistema cambia de matiz —
+superficie elevada y detalle, respectivamente. Un color nuevo que no venga de ese matiz
+base, del indigo o del acento no pertenece al sistema.
 
 ## Typography
 
@@ -258,7 +278,7 @@ acento, ni firma. Es una regla del autor, no una preferencia estilística.
 
 **La regla de la cursiva con sentido.** La cursiva no decora: marca la palabra que carga
 el argumento (*humano*, *sentirnos humanos*, *sentido*, *design thinking*) y va siempre en
-terracota — `em { font-style: italic; color: var(--accent) }` es global en los dos
+el acento — `em { font-style: italic; color: var(--accent) }` es global en los dos
 stylesheets. Nunca poner en cursiva una frase entera ni usarla por ritmo.
 
 **La regla de la versalita.** Todo lo que sea metadato —fecha, categoría, herramienta,
@@ -300,8 +320,8 @@ scroll real y produce el temblor que ya se corrigió una vez.
 ## Elevation & Depth
 
 Hoy el sistema es plano por construcción. La profundidad no viene de sombras sino de tres
-recursos: **hairlines** que separan sin encerrar, **capas de tono** muy cercanas entre sí
-(#1E1E20 → #2A2A2C, y los overlays `rgba(30,30,32,0.6/0.72/0.88/0.92)`) y **desenfoque de
+recursos: **hairlines** que separan sin encerrar, **capas de tono/matiz** cercanas entre sí
+(#211B18 → #2F2B4E, y los overlays `rgba(33,27,24,0.6/0.72/0.88/0.92)`) y **desenfoque de
 fondo** (`backdrop-filter: blur(8–10px)` en el header sticky y en la franja móvil de la
 sidebar). Solo dos elementos llevan sombra real: el botón specular y la imagen del
 lightbox.
@@ -314,7 +334,7 @@ ayude a separarlas del fondo. Lo que no cambia es el carácter de la sombra.
 
 - **Ambiental de superficie** (`box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18)`): paso
   autorizado, aún no implementado. Para galería, fichas o contenedores que necesiten
-  despegarse del grafito sin volverse tarjetas.
+  despegarse del taupe sin volverse tarjetas.
 - **Ambiental de control** (`box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 8px 24px rgba(0,0,0,0.25)`):
   el botón specular. El `inset` claro de 1px es el filo de luz superior; no se elimina.
 - **Flotante** (`box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6)`): la imagen del lightbox y
@@ -326,9 +346,10 @@ ayude a separarlas del fondo. Lo que no cambia es el carácter de la sombra.
 baja opacidad. Nunca una sombra corta y dura que dibuje un contorno, y nunca una sombra
 con tinte de color. Si la sombra se lee como un borde, está mal hecha.
 
-**La regla de la capa cercana.** Las superficies elevadas se separan por tono en pasos
-mínimos (12 puntos de luminancia entre #1E1E20 y #2A2A2C). Un salto grande de valor rompe
-la sala oscura.
+**La regla de la capa cercana.** Reformulada por el rebranding: ya no es un paso mínimo de
+luminancia dentro del mismo matiz, sino un salto de matiz controlado a un solo destino —
+taupe cálido (#211B18) a indigo frío (#2F2B4E), y nada más. No hay una tercera superficie
+ni una escalera de tonos entre ambas; ese único salto es la profundidad del sistema.
 
 ## Shapes
 
@@ -342,8 +363,8 @@ convenga; esta sección describe los valores en uso, no una regla que los unifor
 sí es estable: los bordes son hairlines de 1px (`--line`), nunca gruesos, y las divisiones
 estructurales son líneas —`border-top` / `border-bottom`— y no contenedores cerrados.
 
-La única forma pesada del sistema es el **marco de marfil** del bloque "Detrás de Knox":
-un rectángulo de 15px a los lados y ~100px arriba y abajo, con un lienzo grafito adentro.
+La única forma pesada del sistema es el **marco de arena** del bloque "Detrás de Knox":
+un rectángulo de 15px a los lados y ~100px arriba y abajo, con un lienzo taupe adentro.
 Es una pieza enmarcada, y su asimetría (fino a los lados, grueso arriba y abajo) es
 deliberada.
 
@@ -370,12 +391,12 @@ deliberada.
 - **Carácter:** el paso final de la home y el único punto donde el sistema se invierte.
   No es un botón: es una fila a todo el ancho, del mismo material que el flow menu, en
   escala CTA.
-- **Forma:** hairline arriba y abajo, sin radio ni fondo en reposo, texto marfil centrado
-  a `clamp(2.6rem, 13vw, 7.5rem)`. Sale del padding lateral del cierre negándolo exacto
-  (`margin: … calc(-1 * clamp(1.4rem, 6vw, 4rem))`), sin JS.
-- **Hover / Focus:** el fondo se llena de Marfil de Archivo y el texto pasa a Grafito
+- **Forma:** hairline arriba y abajo, sin radio ni fondo en reposo, texto en Arena de
+  Lectura centrado a `clamp(2.6rem, 13vw, 7.5rem)`. Sale del padding lateral del cierre
+  negándolo exacto (`margin: … calc(-1 * clamp(1.4rem, 6vw, 4rem))`), sin JS.
+- **Hover / Focus:** el fondo se llena de Arena de Lectura y el texto pasa a Taupe
   Profundo en 0.45s con `cubic-bezier(0.16, 1, 0.3, 1)`; la flecha avanza 0.18em. El
-  teclado recibe exactamente el mismo estado, más un `outline` de terracota a -6px.
+  teclado recibe exactamente el mismo estado, más un `outline` del acento a -6px.
 - **Relación con el flow menu:** mismo material, temperamento opuesto. Las filas del
   índice tantean —la franja entra desde el borde más cercano al cursor y el texto corre en
   marquee—; la de cierre no tantea: llega entera y se queda. Es la única vez en todo el
@@ -386,7 +407,7 @@ deliberada.
 - **Forma:** radio de 18px (`--sb-radius`), sin borde, fondo transparente con
   `color-mix` sobre `--sb-tint`.
 - **Primario (specular):** el único botón del sitio, en la sección de archivo. Texto
-  Blanco Titular, peso 500, `padding: 18px 40px` (lg: `clamp(20px,2.4vw,28px)
+  Hueso Titular, peso 500, `padding: 18px 40px` (lg: `clamp(20px,2.4vw,28px)
   clamp(44px,5vw,60px)`), con un anillo de luz cónico que gira en 3.5s y un brillo WebGL
   (`lib/ogl.min.js`) que sigue el cursor cuando hay WebGL2.
 - **Degradación:** sin WebGL2 o con `prefers-reduced-motion`, el botón conserva forma,
@@ -403,12 +424,12 @@ deliberada.
 
 ### Cards / Containers
 
-El sistema **no tiene tarjetas**. `--card` (#2A2A2C) está declarado y se usa como base de
-los placeholders de galería, pero no existe ningún contenedor con fondo, sombra y radio
-que agrupe contenido. Los agrupamientos se hacen con líneas y espacio.
+El sistema **no tiene tarjetas**. `--card` (#2F2B4E, PANTONE 3524 C) está declarado y se
+usa como base de los placeholders de galería, pero no existe ningún contenedor con fondo,
+sombra y radio que agrupe contenido. Los agrupamientos se hacen con líneas y espacio.
 
 El **item de galería** es lo más cercano: `aspect-ratio` 4/3 (la variante ancha, 16/9),
-`1px solid var(--line)`, radio 4px y una trama diagonal a 45° (#242426 / #2c2c2e) con la
+`1px solid var(--line)`, radio 4px y una trama diagonal a 45° (#241E1B / #2A231F) con la
 palabra "Próximamente" en versalita mientras no hay foto. Al llegar la imagen real, el
 `<img>` con `object-fit: cover` la tapa por completo.
 
@@ -416,36 +437,37 @@ palabra "Próximamente" en versalita mientras no hay foto. Al llegar la imagen r
 
 No existen. El sitio no tiene formularios: el contacto son enlaces `mailto:`, `tel:` y
 externos, tratados como filas de índice. Si algún día hace falta un campo, debe heredar el
-lenguaje de la fila —hairline inferior, sin caja, foco en terracota— y no una caja con
+lenguaje de la fila —hairline inferior, sin caja, foco en el acento— y no una caja con
 fondo.
 
 ### Navigation
 
-- **Header:** sticky, `rgba(30,30,32,0.72)` con `backdrop-filter: blur(10px)` y hairline
+- **Header:** sticky, `rgba(33,27,24,0.72)` con `backdrop-filter: blur(10px)` y hairline
   inferior. Marca "KNOX" a la izquierda en 0.95rem, peso 800, tracking 0.18em.
-- **Botón hamburguesa:** fijo arriba a la derecha, tres barras de 26×2px en marfil que se
-  cruzan en aspa con `cubic-bezier(0.65, 0, 0.35, 1)` cuando `aria-expanded="true"`.
+- **Botón hamburguesa:** fijo arriba a la derecha, tres barras de 26×2px en Arena de
+  Lectura que se cruzan en aspa con `cubic-bezier(0.65, 0, 0.35, 1)` cuando
+  `aria-expanded="true"`.
 - **Panel lateral:** entra desde la derecha (`min(420px, 92vw)`; 100vw en ≤640px), fondo
-  grafito, hairline izquierda. Los cuatro enlaces son filas numeradas (`01`–`04` en Gris
+  taupe, hairline izquierda. Los cuatro enlaces son filas numeradas (`01`–`04` en Gris
   Nota a 0.5em) que se revelan con `yPercent` escalonado a 0.06s. El activo y el hover van
-  a Blanco Titular. Cierra con ✕, Escape o clic fuera.
+  a Hueso Titular. Cierra con ✕, Escape o clic fuera.
 - **Flow menu (home):** tres filas a todo el ancho de la ventana; al entrar el cursor, una
-  franja marfil sube o baja **desde el borde más cercano al cursor** (`expo.out`, 0.6s) y
-  dentro corre un marquee CSS infinito con el mismo texto en grafito.
+  franja en Arena de Lectura sube o baja **desde el borde más cercano al cursor**
+  (`expo.out`, 0.6s) y dentro corre un marquee CSS infinito con el mismo texto en taupe.
 
 ### Sidebar de proyecto (componente firma)
 
 Riel vertical sticky centrado en el viewport (226px, `top: 50%` + `translateY(-50%)`), con
 un marcador de línea de 32×2px a la izquierda de cada ítem. La proximidad del cursor
 alimenta una variable `--effect` (0→1) que interpola el color del texto y del marcador
-entre gris y terracota vía `color-mix`, desplaza el ítem 14px a la derecha y estira el
+entre gris y el acento vía `color-mix`, desplaza el ítem 14px a la derecha y estira el
 marcador. Un tick más corto (16×1px, `::after`) marca la mitad del hueco entre ítems: son
 "las líneas entre las líneas" que le dan textura al riel en reposo. En ≤820px se convierte
 en una franja horizontal con scroll y los marcadores desaparecen.
 
 ### Disponibilidad
 
-Punto de 8px en terracota que pulsa (`opacity` 1→0.3, `scale` 1→0.75, 2.4s
+Punto de 8px en el acento que pulsa (`opacity` 1→0.3, `scale` 1→0.75, 2.4s
 `ease-in-out`, infinito) seguido de texto Label. El punto es `inline-block` a propósito:
 si el texto se parte en varias líneas, queda pegado a la primera palabra en vez de flotar.
 Se apaga con `prefers-reduced-motion`.
@@ -456,8 +478,8 @@ Se apaga con `prefers-reduced-motion`.
 
 - **Do** construir con filas separadas por hairline antes que con cualquier contenedor
   cerrado. Es el gesto que unifica trabajos, contacto, menú y ficha.
-- **Do** mantener terracota por debajo del 10% de cualquier pantalla, y usarla en énfasis,
-  estado, foco y selección — no en superficies.
+- **Do** mantener el acento (Pizarra Señal) por debajo del 10% de cualquier pantalla, y
+  usarlo en énfasis, estado, foco y selección — no en superficies.
 - **Do** aplicar el gesto de hover completo cuando hagas una lista nueva: la fila activa se
   desliza 1.4rem y las hermanas bajan a 0.35 de opacidad.
 - **Do** poner todo metadato en versalita gris (mayúsculas, ≤0.82rem, tracking ≥0.14em) y
@@ -476,7 +498,7 @@ Se apaga con `prefers-reduced-motion`.
 - **Don't** introducir una tipografía serif en ningún rol. Sin excepciones.
 - **Don't** usar #FFFFFF fuera de la pantalla de apertura del conejo.
 - **Don't** poner cursiva por ritmo o decoración: la cursiva marca la palabra que carga el
-  sentido y va en terracota.
+  sentido y va en el acento.
 - **Don't** agregar sombras duras, cortas o con tinte de color. Difusas, negras y de baja
   opacidad, o ninguna.
 - **Don't** convertir el manifiesto de la home en un bloque alineado a la izquierda ni

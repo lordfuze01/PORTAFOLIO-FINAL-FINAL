@@ -4,22 +4,25 @@
    ========================================================= */
 
 :root {
-  /* Regla 60-30-10: --bg (60, dominante) / --fg+--muted (30, secundario) /
-     --accent (10, terracota calida -- refuerza "Human centered creation"
-     en vez de un azul corporativo). Ya no son negro/blanco puros: eso
-     dejaba el sitio en solo 2 colores, sin el acento del 10%. */
-  --bg: #1E1E20;
-  --fg: #F9F8F6;
-  --muted: #a6a6a6;      /* texto secundario */
-  --line: #3D3D3F;       /* lineas / bordes sutiles */
-  --card: #2A2A2C;       /* fondo de tarjetas */
-  --accent: #C4622E;     /* acento: terracota */
+  /* Rebranding Pantone (2026-08): regla 60-30-10 sobre 3 tintas Pantone --
+     2474 C (taupe calido) al 60%, 3524 C (indigo) al 30%, 3526 C (gris
+     azulado) al 10% como unico acento. El fondo y el texto de lectura son
+     sombra/tinta del MISMO matiz (2474 C, hue ~22deg) para que la "sala
+     oscura" siga funcionando; el indigo (3524 C, ya casi negro) entra tal
+     cual como superficie elevada y el gris azulado (3526 C) tal cual como
+     el unico acento -- reemplaza la terracota. */
+  --bg: #211B18;         /* sombra de PANTONE 2474 C -- dominante 60% */
+  --fg: #F6F4F3;         /* tinta clara de PANTONE 2474 C -- titulares */
+  --muted: #B1A6A0;      /* texto secundario, misma familia mas oscura */
+  --line: #3A312C;       /* lineas / bordes sutiles, un paso sobre --bg */
+  --card: #2F2B4E;       /* PANTONE 3524 C puro -- fondo de tarjetas */
+  --accent: #788F98;     /* PANTONE 3526 C puro -- unico acento (10%) */
   --max: 1120px;         /* ancho maximo del contenido */
 
   /* Mismos valores que index.html, para que el menu lateral se vea igual
      en todas las paginas (independiente de --fg/--muted de aqui). */
-  --bone: #ECE7DF;
-  --ash:  #7c7c7c;
+  --bone: #EDE7E4;
+  --ash:  #8C7C73;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -37,7 +40,7 @@ body {
 a { color: inherit; }
 em { font-style: italic; color: var(--accent); }
 
-/* Seleccion de texto en terracota: la marca aparece hasta al copiar. */
+/* Seleccion de texto en el acento: la marca aparece hasta al copiar. */
 ::selection { background: var(--accent); color: var(--bg); }
 
 /* Transicion suave (crossfade) al navegar entre paginas. Solo actua en
@@ -58,7 +61,7 @@ em { font-style: italic; color: var(--accent); }
   gap: 1.5rem;
   flex-wrap: wrap;
   padding: 1.4rem clamp(1.25rem, 5vw, 3.5rem);
-  background: rgba(30, 30, 32, 0.72);
+  background: rgba(33, 27, 24, 0.72);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--line);
 }
@@ -186,7 +189,7 @@ em { font-style: italic; color: var(--accent); }
 .site-footer a { color: var(--muted); text-decoration: none; transition: color 0.25s; }
 .site-footer a:hover { color: var(--fg); }
 .site-footer__contact { display: flex; flex-direction: column; gap: 0.4rem; text-align: right; }
-.site-footer__legal { margin-top: 2rem; font-size: 0.8rem; color: #666; }
+.site-footer__legal { margin-top: 2rem; font-size: 0.8rem; color: #766860; }
 
 /* ---------- Animacion de entrada ---------- */
 .reveal { opacity: 0; transform: translateY(18px); animation: reveal 0.8s ease forwards; }
@@ -265,11 +268,11 @@ em { font-style: italic; color: var(--accent); }
 .work__preview-inner {
   width: 100%; height: 100%;
   display: grid; place-items: center;
-  color: #6a6a6a;
+  color: #766860;
   font-size: 0.8rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  background: repeating-linear-gradient(45deg, #242426 0 12px, #2c2c2e 12px 24px);
+  background: repeating-linear-gradient(45deg, #241E1B 0 12px, #2A231F 12px 24px);
 }
 .work__preview-inner img { width: 100%; height: 100%; object-fit: cover; }
 
@@ -286,10 +289,10 @@ em { font-style: italic; color: var(--accent); }
   border: 1px solid var(--line);
   border-radius: 4px;
   overflow: hidden;
-  background: repeating-linear-gradient(45deg, #242426 0 12px, #28282a 12px 24px);
+  background: repeating-linear-gradient(45deg, #241E1B 0 12px, #262019 12px 24px);
   display: grid;
   place-items: center;
-  color: #5a5a5a;
+  color: #625649;
   font-size: 0.8rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
@@ -462,7 +465,7 @@ em { font-style: italic; color: var(--accent); }
 .menu-toggle__icon span:nth-child(1) { top: 0; }
 .menu-toggle__icon span:nth-child(2) { top: 8px; }
 .menu-toggle__icon span:nth-child(3) { top: 16px; }
-.menu-toggle:hover .menu-toggle__icon span { background: #F9F8F6; }
+.menu-toggle:hover .menu-toggle__icon span { background: #F6F4F3; }
 .menu-toggle[aria-expanded="true"] .menu-toggle__icon span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
 .menu-toggle[aria-expanded="true"] .menu-toggle__icon span:nth-child(2) { opacity: 0; }
 .menu-toggle[aria-expanded="true"] .menu-toggle__icon span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
@@ -472,7 +475,7 @@ em { font-style: italic; color: var(--accent); }
   position: fixed;
   inset: 0;
   z-index: 55;
-  background: rgba(30, 30, 32, 0.6);
+  background: rgba(33, 27, 24, 0.6);
 }
 .menu-overlay[hidden] { display: none; }
 
@@ -520,7 +523,7 @@ em { font-style: italic; color: var(--accent); }
   vertical-align: middle;
 }
 .menu-panel__link:hover,
-.menu-panel__link.is-active { color: #F9F8F6; }
+.menu-panel__link.is-active { color: #F6F4F3; }
 .menu-panel__link.is-active .menu-panel__num { color: var(--bone); }
 .menu-panel__link:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 
@@ -663,7 +666,7 @@ em { font-style: italic; color: var(--accent); }
     width: 100%;
     padding-left: 0;
     z-index: 5;
-    background: rgba(30, 30, 32, 0.88);
+    background: rgba(33, 27, 24, 0.88);
     backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--line);
     margin-bottom: 1.6rem;
@@ -793,7 +796,7 @@ em { font-style: italic; color: var(--accent); }
   aspect-ratio: 1;
   transform-origin: center;
 }
-/* "Human centered creation" pasa a ser del mismo marfil que el marco (ya
+/* "Human centered creation" pasa a ser de la misma arena que el marco (ya
    no vive sobre el lienzo oscuro): el padding-top grande hace de divisor
    grueso con la parte de arriba, en vez de una linea fina. Texto oscuro
    por el cambio de fondo. */
