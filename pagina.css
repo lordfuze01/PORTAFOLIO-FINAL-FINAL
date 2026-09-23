@@ -804,10 +804,14 @@ html.mz-cargando .mosaico-cargador {
   cursor: zoom-in;
 }
 .vista__foto img { display: block; width: 100%; height: auto; }
-/* Video del proyecto (proyectos.js -> video: link de YouTube o Vimeo). */
+/* Video del proyecto (proyectos.js -> video: link de YouTube o Vimeo).
+   Ancho de la columna en 16:9, pero nunca mas alto que la pantalla
+   (menos el margen de arriba y abajo de .vista__media). */
 .vista__video {
   position: relative;
   flex: none;
+  width: min(100%, (100svh - 2 * clamp(12px, 1.1vw, 18px)) * 16 / 9);
+  align-self: center;
   aspect-ratio: 16 / 9;
   background: #000;
   overflow: hidden;

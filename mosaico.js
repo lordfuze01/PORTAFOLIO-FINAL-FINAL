@@ -57,20 +57,32 @@
   // Proyecto sin fotos todavia: una sola casilla "Coming soon" en el
   // mosaico, para que igual se pueda abrir y leer.
   var HUECO = { hueco: true, ancho: 4, alto: 3 };
+  // Si no tiene fotos pero si video de YouTube, la casilla es la
+  // miniatura del video (16:9; hqdefault siempre existe y sus franjas
+  // negras quedan fuera con object-fit: cover).
   function fotosDe(p) {
-    return (p.fotos && p.fotos.length) ? p.fotos : [HUECO];
+    if (p.fotos && p.fotos.length) return p.fotos;
+    var id = youtubeId(p.video);
+    if (id) return [{ miniatura: true, src: 'https://i.ytimg.com/vi/' + id + '/hqdefault.jpg', ancho: 16, alto: 9 }];
+    return [HUECO];
   }
   function imagen(f, extra) {
     if (f.hueco) return '<span class="mz-hueco"><span>Coming soon</span></span>';
     return '<img src="' + esc(f.src) + '" alt="' + esc(extra.alt) + '" width="' + f.ancho + '" height="' +
       f.alto + '" decoding="async"' + (extra.lazy ? ' loading="lazy"' : '') + ' />';
   }
+  // Link de YouTube (normal, corto o el src del iframe de "Insertar") ->
+  // el id de 11 caracteres del video (o null).
+  function youtubeId(url) {
+    var m = url && String(url).match(/(?:youtu\.be\/|youtube(?:-nocookie)?\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/))([\w-]{11})/);
+    return m ? m[1] : null;
+  }
   // Link de YouTube o Vimeo -> direccion para incrustarlo (o null).
   function videoEmbed(url) {
     if (!url) return null;
-    var m = String(url).match(/(?:youtu\.be\/|youtube(?:-nocookie)?\.com\/(?:watch\?(?:.*&)?v=|embed\/|shorts\/))([\w-]{11})/);
-    if (m) return 'https://www.youtube-nocookie.com/embed/' + m[1] + '?rel=0';
-    m = String(url).match(/vimeo\.com\/(?:video\/)?(\d+)/);
+    var id = youtubeId(url);
+    if (id) return 'https://www.youtube.com/embed/' + id + '?rel=0';
+    var m = String(url).match(/vimeo\.com\/(?:video\/)?(\d+)/);
     if (m) return 'https://player.vimeo.com/video/' + m[1] + '?dnt=1';
     return null;
   }
@@ -173,15 +185,18 @@
         '</span></li>';
     }).join('');
     var embed = videoEmbed(p.video);
-    // Con video y sin fotos, la casilla "Coming soon" no se muestra: la
-    // del mosaico vuela directo al video.
+    // Con video y sin fotos, la casilla del mosaico (miniatura o "Coming
+    // soon") no se repite en la vista: vuela directo al video.
     var fotos = fotosDe(p).map(function (f, i) {
       return '<figure class="vista__foto' + (f.hueco ? ' vista__foto--hueco' : '') + '" data-indice="' + i + '"' +
-        (f.hueco && embed ? ' hidden' : '') + '>' + imagen(f, { alt: f.alt || p.nombre }) + '</figure>';
+        ((f.hueco || f.miniatura) && embed ? ' hidden' : '') + '>' + imagen(f, { alt: f.alt || p.nombre }) + '</figure>';
     }).join('');
+    // referrerpolicy: YouTube exige saber desde que sitio se incrusta; sin
+    // eso sale "Error 153 / video player configuration error".
     var video = embed
       ? '<div class="vista__video"><iframe src="' + esc(embed) + '" title="' + esc(p.nombre) + '"' +
-        ' allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowfullscreen loading="lazy"></iframe></div>'
+        ' allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"' +
+        ' referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe></div>'
       : '';
     vista.innerHTML =
       '<div class="vista__velo"></div>' +

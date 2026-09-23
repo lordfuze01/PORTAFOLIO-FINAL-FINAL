@@ -617,3 +617,18 @@ página y haz una que sí vaya acorde", y en las franjas dejar solo "Graphic".
   calc(tamaño del wordmark * 0.066 - 0.02em)` (el margen interno de la "B" gigante).
   El tamaño del wordmark vive en `--word-size` dentro de `.home__word`; si se cambia,
   cambiar también el clamp del padding del nombre.
+
+### Décima pasada: video de I Don't Like Sand (2026-09-23) — HECHO
+- `proyectos.js` → `i-dont-like-sand` tiene `video: 'https://www.youtube.com/embed/adVgbqGQa_o'`
+  (el src del iframe de "Insertar" de YouTube; también sirve el link youtu.be).
+- El embed pasó de youtube-nocookie a `www.youtube.com/embed/ID?rel=0`, con
+  `referrerpolicy="strict-origin-when-cross-origin"` y el `allow` del código de YouTube.
+  Sin referrer YouTube muestra "Error 153 / video player configuration error"; por
+  eso tampoco se ve abriendo el HTML con doble clic (file://): hay que probarlo en el
+  sitio publicado o con un servidor local.
+- Proyecto con video de YouTube y sin fotos: su casilla del mosaico es la miniatura
+  (`i.ytimg.com/vi/ID/hqdefault.jpg`, marco 16:9 con object-fit cover, así las franjas
+  negras de hqdefault no se ven) y vuela al video al abrir. `_headers`: CSP con
+  `img-src https://i.ytimg.com` y `frame-src https://www.youtube.com`.
+- `.vista__video`: ancho `min(100%, (100svh − márgenes) × 16/9)`, centrado, para que
+  en pantallas anchas el video nunca pase del alto de la ventana.

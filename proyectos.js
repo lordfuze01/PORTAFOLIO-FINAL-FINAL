@@ -19,9 +19,11 @@
 // >>> PROYECTO SIN FOTOS TODAVIA: deja  fotos: []  y en el mosaico sale
 //     una casilla rayada "Coming soon" que igual se puede abrir.
 // >>> PARA PONER UN VIDEO: agrega  video: 'link de YouTube o Vimeo'
-//     (el link normal, como https://youtu.be/abc123XYZ00). Sale primero,
+//     (el link normal, como https://youtu.be/abc123XYZ00, o el que sale
+//     en src="..." del codigo de "Compartir > Insertar"). Sale primero,
 //     arriba de las fotos, al abrir el proyecto. Si es de YouTube puede
-//     estar como "No listado".
+//     estar como "No listado", y si el proyecto no tiene fotos, la
+//     miniatura del video es su casilla en el mosaico.
 // >>> El sitio esta en INGLES: nombre, tipo, descripcion y ficha van en
 //     ingles.
 // ==================================================================
@@ -110,7 +112,7 @@ window.PROYECTOS = [
     ],
   },
   {
-    // >>> PENDIENTE: tipo, descripcion, ficha, video y fotos reales.
+    // >>> PENDIENTE: tipo, descripcion, ficha y fotos reales.
     id: 'i-dont-like-sand',
     categoria: 'audiovisual',
     nombre: "I Don't Like Sand",
@@ -122,7 +124,7 @@ window.PROYECTOS = [
       ['Process', 'Coming soon'],
       ['Final product', 'Coming soon'],
     ],
-    // video: 'https://youtu.be/XXXXXXXXXXX',
+    video: 'https://www.youtube.com/embed/adVgbqGQa_o',
     fotos: [],
   },
   {
