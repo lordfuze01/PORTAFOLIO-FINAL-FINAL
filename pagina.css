@@ -493,96 +493,114 @@ em { font-style: italic; color: var(--accent); }
 .mz-mascara { display: block; overflow: hidden; }
 .mz-sube { display: block; }
 
-/* ---- Cabecera: KNOX a la izquierda, las 3 areas en una pastilla de
-   "liquid glass" al centro y el menu (fijo) a la derecha. Va fija
-   arriba: las areas siempre estan a mano mientras bajas el mosaico. ---- */
+/* ---- Cabecera: la misma barra de las demas paginas (.site-header:
+   taupe translucido, blur y hairline abajo) con KNOX a la izquierda,
+   las 3 areas al centro y el menu (fijo) a la derecha. Las areas usan
+   el lenguaje del sitio: numeradas como el menu lateral (01 / 02 / 03),
+   en mayusculas espaciadas como la marca, y al pasar el cursor el
+   texto rueda hacia arriba desde su mascara (como los textos de la
+   home). Una hairline se desliza bajo el area actual. ---- */
 .mosaico-cabecera {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 25;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  display: flex;
   align-items: center;
-  /* alto fijo: KNOX, la pastilla y el menu quedan en la misma linea */
-  height: calc(0.85rem * 2 + 42px);
+  /* mismo alto que .site-header: 1.4rem arriba y abajo */
+  height: calc(1.4rem * 2 + 1.52rem);
   /* a la derecha queda el espacio del boton del menu (fijo) */
-  padding: 0 calc(clamp(1.2rem, 3vw, 2rem) + 46px + 1rem) 0 clamp(1.25rem, 3vw, 2rem);
+  padding: 0 calc(clamp(1.2rem, 3vw, 2rem) + 46px + 1rem) 0 clamp(1.25rem, 5vw, 3.5rem);
+  background: rgba(33, 27, 24, 0.72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
   color: var(--fg);
-  pointer-events: none;
 }
-.mosaico-cabecera > * { pointer-events: auto; }
 .mosaico-cabecera a { color: inherit; text-decoration: none; }
-.mosaico-cabecera a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.mosaico-cabecera a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
 .mc-marca {
-  justify-self: start;
   font-weight: 800;
   letter-spacing: 0.18em;
   font-size: 0.95rem;
+  line-height: 1.6;
   transition: opacity 0.25s ease;
 }
 .mc-marca:hover { opacity: 0.6; }
 
-/* La pastilla de vidrio: desenfoca y satura lo que pasa por debajo
-   (las fotos del mosaico al hacer scroll), con un filo de luz arriba y
-   una sombra suave abajo. El "lente" es una gota de vidrio mas clara
-   que se desliza a la area bajo el cursor y vuelve a la actual. */
 .mc-areas {
-  /* centrada en la pantalla (no en el hueco entre KNOX y el menu) */
   position: absolute;
   left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  top: 0;
+  bottom: 0;
+  transform: translateX(-50%);
   display: flex;
   align-items: center;
-  padding: 5px;
-  border-radius: 999px;
-  background:
-    linear-gradient(180deg, rgba(246, 244, 243, 0.14), rgba(246, 244, 243, 0.03) 55%, rgba(246, 244, 243, 0.07));
-  backdrop-filter: blur(14px) saturate(170%) brightness(1.05);
-  -webkit-backdrop-filter: blur(14px) saturate(170%) brightness(1.05);
-  border: 1px solid rgba(246, 244, 243, 0.16);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.28),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.18),
-    0 10px 30px rgba(0, 0, 0, 0.28);
+  gap: clamp(1.4rem, 3vw, 2.8rem);
 }
 .mc-areas a {
   position: relative;
-  z-index: 1;
-  padding: 0.55em 1.15em 0.5em;
-  border-radius: 999px;
-  font-size: 0.92rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.55em;
+  height: 100%;
+  align-items: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
   line-height: 1;
   white-space: nowrap;
-  color: rgba(246, 244, 243, 0.62);
-  transition: color 0.35s ease;
+  color: var(--muted);
+  transition: color 0.3s ease;
 }
-.mc-areas a:hover,
-.mc-areas a.is-lente { color: var(--fg); }
-.mc-areas a[aria-current="page"] { color: var(--fg); }
-.mc-areas__lente {
+.mc-areas__num {
+  font-size: 0.82em;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--ash);
+  transition: color 0.3s ease;
+}
+.mc-areas a[aria-current="page"],
+.mc-areas a:hover { color: var(--fg); }
+.mc-areas a[aria-current="page"] .mc-areas__num { color: var(--accent); }
+/* Rodillo: el texto sube y su copia (::after) entra desde abajo. */
+.mc-areas__rollo {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  padding-top: 0.1em;
+}
+.mc-areas__rollo > span {
+  display: block;
+  transition: transform 0.55s cubic-bezier(0.76, 0, 0.24, 1);
+}
+.mc-areas__rollo > span::after {
+  content: attr(data-t);
   position: absolute;
-  top: 5px;
-  bottom: 5px;
   left: 0;
+  top: 100%;
+  padding-top: 0.1em;
+}
+.mc-areas a:hover .mc-areas__rollo > span,
+.mc-areas a:focus-visible .mc-areas__rollo > span { transform: translateY(-100%); }
+/* Hairline bajo el area actual; se desliza a la que tenga el cursor. */
+.mc-areas__linea {
+  position: absolute;
+  left: 0;
+  bottom: -1px;
   width: 0;
-  border-radius: 999px;
-  background: linear-gradient(180deg, rgba(246, 244, 243, 0.26), rgba(246, 244, 243, 0.1));
-  border: 1px solid rgba(246, 244, 243, 0.22);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 2px 10px rgba(0, 0, 0, 0.18);
-  backdrop-filter: blur(6px) saturate(200%);
-  -webkit-backdrop-filter: blur(6px) saturate(200%);
+  height: 1px;
+  background: var(--fg);
   pointer-events: none;
   transition:
-    transform 0.55s cubic-bezier(0.34, 1.4, 0.64, 1),
-    width 0.55s cubic-bezier(0.34, 1.4, 0.64, 1);
+    transform 0.6s cubic-bezier(0.76, 0, 0.24, 1),
+    width 0.6s cubic-bezier(0.76, 0, 0.24, 1);
 }
-/* Sin JS el lente no se mide: el area actual se marca con su propio fondo. */
-.mc-areas:not(.is-listo) a[aria-current="page"] { background: rgba(246, 244, 243, 0.18); }
+.mc-areas:not(.is-listo) a[aria-current="page"] { box-shadow: inset 0 -1px 0 var(--fg); }
 @media (prefers-reduced-motion: reduce) {
-  .mc-areas__lente { transition: none; }
+  .mc-areas__linea, .mc-areas__rollo > span { transition: none; }
 }
 
 /* ---- Mosaico ----
@@ -841,20 +859,24 @@ html.mz-cargando .mosaico-cargador {
 /* ---- Movil (<650px), como la referencia ---- */
 @media (max-width: 649px) {
   .mosaico-pagina { --mz-texto: 17px; --mz-pad: 14px; --mz-gap: 14px; }
-  /* En el celular la pastilla baja a su propia fila, centrada, bajo
-     KNOX y el menu. */
+  /* En el celular las areas bajan a su propia fila, bajo KNOX y el
+     menu, sin numeros para que quepan. */
   .mosaico-cabecera {
     height: auto;
-    padding-top: 0.85rem;
-    padding-bottom: 0.85rem;
-    grid-template-columns: 1fr;
-    row-gap: 0.9rem;
-    padding-right: clamp(1.25rem, 3vw, 2rem);
+    flex-direction: column;
+    align-items: stretch;
+    padding: 1.1rem clamp(1.1rem, 5vw, 2rem) 0;
   }
-  .mc-marca { padding: 0.35rem 0; }
-  .mc-areas { position: relative; left: auto; top: auto; transform: none; justify-self: center; }
-  .mc-areas a { font-size: 0.85rem; padding: 0.55em 0.95em 0.5em; }
-  .mosaico { grid-template-columns: repeat(4, minmax(0, 1fr)); padding-top: 8.5rem; }
+  .mc-areas {
+    position: relative;
+    left: auto;
+    transform: none;
+    justify-content: space-between;
+    height: 2.8rem;
+    margin-top: 0.6rem;
+  }
+  .mc-areas__num { display: none; }
+  .mosaico { grid-template-columns: repeat(4, minmax(0, 1fr)); padding-top: 9rem; }
   .mosaico__item { margin-bottom: 75px; }
   .mosaico__item--extra { display: none; }
   .mosaico__item--primero { grid-column: 1 / span 2; }

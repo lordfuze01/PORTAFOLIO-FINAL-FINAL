@@ -12,8 +12,8 @@
 //     una foto (el cursor dice "Zoom"): la foto se enfoca sola al
 //     centro; clic o Esc la devuelve. Si el proyecto trae "video"
 //     (link de YouTube o Vimeo), el video va primero en esa columna.
-//  4. La pastilla de VIDRIO de la cabecera (Graphic / Strategy /
-//     Audiovisual): su "lente" se desliza a la area bajo el cursor.
+//  4. Las AREAS de la cabecera (Graphic / Strategy / Audiovisual): una
+//     hairline se desliza bajo el area que tenga el cursor.
 //  3. La DIRECCION cambia a #id-del-proyecto: el link se puede compartir
 //     y el boton "atras" del navegador cierra el proyecto.
 // Sin GSAP, con "menos movimiento" o en pantallas de menos de 650px todo
@@ -631,12 +631,12 @@
     }
     gsap.set(textos, { yPercent: 110 });
     gsap.set(fotos, { y: function () { return window.innerHeight * 0.8; } });
-    if (areas) gsap.set(areas, { autoAlpha: 0, y: -10 });
+    if (areas) gsap.set(areas, { autoAlpha: 0 });
 
     function mostrar() {
       gsap.to(textos, { yPercent: 0, duration: 1.1, ease: 'expo.out', stagger: 0.02 });
       gsap.to(fotos, { y: 0, duration: 1.5, ease: 'expo.out', stagger: 0.05, delay: 0.1, clearProps: 'transform' });
-      if (areas) gsap.to(areas, { autoAlpha: 1, y: 0, duration: 0.8, delay: 0.2, ease: 'expo.out', clearProps: 'transform' });
+      if (areas) gsap.to(areas, { autoAlpha: 1, duration: 0.8, delay: 0.2, ease: 'power2.out' });
     }
 
     if (!conCargador) {
@@ -676,11 +676,11 @@
   }
 
   // ------------------------------------------------------------------
-  // 4. PASTILLA DE VIDRIO: el lente se desliza a la area bajo el cursor
+  // 4. AREAS: la hairline se desliza al area bajo el cursor
   //    (o con foco de teclado) y vuelve a la actual al salir.
   // ------------------------------------------------------------------
   if (areas) {
-    var lente = areas.querySelector('.mc-areas__lente');
+    var lente = areas.querySelector('.mc-areas__linea');
     var enlaces = Array.prototype.slice.call(areas.querySelectorAll('a'));
     var actualArea = areas.querySelector('a[aria-current="page"]') || enlaces[0];
     var ponerLente = function (a) {

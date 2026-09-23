@@ -601,3 +601,15 @@ de Trabajos y sumar proyectos.
   esos dos dominios.
 - Verificado con Playwright (1440×900 y 390×844): sin errores de consola ni overflow;
   video probado con un link de prueba (no quedó en el repo).
+
+### Novena pasada: fuera el liquid glass (2026-09-23) — HECHO
+El usuario: "la barra de liquid glass no me convence, mira toda la identidad de la
+página y haz una que sí vaya acorde", y en las franjas dejar solo "Graphic".
+- Franja 3 de #roles: "Graphic Designer" → "Graphic".
+- La cabecera de las categorías ahora es la misma barra de `.site-header` (taupe al
+  72%, blur, hairline abajo, KNOX en 800 / 0.18em). Las áreas van numeradas como el
+  menú lateral (01 / 02 / 03; el número del área actual en el acento #788F98), en
+  mayúsculas 0.78rem / 700 / 0.18em. Hover: el texto rueda hacia arriba desde su
+  máscara (`.mc-areas__rollo`, copia por `::after` con `data-t`). Una hairline
+  (`.mc-areas__linea`) se desliza bajo el área con el cursor y vuelve a la actual,
+  pegada al borde de la barra. En móvil las áreas bajan a su fila, sin números.
