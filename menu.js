@@ -12,6 +12,23 @@
 
   var abierto = false;
 
+  // Mueve el foco a `el` sin que el navegador dibuje el anillo azul de
+  // :focus-visible cuando el foco lo dispara un clic de mouse (el anillo
+  // solo tiene sentido si la interaccion fue por teclado). Ver nota en
+  // abrirMenu().
+  function enfocarSegunOrigen(el, porTeclado) {
+    if (porTeclado) {
+      el.focus();
+      return;
+    }
+    el.classList.add('sin-anillo-foco');
+    el.addEventListener('blur', function alPerderFoco() {
+      el.classList.remove('sin-anillo-foco');
+      el.removeEventListener('blur', alPerderFoco);
+    });
+    el.focus();
+  }
+
   // Compensa el ancho de la scrollbar al quitarla (evita el salto del
   // contenido cuando el body pasa a overflow:hidden con el menu abierto).
   function bloquearScroll() {
@@ -24,13 +41,13 @@
     document.body.style.paddingRight = '';
   }
 
-  function abrirMenu() {
+  function abrirMenu(porTeclado) {
     if (abierto) return;
     abierto = true;
     overlay.hidden = false;
     bloquearScroll();
     toggle.setAttribute('aria-expanded', 'true');
-    toggle.setAttribute('aria-label', 'Cerrar menú');
+    toggle.setAttribute('aria-label', 'Close menu');
 
     if (menosMovimiento) {
       gsap.set(overlay, { opacity: 1 });
@@ -52,19 +69,28 @@
         }
       );
     }
-    if (primerLink) primerLink.focus();
+
+    // El foco al primer link es necesario para accesibilidad (que el teclado
+    // caiga dentro del panel), pero si el menu se abrio con clic de mouse el
+    // navegador a veces igual dibuja el anillo azul de :focus-visible ahi
+    // (heuristica inconsistente entre navegadores). Ese anillo solo tiene
+    // sentido cuando la apertura fue por teclado; si fue por mouse lo
+    // suprimimos hasta que el link pierda el foco.
+    if (primerLink) enfocarSegunOrigen(primerLink, porTeclado);
   }
 
-  function cerrarMenu() {
+  function cerrarMenu(porTeclado) {
     if (!abierto) return;
     abierto = false;
     toggle.setAttribute('aria-expanded', 'false');
-    toggle.setAttribute('aria-label', 'Abrir menú');
+    toggle.setAttribute('aria-label', 'Open menu');
 
     function alTerminar() {
       overlay.hidden = true;
       desbloquearScroll();
-      toggle.focus();
+      // Mismo caso que al abrir: cerrar con clic (en el boton o en el fondo
+      // oscuro) no debe dejar el anillo azul en el boton hamburguesa.
+      enfocarSegunOrigen(toggle, porTeclado);
     }
     if (menosMovimiento) {
       alTerminar();
@@ -74,13 +100,18 @@
     gsap.to(panel, { xPercent: 100, duration: 0.45, ease: 'power3.in', onComplete: alTerminar });
   }
 
-  toggle.addEventListener('click', function () {
-    if (abierto) cerrarMenu(); else abrirMenu();
+  toggle.addEventListener('click', function (e) {
+    // MouseEvent.detail es 0 cuando el click lo dispara el teclado
+    // (Enter/Espacio sobre el boton) y >=1 cuando lo dispara el mouse.
+    var porTeclado = e.detail === 0;
+    if (abierto) cerrarMenu(porTeclado); else abrirMenu(porTeclado);
   });
   overlay.addEventListener('click', function (e) {
-    if (e.target === overlay) cerrarMenu();
+    // Clic en el fondo oscuro: siempre es mouse (no hay equivalente de
+    // teclado para "clic fuera").
+    if (e.target === overlay) cerrarMenu(false);
   });
   document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') cerrarMenu();
+    if (e.key === 'Escape') cerrarMenu(true);
   });
 })();

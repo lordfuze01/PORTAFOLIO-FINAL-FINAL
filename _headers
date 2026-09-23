@@ -7,6 +7,8 @@
 # - Referrer-Policy: no filtra URLs internas al navegar a otros sitios.
 # - Permissions-Policy: el sitio no usa camara/microfono/ubicacion; se apagan.
 # - CSP: solo se pueden cargar scripts/estilos/imagenes DEL PROPIO sitio.
+#   Unica excepcion: frame-src deja incrustar videos de YouTube (sin
+#   cookies) y Vimeo en las fichas de proyecto (proyectos.js -> video).
 #   ('unsafe-inline' y 'unsafe-eval' son necesarios: el CSS/JS va inline en
 #   index.html y Lottie evalua expresiones de la animacion del conejo.)
 /*
@@ -14,7 +16,7 @@
   X-Frame-Options: DENY
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self'; frame-src https://www.youtube-nocookie.com https://player.vimeo.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
 
 # ---- Cache: librerias locales (no cambian nunca -> 1 año) ----
 /lib/*

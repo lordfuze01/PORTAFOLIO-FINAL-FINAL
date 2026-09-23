@@ -1,15 +1,15 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Santiago Enciso · Portafolio</title>
+    <title>Santiago Enciso · Portfolio</title>
     <!-- Descripcion para buscadores y previews al compartir el link.
          >>> EDITA AQUI el texto si quieres cambiar como se ve al compartir. -->
-    <meta name="description" content="Portafolio de Santiago Enciso — BY KNOX. Dirección creativa que busca devolverle lo humano a lo que creamos: entornos visuales, físicos y audiovisuales desde Bogotá." />
+    <meta name="description" content="Portfolio of Santiago Enciso — BY KNOX. Creative direction that puts the human back into what we make: visual, physical and audiovisual work from Bogotá." />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="BY KNOX · Portafolio de Santiago Enciso" />
-    <meta property="og:description" content="Dirección creativa que busca devolverle lo humano a lo que creamos." />
+    <meta property="og:title" content="BY KNOX · Portfolio of Santiago Enciso" />
+    <meta property="og:description" content="Creative direction that puts the human back into what we make." />
     <!-- Barra del navegador (movil) en el mismo taupe del sitio -->
     <meta name="theme-color" content="#211B18" />
     <!-- Favicon: "K" clara sobre taupe oscuro (SVG incrustado, sin archivo extra) -->
@@ -99,6 +99,39 @@
         will-change: contents, opacity;
       }
 
+      /* Nota "sucia" bajo el conejo: el chiste de la pantalla de carga.
+         Special Elite (maquina de escribir gastada, lib/special-elite.woff2)
+         + un filtro SVG que le come los bordes a la tinta. >>> El TEXTO se
+         edita en el HTML, dentro de .launch__note. */
+      @font-face {
+        font-family: 'Special Elite';
+        src: url('./lib/special-elite.woff2') format('woff2');
+        font-display: block;
+      }
+      .launch__note {
+        position: fixed;
+        left: 50%;
+        bottom: clamp(1.6rem, 6vh, 3.2rem);
+        transform: translateX(-50%) rotate(-1.2deg);
+        width: min(92vw, 36rem);
+        z-index: 2;
+        text-align: center;
+        color: var(--fg);
+        font-family: 'Special Elite', 'Courier New', monospace;
+        font-size: clamp(0.9rem, 1.6vw, 1.15rem);
+        line-height: 1.45;
+        letter-spacing: 0.01em;
+        text-transform: lowercase;
+        filter: url(#tintaSucia);
+        opacity: 0;
+      }
+      .launch__note small {
+        display: block;
+        margin-top: 0.35rem;
+        font-size: 0.82em;
+        opacity: 0.6;
+      }
+
       .launch__bunny {
         width: var(--bunny-size);
         height: var(--bunny-size);
@@ -111,7 +144,41 @@
       /* ---------- Pagina principal (landing con scroll estilo NEXOLA) ---------- */
       .home {
         display: block;               /* contenedor con scroll */
-        background: var(--bg-final);
+        /* Sin fondo propio (ni aqui ni en las secciones): el color lo pinta
+           el <body> y lo va cambiando el script "COLOR POR SECCION" al hacer
+           scroll. Si el JS no corre, el body se queda en taupe, como antes. */
+        background: transparent;
+      }
+
+      /* ==================================================================
+         COLOR POR SECCION (inspirado en russellnumo.nl): el fondo de la
+         pagina se funde de un color a otro mientras bajas. Cada seccion de
+         la home trae un data-color en el HTML (taupe / arena / indigo) y
+         el script "COLOR POR SECCION" mezcla el fondo segun el scroll.
+         Cuando el fondo queda claro, #home pasa a data-tema="claro" y aqui
+         se invierten las MISMAS variables que ya usan los componentes (la
+         tinta pasa a ser el taupe) -- asi el texto siempre se lee sin
+         tocar cada componente por separado.
+         ================================================================== */
+      .home[data-tema="claro"] {
+        --bone: #211B18;                     /* tinta: el taupe del sitio */
+        --ash:  #6A5D56;                     /* metadatos, legible sobre arena */
+        --line: rgba(33, 27, 24, 0.18);      /* hairlines del mismo material que la tinta */
+        --bg-final: #EDE7E4;                 /* texto sobre franjas oscuras (flow-menu) */
+      }
+      /* El lightbox siempre es oscuro (fondo taupe al 92%), aunque se abra
+         mientras la pagina esta en tema claro: sus botones no se invierten. */
+      .lightbox {
+        --bone: #EDE7E4;
+        --line: rgba(237, 231, 228, 0.16);
+      }
+      /* Cuando el fondo cruza de oscuro a claro (o al reves), la tinta
+         cambia de tema: esto la funde en vez de hacerla saltar. (Los links
+         que ya tenian su propia transicion de color la conservan.) */
+      .intro__title, .roles__text, .flow-menu, .flow-menu__item,
+      .behance__eyebrow, .behance__title, .masonry-list .item-img,
+      .cierre, .status, .cierre__servicios, .cierre__datos {
+        transition: color 0.5s ease, border-color 0.5s ease;
       }
 
       /* HERO: seccion alta que da recorrido de scroll para la animacion */
@@ -146,6 +213,17 @@
         font-weight: 800;
         line-height: 0.82;
         letter-spacing: -0.04em;
+        text-transform: uppercase;
+      }
+      /* Quien es KNOX: el nombre real bajo el wordmark. Entra igual que
+         BY KNOX (sube y aparece), un poco despues. */
+      .home__name {
+        margin-top: clamp(0.6rem, 1.4vw, 1.2rem);
+        color: var(--titulo-color);
+        font-size: clamp(1rem, 2.6vw, 2.4rem);
+        font-weight: 700;
+        line-height: 1;
+        letter-spacing: -0.02em;
         text-transform: uppercase;
       }
       /* La foto: anclada abajo, CRECE hacia arriba con el scroll (via JS) */
@@ -208,46 +286,37 @@
          ================================================================== */
       .intro {
         position: relative;
-        background: var(--bg-final);
-        min-height: 100vh;
-        min-height: 100dvh;
+        /* Sin min-height: la seccion ahora solo tiene 2 lineas de titulo
+           (ya no el manifiesto completo + nav de antes), asi que se ajusta
+           a su contenido en vez de forzar 100vh -- eso era lo que dejaba
+           tanto marron vacio arriba y abajo. */
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;       /* centra horizontalmente */
         text-align: center;        /* centra el texto */
-        gap: clamp(2rem, 6vh, 3.5rem);
-        max-width: 1000px;
-        margin: 0 auto;
-        /* Abajo, casi sin aire: el ultimo item del flow-menu ya cierra con
-           su propia linea, y la seccion Behance que sigue trae su propio
-           padding-top -- no queremos duplicar el espacio ni las lineas. */
-        padding: clamp(5rem, 14vh, 10rem) clamp(1.4rem, 6vw, 4rem) clamp(0.75rem, 2vh, 1.25rem);
+        /* Sin max-width: el titular es lo unico que hay en esta seccion y
+           debe aprovechar TODO el ancho de la pantalla, no vivir en una
+           columna angosta de lectura. */
+        padding: clamp(3.5rem, 10vh, 6rem) clamp(1.2rem, 5vw, 3rem);
       }
 
-      /* Titulo grande (hereda la Helvetica del sitio, sin serif) */
+      /* Titulo grande (hereda la Helvetica del sitio, sin serif) -- es el
+         unico contenido de .intro. El tamaño de letra es EL MISMO que
+         tenia el titulo corto original (no se agranda): lo que llena el
+         ancho es que cada .line ahora trae una frase mas larga (mas
+         palabras), no una letra mas grande. */
       .intro__title {
         font-weight: 700;
         color: var(--bone);
         /* minimo bajo + max-width 100%: nunca se sale en moviles */
         font-size: clamp(1.1rem, 5.3vw, 4.2rem);
-        line-height: 1.06;
+        line-height: 1.08;
         letter-spacing: -0.03em;
         margin: 0;
         width: 100%;        /* fija el ancho: el texto se acomoda, nunca se sale */
       }
       .intro__title em { font-style: italic; color: var(--accent); }   /* enfasis: cursiva + acento */
-
-      /* Parrafo de apoyo */
-      .intro__lead {
-        color: #CFC7C2;
-        font-size: clamp(0.95rem, 2vw, 1.5rem);
-        line-height: 1.5;
-        margin: 0;
-        width: 100%;
-        max-width: 52ch;    /* en escritorio no pasa de 52 caracteres de ancho */
-      }
-      .intro__lead em { font-style: italic; color: var(--accent); }
 
       /* Mecanica del revelado: cada .line recorta a su hijo, que sube desde abajo */
       .line { display: block; overflow: hidden; }
@@ -255,20 +324,20 @@
       .intro__title .line { padding-bottom: 0.08em; }  /* respiro para colas (g, y) */
 
       /* ==================================================================
-         Indice de enlaces: "flowing menu" a todo el ancho (rompe el
-         max-width: 1000px del .intro con margenes negativos). Cada fila
-         es un link grande centrado; al pasar el cursor entra una franja
-         clara con el texto en marquee (scroll horizontal infinito),
-         desde el borde (arriba/abajo) mas cercano al cursor.
+         Indice de enlaces: "flowing menu" a todo el ancho (rompe el max-width
+         del contenedor con margenes negativos, medidos por JS). Vive suelto
+         en <main> -- ya no dentro de .intro -- justo antes de "Fragmentos
+         del trabajo". Cada fila es un link grande centrado; al pasar el
+         cursor entra una franja clara con el texto en marquee (scroll
+         horizontal infinito), desde el borde (arriba/abajo) mas cercano al
+         cursor.
          ================================================================== */
       .flow-menu {
-        /* align-self: el .intro tiene align-items:center, que re-centraria
-           esta fila (mas ancha que .intro) y anularia el margen que fija
-           el JS. flex-start la saca de ese centrado automatico. */
-        align-self: flex-start;
+        /* Respiro propio ahora que no hereda el "gap" de .intro. */
+        margin: clamp(2.5rem, 6vh, 4rem) 0;
         /* Ancho y margen reales los fija el JS (mide el offset real contra
-           el viewport): el padding de .intro hace que un calc(50% - 50vw)
-           puramente en CSS no quede exacto. */
+           el viewport): un calc(50% - 50vw) puramente en CSS no queda
+           exacto dentro del padding del contenedor. */
         border-top: 1px solid var(--line);
       }
       .flow-menu__item { position: relative; border-bottom: 1px solid var(--line); overflow: hidden; }
@@ -321,6 +390,101 @@
       }
 
       /* ==================================================================
+         Seccion "ROLES" — 3 franjas de texto en marquee horizontal
+         continuo (inspirado en el componente ScrollVelocity de React Bits
+         que paso el usuario como referencia, portado a CSS/JS vanilla sin
+         Framer Motion ni build). Cada franja repite su texto en loop
+         infinito por una animacion CSS nativa (mismo mecanismo ya probado
+         del flow-menu: duplicar copias hasta cubrir el ancho + @keyframes
+         infinite con --part-width/--marquee-duration) -- así el movimiento
+         corre en el compositor del navegador, no depende de que el hilo
+         principal este libre cada frame. Filas alternas corren en
+         direcciones opuestas (animation-direction: reverse por nth-child).
+         La velocidad SI reacciona en vivo al scroll, pero solo tocando
+         `playbackRate` de cada animacion (Web Animations API) -- no hay
+         ninguna lectura de layout (offsetWidth, getBoundingClientRect) en
+         el loop de scroll, que era lo que hacia que se sintiera trabado.
+         Logica completa mas abajo, buscar "ROLES:" en el script.
+         Tipografia: Roboto Flex Variable (misma fuente autohospedada que
+         usaba knox.html, ver lib/roboto-flex-variable.woff2) llevada a
+         peso maximo y bien condensada, para imitar una tipografia alta y
+         negrita tipo Aalto sin sumar una fuente nueva al sitio.
+         ================================================================== */
+      @font-face {
+        font-family: 'Roboto Flex Variable';
+        src: url('./lib/roboto-flex-variable.woff2') format('woff2');
+        font-weight: 100 1000;
+        font-stretch: 25% 151%;
+        font-display: swap;
+      }
+      .roles {
+        padding: clamp(3rem, 8vh, 6rem) 0;
+        display: flex;
+        flex-direction: column;
+        /* Sin espacio entre filas: el padding-top de cada texto (el aire
+           para las tildes) ya las separa, apretadas como en la referencia. */
+        gap: 0;
+      }
+      /* Sin JS (o con "menos movimiento"): una sola copia por fila,
+         centrada, sin animar -- por eso el fade de entrada lo pone el JS
+         via estilo inline (mas abajo), nunca por defecto en CSS: asi el
+         contenido nunca queda invisible si el JS no llega a correr. */
+      .roles__row {
+        display: flex;
+        justify-content: center;
+        overflow: hidden;
+        width: 100%;
+      }
+      .roles.is-animated .roles__row { justify-content: flex-start; }
+      /* Quieta (menos movimiento o sin JS): a este tamaño "Realizador
+         grafico" no cabe en una linea, asi que se parte en dos en vez de
+         cortarse por los lados. */
+      .roles:not(.is-animated) .roles__text {
+        display: block;
+        white-space: normal;
+        text-align: center;
+        line-height: 1.05;   /* la tilde de la segunda linea no pisa a la primera */
+      }
+      .roles__track {
+        display: flex;
+        width: max-content;
+        will-change: transform;
+      }
+      .roles.is-animated .roles__track {
+        animation: roles-marquee var(--marquee-duration, 18s) linear infinite;
+      }
+      /* Filas 2 y 4 (impares en indice 0-based) al reves -- alternan con la 1 y 3. */
+      .roles.is-animated .roles__row:nth-child(2n) .roles__track { animation-direction: reverse; }
+      @keyframes roles-marquee {
+        to { transform: translateX(calc(-1 * var(--part-width, 0px))); }
+      }
+      .roles__text {
+        display: flex;
+        align-items: baseline;
+        white-space: nowrap;
+        margin: 0;
+        /* Sin separador: la frase se repite pegada a si misma (solo un
+           espacio via padding), infinite scroll liso. */
+        /* padding-top: aire para la tilde de la Á de "grafico" -- la fila
+           tiene overflow:hidden y con este interlineado tan apretado la
+           cortaba por arriba. */
+        padding: 0.1em 0.3em 0;
+        font-family: 'Roboto Flex Variable', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-weight: 800;
+        /* Letra alta y angosta como la de russellnumo.nl: ancho minimo del
+           Roboto Flex (wdth 25) y tamaño optico de titular (opsz 144).
+           El letter-spacing POSITIVO es a proposito: con tracking negativo
+           las letras de este peso se montan y dejan una rayita clara entre
+           una y otra al renderizar. */
+        font-variation-settings: 'wght' 880, 'wdth' 25, 'opsz' 144;
+        text-transform: uppercase;
+        font-size: clamp(3.6rem, 17vw, 15rem);
+        line-height: 0.92;
+        letter-spacing: 0.02em;
+        color: var(--bone);
+      }
+
+      /* ==================================================================
          Seccion "BEHANCE": eyebrow + titulo + boton al portafolio completo.
          Mismo aire centrado que el Cierre. Reemplaza la antigua seccion de
          video ("corto") mientras no hay una pieza grabada.
@@ -328,7 +492,6 @@
          ================================================================== */
       .behance {
         position: relative;
-        background: var(--bg-final);
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -354,6 +517,9 @@
         line-height: 1.1;
         margin: 0;
       }
+      /* Mascara del titulo: respiro abajo para que no se corten la g y la j
+         (el margen negativo lo compensa y el alto no cambia). */
+      .behance__title .line { padding-bottom: 0.12em; margin-bottom: -0.12em; }
       .behance__btn { margin-top: clamp(0.4rem, 1.5vh, 0.8rem); }
       .specular-button--lg.behance__btn {
         font-size: clamp(1.3rem, 2.2vw, 1.6rem);
@@ -498,7 +664,7 @@
           0 8px 24px rgba(0, 0, 0, 0.25);
         cursor: pointer;
         outline: none;
-        transition: transform 0.15s ease;
+        transition: transform 0.15s ease, color 0.5s ease;
       }
       /* Brillo de respaldo 100% CSS: un anillo que gira alrededor del boton.
          No depende de WebGL ni de JS -- se ve siempre, en cualquier
@@ -535,6 +701,19 @@
       @media (prefers-reduced-motion: reduce) {
         .specular-button::before { animation: none; --sb-angle: 35deg; }
       }
+      /* Sobre fondo claro (Behance va sobre arena): texto y anillo de
+         respaldo en taupe -- en blanco se perdian sobre la arena. El brillo
+         WebGL cambia igual, en el script del boton (lineColorClaro). */
+      .home[data-tema="claro"] .specular-button { --sb-text-color: #211B18; }
+      .home[data-tema="claro"] .specular-button::before {
+        background: conic-gradient(
+          from var(--sb-angle),
+          transparent 0deg,
+          transparent 250deg,
+          rgba(33, 27, 24, 0.75) 300deg,
+          transparent 345deg
+        );
+      }
       .specular-button:active { transform: scale(0.97); }
       .specular-button:focus-visible {
         outline: 2px solid color-mix(in srgb, var(--sb-text-color) 60%, transparent);
@@ -569,7 +748,6 @@
          ================================================================== */
       .cierre {
         position: relative;
-        background: var(--bg-final);
         border-top: 1px solid var(--line);
         display: flex;
         flex-direction: column;
@@ -611,9 +789,9 @@
       /* ---- Fila de cierre: el ultimo paso del visitante ----
          Misma familia que el flow-menu (fila a todo el ancho con
          hairlines), pero resuelta al reves: alli la franja de arena
-         corre en marquee y tantea; aqui llega entera y se queda. Es el
-         unico lugar del sitio donde se prende la luz -- el fondo pasa a
-         arena y el texto a taupe. Sale del padding lateral del
+         corre en marquee y tantea; aqui llega entera y se queda: al
+         pasar el cursor la fila se prende -- el fondo pasa a arena y el
+         texto a taupe. Sale del padding lateral del
          .cierre hasta el borde real de la ventana: como ese padding es
          un valor unico, se puede negar exacto y no hace falta el JS que
          si necesita el flow-menu. */
@@ -638,7 +816,8 @@
         padding: clamp(1.6rem, 5vh, 3rem) 1rem;
         transition:
           background 0.45s cubic-bezier(0.16, 1, 0.3, 1),
-          color 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+          color 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+          border-color 0.45s ease;
       }
       .cierre__cta:hover,
       .cierre__cta:focus-visible {
@@ -679,6 +858,10 @@
         transition: color 0.25s ease;
       }
       .cierre__datos a:hover { color: #F6F4F3; }
+      /* El cierre ahora va sobre arena: el hover no puede aclarar el link
+         (se perderia) y el pie legal sube a un gris que si se lee ahi. */
+      .home[data-tema="claro"] .cierre__datos a:hover { color: var(--accent); }
+      .home[data-tema="claro"] .cierre__legal { color: var(--ash); }
       .cierre__datos a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
       .cierre__legal {
         color: #766860;
@@ -717,10 +900,16 @@
       .menu-toggle__icon span:nth-child(2) { top: 8px; }
       .menu-toggle__icon span:nth-child(3) { top: 16px; }
       .menu-toggle:hover .menu-toggle__icon span { background: #F6F4F3; }
+      /* Sobre secciones claras el icono ya es taupe (hereda --bone del tema);
+         el hover no debe aclararlo hasta perderse sobre la arena. */
+      .home[data-tema="claro"] .menu-toggle[aria-expanded="false"]:hover .menu-toggle__icon span { background: var(--bone); }
+      /* Menu abierto: la X queda sobre el panel, que siempre es oscuro. */
+      .menu-toggle[aria-expanded="true"] .menu-toggle__icon span { background: #EDE7E4; }
       .menu-toggle[aria-expanded="true"] .menu-toggle__icon span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
       .menu-toggle[aria-expanded="true"] .menu-toggle__icon span:nth-child(2) { opacity: 0; }
       .menu-toggle[aria-expanded="true"] .menu-toggle__icon span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
       .menu-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+      .menu-toggle.sin-anillo-foco:focus-visible { outline: none; }
 
       .menu-overlay {
         position: fixed;
@@ -775,6 +964,7 @@
       .menu-panel__link.is-active { color: #F6F4F3; }
       .menu-panel__link.is-active .menu-panel__num { color: var(--bone); }
       .menu-panel__link:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+      .menu-panel__link.sin-anillo-foco:focus-visible { outline: none; }
 
       .menu-panel__contact {
         display: flex;
@@ -803,26 +993,89 @@
     <div id="launch" class="launch">
       <div id="loader" class="launch__loader">0%</div>
       <div id="bunny" class="launch__bunny"></div>
+      <!-- >>> EDITA AQUI la nota de abajo del conejo. -->
+      <p id="launchNote" class="launch__note">
+        this loading screen doesn't serve any functional purpose.
+        it just looks neat.
+        <small>ft. knox</small>
+      </p>
+      <!-- Filtro de "tinta sucia" para la nota: rompe y mancha los bordes. -->
+      <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+        <filter id="tintaSucia" x="-5%" y="-20%" width="110%" height="140%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="7" result="ruido" />
+          <feDisplacementMap in="SourceGraphic" in2="ruido" scale="1.6" xChannelSelector="R" yChannelSelector="G" result="corrida" />
+          <feTurbulence type="fractalNoise" baseFrequency="1.8" numOctaves="1" seed="3" result="grano" />
+          <feColorMatrix in="grano" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -4 3.1" result="huecos" />
+          <feComposite in="corrida" in2="huecos" operator="in" />
+        </filter>
+      </svg>
     </div>
 
     <!-- Pagina principal (oculta hasta que termine la animacion) -->
     <main id="home" class="home" style="display:none">
+      <!-- Boton del menu: va suelto aqui (no dentro del hero) para que ninguna
+           seccion lo tape -- dentro del hero quedaba en la capa de la foto y
+           la galeria y los links le pasaban por encima. Es position:fixed,
+           asi que el lugar en el HTML no cambia donde se ve. -->
+      <button type="button" id="menuToggle" class="menu-toggle" aria-expanded="false" aria-controls="menuPanel" aria-label="Open menu">
+        <span class="menu-toggle__icon" aria-hidden="true"><span></span><span></span><span></span></span>
+      </button>
+
+      <!-- ================================================================
+           >>> COLORES AL HACER SCROLL <<<
+           Solo dos colores: marron (taupe) y blanco (arena). Cada seccion
+           trae data-color="taupe" | "arena" y el fondo se funde de uno al
+           otro mientras bajas (script "COLOR POR SECCION"). Hoy: marron
+           hasta el manifiesto ("Las mejores cosas... la observacion") y
+           blanco desde las franjas hasta el final. Para mover el cambio,
+           cambia solo esa palabra en la seccion que quieras. En arena el
+           texto pasa a taupe solo.
+           ================================================================ -->
+
       <!-- HERO: wordmark + nav, con la foto que crece al hacer scroll -->
-      <section class="hero" id="hero">
+      <section class="hero" id="hero" data-color="taupe">
         <div class="hero__sticky">
           <div class="hero__head">
-            <h1 class="home__word">BY KNOX</h1>
-            <button type="button" id="menuToggle" class="menu-toggle" aria-expanded="false" aria-controls="menuPanel" aria-label="Abrir menú">
-              <span class="menu-toggle__icon" aria-hidden="true"><span></span><span></span><span></span></span>
-            </button>
+            <div>
+              <h1 class="home__word">BY KNOX</h1>
+              <!-- Quien es KNOX: se revela igual que el wordmark. -->
+              <p class="home__name">Santiago Enciso Ballesta</p>
+            </div>
           </div>
 
           <figure class="hero__cover" id="cover">
             <img src="./foto-portada.jpg" alt="BY KNOX" fetchpriority="high" decoding="async" />
-            <figcaption class="hero__caption">Colección mordiendo el polvo</figcaption>
+            <figcaption class="hero__caption">Mordiendo el polvo collection</figcaption>
           </figure>
 
-          <div class="hero__hint" id="scrollHint">↓ desliza</div>
+          <div class="hero__hint" id="scrollHint">↓ scroll</div>
+        </div>
+      </section>
+
+      <!-- ================================================================
+           Seccion "ROLES": 3 franjas en marquee horizontal continuo, una
+           disciplina cada una (inspirado en ScrollVelocity de React Bits:
+           filas alternas corren en direcciones opuestas, la velocidad
+           reacciona en vivo al scroll). Logica en el <script> mas abajo,
+           buscar "ROLES:". Sin foto -- solo el texto, mas grande.
+           >>> Los TEXTOS se editan aqui mismo, dentro de cada .roles__text
+               (una sola copia -- el resto las clona el JS en tiempo real).
+           ================================================================ -->
+      <section class="roles" id="roles" aria-label="Disciplines" data-color="taupe">
+        <div class="roles__row" data-roles-row>
+          <div class="roles__track" data-roles-track>
+            <h3 class="roles__text">Service Designer</h3>
+          </div>
+        </div>
+        <div class="roles__row" data-roles-row>
+          <div class="roles__track" data-roles-track>
+            <h3 class="roles__text">Filmmaker</h3>
+          </div>
+        </div>
+        <div class="roles__row" data-roles-row>
+          <div class="roles__track" data-roles-track>
+            <h3 class="roles__text">Graphic Designer</h3>
+          </div>
         </div>
       </section>
 
@@ -836,56 +1089,42 @@
            - Para poner una palabra en CURSIVA usa <em>palabra</em>.
            - Puedes agregar o quitar lineas copiando/borrando un <span class="line">.
            ================================================================ -->
-      <section class="intro" id="intro">
-        <!-- Titulo (se revela linea a linea) -->
+      <section class="intro" id="intro" data-color="taupe">
+        <!-- Titulo (se revela linea a linea). Es el UNICO contenido de esta
+             seccion -- a proposito: ocupa todo el ancho de la pantalla en
+             vez de vivir en una columna angosta centrada. El tamaño de
+             letra es el original (no se agranda); lo que llena el ancho es
+             que cada linea trae MAS PALABRAS, no letras mas grandes. -->
         <h2 class="intro__title">
-          <span class="line"><span>Dirección creativa</span></span>
-          <span class="line"><span>para <em>seres humanos</em>.</span></span>
+          <span class="line"><span>The best things are always born from the same sources:</span></span>
+          <span class="line"><span><em>curiosity</em> and <em>observation</em>.</span></span>
         </h2>
-
-        <!-- Parrafo de apoyo -->
-        <p class="intro__lead">
-          <span class="line"><span>En una modernidad que nos aleja</span></span>
-          <span class="line"><span>de nosotros mismos, diseñamos entornos</span></span>
-          <span class="line"><span>para volver a <em>sentirnos humanos</em>.</span></span>
-          <span class="line"><span>La tecnología acelera;</span></span>
-          <span class="line"><span>las personas dan el <em>sentido</em>.</span></span>
-        </p>
-
-        <!-- Indice de enlaces: flowing menu a todo el ancho -->
-        <nav class="flow-menu" id="flowMenu" aria-label="Enlaces del sitio">
-          <div class="flow-menu__item" data-flow-item>
-            <a class="flow-menu__link" href="knox.html">Conoce a Knox</a>
-            <div class="flow-menu__marquee" data-flow-marquee>
-              <div class="flow-menu__marquee-inner-wrap">
-                <div class="flow-menu__marquee-inner" data-flow-inner>
-                  <div class="flow-menu__marquee-part">Conoce a Knox</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="flow-menu__item" data-flow-item>
-            <a class="flow-menu__link" href="trabajos.html">Ver trabajos</a>
-            <div class="flow-menu__marquee" data-flow-marquee>
-              <div class="flow-menu__marquee-inner-wrap">
-                <div class="flow-menu__marquee-inner" data-flow-inner>
-                  <div class="flow-menu__marquee-part">Ver trabajos</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="flow-menu__item" data-flow-item>
-            <a class="flow-menu__link" href="contacto.html">Contacto</a>
-            <div class="flow-menu__marquee" data-flow-marquee>
-              <div class="flow-menu__marquee-inner-wrap">
-                <div class="flow-menu__marquee-inner" data-flow-inner>
-                  <div class="flow-menu__marquee-part">Contacto</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </nav>
       </section>
+
+      <!-- Indice de enlaces: flowing menu a todo el ancho. Vive suelto aqui
+           (no dentro de .intro) justo antes de "Fragmentos del trabajo". -->
+      <nav class="flow-menu" id="flowMenu" aria-label="Site links" data-color="arena">
+        <div class="flow-menu__item" data-flow-item>
+          <a class="flow-menu__link" href="trabajos.html">See work</a>
+          <div class="flow-menu__marquee" data-flow-marquee>
+            <div class="flow-menu__marquee-inner-wrap">
+              <div class="flow-menu__marquee-inner" data-flow-inner>
+                <div class="flow-menu__marquee-part">See work</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flow-menu__item" data-flow-item>
+          <a class="flow-menu__link" href="contacto.html">Contact</a>
+          <div class="flow-menu__marquee" data-flow-marquee>
+            <div class="flow-menu__marquee-inner-wrap">
+              <div class="flow-menu__marquee-inner" data-flow-inner>
+                <div class="flow-menu__marquee-part">Contact</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
 
       <!-- ================================================================
            Seccion "BEHANCE": enlace al portafolio completo. Reemplaza la
@@ -894,28 +1133,29 @@
            >>> COMO EDITAR LOS TEXTOS <<<
            - Para poner una palabra en CURSIVA usa <em>palabra</em>.
            ================================================================ -->
-      <section class="behance" id="behance">
+      <section class="behance" id="behance" data-color="arena">
         <div class="behance__head" data-behance-fila>
-          <p class="behance__eyebrow">Archivo</p>
-          <h2 class="behance__title">Fragmentos del trabajo</h2>
+          <p class="behance__eyebrow">Archive</p>
+          <!-- El titulo sube desde abajo al entrar (mascara .line). -->
+          <h2 class="behance__title"><span class="line"><span>Finger on the shutter</span></span></h2>
         </div>
         <!-- >>> GALERIA: los items estan en `behanceGalleryItems`, mas abajo
              (en el <script type="module"> junto al del boton). Cada foto
              abre un lightbox (#masonryLightbox, mas abajo) al hacer clic;
              para agregar mas fotos, sumalas a imagenes/masonry/ y a ese
              array (ver comentario junto a `behanceGalleryItems`). -->
-        <div class="masonry-list" id="behanceGallery" aria-label="Galería de trabajos"></div>
+        <div class="masonry-list" id="behanceGallery" aria-label="Work gallery"></div>
         <div class="lightbox" id="masonryLightbox" aria-hidden="true">
-          <button class="lightbox__nav lightbox__nav--prev" type="button" aria-label="Foto anterior">‹</button>
+          <button class="lightbox__nav lightbox__nav--prev" type="button" aria-label="Previous photo">‹</button>
           <img class="lightbox__img" alt="" />
-          <button class="lightbox__nav lightbox__nav--next" type="button" aria-label="Foto siguiente">›</button>
-          <button class="lightbox__close" type="button" aria-label="Cerrar">×</button>
+          <button class="lightbox__nav lightbox__nav--next" type="button" aria-label="Next photo">›</button>
+          <button class="lightbox__close" type="button" aria-label="Close">×</button>
         </div>
         <a class="specular-button specular-button--lg behance__btn" data-behance-fila
            href="https://www.behance.net/santiagenciso1" target="_blank" rel="noopener"
            data-specular-button>
           <span class="specular-button__fx" aria-hidden="true"></span>
-          <span class="specular-button__label">Ver Behance <span class="arrow">→</span></span>
+          <span class="specular-button__label">See Behance <span class="arrow">→</span></span>
         </a>
       </section>
 
@@ -924,19 +1164,19 @@
            >>> Los TEXTOS se editan aqui mismo. Cada fila con
            data-cierre-fila se revela en cascada al llegar con el scroll.
            ================================================================ -->
-      <footer class="cierre" id="cierre">
+      <footer class="cierre" id="cierre" data-color="arena">
         <p class="status" data-cierre-fila>
           <span class="status__dot" aria-hidden="true"></span>
-          Disponible para proyectos — Bogotá / remoto
+          Available for projects — Bogotá / remote
         </p>
         <!-- >>> EL PASO FINAL: la fila que lleva a contacto. Es el objetivo
              de toda la home; si se toca, no quitarle tamaño ni sacarla del
              ancho completo. -->
         <a class="cierre__cta" href="contacto.html" data-cierre-fila>
-          Hablemos <span class="arrow" aria-hidden="true">→</span>
+          <span class="line"><span>Let's talk <span class="arrow" aria-hidden="true">→</span></span></span>
         </a>
         <p class="cierre__servicios" data-cierre-fila>
-          Dirección creativa · Diseño gráfico · Audiovisual · Fotografía · Editorial · Diseño industrial
+          Creative direction · Graphic design · Audiovisual · Photography · Editorial · Industrial design
         </p>
         <p class="cierre__datos" data-cierre-fila>
           <a href="mailto:sencisoballesta@gmail.com">sencisoballesta@gmail.com</a>
@@ -951,7 +1191,7 @@
 
     <div class="menu-overlay" id="menuOverlay" hidden>
       <div class="menu-panel" id="menuPanel">
-        <nav aria-label="Navegación principal">
+        <nav aria-label="Main navigation">
           <ol class="menu-panel__list">
             <li class="menu-panel__item">
               <a class="menu-panel__link is-active" href="index.html#main">
@@ -959,18 +1199,13 @@
               </a>
             </li>
             <li class="menu-panel__item">
-              <a class="menu-panel__link" href="knox.html">
-                <span class="line"><span><span class="menu-panel__num">02</span>Knox</span></span>
-              </a>
-            </li>
-            <li class="menu-panel__item">
               <a class="menu-panel__link" href="trabajos.html">
-                <span class="line"><span><span class="menu-panel__num">03</span>Trabajos</span></span>
+                <span class="line"><span><span class="menu-panel__num">02</span>Work</span></span>
               </a>
             </li>
             <li class="menu-panel__item">
               <a class="menu-panel__link" href="contacto.html">
-                <span class="line"><span><span class="menu-panel__num">04</span>Contacto</span></span>
+                <span class="line"><span><span class="menu-panel__num">03</span>Contact</span></span>
               </a>
             </li>
           </ol>
@@ -1021,7 +1256,7 @@
         launch.style.display = 'none';
         home.style.display = 'block';
         marcarHashMain();
-        gsap.set('.home__word', { opacity: 1, y: 0 });
+        gsap.set('.home__word, .home__name', { opacity: 1, y: 0 });
         gsap.set('.menu-toggle', { opacity: 1, y: 0 });
         gsap.set('.hero__cover', { opacity: 1 });
         actualizarHero();
@@ -1030,11 +1265,14 @@
       // Animacion de entrada de la home (estilo NEXOLA).
       function animarHome() {
         gsap.set('.home__word', { y: 40, opacity: 0 });
+        gsap.set('.home__name', { y: 24, opacity: 0 });
         gsap.set('.menu-toggle', { y: 12, opacity: 0 });
         gsap.set('.hero__cover', { opacity: 0 });
         gsap.timeline({ delay: 0.15 })
           // 1) El wordmark BY KNOX sube y aparece.
           .to('.home__word', { y: 0, opacity: 1, duration: 0.9, ease: 'power3.out' })
+          // 1b) Debajo, el nombre de quien es KNOX, con la misma entrada.
+          .to('.home__name', { y: 0, opacity: 1, duration: 0.9, ease: 'power3.out' }, '-=0.6')
           // 2) El boton de menu aparece.
           .to('.menu-toggle', { y: 0, opacity: 1, duration: 0.6, ease: 'power2.out' }, '-=0.5')
           // 3) La foto de portada aparece.
@@ -1077,56 +1315,445 @@
       if (window.visualViewport) window.visualViewport.addEventListener('resize', actualizarHero);
       actualizarHero();
 
+      // ====== COLOR POR SECCION: el fondo cambia de color al hacer scroll ======
+      // Inspirado en russellnumo.nl, donde el fondo pasa de blanco a negro al
+      // llegar al contacto, amarrado a la posicion del scroll (si subes, se
+      // devuelve). Aqui cada seccion de #home trae su data-color y el fondo
+      // del <body> se funde de un color al siguiente: la mezcla empieza
+      // cuando el borde de arriba de la seccion nueva llega al 60% de la
+      // pantalla y termina cuando llega al 10% (ver EMPIEZA / TERMINA). Con
+      // el cambio puesto en las franjas, el manifiesto se alcanza a leer
+      // entero sobre marron y el blanco entra justo cuando sus palabras
+      // terminan de encenderse. Segun que tan claro este el fondo en
+      // cada momento, #home cambia a data-tema="claro"/"oscuro" y el CSS
+      // invierte la tinta del texto (ver "COLOR POR SECCION" en el <style>).
+      // Rendimiento: las posiciones de las secciones se miden solo cuando
+      // algo cambia de tamaño; en el scroll solo se lee window.scrollY y se
+      // pinta el fondo -- cero lecturas de layout por frame.
+      (function () {
+        var home = document.getElementById('home');
+        if (!home) return;
+
+        // >>> EDITA AQUI los colores: solo marron y blanco (las tintas de
+        // PANTONE 2474 C del sitio). El color del texto no hace falta
+        // indicarlo: se elige solo segun que tan claro quede el fondo.
+        var PALETA = {
+          taupe: { hex: '#211B18' }, // marron: sombra de PANTONE 2474 C
+          arena: { hex: '#EDE7E4' }, // blanco: tinta clara de PANTONE 2474 C
+        };
+        // Tramo del cambio, en fraccion del alto de la pantalla: posicion
+        // del borde de arriba de la seccion nueva cuando la mezcla EMPIEZA
+        // y cuando TERMINA. Subir EMPIEZA adelanta el cambio.
+        var EMPIEZA = 0.6;
+        var TERMINA = 0.1;
+        // Luminancia (WCAG) donde la tinta clara (#EDE7E4) y la oscura
+        // (#211B18) dan el mismo contraste, ~3.7:1. Por encima de este
+        // punto el fondo ya es "claro" y el texto va en taupe; por debajo,
+        // en arena. Asi, a mitad de un cambio de color, el texto nunca
+        // queda del mismo tono que el fondo.
+        var LUZ_CRUCE = 0.18;
+        Object.keys(PALETA).forEach(function (nombre) {
+          var hex = PALETA[nombre].hex;
+          PALETA[nombre].rgb = [1, 3, 5].map(function (i) { return parseInt(hex.substr(i, 2), 16); });
+        });
+
+        var secciones = Array.prototype.slice.call(home.querySelectorAll('[data-color]')).map(function (el) {
+          var nombre = el.getAttribute('data-color');
+          if (!PALETA[nombre]) nombre = 'taupe';
+          return { el: el, nombre: nombre, top: 0 };
+        });
+        if (secciones.length < 2) return;
+
+        var metaTema = document.querySelector('meta[name="theme-color"]');
+        var altoPantalla = window.innerHeight;
+        var pendiente = false;
+        var ultimoFondo = '';
+        var ultimoTema = '';
+        var ultimoNombre = '';
+
+        // Mezcla "en luz" (raiz de la mezcla de cuadrados, como Framer Motion):
+        // la mitad del camino entre taupe y arena no se ve embarrada.
+        function mezclar(a, b, t) {
+          return [0, 1, 2].map(function (i) {
+            return Math.round(Math.sqrt(a[i] * a[i] * (1 - t) + b[i] * b[i] * t));
+          });
+        }
+
+        function luminancia(rgb) {
+          var lineal = rgb.map(function (v) {
+            v = v / 255;
+            return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+          });
+          return 0.2126 * lineal[0] + 0.7152 * lineal[1] + 0.0722 * lineal[2];
+        }
+
+        function medir() {
+          if (!home.offsetParent) return false; // #home sigue oculto (conejo)
+          var y = window.scrollY;
+          secciones.forEach(function (s) { s.top = s.el.getBoundingClientRect().top + y; });
+          altoPantalla = window.innerHeight;
+          return true;
+        }
+
+        function pintar() {
+          pendiente = false;
+          if (!home.offsetParent) return;
+          var y = window.scrollY;
+          var rgb = PALETA[secciones[0].nombre].rgb;
+          var nombre = secciones[0].nombre;
+          for (var i = 1; i < secciones.length; i++) {
+            var s = secciones[i];
+            if (s.nombre === secciones[i - 1].nombre) continue; // mismo color: no hay cambio
+            var t = (y + altoPantalla * EMPIEZA - s.top) / (altoPantalla * (EMPIEZA - TERMINA));
+            if (t <= 0) break; // esta seccion (y las siguientes) aun no entran
+            if (t > 1) t = 1;
+            rgb = mezclar(rgb, PALETA[s.nombre].rgb, t);
+            if (t >= 0.5) nombre = s.nombre; // ya domina la pantalla
+          }
+
+          var fondo = 'rgb(' + rgb.join(', ') + ')';
+          if (fondo !== ultimoFondo) {
+            document.body.style.backgroundColor = fondo;
+            // el <html> tambien: es lo que se ve al "rebotar" en el borde del scroll
+            document.documentElement.style.backgroundColor = fondo;
+            ultimoFondo = fondo;
+          }
+          var tema = luminancia(rgb) > LUZ_CRUCE ? 'claro' : 'oscuro';
+          if (tema !== ultimoTema) {
+            home.setAttribute('data-tema', tema);
+            ultimoTema = tema;
+          }
+          // Barra del navegador en movil: acompaña al color que domina.
+          if (metaTema && nombre !== ultimoNombre) {
+            metaTema.setAttribute('content', PALETA[nombre].hex);
+            ultimoNombre = nombre;
+          }
+        }
+
+        function alScroll() {
+          if (pendiente) return;
+          pendiente = true;
+          requestAnimationFrame(pintar);
+        }
+        function remedir() {
+          if (medir()) pintar();
+        }
+
+        window.addEventListener('scroll', alScroll, { passive: true });
+        window.addEventListener('resize', remedir);
+        if (window.visualViewport) window.visualViewport.addEventListener('resize', remedir);
+        // #home pasa de display:none a visible al terminar el conejo, y cambia
+        // de alto cuando la galeria acomoda sus fotos: en ambos casos hay que
+        // volver a medir donde empieza cada seccion.
+        if (typeof ResizeObserver !== 'undefined') new ResizeObserver(remedir).observe(home);
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(remedir);
+        remedir();
+      })();
+
       // ====== REVELADO DEL MANIFIESTO ======
-      // Cada linea (envuelta en .line) sube desde abajo al entrar en pantalla,
-      // en cascada. Es el mismo efecto de scroll de la pagina de referencia,
-      // hecho con GSAP (ya cargado) + IntersectionObserver. Sin librerias extra.
+      // El titular (envuelto en .line por frase) sube desde abajo al entrar
+      // en pantalla, en cascada. Mismo mecanismo GSAP + IntersectionObserver
+      // que el resto del sitio. El flow-menu (Ver trabajos / Contacto) ya no
+      // vive dentro de #intro -- se busca aparte por id y se revela con su
+      // propio observer cuando le toca a el (mas abajo en la pagina).
       (function () {
         var intro = document.getElementById('intro');
-        if (!intro || typeof gsap === 'undefined') return;
-
-        var lineas = intro.querySelectorAll('.line > span');
-        var enlaces = intro.querySelector('.flow-menu');
+        var enlaces = document.getElementById('flowMenu');
+        if (typeof gsap === 'undefined') return;
         // Respeta a quien pide menos movimiento: mostramos todo sin animar.
         var menosMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-        if (menosMovimiento) {
-          gsap.set(lineas, { yPercent: 0, opacity: 1 });
-          if (enlaces) gsap.set(enlaces, { opacity: 1, y: 0 });
-          return;
+        if (intro) {
+          var lineas = intro.querySelectorAll('.line > span');
+          if (menosMovimiento) {
+            gsap.set(lineas, { yPercent: 0 });
+          } else {
+            gsap.set(lineas, { yPercent: 110 });
+            var reproducido = false;
+            var io = new IntersectionObserver(
+              function (entradas) {
+                entradas.forEach(function (e) {
+                  if (!e.isIntersecting || reproducido) return;
+                  reproducido = true;
+                  gsap.to(lineas, { yPercent: 0, duration: 1.05, ease: 'power4.out', stagger: 0.09 });
+                  io.disconnect();
+                });
+              },
+              { threshold: 0.4 }
+            );
+            io.observe(intro);
+          }
         }
 
-        // Estado inicial: lineas escondidas debajo de su recorte; enlaces atenuados.
-        gsap.set(lineas, { yPercent: 110 });
-        if (enlaces) gsap.set(enlaces, { opacity: 0, y: 18 });
+        if (enlaces) {
+          if (menosMovimiento) {
+            gsap.set(enlaces, { opacity: 1, y: 0 });
+          } else {
+            gsap.set(enlaces, { opacity: 0, y: 18 });
+            var reproducidoEnlaces = false;
+            var ioEnlaces = new IntersectionObserver(
+              function (entradas) {
+                entradas.forEach(function (e) {
+                  if (!e.isIntersecting || reproducidoEnlaces) return;
+                  reproducidoEnlaces = true;
+                  gsap.to(enlaces, { opacity: 1, y: 0, duration: 0.9, ease: 'power2.out' });
+                  ioEnlaces.disconnect();
+                });
+              },
+              { threshold: 0.25 }
+            );
+            ioEnlaces.observe(enlaces);
+          }
+        }
+      })();
 
-        var reproducido = false;
-        var io = new IntersectionObserver(
-          function (entradas) {
-            entradas.forEach(function (e) {
-              if (!e.isIntersecting || reproducido) return;
-              reproducido = true;
-              gsap.to(lineas, {
-                yPercent: 0,
-                duration: 1.05,
-                ease: 'power4.out',
-                stagger: 0.09,
-              });
-              if (enlaces) {
-                gsap.to(enlaces, {
-                  opacity: 1,
+      // ====== MANIFIESTO: las palabras se "encienden" con el scroll ======
+      // Como la cita de russellnumo.nl: cada palabra del titular arranca
+      // tenue y se llena de tinta a medida que bajas, en ola, amarrada a la
+      // posicion del scroll (si subes, se vuelven a apagar). Las palabras
+      // las envuelve este script: el titular se sigue editando en el HTML
+      // igual que antes (texto normal y <em>), sin spans extra.
+      // Convive con el revelado de arriba: las lineas suben al entrar (ya
+      // tenues) y despues el scroll las va encendiendo.
+      (function () {
+        var titulo = document.querySelector('.intro__title');
+        var home = document.getElementById('home');
+        if (!titulo || !home) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+        var TENUE = 0.18; // opacidad de una palabra todavia "apagada"
+
+        // Envuelve cada palabra de los nodos de texto en <span class="palabra">
+        // (entra tambien a los <em> y a los .line; los espacios quedan igual).
+        function envolverPalabras(nodo) {
+          Array.prototype.slice.call(nodo.childNodes).forEach(function (hijo) {
+            if (hijo.nodeType === 1) { envolverPalabras(hijo); return; }
+            if (hijo.nodeType !== 3 || !hijo.textContent.trim()) return;
+            var trozo = document.createDocumentFragment();
+            hijo.textContent.split(/(\s+)/).forEach(function (parte) {
+              if (!parte) return;
+              if (/^\s+$/.test(parte)) { trozo.appendChild(document.createTextNode(parte)); return; }
+              var span = document.createElement('span');
+              span.className = 'palabra';
+              span.textContent = parte;
+              trozo.appendChild(span);
+            });
+            nodo.replaceChild(trozo, hijo);
+          });
+        }
+        envolverPalabras(titulo);
+
+        var palabras = Array.prototype.slice.call(titulo.querySelectorAll('.palabra'));
+        var total = palabras.length;
+        if (!total) return;
+        var inicio = 0;
+        var fin = 1;
+        var ultimas = [];
+        var pendiente = false;
+
+        // El encendido empieza cuando el titular asoma al 85% de la pantalla
+        // y termina cuando su borde de abajo pasa el 45%: suficiente recorrido
+        // para leerlo aunque sean solo dos lineas.
+        function medir() {
+          if (!titulo.offsetParent) return false; // #home sigue oculto (conejo)
+          var r = titulo.getBoundingClientRect();
+          var arriba = r.top + window.scrollY;
+          var vh = window.innerHeight;
+          inicio = arriba - vh * 0.85;
+          fin = Math.max(inicio + 1, arriba + r.height - vh * 0.45);
+          return true;
+        }
+
+        // Cada palabra tiene su propio tramo del recorrido (se solapan un poco
+        // con las vecinas para que se vea como una ola, igual que la referencia).
+        function pintar() {
+          pendiente = false;
+          var p = (window.scrollY - inicio) / (fin - inicio);
+          p = Math.max(0, Math.min(1, p));
+          palabras.forEach(function (palabra, i) {
+            var desde = total > 1 ? (0.8 * i) / (total - 1) : 0;
+            var hasta = Math.min((total > 1 ? (0.8 * (i + 1)) / (total - 1) : 1) + 0.2, 1);
+            var t = Math.max(0, Math.min(1, (p - desde) / (hasta - desde)));
+            var opacidad = Math.round((TENUE + (1 - TENUE) * t) * 100) / 100;
+            if (ultimas[i] !== opacidad) {
+              palabra.style.opacity = opacidad;
+              ultimas[i] = opacidad;
+            }
+          });
+        }
+
+        function alScroll() {
+          if (pendiente) return;
+          pendiente = true;
+          requestAnimationFrame(pintar);
+        }
+        function remedir() {
+          if (medir()) pintar();
+        }
+
+        window.addEventListener('scroll', alScroll, { passive: true });
+        window.addEventListener('resize', remedir);
+        if (typeof ResizeObserver !== 'undefined') new ResizeObserver(remedir).observe(home);
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(remedir);
+        remedir();
+      })();
+
+      // ====== ROLES: marquee horizontal continuo, velocidad ligada al scroll ======
+      // Inspirado en el componente ScrollVelocity de React Bits que paso el
+      // usuario como referencia, pero implementado distinto a proposito: la
+      // primera version movia cada fila a mano en un loop de scroll leyendo
+      // offsetWidth de cada fila EN CADA FRAME -- eso fuerza un recalculo de
+      // layout constante (forced reflow) y es justo lo que se sentia
+      // "trabado" al hacer scroll. Esta version usa el mismo mecanismo ya
+      // probado del flow-menu (duplicar copias + @keyframes infinite nativo,
+      // que corre en el compositor del navegador) para el movimiento base, y
+      // el scroll SOLO toca playbackRate de esas animaciones -- cero
+      // lecturas de layout en el loop.
+      (function () {
+        var seccion = document.getElementById('roles');
+        if (!seccion) return;
+        var filas = Array.prototype.slice.call(seccion.querySelectorAll('[data-roles-row]'));
+        if (!filas.length) return;
+        var menosMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // Entrada: cada franja se destapa de abajo hacia arriba (clip-path)
+        // mientras sube un poco, en cascada -- igual que las lineas del hero
+        // de russellnumo.nl. El estado oculto inicial lo pone el JS mismo
+        // (nunca el CSS): si el script no llega a correr, las franjas se ven
+        // completas de una vez en vez de quedar invisibles para siempre.
+        if (!menosMovimiento && typeof gsap !== 'undefined') {
+          gsap.set(filas, { clipPath: 'inset(100% 0% 0% 0%)', y: 40 });
+          var io = new IntersectionObserver(
+            function (entradas) {
+              entradas.forEach(function (e) {
+                if (!e.isIntersecting) return;
+                gsap.to(filas, {
+                  clipPath: 'inset(0% 0% 0% 0%)',
                   y: 0,
                   duration: 0.9,
-                  ease: 'power2.out',
-                  delay: 0.5,
+                  ease: 'power4.out',
+                  stagger: 0.12,
+                  onComplete: function () { gsap.set(filas, { clearProps: 'clipPath,transform' }); },
                 });
-              }
-              io.disconnect();
-            });
-          },
-          { threshold: 0.25 }
-        );
-        io.observe(intro);
+                io.disconnect();
+              });
+            },
+            { threshold: 0.2 }
+          );
+          io.observe(seccion);
+        }
+
+        if (menosMovimiento) return; // una sola copia por fila, centrada y quieta (CSS)
+
+        seccion.classList.add('is-animated');
+
+        var DURACION_BASE = 16;  // segundos por vuelta completa, en reposo
+        var SUAVIZADO = 0.1;     // que tan rapido "atrapa" la velocidad real del scroll
+        var SCROLL_REF = 1400;   // px/s de scroll que cuentan como referencia
+        var IMPULSO_MAX = 4;     // cuanto puede llegar a multiplicar la velocidad esa referencia
+        var LENTO_HOVER = 0.12;  // fraccion de la velocidad con el cursor encima de una franja
+
+        function lerp(a, b, t) { return a + (b - a) * t; }
+
+        // Direccion de cada fila (par/impar) ya la resuelve el CSS
+        // (animation-direction: reverse por nth-child) -- aqui solo hay que
+        // medir cuanto mide una copia del texto para que el loop sea
+        // perfecto, sin costuras.
+        var pistas = filas.map(function (fila) {
+          var track = fila.querySelector('[data-roles-track]');
+          var original = track.querySelector('.roles__text');
+
+          function medir() {
+            var anchoParte = original.offsetWidth;
+            if (!anchoParte) return;
+            var necesarias = Math.max(4, Math.ceil((fila.offsetWidth * 2.5) / anchoParte) + 2);
+            var actuales = track.querySelectorAll('.roles__text').length;
+            for (var n = actuales; n < necesarias; n++) {
+              var copia = original.cloneNode(true);
+              copia.setAttribute('aria-hidden', 'true'); // solo la original es contenido real
+              track.appendChild(copia);
+            }
+            while (track.querySelectorAll('.roles__text').length > necesarias) {
+              track.removeChild(track.lastElementChild);
+            }
+            track.style.setProperty('--part-width', anchoParte + 'px');
+            track.style.setProperty('--marquee-duration', DURACION_BASE + 's');
+          }
+          medir();
+
+          var pista = { track: track, medir: medir, animacion: null, encima: false, frenoHover: 1 };
+          // Con el cursor encima, la franja casi se detiene para poder leerla
+          // (como en la referencia); al salir recupera su velocidad.
+          fila.addEventListener('mouseenter', function () { pista.encima = true; });
+          fila.addEventListener('mouseleave', function () { pista.encima = false; });
+          return pista;
+        });
+
+        // Recalcula si cambia el ancho de la ventana, y tambien cuando
+        // terminen de cargar las fuentes (Roboto Flex es font-display:swap;
+        // si se mide antes con la fuente de respaldo, la fila queda con
+        // menos copias de las que necesita y aparecen huecos al girar).
+        window.addEventListener('resize', function () {
+          pistas.forEach(function (p) { p.medir(); });
+        });
+        if (document.fonts && document.fonts.ready) {
+          document.fonts.ready.then(function () {
+            pistas.forEach(function (p) { p.medir(); });
+          });
+        }
+        // #home arranca en display:none mientras corre el conejo (ver
+        // "FLOWING MENU" mas abajo) -- este script corre ANTES de que se
+        // muestre, asi que la primera medicion de arriba da anchoParte 0 y
+        // medir() se sale sin fijar --part-width (por eso no se movia nada:
+        // el keyframe quedaba animando hacia translateX(0px)). Igual que ya
+        // hace el flow-menu, se observa #home con ResizeObserver para volver
+        // a medir en el momento exacto en que deja de estar oculto.
+        if (typeof ResizeObserver !== 'undefined') {
+          var home = document.getElementById('home');
+          if (home) {
+            new ResizeObserver(function () {
+              pistas.forEach(function (p) { p.medir(); });
+            }).observe(home);
+          }
+        }
+
+        var direccionGlobal = 1;
+        var velocidadSuave = 0;
+        var ultimoScrollY = window.scrollY;
+        var ultimoTiempo = performance.now();
+
+        function frame() {
+          var ahora = performance.now();
+          var dt = Math.min((ahora - ultimoTiempo) / 1000, 0.05);
+          ultimoTiempo = ahora;
+
+          var deltaScroll = window.scrollY - ultimoScrollY;
+          ultimoScrollY = window.scrollY;
+          var velocidadInstante = dt > 0 ? deltaScroll / dt : 0; // px/s: + baja, - sube
+          velocidadSuave = lerp(velocidadSuave, velocidadInstante, SUAVIZADO);
+
+          var impulso = (velocidadSuave / SCROLL_REF) * IMPULSO_MAX;
+          if (impulso > 0) direccionGlobal = 1;
+          else if (impulso < 0) direccionGlobal = -1;
+
+          // Multiplicador unico para las 3 filas: como cada una ya arranca
+          // en su propia direccion via CSS, aplicar el mismo factor a todas
+          // conserva la alternancia y ademas invierte a todas juntas cuando
+          // cambia la direccion del scroll.
+          var factor = direccionGlobal * (1 + Math.abs(impulso));
+
+          pistas.forEach(function (p) {
+            if (!p.animacion) {
+              var anims = p.track.getAnimations ? p.track.getAnimations() : [];
+              p.animacion = anims[0] || null;
+            }
+            p.frenoHover = lerp(p.frenoHover, p.encima ? LENTO_HOVER : 1, 0.08);
+            if (p.animacion) p.animacion.playbackRate = factor * p.frenoHover;
+          });
+
+          requestAnimationFrame(frame);
+        }
+        requestAnimationFrame(frame);
       })();
 
       // ====== REVELADO DEL CIERRE (footer) ======
@@ -1137,6 +1764,9 @@
         if (!cierre || typeof gsap === 'undefined') return;
 
         var filas = cierre.querySelectorAll('[data-cierre-fila]');
+        // "Hablemos" ademas sube desde abajo dentro de su fila (mascara
+        // .line), como el "Get in touch" de russellnumo.nl.
+        var ctaTexto = cierre.querySelectorAll('.cierre__cta .line > span');
         var menosMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
         if (menosMovimiento) {
@@ -1145,6 +1775,7 @@
         }
 
         gsap.set(filas, { opacity: 0, y: 26 });
+        gsap.set(ctaTexto, { yPercent: 110 });
 
         var reproducido = false;
         var io = new IntersectionObserver(
@@ -1153,6 +1784,7 @@
               if (!e.isIntersecting || reproducido) return;
               reproducido = true;
               gsap.to(filas, { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out', stagger: 0.09 });
+              gsap.to(ctaTexto, { yPercent: 0, duration: 1.1, ease: 'power4.out', delay: 0.15 });
               io.disconnect();
             });
           },
@@ -1298,6 +1930,8 @@
         if (!behance || typeof gsap === 'undefined') return;
 
         var filas = behance.querySelectorAll('[data-behance-fila]');
+        // El titulo ademas sube desde abajo dentro de su mascara (.line).
+        var tituloTexto = behance.querySelectorAll('.behance__title .line > span');
         var menosMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
         if (menosMovimiento) {
@@ -1306,6 +1940,7 @@
         }
 
         gsap.set(filas, { opacity: 0, y: 26 });
+        gsap.set(tituloTexto, { yPercent: 110 });
 
         var reproducido = false;
         var io = new IntersectionObserver(
@@ -1314,6 +1949,7 @@
               if (!e.isIntersecting || reproducido) return;
               reproducido = true;
               gsap.to(filas, { opacity: 1, y: 0, duration: 0.7, ease: 'power2.out', stagger: 0.12 });
+              gsap.to(tituloTexto, { yPercent: 0, duration: 1.1, ease: 'power4.out', delay: 0.1 });
               io.disconnect();
             });
           },
@@ -1338,6 +1974,12 @@
 
         // Estado inicial: pequeno e invisible.
         gsap.set(bunny, { scale: 0.7, opacity: 0 });
+        // La nota de abajo entra temblando un poco, como impresa a golpes,
+        // y se va con el conejo.
+        var nota = document.getElementById('launchNote');
+        if (nota) {
+          gsap.fromTo(nota, { opacity: 0, y: 8 }, { opacity: 0.85, y: 0, duration: 0.5, delay: 0.25, ease: 'steps(4)' });
+        }
 
         var tl = gsap.timeline({
           // El contador sigue el progreso de la animacion: 0% al inicio, 100% al final.
@@ -1346,8 +1988,8 @@
           },
           onComplete: function () {
             loader.textContent = '100%';
-            // El contador se desvanece junto con el conejo.
-            gsap.to(loader, { opacity: 0, duration: 0.5, ease: 'power2.in', delay: 0.35 });
+            // El contador y la nota se desvanecen junto con el conejo.
+            gsap.to([loader, nota], { opacity: 0, duration: 0.5, ease: 'power2.in', delay: 0.35 });
             // El conejo se desvanece...
             gsap.to(bunny, {
               scale: 0.7,
@@ -1377,7 +2019,8 @@
         // 1) ZOOM al aparecer: crece de inmediato con un rebote suave.
         tl.to(bunny, { opacity: 1, scale: 1.3, duration: 0.7, ease: 'back.out(2)' })
           // 2) Se mantiene grande mientras PARPADEA.
-          .to(bunny, { scale: 1.3, duration: 0.9 })
+          //    (1.5s: tiempo justo para leer la nota de abajo.)
+          .to(bunny, { scale: 1.3, duration: 1.5 })
           // 3) Despues del parpadeo se hace CHIQUITO.
           .to(bunny, { scale: 0.8, duration: 0.6, ease: 'power2.inOut' });
       }
@@ -1536,6 +2179,9 @@ void main() {
         var last = performance.now();
         var lineC = new Color();
         var baseC = new Color();
+        // Tema de la home (lo pone "COLOR POR SECCION"): sobre fondo claro el
+        // brillo va en taupe, porque uno blanco no se veria sobre la arena.
+        var homeTema = document.getElementById('home');
 
         function update(now) {
           requestAnimationFrame(update);
@@ -1551,8 +2197,9 @@ void main() {
           var brightTarget = opts.autoAnimate ? 1 : proximityT;
           bright += (brightTarget - bright) * (1 - Math.exp(-dt * 8));
 
-          lineC.set(opts.lineColor);
-          baseC.set(opts.baseColor);
+          var claro = homeTema && homeTema.getAttribute('data-tema') === 'claro';
+          lineC.set(claro ? opts.lineColorClaro : opts.lineColor);
+          baseC.set(claro ? opts.baseColorClaro : opts.baseColor);
           program.uniforms.uAngle.value = angle;
           program.uniforms.uRadius.value = Math.min(opts.radius, Math.min(sizeRef.w, sizeRef.h) / 2) * dpr;
           program.uniforms.uLineColor.value = [lineC.r, lineC.g, lineC.b];
@@ -1574,6 +2221,8 @@ void main() {
               radius: 18,
               lineColor: '#ffffff',
               baseColor: '#525252',
+              lineColorClaro: '#211B18',
+              baseColorClaro: '#8C7C73',
               intensity: 1,
               shineSize: 10,
               shineFade: 40,
@@ -1684,7 +2333,7 @@ void main() {
           if (item.img) {
             img.style.backgroundImage = 'url(' + item.img + ')';
           } else {
-            img.textContent = 'Próximamente';
+            img.textContent = 'Coming soon';
           }
           wrapper.appendChild(img);
 

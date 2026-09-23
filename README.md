@@ -5,9 +5,13 @@ abrir `index.html` con doble clic.
 
 ## Estructura
 
-- `index.html` — intro (conejo) + landing con el efecto de scroll.
-- `knox.html` — ¿Quién es Knox?
-- `trabajos.html` — Trabajos (índice interactivo).
+- `index.html` — intro (conejo) + landing con el efecto de scroll, manifiesto
+  (incluye el "quién es Knox") y sección de 3 disciplinas gigantes.
+- `trabajos.html` — Trabajos: las 3 categorías.
+- `trabajos-grafico.html`, `trabajos-estrategia.html`, `trabajos-audiovisual.html` —
+  mosaico de cada categoría estilo gilhuybrecht.com; al hacer clic el proyecto se
+  abre encima (`mosaico.js`).
+- `proyectos.js` — **la información y las fotos de cada proyecto** (se editan solo aquí).
 - `contacto.html` — Contacto.
 - `pagina.css` — estilos de las páginas internas.
 - `lib/` — librerías locales (GSAP y Lottie).

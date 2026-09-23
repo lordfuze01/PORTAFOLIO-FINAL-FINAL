@@ -125,52 +125,6 @@ em { font-style: italic; color: var(--accent); }
 .grid--2 { grid-template-columns: repeat(2, 1fr); }
 .grid--3 { grid-template-columns: repeat(3, 1fr); }
 
-/* ---------- Ficha tecnica (trabajos.html) ----------
-   Filas con hairlines, mismo lenguaje del indice grande de proyectos:
-   fecha | nombre + descripcion | herramientas. Sin cajas ni chips. */
-.ficha { list-style: none; }
-.ficha__row {
-  display: grid;
-  grid-template-columns: minmax(9rem, 13rem) 1fr minmax(10rem, 15rem);
-  gap: 0.8rem 2.5rem;
-  align-items: baseline;
-  border-top: 1px solid var(--line);
-  padding: clamp(1.3rem, 3.5vw, 2rem) 0.4rem;
-}
-.ficha__row:last-child { border-bottom: 1px solid var(--line); }
-.ficha__fecha {
-  font-size: 0.78rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-.ficha__title { font-size: 1.15rem; font-weight: 700; letter-spacing: -0.01em; }
-.ficha__text {
-  color: var(--muted);
-  font-size: 0.95rem;
-  margin-top: 0.5rem;
-  max-width: 52ch;
-}
-.ficha__tools {
-  font-size: 0.78rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--muted);
-  text-align: right;
-}
-
-/* ---------- Chips / etiquetas ---------- */
-.chips { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.4rem; }
-.chip {
-  border: 1px solid var(--line);
-  border-radius: 2px;
-  padding: 0.35rem 0.75rem;
-  font-size: 0.74rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
 /* ---------- Footer ---------- */
 .site-footer {
   border-top: 1px solid var(--line);
@@ -293,131 +247,6 @@ em { font-style: italic; color: var(--accent); }
   .cat-hero__bg, .cat-hero__glass, .cat-hero__label, .cat-hero__cta { transition: none; }
 }
 
-/* ---------- Trabajos: indice interactivo ---------- */
-.work { position: relative; }
-.work__list { list-style: none; }
-.work__item { border-top: 1px solid var(--line); }
-.work__item:last-child { border-bottom: 1px solid var(--line); }
-
-.work__link {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: baseline;
-  gap: 1.5rem;
-  padding: clamp(1.4rem, 4vw, 2.4rem) 0.4rem;
-  text-decoration: none;
-  color: var(--fg);
-  transition: padding-left 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
-}
-.work__index {
-  font-size: 0.85rem;
-  color: var(--muted);
-  letter-spacing: 0.1em;
-}
-.work__name {
-  font-size: clamp(2rem, 7vw, 4.5rem);
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  line-height: 1;
-  transition: opacity 0.3s ease;
-}
-.work__cat {
-  font-size: 0.82rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--muted);
-  text-align: right;
-}
-/* Al pasar el cursor: el activo se resalta y los demas se atenuan */
-.work__list:hover .work__name { opacity: 0.35; }
-.work__item:hover .work__name { opacity: 1; }
-.work__item:hover .work__link { padding-left: 1.4rem; }
-
-/* Movil: la categoria en su columna angosta se partia palabra por
-   palabra -- pasa debajo del nombre, alineada con el. */
-@media (max-width: 640px) {
-  .work__link { grid-template-columns: auto 1fr; row-gap: 0.5rem; }
-  .work__cat { grid-column: 2; text-align: left; }
-}
-
-/* Vista previa flotante que sigue al cursor */
-.work__preview {
-  position: fixed;
-  top: 0; left: 0;
-  width: min(30vw, 340px);
-  aspect-ratio: 4 / 3;
-  border-radius: 4px;
-  overflow: hidden;
-  pointer-events: none;
-  opacity: 0;
-  transform: translate(-50%, -50%) scale(0.9);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  z-index: 50;
-  border: 1px solid var(--line);
-}
-.work__preview.is-visible { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-.work__preview-inner {
-  width: 100%; height: 100%;
-  display: grid; place-items: center;
-  color: #766860;
-  font-size: 0.8rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  background: repeating-linear-gradient(45deg, #241E1B 0 12px, #2A231F 12px 24px);
-}
-.work__preview-inner img { width: 100%; height: 100%; object-fit: cover; }
-
-/* ---------- Pagina de proyecto (detalle) ----------
-   Galeria de imagenes: mientras no hay fotos, cada .galeria__item muestra
-   un bloque placeholder. Para poner una foto real, dentro del item va:
-       <img src="./tu-foto.jpg" alt="..." loading="lazy" />
-   (el texto "Proximamente" se tapa solo con la imagen). */
-.galeria { display: grid; gap: 1.25rem; margin-top: clamp(1.8rem, 4vw, 2.8rem); }
-.galeria--2 { grid-template-columns: repeat(2, 1fr); }
-.galeria__item {
-  position: relative;
-  aspect-ratio: 4 / 3;
-  border: 1px solid var(--line);
-  border-radius: 4px;
-  overflow: hidden;
-  background: repeating-linear-gradient(45deg, #241E1B 0 12px, #262019 12px 24px);
-  display: grid;
-  place-items: center;
-  color: #625649;
-  font-size: 0.8rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-.galeria__item--ancha { grid-column: 1 / -1; aspect-ratio: 16 / 9; }
-.galeria__item img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-
-/* Enlace "Siguiente proyecto" al final del detalle */
-.next {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: baseline;
-  gap: 1.5rem;
-  padding: clamp(1.4rem, 4vw, 2.4rem) 0.4rem;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  text-decoration: none;
-  color: var(--fg);
-  transition: padding-left 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.next:hover { padding-left: 1.4rem; }
-.next__label {
-  font-size: 0.8rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-.next__name {
-  font-size: clamp(1.8rem, 6vw, 3.5rem);
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  line-height: 1;
-}
-
 /* ---------- Disponibilidad (punto + texto) ----------
    El punto es inline: si el texto se parte en varias lineas, queda pegado
    a la primera palabra en vez de flotar a la izquierda. */
@@ -498,11 +327,7 @@ em { font-style: italic; color: var(--accent); }
 @media (max-width: 820px) {
   .grid--2 { grid-template-columns: 1fr; }
   .grid--3 { grid-template-columns: 1fr; }
-  .galeria--2 { grid-template-columns: 1fr; }
-  .galeria__item--ancha { grid-column: auto; }
   .site-footer__contact { text-align: left; }
-  .ficha__row { grid-template-columns: 1fr; gap: 0.35rem; }
-  .ficha__tools { text-align: left; margin-top: 0.3rem; }
 }
 
 @media (max-width: 640px) {
@@ -561,6 +386,7 @@ em { font-style: italic; color: var(--accent); }
 .menu-toggle[aria-expanded="true"] .menu-toggle__icon span:nth-child(2) { opacity: 0; }
 .menu-toggle[aria-expanded="true"] .menu-toggle__icon span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 .menu-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.menu-toggle.sin-anillo-foco:focus-visible { outline: none; }
 
 .menu-overlay {
   position: fixed;
@@ -617,6 +443,7 @@ em { font-style: italic; color: var(--accent); }
 .menu-panel__link.is-active { color: #F6F4F3; }
 .menu-panel__link.is-active .menu-panel__num { color: var(--bone); }
 .menu-panel__link:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.menu-panel__link.sin-anillo-foco:focus-visible { outline: none; }
 
 .menu-panel__contact {
   display: flex;
@@ -640,272 +467,427 @@ em { font-style: italic; color: var(--accent); }
 }
 
 /* =========================================================
-   SIDEBAR DE PROYECTO — layout de 2 columnas + lista con efecto
-   de proximidad al cursor (puerto vanilla del componente React
-   "LineSidebar"). Compartido por especiferal.html / mordiendo.html
-   / elsabio.html. Comportamiento en sidebar.js. Ver
-   docs/superpowers/specs/2026-07-26-sidebar-proyecto-design.md.
+   TRABAJOS — MOSAICO + VISTA DE PROYECTO (referencia:
+   gilhuybrecht.com, replicada a pedido del autor). Paginas
+   trabajos-grafico / trabajos-estrategia / trabajos-audiovisual.
+   El contenido sale de proyectos.js y el comportamiento de
+   mosaico.js. Medidas de la referencia a 1440px: 14 columnas con
+   gap de ~0.93vw, cada imagen ocupa 2 (7 por fila), 72px entre
+   filas, el mosaico empieza al 31% del ancho y todo el texto es de
+   ~16px peso 500. En <650px: 4 columnas (2 imagenes por fila) y
+   solo las dos primeras fotos de cada proyecto, una fila por
+   proyecto, igual que la referencia en movil.
    ========================================================= */
-.page-content { min-width: 0; }
-.page-content > section {
-  padding: clamp(1.6rem, 4vw, 2.6rem) 0;
-  border-top: 1px solid var(--line);
-  scroll-margin-top: var(--header-height, 90px);
+.mosaico-pagina {
+  --mz-pad: clamp(12px, 0.94vw, 16px);
+  --mz-gap: clamp(12px, 0.94vw, 16px);
+  --mz-texto: clamp(15px, 1.13vw, 18px);
+  font-size: var(--mz-texto);
+  line-height: 1.12;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  overflow-x: hidden;
 }
-.page-content > section:first-child { border-top: 0; padding-top: 0; }
-.page-content h2 {
-  font-size: clamp(1.3rem, 3vw, 1.9rem);
+/* Mascara para los textos que suben al entrar (como los .js-up de la
+   referencia): el hijo .mz-sube arranca abajo y el JS lo trae. */
+.mz-mascara { display: block; overflow: hidden; }
+.mz-sube { display: block; }
+
+/* ---- Cabecera: KNOX a la izquierda, las 3 areas en una pastilla de
+   "liquid glass" al centro y el menu (fijo) a la derecha. Va fija
+   arriba: las areas siempre estan a mano mientras bajas el mosaico. ---- */
+.mosaico-cabecera {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 25;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  /* alto fijo: KNOX, la pastilla y el menu quedan en la misma linea */
+  height: calc(0.85rem * 2 + 42px);
+  /* a la derecha queda el espacio del boton del menu (fijo) */
+  padding: 0 calc(clamp(1.2rem, 3vw, 2rem) + 46px + 1rem) 0 clamp(1.25rem, 3vw, 2rem);
+  color: var(--fg);
+  pointer-events: none;
+}
+.mosaico-cabecera > * { pointer-events: auto; }
+.mosaico-cabecera a { color: inherit; text-decoration: none; }
+.mosaico-cabecera a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.mc-marca {
+  justify-self: start;
   font-weight: 800;
-  letter-spacing: -0.01em;
-  margin-bottom: 0.9rem;
+  letter-spacing: 0.18em;
+  font-size: 0.95rem;
+  transition: opacity 0.25s ease;
 }
-.page-content section p { color: var(--muted); max-width: 60ch; }
-.page-content section p + p { margin-top: 0.9rem; }
+.mc-marca:hover { opacity: 0.6; }
 
-/* Desktop: .page-body se estira a lo ancho completo del documento y se le
-   resta ese mismo ancho como margin-left negativo (calculado en JS,
-   sidebar.js -- mismo truco que ya usa .flow-menu en index.html para
-   salirse del max-width centrado de .page). Adentro, un flex row simple:
-   la sidebar (position:sticky nativo, sin JS de por medio) queda pegada
-   al borde real de la ventana porque ahora ES el borde de su contenedor.
-   position:sticky puro (no una imitacion con scroll+JS) es a proposito:
-   cualquier reimplementacion en JS mueve el elemento un frame detras del
-   scroll real, que es justo el temblor/jitter que se reporto -- sticky
-   nativo lo resuelve el compositor del navegador, sin ese delay. */
-.page-body { display: flex; align-items: flex-start; margin-top: clamp(2.5rem, 6vw, 4rem); }
-
-@media (min-width: 821px) {
-  .page-body { gap: 40px; }
-  .line-sidebar {
-    position: sticky;
-    top: 50%;
-    transform: translateY(-50%);
-    flex: 0 0 226px;
-    padding-left: 46px;
-  }
-  .page-content { max-width: 854px; }
-}
-
-.line-sidebar__list {
-  list-style: none;
+/* La pastilla de vidrio: desenfoca y satura lo que pasa por debajo
+   (las fotos del mosaico al hacer scroll), con un filo de luz arriba y
+   una sombra suave abajo. El "lente" es una gota de vidrio mas clara
+   que se desliza a la area bajo el cursor y vuelve a la actual. */
+.mc-areas {
+  /* centrada en la pantalla (no en el hueco entre KNOX y el menu) */
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
-  flex-direction: column;
-  gap: 22px;
+  align-items: center;
+  padding: 5px;
+  border-radius: 999px;
+  background:
+    linear-gradient(180deg, rgba(246, 244, 243, 0.14), rgba(246, 244, 243, 0.03) 55%, rgba(246, 244, 243, 0.07));
+  backdrop-filter: blur(14px) saturate(170%) brightness(1.05);
+  -webkit-backdrop-filter: blur(14px) saturate(170%) brightness(1.05);
+  border: 1px solid rgba(246, 244, 243, 0.16);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.18),
+    0 10px 30px rgba(0, 0, 0, 0.28);
 }
-.line-sidebar__item { position: relative; --effect: 0; }
-.line-sidebar__link {
+.mc-areas a {
+  position: relative;
+  z-index: 1;
+  padding: 0.55em 1.15em 0.5em;
+  border-radius: 999px;
+  font-size: 0.92rem;
+  line-height: 1;
+  white-space: nowrap;
+  color: rgba(246, 244, 243, 0.62);
+  transition: color 0.35s ease;
+}
+.mc-areas a:hover,
+.mc-areas a.is-lente { color: var(--fg); }
+.mc-areas a[aria-current="page"] { color: var(--fg); }
+.mc-areas__lente {
+  position: absolute;
+  top: 5px;
+  bottom: 5px;
+  left: 0;
+  width: 0;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(246, 244, 243, 0.26), rgba(246, 244, 243, 0.1));
+  border: 1px solid rgba(246, 244, 243, 0.22);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 2px 10px rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(6px) saturate(200%);
+  -webkit-backdrop-filter: blur(6px) saturate(200%);
+  pointer-events: none;
+  transition:
+    transform 0.55s cubic-bezier(0.34, 1.4, 0.64, 1),
+    width 0.55s cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+/* Sin JS el lente no se mide: el area actual se marca con su propio fondo. */
+.mc-areas:not(.is-listo) a[aria-current="page"] { background: rgba(246, 244, 243, 0.18); }
+@media (prefers-reduced-motion: reduce) {
+  .mc-areas__lente { transition: none; }
+}
+
+/* ---- Mosaico ----
+   Cada imagen ocupa 2 de las 14 columnas. Con subgrid, el rotulo y la
+   imagen de todos los items de una fila comparten sus alturas: si un
+   nombre largo se parte en dos lineas, las imagenes de esa fila siguen
+   alineadas arriba. */
+.mosaico {
+  display: grid;
+  grid-template-columns: repeat(14, minmax(0, 1fr));
+  column-gap: var(--mz-gap);
+  row-gap: 0;
+  padding: clamp(150px, 14vw, 260px) var(--mz-pad) clamp(110px, 10vw, 180px);
+}
+.mosaico__item {
+  grid-column: span 2;
+  grid-row: span 2;
+  display: grid;
+  grid-template-rows: subgrid;
+  margin-bottom: clamp(44px, 5vw, 80px);
+  color: var(--fg);
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+.mosaico__item.is-apagado { opacity: 0.2; }
+.mosaico__item:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.mosaico__rotulo {
+  align-self: end;
   display: flex;
   align-items: baseline;
-  gap: 0.6rem;
-  padding: 0.2rem 0;
-  text-decoration: none;
-  color: color-mix(in srgb, var(--muted) calc((1 - var(--effect)) * 100%), var(--accent) calc(var(--effect) * 100%));
-  transform: translateX(calc(var(--effect) * 14px));
+  justify-content: space-between;
+  gap: 0.5em;
+  margin-bottom: 0.36em;
 }
-.line-sidebar__link:focus-visible {
+.mosaico__num { margin-left: auto; }
+.mosaico__marco {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  background: #2A231F;
+}
+.mosaico__marco img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.mosaico__vacio { grid-column: 1 / -1; color: var(--muted); }
+
+/* Casilla de un proyecto que aun no tiene fotos (proyectos.js con
+   fotos: []): rayas del mismo taupe y "Coming soon". Tambien es la
+   copia que vuela al abrirlo (span.mz-vuelo). */
+.mz-hueco,
+span.mz-vuelo {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: repeating-linear-gradient(45deg, #241E1B 0 12px, #2A231F 12px 24px);
+  color: var(--muted);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.vista__foto--hueco { aspect-ratio: 4 / 3; cursor: default; }
+
+/* ---- Cargador 0% -> 100% (solo la primera vez por sesion) ----
+   Lo prende un script en el <head> (clase mz-cargando en <html>) antes
+   de pintar nada, y lo apaga mosaico.js. Si el JS fallara, el propio
+   CSS lo desvanece a los 7s para que nunca tape la pagina. */
+.mosaico-cargador {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: none;
+  place-items: center;
+  background: var(--bg);
+  color: var(--fg);
+  font-variant-numeric: tabular-nums;
+}
+html.mz-cargando .mosaico-cargador {
+  display: grid;
+  animation: mz-salvavidas 0.4s ease 7s forwards;
+}
+@keyframes mz-salvavidas {
+  to { opacity: 0; visibility: hidden; }
+}
+
+/* ---- Vista del proyecto: se abre encima del mosaico ----
+   Informacion en 5 de las 14 columnas, fotos en las otras 9, igual que
+   la referencia. El mosaico queda atras, apagado. */
+.vista {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: grid;
+  grid-template-columns: repeat(14, minmax(0, 1fr));
+  column-gap: var(--mz-gap);
+  padding: 0 var(--mz-pad);
+}
+.vista[hidden] { display: none; }
+.vista__info {
+  grid-column: 1 / span 5;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  padding: calc(var(--mz-texto) * 1.2) 0 2rem;
+  color: var(--fg);
+}
+.vista__cabeza {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.2em;
+}
+.vista__titulo { font: inherit; }
+/* El titulo recibe el foco al abrir (para lectores de pantalla); no
+   necesita anillo porque no es un control. */
+.vista__titulo:focus { outline: none; }
+.vista__pill { color: var(--fg); text-decoration: none; white-space: nowrap; transition: opacity 0.25s ease; }
+.vista__pill:hover { opacity: 0.6; }
+.vista__tipo { margin-top: 0.3em; color: var(--muted); }
+.vista__desc { margin-top: 2.7em; max-width: 47.5rem; }
+.vista__desc .mz-mascara { padding-bottom: 0.04em; }
+.vista__fichaw { position: relative; margin-top: 2.7em; }
+.vista__ficha { list-style: none; }
+/* Ficha numerada como la de la referencia: numero | dato | valor (el
+   valor ocupa 3 de 5 columnas). El <li> es la mascara y la fila sube. */
+.vista__dato { overflow: hidden; }
+.vista__fila {
+  display: grid;
+  /* numero | dato | valor. La referencia usa 5 columnas iguales, pero sus
+     datos son palabras cortas (Dev, Year); "Herramientas" o "Producto
+     final" necesitan una columna un poco mas ancha. */
+  grid-template-columns: minmax(2em, 0.7fr) minmax(7em, 1.3fr) minmax(0, 3fr);
+  column-gap: 20px;
+  padding: 0.15em 0;
+}
+.vista__fila .v.is-pendiente { color: var(--muted); }
+/* La pastilla que sigue a la fila de la ficha bajo el cursor. */
+.vista__resalte {
+  position: absolute;
+  z-index: -1;
+  left: -8px;
+  right: -8px;
+  top: 0;
+  height: 1.4em;
+  border-radius: 5px;
+  background: rgba(246, 244, 243, 0.15);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  opacity: 0;
+  pointer-events: none;
+}
+/* "Volver": en escritorio lo hace la etiqueta del cursor (clic en esta
+   columna); este boton queda para teclado y pantallas tactiles. */
+.vista__volver {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+  background: none;
+  color: var(--fg);
+  font: inherit;
+  cursor: pointer;
+}
+.vista__volver:focus-visible {
+  position: static;
+  width: auto;
+  height: auto;
+  clip-path: none;
+  margin-top: auto;
+  align-self: flex-start;
   outline: 2px solid var(--accent);
   outline-offset: 4px;
 }
-/* Marcador: linea a la izquierda del texto (puerto fiel de la referencia
-   en REFERENCIAS/ -- component CSS de LineSidebar). Un segundo "tick" mas
-   corto y tenue marca la mitad del hueco ENTRE dos items consecutivos
-   (pseudo-elemento ::after, sin HTML extra): son esas "lineas entre las
-   lineas" que le dan textura a la lista en reposo. */
-.line-sidebar__marker {
-  position: absolute;
-  top: 50%;
-  left: -46px;
-  height: 2px;
-  width: 32px;
-  background: color-mix(in srgb, var(--line) calc((1 - var(--effect)) * 100%), var(--accent) calc(var(--effect) * 100%));
-  transform-origin: left center;
-  transform: translateY(-50%) scaleX(calc(0.7 + var(--effect) * 0.5));
-}
-.line-sidebar__item:not(:last-child)::after {
-  content: '';
-  position: absolute;
-  top: calc(100% + 11px);
-  left: -46px;
-  height: 1px;
-  width: 16px;
-  background: var(--bone);
-  opacity: 0.85;
-  transform-origin: left center;
-  transform: translateY(-50%) scaleX(calc(0.7 + var(--effect) * 0.6));
-}
-.line-sidebar__index {
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
-  color: var(--ash);
-  opacity: calc(0.55 + var(--effect) * 0.45);
-  flex: 0 0 auto;
-}
-.line-sidebar__text {
-  font-size: 0.95rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  white-space: nowrap;
-}
-
-@media (max-width: 820px) {
-  /* Mobile: sin espacio para un riel lateral -- vuelve al flujo normal
-     (position:static), franja horizontal con scroll arriba del contenido,
-     tampoco centrada/pegada al scrollear. */
-  .page-body { flex-direction: column; }
-  .line-sidebar {
-    position: static;
-    width: 100%;
-    padding-left: 0;
-    z-index: 5;
-    background: rgba(33, 27, 24, 0.88);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--line);
-    margin-bottom: 1.6rem;
-  }
-  .line-sidebar__list {
-    flex-direction: row;
-    gap: 1.5rem;
-    padding: 0.9rem clamp(1.25rem, 5vw, 3.5rem);
-    overflow-x: auto;
-    scrollbar-width: none;
-  }
-  .line-sidebar__list::-webkit-scrollbar { display: none; }
-  .line-sidebar__marker,
-  .line-sidebar__item::after { display: none; }
-}
-
-/* =========================================================
-   KNOX HERO — titular "KNOX" gigante y centrado con efecto de presion
-   (puerto vanilla del componente React Bits "TextPressure"): cada letra
-   varia su peso/ancho segun que tan cerca este el cursor. Fuente variable
-   Roboto Flex autohospedada en lib/ (no depende de internet en vivo, ver
-   lib/gsap.min.js / lib/lottie.min.js -- mismo criterio). Comportamiento
-   en text-pressure.js. Por ahora solo en knox.html.
-   ========================================================= */
-@font-face {
-  font-family: 'Roboto Flex Variable';
-  src: url('./lib/roboto-flex-variable.woff2') format('woff2');
-  font-weight: 100 1000;
-  font-stretch: 25% 151%;
-  font-display: swap;
-}
-.knox-hero {
+.vista__media {
+  grid-column: 6 / span 9;
+  height: 100vh;
+  height: 100svh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
   display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  padding-bottom: clamp(1.5rem, 4vh, 3rem);
+  flex-direction: column;
+  gap: clamp(12px, 1.04vw, 18px);
+  padding: clamp(12px, 1.1vw, 18px) 0;
 }
-.text-pressure-title {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
+.vista__media::-webkit-scrollbar { display: none; }
+.vista__foto {
+  position: relative;
+  flex: none;
   margin: 0;
-  font-family: 'Roboto Flex Variable', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-weight: 100;
-  font-variation-settings: 'wght' 400, 'wdth' 100;
-  font-size: clamp(3rem, 18vw, 12rem);
-  text-transform: uppercase;
-  color: var(--fg);
-  line-height: 0.9;
-  white-space: nowrap;
-  user-select: none;
+  overflow: hidden;
+  background: #2A231F;
+  cursor: zoom-in;
 }
-.text-pressure-char { display: inline-block; }
-
-@media (prefers-reduced-motion: reduce) {
-  .text-pressure-char { font-variation-settings: 'wght' 500, 'wdth' 90 !important; }
-}
-
-/* =========================================================
-   KNOX BIO — marco beige (--bone) alrededor del bloque "Detrás de Knox"
-   + conejo Lottie + cierre "Human centered creation" (referencia:
-   houseofhoney.com/studio + estilo "pieza enmarcada"). El marco se sale
-   del ancho centrado de .page a todo el ancho de la ventana (mismo
-   truco que .flow-menu en index.html / .page-body de la sidebar: JS mide
-   el offset real y compensa con margin-left negativo -- ver
-   knox-bunny.js). Grosor asimetrico: fino a los lados, arriba y abajo del
-   cierre quedan al mismo grosor (~100px cada uno; el de abajo se reparte
-   entre el padding-bottom del marco y el de .knox-bio__closing). Adentro,
-   un lienzo oscuro (.knox-bio-frame__inner) con el contenido real. El
-   conejo crece/achica segun la direccion del scroll (comportamiento en
-   knox-bunny.js). Solo en knox.html.
-   ========================================================= */
-.knox-bio-frame {
-  background: var(--bone);
-  padding: 100px 15px 30px;
-  margin: clamp(1rem, 4vh, 2rem) 0;
-}
-.knox-bio-frame__inner { background: var(--bg); }
-
-.knox-bio {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-.knox-bio__text {
-  padding: clamp(1.5rem, 4vh, 2.5rem) clamp(1.8rem, 5vw, 3.5rem) clamp(1.8rem, 5vw, 3.5rem);
-  border-right: 15px solid var(--bone);
-  transform-origin: center;
-  will-change: transform;
-}
-/* Label grande tipo titulo (~20-26pt), todo en negrilla: "Detras de" en
-   Helvetica Neue bold + "Knox" abajo mas pesada aun (800), para que
-   contraste como nombre propio (misma familia base del sitio, sin
-   fuente nueva). */
-.knox-bio__text .section-label {
-  font-size: clamp(1.6rem, 3.4vw, 2.1rem);
-  line-height: 1.15;
-  letter-spacing: 0;
-  text-transform: none;
-  color: var(--bone);
-  font-weight: 700;
-  margin-bottom: clamp(1.5rem, 4vh, 2.2rem);
-}
-.knox-bio__label-name {
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-weight: 800;
-  letter-spacing: -0.01em;
-}
-.knox-bio__text .text-lg { color: var(--bone); font-weight: 400; max-width: 46ch; }
-.knox-bio__text .text-lg.mt { margin-top: 1.1rem; }
-/* Revelado linea a linea al entrar en pantalla -- mismo patron .line +
-   IntersectionObserver + GSAP del manifiesto en index.html (ver
-   knox-bunny.js para el disparador). */
-.knox-bio__text .line { overflow: hidden; display: block; }
-.knox-bio__text .line > span { display: block; will-change: transform; }
-.knox-bio__bunny {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: clamp(1.5rem, 4vh, 2.5rem) clamp(1.8rem, 5vw, 3.5rem) clamp(1.8rem, 5vw, 3.5rem);
-  min-height: 320px;
+.vista__foto img { display: block; width: 100%; height: auto; }
+/* Video del proyecto (proyectos.js -> video: link de YouTube o Vimeo). */
+.vista__video {
+  position: relative;
+  flex: none;
+  aspect-ratio: 16 / 9;
+  background: #000;
   overflow: hidden;
 }
-.knox-bio__bunny-inner {
-  width: min(65%, 300px);
-  aspect-ratio: 1;
-  transform-origin: center;
+.vista__video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+/* Enfoque: una foto sola, grande, al centro. */
+.vista__velo {
+  position: fixed;
+  inset: 0;
+  z-index: 45;
+  background: var(--bg);
+  opacity: 0;
+  pointer-events: none;
 }
-/* "Human centered creation" pasa a ser de la misma arena que el marco (ya
-   no vive sobre el lienzo oscuro): el padding-top grande hace de divisor
-   grueso con la parte de arriba, en vez de una linea fina. Texto oscuro
-   por el cambio de fondo. */
-.knox-bio__closing {
-  background: var(--bone);
-  padding: 100px clamp(1.8rem, 5vw, 3.5rem) 70px;
-  transform-origin: center;
-  will-change: transform;
-}
-.knox-bio__closing .statement { color: var(--bg); }
-.knox-bio__closing .page__lead {
-  color: color-mix(in srgb, var(--bg) 65%, var(--bone) 35%);
+.vista.is-foco .vista__velo { pointer-events: auto; cursor: zoom-out; }
+
+/* Copias que "vuelan" del mosaico a la vista y de vuelta (y al
+   enfocar). Van por encima de todo mientras dura la animacion. */
+.mz-vuelo {
+  position: fixed;
+  z-index: 60;
+  margin: 0;
+  object-fit: cover;
+  pointer-events: none;
+  will-change: transform, left, top, width, height;
 }
 
-@media (max-width: 820px) {
-  .knox-bio-frame { padding: 90px 15px 180px; }
-  .knox-bio { grid-template-columns: 1fr; }
-  .knox-bio__text { border-right: 0; border-bottom: 15px solid var(--bone); padding-bottom: clamp(1.8rem, 5vw, 3.5rem); }
-  .knox-bio__bunny { padding-top: 0; }
-  .knox-bio__closing { padding: 60px clamp(1.8rem, 5vw, 3.5rem) 50px; }
+/* Cursor con etiqueta (Volver / Ampliar / Cerrar), solo con mouse. */
+.mosaico-cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 210;
+  pointer-events: none;
+  color: #fff;
+  mix-blend-mode: difference;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.mosaico-cursor.is-visible { opacity: 1; }
+.mosaico-pagina.con-cursor .vista__info,
+.mosaico-pagina.con-cursor .vista__foto,
+.mosaico-pagina.con-cursor .vista__velo { cursor: none; }
+.mosaico-pagina.con-cursor .vista__info a,
+.mosaico-pagina.con-cursor .vista__info .vista__dato a { cursor: pointer; }
+
+/* ---- Movil (<650px), como la referencia ---- */
+@media (max-width: 649px) {
+  .mosaico-pagina { --mz-texto: 17px; --mz-pad: 14px; --mz-gap: 14px; }
+  /* En el celular la pastilla baja a su propia fila, centrada, bajo
+     KNOX y el menu. */
+  .mosaico-cabecera {
+    height: auto;
+    padding-top: 0.85rem;
+    padding-bottom: 0.85rem;
+    grid-template-columns: 1fr;
+    row-gap: 0.9rem;
+    padding-right: clamp(1.25rem, 3vw, 2rem);
+  }
+  .mc-marca { padding: 0.35rem 0; }
+  .mc-areas { position: relative; left: auto; top: auto; transform: none; justify-self: center; }
+  .mc-areas a { font-size: 0.85rem; padding: 0.55em 0.95em 0.5em; }
+  .mosaico { grid-template-columns: repeat(4, minmax(0, 1fr)); padding-top: 8.5rem; }
+  .mosaico__item { margin-bottom: 75px; }
+  .mosaico__item--extra { display: none; }
+  .mosaico__item--primero { grid-column: 1 / span 2; }
+  .mosaico__num { visibility: hidden; }
+
+  /* La vista se apila: informacion arriba, fotos abajo, y un "Cerrar"
+     fijo abajo al centro (el "Close" de la referencia en movil). */
+  .vista {
+    display: block;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    background: var(--bg);
+    padding-bottom: 5rem;
+  }
+  .vista__info { padding-bottom: 2.4em; }
+  /* el boton del menu (fijo arriba a la derecha) no tapa "Behance" */
+  .vista__cabeza { padding-right: calc(clamp(1.2rem, 3vw, 2rem) + 46px); }
+  .vista__media { height: auto; overflow: visible; padding: 0; }
+  .vista__volver,
+  .vista__volver:focus-visible {
+    position: fixed;
+    left: 50%;
+    bottom: 14px;
+    z-index: 50;
+    width: auto;
+    height: 26px;
+    padding: 0 8px;
+    clip-path: none;
+    transform: translateX(-50%);
+    border-radius: 5px;
+    background: rgba(33, 27, 24, 0.6);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    line-height: 26px;
+  }
 }

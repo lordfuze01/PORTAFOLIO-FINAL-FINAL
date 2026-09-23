@@ -121,8 +121,12 @@
         "purpose": "Versalita gris para todo metadato: eyebrows, fechas, herramientas, categorias, disponibilidad y chips."
       },
       "pressure": {
-        "displayName": "Titular de presion",
-        "purpose": "Excepcion localizada en knox.html: Roboto Flex Variable autohospedada (wght 100-1000, wdth 25-151%), clamp(3rem, 18vw, 12rem), lh 0.9, mayusculas. Cada letra varia peso y ancho segun la cercania del cursor. No es una segunda fuente del sistema."
+        "displayName": "Titular de presion (retirado)",
+        "purpose": "Vivia en knox.html (retirado 2026-09): cada letra variaba peso/ancho segun la cercania del cursor. La pagina y su script (text-pressure.js) se eliminaron; ya no hay ningun uso de este tratamiento en el sitio."
+      },
+      "roles": {
+        "displayName": "Titular gigante de roles",
+        "purpose": "Seccion #roles de index.html (3 disciplinas, inspirada en russellnumo.nl): 3 franjas en marquee horizontal infinito, filas alternas en sentido contrario, velocidad y direccion ligadas al scroll, casi se detienen con el cursor encima. Roboto Flex Variable autohospedada en wght 880 / wdth 25 / opsz 144 (alta y angosta, como la Humane de la referencia), clamp(3.6rem, 17vw, 15rem), lh 0.92, tracking +0.02em (con tracking negativo las letras se montan y dejan rayitas claras), mayusculas. No es una segunda fuente del sistema."
       }
     },
     "shadows": [
@@ -197,6 +201,21 @@
         "name": "anillo-specular",
         "value": "3.5s linear infinite",
         "purpose": "El gradiente conico girando alrededor del boton. Con prefers-reduced-motion queda estatico en 35deg."
+      },
+      {
+        "name": "color-por-seccion",
+        "value": "mezcla ligada al scroll: mientras el borde superior de la seccion nueva va del 60% al 10% de la pantalla",
+        "purpose": "Home: el fondo del body se funde entre dos colores, marron y blanco (data-color: taupe #211B18 en hero y manifiesto -> arena #EDE7E4 desde las franjas hasta el cierre), como el fondo que cambia con el scroll en russellnumo.nl. La tinta cambia de tema (data-tema en #home) segun la luminancia real del fondo (cruce ~0.18), con transicion de color 0.5s."
+      },
+      {
+        "name": "encendido-palabras",
+        "value": "opacidad 0.18 -> 1 por palabra, ligada al scroll, en ola",
+        "purpose": "Titular del manifiesto (#intro): cada palabra se llena de tinta a medida que bajas, como la cita de russellnumo.nl. Se apaga con prefers-reduced-motion."
+      },
+      {
+        "name": "destape-franjas",
+        "value": "gsap power4.out 0.9s, stagger 0.12, clip-path inset(100% 0 0 0) -> inset(0) + y 40 -> 0",
+        "purpose": "Entrada de las 3 franjas de #roles, de abajo hacia arriba, como las lineas del hero de la referencia."
       }
     ],
     "breakpoints": [
@@ -280,12 +299,12 @@
       "css": ".ds-galeria { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; } .ds-galeria__item { position: relative; aspect-ratio: 4 / 3; border: 1px solid var(--line, #3D3D3F); border-radius: 4px; overflow: hidden; background: repeating-linear-gradient(45deg, #242426 0 12px, #28282a 12px 24px); display: grid; place-items: center; color: #5a5a5a; font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; } .ds-galeria__item--ancha { grid-column: 1 / -1; aspect-ratio: 16 / 9; } .ds-galeria__item img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; } @media (max-width: 820px) { .ds-galeria { grid-template-columns: 1fr; } .ds-galeria__item--ancha { grid-column: auto; } }"
     },
     {
-      "name": "Riel de secciones (sidebar de proyecto)",
-      "kind": "nav",
+      "name": "Mosaico de Trabajos + vista de proyecto",
+      "kind": "custom",
       "refersTo": "row-index",
-      "description": "Riel sticky de las paginas de proyecto. En produccion la cercania del cursor alimenta --effect (0 a 1) e interpola color y desplazamiento con color-mix; aqui se aproxima con :hover. El tick corto entre items son 'las lineas entre las lineas'.",
-      "html": "<nav class=\"ds-riel\"><ul><li class=\"ds-riel__item\"><span class=\"ds-riel__marker\" aria-hidden=\"true\"></span><a class=\"ds-riel__link\" href=\"#\"><span class=\"ds-riel__index\">01</span><span class=\"ds-riel__text\">Concepto</span></a></li><li class=\"ds-riel__item\"><span class=\"ds-riel__marker\" aria-hidden=\"true\"></span><a class=\"ds-riel__link\" href=\"#\"><span class=\"ds-riel__index\">02</span><span class=\"ds-riel__text\">Proceso</span></a></li></ul></nav>",
-      "css": ".ds-riel { padding-left: 46px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; } .ds-riel ul { list-style: none; display: flex; flex-direction: column; gap: 22px; margin: 0; padding: 0; } .ds-riel__item { position: relative; } .ds-riel__link { display: flex; align-items: baseline; gap: 0.6rem; padding: 0.2rem 0; text-decoration: none; color: var(--muted, #a6a6a6); transition: color 0.25s ease, transform 0.25s ease; } .ds-riel__item:hover .ds-riel__link { color: var(--accent, #C4622E); transform: translateX(14px); } .ds-riel__marker { position: absolute; top: 50%; left: -46px; height: 2px; width: 32px; background: var(--line, #3D3D3F); transform-origin: left center; transform: translateY(-50%) scaleX(0.7); transition: background 0.25s ease, transform 0.25s ease; } .ds-riel__item:hover .ds-riel__marker { background: var(--accent, #C4622E); transform: translateY(-50%) scaleX(1.2); } .ds-riel__item:not(:last-child)::after { content: ''; position: absolute; top: calc(100% + 11px); left: -46px; height: 1px; width: 16px; background: var(--bone, #ECE7DF); opacity: 0.85; } .ds-riel__index { font-size: 0.72rem; letter-spacing: 0.08em; color: var(--ash, #7c7c7c); opacity: 0.55; } .ds-riel__text { font-size: 0.95rem; font-weight: 700; letter-spacing: -0.01em; white-space: nowrap; } .ds-riel__link:focus-visible { outline: 2px solid var(--accent, #C4622E); outline-offset: 4px; }"
+      "description": "Mosaico de Trabajos + vista de proyecto al estilo gilhuybrecht.com (2026-09-23). Cada categoria es un mosaico de 14 columnas (7 fotos por fila) con el nombre del proyecto sobre su primera foto y los numeros 1, 2, 3...; hover apaga los demas proyectos al 20%. Clic: las fotos vuelan con giro 3D a la columna derecha (9/14) y la info sube en la izquierda (5/14); cursor con etiqueta Volver / Ampliar / Cerrar; la direccion cambia a #id. Datos en proyectos.js, comportamiento en mosaico.js. La demo muestra la vista abierta.",
+      "html": "<div class=\"ds-proyecto\"><div class=\"ds-proyecto__info\"><p class=\"ds-proyecto__eyebrow\">Proyecto 02 · Fotografia</p><p class=\"ds-proyecto__titulo\">Mordiendo el polvo</p><ol class=\"ds-proyecto__datos\"><li><span>01</span><span>Fecha</span><span>Feb 2025</span></li><li><span>02</span><span>Proceso</span><span>Proximamente</span></li></ol><p class=\"ds-proyecto__volver\">&larr; Volver</p></div><div class=\"ds-proyecto__media\"><div class=\"ds-proyecto__foto\"></div><div class=\"ds-proyecto__foto\"></div></div></div>",
+      "css": ".ds-proyecto { display: grid; grid-template-columns: 34% 1fr; gap: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background: #211B18; color: #F6F4F3; } .ds-proyecto__info { padding: 1.2rem; border-right: 1px solid #3A312C; display: flex; flex-direction: column; gap: 0.9rem; } .ds-proyecto__eyebrow, .ds-proyecto__datos span:nth-child(-n+2), .ds-proyecto__volver { font-size: 0.7rem; letter-spacing: 0.16em; text-transform: uppercase; color: #8C7C73; margin: 0; } .ds-proyecto__titulo { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.02em; margin: 0; } .ds-proyecto__datos { list-style: none; margin: 0; padding: 0; } .ds-proyecto__datos li { display: grid; grid-template-columns: 1.6rem 5.5rem 1fr; gap: 0.5rem; padding: 0.5rem 0; border-top: 1px solid #3A312C; font-size: 0.85rem; } .ds-proyecto__volver { margin-top: 1.5rem; color: #F6F4F3; } .ds-proyecto__media { display: flex; flex-direction: column; gap: 0.6rem; padding: 0.6rem; } .ds-proyecto__foto { aspect-ratio: 3 / 2; border-radius: 4px; background: repeating-linear-gradient(45deg, #241E1B 0 12px, #262019 12px 24px); }"
     },
     {
       "name": "Eyebrow y titulo de seccion",
@@ -346,7 +365,7 @@
       },
       {
         "name": "La regla del sticky nativo",
-        "body": "La sidebar de proyecto usa position: sticky puro. Esta prohibido reimplementarla con scroll + JS: cualquier imitacion va un frame detras del scroll real y produce el temblor que ya se corrigio una vez.",
+        "body": "La columna de informacion de la vista de proyecto usa position: sticky puro. Esta prohibido reimplementarla con scroll + JS: cualquier imitacion va un frame detras del scroll real y produce el temblor que ya se corrigio una vez.",
         "section": "layout"
       },
       {
@@ -376,7 +395,7 @@
       "Don't poner cursiva por ritmo o decoracion: la cursiva marca la palabra que carga el sentido y va en terracota.",
       "Don't agregar sombras duras, cortas o con tinte de color. Difusas, negras y de baja opacidad, o ninguna.",
       "Don't convertir el manifiesto de la home en un bloque alineado a la izquierda ni agregarle un riel lateral: va centrado.",
-      "Don't reimplementar el sticky de la sidebar de proyecto con scroll + JS.",
+      "Don't reimplementar el sticky de la columna de informacion del proyecto con scroll + JS.",
       "Don't usar ScrollTrigger: solo esta el core de GSAP. Los efectos de scroll se hacen con IntersectionObserver + gsap.to, o con el motor manual en rAF del hero.",
       "Don't derivar hacia estetica SaaS/startup, plantilla de portafolio, brutalismo ruidoso o agencia corporativa. Son las cuatro anti-referencias confirmadas del proyecto.",
       "Don't inventar logos de clientes, testimonios, metricas o casos de estudio para llenar una composicion."

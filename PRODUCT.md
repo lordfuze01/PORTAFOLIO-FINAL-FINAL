@@ -30,7 +30,11 @@ contacto, no fines en sí mismos.
 
 ## Positioning
 
-"Dirección creativa para seres humanos." / "Human Centered."
+"Las mejores cosas siempre nacen de las mismas fuentes: la curiosidad y la
+observación." — el manifiesto de la Home ya no vive separado del "quién es
+Knox" (la página dedicada se retiró en 2026-09; su bio se fusionó ahí mismo).
+El tema "Human Centered" sigue presente como hilo del texto, no como frase
+aislada.
 
 El mecanismo es *design thinking* aplicado a través de disciplinas que rara vez viven en
 un mismo perfil —comunicación gráfica, ilustración, audiovisual, editorial y diseño
@@ -45,12 +49,17 @@ verdad.
 - Sitio estático servido por **Cloudflare Pages** (proyecto `byknox`, `wrangler.jsonc`
   sirve desde la raíz). **Publicar = `git push` a `main`**; Cloudflare redespliega solo.
   El usuario hace sus propios commits — no commitear por él salvo que lo pida.
-- Cuatro páginas principales — Home (`index.html`), Knox, Trabajos, Contacto — más una
-  página de detalle por proyecto. Menú lateral compartido por todas.
+- Tres páginas principales — Home (`index.html`), Trabajos, Contacto — más una
+  página-mosaico por categoría de Trabajos, donde cada proyecto se abre encima. Menú lateral compartido por todas. (La página
+  `knox.html` se retiró en 2026-09: el "quién es Knox" pasó al manifiesto de
+  la Home, junto con una sección de 3 disciplinas gigantes tipo
+  russellnumo.nl.)
 - El visitante evalúa hojeando: intro del conejo, hero fotográfico que crece con el
-  scroll, manifiesto, galería "Fragmentos del trabajo" con lightbox, índice de trabajos
-  con vista previa al cursor, fichas técnicas (fecha · proyecto · medios) y cierre con
-  disponibilidad y datos de contacto.
+  scroll, manifiesto, galería "Fragmentos del trabajo" con lightbox y cierre con
+  disponibilidad y datos de contacto. Cada categoría de Trabajos es un mosaico de
+  todas sus fotos y cada proyecto se abre encima al hacer clic (referencia
+  gilhuybrecht.com): la información a la izquierda y las fotos a la derecha. La
+  información y las fotos de los proyectos viven en `proyectos.js`.
 - **Behance** (`behance.net/santiagenciso1`) es el archivo extendido del trabajo; el
   sitio muestra la selección.
 - Canales de contacto reales: `sencisoballesta@gmail.com`, `+57 316 280 1718`,
@@ -65,8 +74,8 @@ verdad.
 - Librerías locales en `lib/` (funcionan sin internet): **GSAP solo core, sin
   ScrollTrigger** → los efectos de scroll se hacen con IntersectionObserver + `gsap.to`;
   además Lottie, OGL y la fuente variable Roboto Flex.
-- El logo/mascota es un **conejo animado en Lottie** (`conejo.json`, incrustado también
-  en `knox.html`).
+- El logo/mascota es un **conejo animado en Lottie** (`conejo.json`, incrustado en
+  `index.html`).
 - El hero usa un **motor de scroll manual** (`actualizarHero()` con rAF): la foto crece
   de 56vh a 100vh, se aclara y enfoca. No romper esa lógica.
 - El CSS del menú lateral y de `.status` está **duplicado a propósito** en `index.html`

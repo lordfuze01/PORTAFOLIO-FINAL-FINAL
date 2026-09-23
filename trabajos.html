@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="es">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Trabajos · KNOX</title>
-    <meta name="description" content="Selección de proyectos de BY KNOX por categoría: Visual, Estrategia e Industrial." />
+    <title>Work · KNOX</title>
+    <meta name="description" content="Selected work by BY KNOX by category: Graphic, Strategy and Audiovisual." />
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23211B18'/%3E%3Ctext x='32' y='47' font-family='Helvetica,Arial,sans-serif' font-size='42' font-weight='800' fill='%23EDE7E4' text-anchor='middle'%3EK%3C/text%3E%3C/svg%3E" />
     <meta name="theme-color" content="#211B18" />
     <link rel="stylesheet" href="./pagina.css" />
@@ -12,7 +12,7 @@
   <body>
     <header class="site-header">
       <a class="site-header__brand" href="index.html#main">KNOX</a>
-      <button type="button" id="menuToggle" class="menu-toggle" aria-expanded="false" aria-controls="menuPanel" aria-label="Abrir menú">
+      <button type="button" id="menuToggle" class="menu-toggle" aria-expanded="false" aria-controls="menuPanel" aria-label="Open menu">
         <span class="menu-toggle__icon" aria-hidden="true"><span></span><span></span><span></span></span>
       </button>
     </header>
@@ -20,32 +20,32 @@
     <main>
       <!-- Hero de categorias: cada columna es un <a> a pagina completa.
            PARA CAMBIAR LA FOTO DE UNA COLUMNA: reemplaza la ruta dentro de
-           background-image en el .cat-hero__bg correspondiente (hoy son
-           placeholders de imagenes/masonry/ mientras hay fotos propias por
-           categoria). -->
-      <section class="cat-hero" aria-label="Categorías de trabajo">
-        <a class="cat-hero__col" href="trabajos-visual.html">
-          <div class="cat-hero__bg" style="background-image: url('imagenes/masonry/masonry-02.jpg')"></div>
+           background-image en el .cat-hero__bg correspondiente
+           (imagenes/grafico.jpg, imagenes/estrategia.jpg,
+           imagenes/audiovisual.jpg). -->
+      <section class="cat-hero" aria-label="Work categories">
+        <a class="cat-hero__col" href="trabajos-grafico.html">
+          <div class="cat-hero__bg" style="background-image: url('imagenes/grafico.jpg')"></div>
           <div class="cat-hero__glass" aria-hidden="true"></div>
           <span class="cat-hero__content">
-            <span class="cat-hero__label">Visual</span>
-            <span class="cat-hero__cta">Ver proyectos →</span>
+            <span class="cat-hero__label">Graphic</span>
+            <span class="cat-hero__cta">See projects →</span>
           </span>
         </a>
         <a class="cat-hero__col" href="trabajos-estrategia.html">
-          <div class="cat-hero__bg" style="background-image: url('imagenes/masonry/masonry-05.jpg')"></div>
+          <div class="cat-hero__bg" style="background-image: url('imagenes/estrategia.jpg')"></div>
           <div class="cat-hero__glass" aria-hidden="true"></div>
           <span class="cat-hero__content">
-            <span class="cat-hero__label">Estrategia</span>
-            <span class="cat-hero__cta">Ver proyectos →</span>
+            <span class="cat-hero__label">Strategy</span>
+            <span class="cat-hero__cta">See projects →</span>
           </span>
         </a>
-        <a class="cat-hero__col" href="trabajos-industrial.html">
-          <div class="cat-hero__bg" style="background-image: url('imagenes/masonry/masonry-08.jpg')"></div>
+        <a class="cat-hero__col" href="trabajos-audiovisual.html">
+          <div class="cat-hero__bg" style="background-image: url('imagenes/audiovisual.jpg')"></div>
           <div class="cat-hero__glass" aria-hidden="true"></div>
           <span class="cat-hero__content">
-            <span class="cat-hero__label">Industrial</span>
-            <span class="cat-hero__cta">Ver proyectos →</span>
+            <span class="cat-hero__label">Audiovisual</span>
+            <span class="cat-hero__cta">See projects →</span>
           </span>
         </a>
       </section>
@@ -56,11 +56,11 @@
         <div>
           <h3>KNOX</h3>
           <p class="text-lg mt-sm" style="max-width: 34ch">
-            Dirección creativa. Human centered creation, desde Bogotá.
+            Creative direction. Human centered creation, from Bogotá.
           </p>
           <p class="status">
             <span class="status__dot" aria-hidden="true"></span>
-            Disponible para proyectos — Bogotá / remoto
+            Available for projects — Bogotá / remote
           </p>
         </div>
         <div class="site-footer__contact">
@@ -74,7 +74,7 @@
 
     <div class="menu-overlay" id="menuOverlay" hidden>
       <div class="menu-panel" id="menuPanel">
-        <nav aria-label="Navegación principal">
+        <nav aria-label="Main navigation">
           <ol class="menu-panel__list">
             <li class="menu-panel__item">
               <a class="menu-panel__link" href="index.html#main">
@@ -82,18 +82,13 @@
               </a>
             </li>
             <li class="menu-panel__item">
-              <a class="menu-panel__link" href="knox.html">
-                <span class="line"><span><span class="menu-panel__num">02</span>Knox</span></span>
-              </a>
-            </li>
-            <li class="menu-panel__item">
               <a class="menu-panel__link is-active" href="trabajos.html">
-                <span class="line"><span><span class="menu-panel__num">03</span>Trabajos</span></span>
+                <span class="line"><span><span class="menu-panel__num">02</span>Work</span></span>
               </a>
             </li>
             <li class="menu-panel__item">
               <a class="menu-panel__link" href="contacto.html">
-                <span class="line"><span><span class="menu-panel__num">04</span>Contacto</span></span>
+                <span class="line"><span><span class="menu-panel__num">03</span>Contact</span></span>
               </a>
             </li>
           </ol>

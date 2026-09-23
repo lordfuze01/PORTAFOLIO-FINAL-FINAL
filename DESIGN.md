@@ -156,6 +156,13 @@ conejo es blanco puro, y existe para apagarse. Después de eso, el blanco máxim
 es la tinta clara de PANTONE 2474 C, nunca #FFF. Ese contraste —el paso de la sala
 iluminada a la sala oscura— es la entrada a la marca, no un preloader.
 
+**Excepción desde 2026-09-22: la home cambia de color con el scroll.** A pedido del
+autor (referencia: russellnumo.nl), el fondo de `index.html` ya no es taupe de punta a
+punta. Solo dos colores, marrón y blanco: taupe en el hero y el manifiesto, y Arena de
+Lectura desde las franjas de disciplinas hasta el cierre. El cambio se funde con el
+scroll justo después del manifiesto; en la arena la sala "se prende" y la tinta pasa a
+taupe. Las páginas internas siguen siendo la sala oscura. Ver "La regla de los capítulos".
+
 **Key Characteristics:**
 
 - Taupe dominante (PANTONE 2474 C), su propia tinta clara para leer, gris azulado
@@ -187,8 +194,7 @@ cual como el único acento, reemplazando la terracota.
 - **Pizarra Señal** (#788F98 — PANTONE 3526 C puro): el único acento del sistema. Vive en
   las cursivas de énfasis (`em` es el acento globalmente), el punto de disponibilidad que
   pulsa, el `outline` de foco visible, el `::selection` (la marca aparece hasta al copiar
-  texto), el marcador activo de la sidebar de proyecto y la etiqueta de una fila de
-  contacto en hover. Nunca como fondo de un área grande.
+  texto) y la etiqueta de una fila de contacto en hover. Nunca como fondo de un área grande.
 
 ### Neutral
 
@@ -207,8 +213,8 @@ cual como el único acento, reemplazando la terracota.
   la arena, nunca puro.
 - **Gris Lectura** (#B1A6A0): texto secundario y párrafos de las páginas internas, misma
   familia tonal que el fondo y la arena.
-- **Gris Nota** (#8C7C73): metadato de bajo peso — numeración del menú, índices de la
-  sidebar, eyebrow del archivo, servicios y datos del cierre.
+- **Gris Nota** (#8C7C73): metadato de bajo peso — numeración del menú, el tipo y los
+  "Próximamente" de la vista de proyecto, eyebrow del archivo, servicios y datos del cierre.
 - **Gris Pie** (#766860): línea legal y ciudad en los footers. El escalón más bajo.
 - **Hairline Clara** (rgba(237, 231, 228, 0.16)): la línea fina sobre el fondo oscuro en
   `index.html`. Traslúcida sobre la arena, no gris: la línea es del mismo material que el
@@ -238,6 +244,16 @@ todos del mismo matiz de PANTONE 2474 C (~22°), solo variando luminancia. El in
 (3524 C) y el acento (3526 C) son las únicas dos veces que el sistema cambia de matiz —
 superficie elevada y detalle, respectivamente. Un color nuevo que no venga de ese matiz
 base, del indigo o del acento no pertenece al sistema.
+
+**La regla de los capítulos (solo la home).** Cada sección de `index.html` declara su
+fondo con `data-color` (solo `taupe` o `arena`: el autor pidió marrón y blanco, nada más)
+y el script "COLOR POR SECCION" funde el fondo del `<body>` de un capítulo al siguiente,
+amarrado a la posición del scroll: la mezcla corre mientras el borde superior de la
+sección nueva va del 60% al 10% de la pantalla. Las secciones no llevan fondo propio. La tinta no se elige por sección sino por la
+luminancia real del fondo en cada momento (`data-tema="claro"/"oscuro"` en `#home`
+invierte `--bone`, `--ash`, `--line` y `--bg-final`), así el texto nunca queda del tono
+del fondo a mitad de un cambio. Pizarra Señal nunca es un capítulo (rompería la regla del
+10%) y el blanco puro tampoco (regla del blanco único).
 
 ## Typography
 
@@ -299,22 +315,22 @@ El hero de la home no es una sección normal: mide 230dvh de recorrido con un
 56vh a 100vh mientras le quita el `brightness(0.55) blur(3px)` inicial. Ese recorrido es
 la primera unidad de lectura del sitio.
 
-**Breakpoints reales:** 820px (grids a una columna, ficha apilada, sidebar de proyecto a
-franja horizontal, marco de Knox a una columna), 640px (categoría del índice debajo del
+**Breakpoints reales:** 820px (grids a una columna, ficha apilada, marco de Knox a una
+columna), 640px (categoría del índice debajo del
 nombre, contacto en dos líneas, panel de menú a 100vw, hero a 44vh) y 560px (márgenes
-laterales mínimos del manifiesto). En escritorio, la página de proyecto es una franja
-sticky de 226px + contenido de máx. 854px con 40px de gap.
+laterales mínimos del manifiesto). El mosaico de Trabajos (estilo
+gilhuybrecht.com) usa su propio corte en 650px: 14 columnas arriba, 4 abajo.
 
 ### Named Rules
 
 **La regla de sangrar.** Las estructuras de navegación e índice se salen del contenedor
 centrado hasta el borde real de la ventana; el JS mide el offset y lo compensa con un
-`margin-left` negativo (flow menu, `.page-body` de la sidebar, marco de Knox). El texto se
+`margin-left` negativo (flow menu, marco de Knox). El texto se
 queda centrado y tranquilo; las líneas cortan la ventana entera. Ese desajuste deliberado
 es lo que impide que el sitio lea como una plantilla de una sola columna.
 
-**La regla del sticky nativo.** La sidebar de proyecto usa `position: sticky` puro. Está
-prohibido reimplementarla con scroll + JS: cualquier imitación va un frame detrás del
+**La regla del sticky nativo.** Lo que se quede pegado al hacer scroll usa
+`position: sticky` (o `fixed`) puro. Está prohibido reimplementarlo con scroll + JS: cualquier imitación va un frame detrás del
 scroll real y produce el temblor que ya se corrigió una vez.
 
 ## Elevation & Depth
@@ -322,8 +338,7 @@ scroll real y produce el temblor que ya se corrigió una vez.
 Hoy el sistema es plano por construcción. La profundidad no viene de sombras sino de tres
 recursos: **hairlines** que separan sin encerrar, **capas de tono/matiz** cercanas entre sí
 (#211B18 → #2F2B4E, y los overlays `rgba(33,27,24,0.6/0.72/0.88/0.92)`) y **desenfoque de
-fondo** (`backdrop-filter: blur(8–10px)` en el header sticky y en la franja móvil de la
-sidebar). Solo dos elementos llevan sombra real: el botón specular y la imagen del
+fondo** (`backdrop-filter: blur(8–10px)` en el header sticky). Solo dos elementos llevan sombra real: el botón specular y la imagen del
 lightbox.
 
 **Decisión del autor:** el sistema queda **abierto a más profundidad**. Las superficies
@@ -455,15 +470,21 @@ fondo.
   franja en Arena de Lectura sube o baja **desde el borde más cercano al cursor**
   (`expo.out`, 0.6s) y dentro corre un marquee CSS infinito con el mismo texto en taupe.
 
-### Sidebar de proyecto (componente firma)
+### Mosaico de Trabajos y vista de proyecto (componente firma)
 
-Riel vertical sticky centrado en el viewport (226px, `top: 50%` + `translateY(-50%)`), con
-un marcador de línea de 32×2px a la izquierda de cada ítem. La proximidad del cursor
-alimenta una variable `--effect` (0→1) que interpola el color del texto y del marcador
-entre gris y el acento vía `color-mix`, desplaza el ítem 14px a la derecha y estira el
-marcador. Un tick más corto (16×1px, `::after`) marca la mitad del hueco entre ítems: son
-"las líneas entre las líneas" que le dan textura al riel en reposo. En ≤820px se convierte
-en una franja horizontal con scroll y los marcadores desaparecen.
+Referencia: gilhuybrecht.com, replicada a pedido del autor (2026-09-23; reemplaza al
+riel lateral y a las páginas de proyecto sueltas). Cada categoría (`trabajos-*.html`)
+es un mosaico de todas las fotos de sus proyectos: 14 columnas, cada foto ocupa 2 (7
+por fila), rótulo con el nombre del proyecto sobre su primera foto y el número 1, 2,
+3… a la derecha, texto de ~16px peso 500. Al pasar el cursor por un proyecto, los
+demás bajan al 20%. Clic: las fotos del proyecto vuelan con giro 3D a la columna
+derecha (9/14) y la información sube línea a línea en la izquierda (5/14): nombre,
+"Behance ↗", tipo, descripción y ficha numerada con una pastilla que sigue a la fila
+bajo el cursor. El cursor es una etiqueta: "Volver" sobre la información (clic
+cierra), "Ampliar" sobre una foto (la lleva sola al centro) y "Cerrar". La dirección
+cambia a `#id` y "atrás" cierra. Todo sale de `proyectos.js` y `mosaico.js`. En <650px:
+2 fotos por fila, solo las dos primeras de cada proyecto, y la vista apilada con
+"Volver" fijo abajo.
 
 ### Disponibilidad
 
@@ -503,7 +524,7 @@ Se apaga con `prefers-reduced-motion`.
   opacidad, o ninguna.
 - **Don't** convertir el manifiesto de la home en un bloque alineado a la izquierda ni
   agregarle un riel lateral: va centrado.
-- **Don't** reimplementar el sticky de la sidebar de proyecto con scroll + JS.
+- **Don't** reimplementar un sticky con scroll + JS.
 - **Don't** usar ScrollTrigger: solo está el core de GSAP. Los efectos de scroll se hacen
   con IntersectionObserver + `gsap.to`, o con el motor manual en rAF del hero.
 - **Don't** derivar hacia estética SaaS/startup, plantilla de portafolio, brutalismo
