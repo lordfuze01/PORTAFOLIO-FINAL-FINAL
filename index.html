@@ -207,9 +207,11 @@
         gap: 2rem;
       }
       .home__word {
+        /* TAMANO del wordmark (lo usa tambien .home__name para alinearse) */
+        --word-size: clamp(2.6rem, 15vw, 14rem);
         color: var(--titulo-color);
         /* TAMANO del wordmark BY KNOX (ajusta el 15vw / el maximo) */
-        font-size: clamp(2.6rem, 15vw, 14rem);
+        font-size: var(--word-size);
         font-weight: 800;
         line-height: 0.82;
         letter-spacing: -0.04em;
@@ -219,6 +221,11 @@
          BY KNOX (sube y aparece), un poco despues. */
       .home__name {
         margin-top: clamp(0.6rem, 1.4vw, 1.2rem);
+        /* Alineado con la tinta de BY KNOX: la "B" gigante trae un margen
+           interno de ~0.066em que el nombre (letra chica) casi no tiene.
+           Se compensa en proporcion al tamano del wordmark, asi coincide
+           en cualquier pantalla. */
+        padding-left: calc(clamp(2.6rem, 15vw, 14rem) * 0.066 - 0.02em);
         color: var(--titulo-color);
         font-size: clamp(1rem, 2.6vw, 2.4rem);
         font-weight: 700;

@@ -613,3 +613,7 @@ página y haz una que sí vaya acorde", y en las franjas dejar solo "Graphic".
   máscara (`.mc-areas__rollo`, copia por `::after` con `data-t`). Una hairline
   (`.mc-areas__linea`) se desliza bajo el área con el cursor y vuelve a la actual,
   pegada al borde de la barra. En móvil las áreas bajan a su fila, sin números.
+- (misma fecha) `.home__name` alineado con la tinta de BY KNOX: `padding-left:
+  calc(tamaño del wordmark * 0.066 - 0.02em)` (el margen interno de la "B" gigante).
+  El tamaño del wordmark vive en `--word-size` dentro de `.home__word`; si se cambia,
+  cambiar también el clamp del padding del nombre.
