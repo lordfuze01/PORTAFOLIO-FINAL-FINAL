@@ -196,7 +196,7 @@
     var video = embed
       ? '<div class="vista__video"><iframe src="' + esc(embed) + '" title="' + esc(p.nombre) + '"' +
         ' allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen"' +
-        ' referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe></div>'
+        ' referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>'
       : '';
     vista.innerHTML =
       '<div class="vista__velo"></div>' +
